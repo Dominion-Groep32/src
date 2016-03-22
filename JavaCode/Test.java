@@ -8,6 +8,7 @@ public class Test {
 		System.out.println("Hallo Maxim");
 		System.out.println("EINDELIJK MAC");
 		System.out.println("Nog eens");
+		System.out.println("Hallo Lara, hier ben ik");
 	}
 
 }
