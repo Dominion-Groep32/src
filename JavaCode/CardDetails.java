@@ -248,4 +248,134 @@ public class CardDetails {
 		cardCost = 5;
 	}
 
+	public void marsquerade()
+	{
+		cardName = "MASQUERADE";
+		cardAbility = "+1 Cards - Each player passes a card from his hand to the left at once. Then you may trash a card from your hand.";
+		cardType = "ACTION";
+		cardCost = 3;
+	}
+	
+	public void merchantShip()
+	{
+		cardName = "MERCHANT SHIP";
+		cardAbility = "Now and at the start of your next turn: +2 Coins";
+		cardType = "ACTION - DURATION";
+		cardCost = 5;
+	}
+	
+	public void militia()
+	{
+		cardName = "MILITIA";
+		cardAbility = "+2 Coins - Each other player discards down to 3 cards in his hand.";
+		cardType = "ACTION - ATTACK";
+		cardCost = 4;
+	}
+	
+	public void mine()
+	{
+		cardName = "MINE";
+		cardAbility = "Trash a Treasure card from your hand. Gain a Treasure card costing up to 3 coins more; put it into your hand.";
+		cardType = "ACTION";
+		cardCost = 5;
+	}
+	
+	public void miningVillage()
+	{
+		cardName = "MINING VILLAGE";
+		cardAbility = "+1 Card & +2 Actions - You may trash this card immediately. If you do, +2 coins.";
+		cardType = "ACTION";
+		cardCost = 4;
+	}
+	
+	public void minion()
+	{
+		cardName = "MINION";
+		cardAbility = "+1 Action - Choose one: +2 Coins; or discard your hand, +4 Cards, and each other player with at least 5 cards in hand discards his hand a draws 4 cards.";
+		cardType = "ACTION - ATTACK";
+		cardCost = 5;
+	}
+	
+	public void moat()
+	{
+		cardName = "MOAT";
+		cardAbility = "+2 Cards - when another player plays an Attack card, you may reveal this from your hand. If you do, you are unaffected by that Attack.";
+		cardType = "ACTION - REACTION";
+		cardCost = 2;
+	}
+	
+	public void moneylender()
+	{
+		cardName = "MONDEYLENDER";
+		cardAbility = "Trash a Copper card from your hand. If you do, +3 Coins";
+		cardType = "ACTION";
+		cardCost = 5;
+	}
+	
+	public void nativeVillage()
+	{
+		cardName = "NATIVE VILLAGE";
+		cardAbility = "+2 Actoins - Choose one: Set aside the top card of your deck face down on your Native Village mat; or put all the cards from your mat into you hand. You may look at the cards on your mat at any time; return them to your deck at the end of the game.";
+		cardType = "ACTION";
+		cardCost = 2;
+	}
+	
+	public void navigator()
+	{
+		cardName = "NAVIGATOR";
+		cardAbility = "+2 Coins - Look at the top 5 cards of your deck. Either discard all of them, or put them back on top of your deck in any order.";
+		cardType = "ACTION";
+		cardCost = 4;
+	}
+	
+	public void nobles()
+	{
+		cardName = "NOBLES";
+		cardAbility = "Choose one: +3 Cards; or +2 Actions --- 2 Shields";
+		cardType = "ACTION - VICTORY";
+		cardCost = 6;
+	}
+	
+	public void outpost()
+	{
+		cardName = "OUTPOST";
+		cardAbility = "You only draw 3 cards (instead of 5) in this turn's Clean-up phase. Take an extra turn after this one. This can't cause you to take more than two consecutive turns.";
+		cardType = "ACTION - DURATION";
+		cardCost = 5;
+	}
+	
+	public void pawn()
+	{
+		cardName = "PAWN";
+		cardAbility = "Choose two: +1 Card; +1 Action; +1 Buy; +1 Coin. (The choices must be different.)";
+		cardType = "ACTION";
+		cardCost = 2;
+	}
+	
+	public void pearlDiver()
+	{
+		cardName = "PEARL DIVER";
+		cardAbility = "+1 Card & +1 Action - Look at the bottom card of your deck. You may put it on top.";
+		cardType = "ACTION";
+		cardCost = 2;
+	}
+	
+	public void philosophersStone()
+	{
+		cardName = "PHILOSOPHER'S STONE";
+		cardAbility = "When you play this, count your deck and discard pile. Worth 1 coin per 5 cards total between them (rounded down).";
+		cardType = "TREASURE";
+		cardCost = 3;
+	}
+	
+	public void pirateShip()
+	{
+		cardName = "PIRATE SHIP";
+		cardAbility = "Choose one: Each other player reveals the top 2 cards of his deck, trashes a revealed Treasure that you choose, discards the rest, and if anyone trashed a Treasure you take a Coin token; or, +1 Coin per Coin token you've taken with Pirate Ships this game.";
+		cardType = "ACTION";
+		cardCost = 4;
+	}
+	
+	
+	
 }
