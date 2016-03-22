@@ -376,6 +376,82 @@ public class CardDetails {
 		cardCost = 4;
 	}
 	
+	public void possession()
+	{
+		cardName = "POSSESSION";
+		cardAbility = "The player to your left takes an extra turn after this one, in which you can see all cards he can and make all decisions for him. Any cards he would gain on that turn, you gain instead; any cards of this that are trashed are set aside and returned to his discard pile at end of turn.";
+		cardType = "ACTION";
+		cardCost = 6;
+	}
 	
+	public void potion()
+	{
+		cardName = "POTION";
+		cardType = "TREASURE";
+		cardCost = 4;
+	}
+	
+	public void province()
+	{
+		cardName = "PROVINCE";
+		cardType = "VICTORY";
+		cardCost = 8;
+	}
+	
+	public void remodel()
+	{
+		cardName = "REMODEL";
+		cardAbility = "Trash a card from your hand. Gain a card costing up to 2 Coins more than the trashed card.";
+		cardType = "ACTION";
+		cardCost = 4;
+	}
+	
+	public void saboteur()
+	{
+		cardName = "SABOTEUR";
+		cardAbility = "Each other player reveals cards from the top of his deck until revealing one costing 3 Coins or more. He trashes that card and may gain a card costing at most 2 coins less than it. He discards the other revealed cards.";
+		cardType = "ACTION - ATTACK";
+		cardCost = 5;
+	}
+	
+	public void salvager()
+	{
+		cardName = "SALVAGER";
+		cardAbility = "+1 Buy - Trash a card from your hand. + coins equal to its cost.";
+		cardType = "ACTION";
+		cardCost = 4;
+	}
+	
+	public void scout()
+	{
+		cardName = "SCOUT";
+		cardAbility = "+1 Action - Reveal the top 4 cards of your deck. Put the revealed Victory cards into your hand. Put the other cards on top of your deck in any order.";
+		cardType = "ACTION";
+		cardCost = 4;
+	}
+	
+	public void scryingPool()
+	{
+		cardName = "SCRYING POOL";
+		cardAbility = "+1 Action - Each player (including you) reveals the top card of his deck and either discards it or puts it back, your choice. Then reveal cards from the rop of your deck until you reveal one that is not an Action. Put all of your revealed cards into your hand.";
+		cardType = "ACTION - ATTACK";
+		cardCost = 2;
+	}
+	
+	public void seaHag()
+	{
+		cardName = "SEA HAG";
+		cardAbility = "Each other player discards the top card of his deck, then gains a Curse card, putting it on top of his deck.";
+		cardType = "ACTION - ATTACK";
+		cardCost = 4;
+	}
+	
+	public void secretChamber()
+	{
+		cardName = "SECRET CHAMBER";
+		cardAbility = "Discard any number of cards. +1 Coin per card discarded. --- When another player plays an Attack card, you may reveal this from your hand. If you do, +2 Cards, then put 2 cards from your hand on top of your deck.";
+		cardType = "ACTION - REACTION";
+		cardCost = 2;
+	}
 	
 }
