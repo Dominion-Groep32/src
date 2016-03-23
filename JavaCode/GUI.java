@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.annotation.Generated;
 import javax.swing.*;
-import org.junit.validator.PublicClassValidator;
+//import org.junit.validator.PublicClassValidator;
 import org.omg.CORBA.PUBLIC_MEMBER;
 
 import javafx.geometry.VerticalDirection;

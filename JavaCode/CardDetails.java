@@ -2,19 +2,86 @@ package JavaCode;
 
 public class CardDetails {
 	
-	public static String cardName = "Province";
-	public static String cardAbility = "Beschrijving van de kaart";
-	public static int cardValue = 6;
-	public static String cardType = "Victory";
-	public static int cardCost = 8;
+	GameActions actions = new GameActions();
+	
+	public int amountCopper;
+	public int amountSilver;
+	public int amountGold;
+	
+	public int amountEstate;
+	public int amountDuchy;
+	public int amountProvince;
+	
+	public int amountCurse ;
+	
+	public String cardName;
+	public String cardAbility;
+	public String cardType;
+	public int cardValue;
+	public int cardCost;
+	public int cardActions;
+	public int extraCards;
+	public int cardBuys;
+
+	
+	public void startUp() {
+		amountCopper = 60;
+		amountSilver = 40;
+		amountGold = 30;
+		
+		amountEstate = 24;
+		amountDuchy = 12;
+		amountProvince = 12;
+		
+		amountCurse = 30;
+		
+		resetCards();
+	}
+	
+	public void resetCards()
+	{
+		cardName = "";
+		cardAbility = "";
+		cardValue = 0;
+		cardType = "";
+		cardCost = 0;
+		cardActions = 1;
+		extraCards = 0;
+		cardBuys = 1;
+	}
 	
 	public void currentCardInfo()
 	{
 		System.out.println(cardName);
 		System.out.println(cardAbility);
-		//System.out.println(cardValue);
+		System.out.println(cardValue);
 		System.out.println(cardType);
 		System.out.println(cardCost);
+	}
+	
+	public void coinCopper()
+	{
+		cardName = "COPPER";
+		cardType = "TREASURE";
+		cardValue += 1;
+		cardCost += 0;
+		actions.buyCopper();
+	}
+	
+	public void coinSilver()
+	{
+		cardName = "SILVER";
+		cardType = "TREASURE";
+		cardValue += 2;
+		cardCost += 3;
+	}
+	
+	public void coinGold()
+	{
+		cardName = "GOLD";
+		cardType = "TREASURE";
+		cardValue = 3;
+		cardCost = 6;
 	}
 	
 	public void adventurer()
@@ -31,6 +98,8 @@ public class CardDetails {
 		cardAbility = "+2 Cards & +1 Action - When you discard this from play, you may put this on top of your deck if you have a Potion in play.";
 		cardType = "ACTION";
 		cardCost = 3;
+		cardActions += 1;
+		extraCards += 2;
 	}
 	
 	public void ambassador()
@@ -47,6 +116,8 @@ public class CardDetails {
 		cardAbility = "+1 Card & +1 Action - Reveal the top 4 cards of your deck. Put the revealed Coppers and Potions into your hand. Put the other cards back on top of your deck in any order.";
 		cardType = "ACTION";
 		cardCost = 2;
+		cardActions += 1;
+		extraCards += 1;
 	}
 	
 	public void apprentice()
