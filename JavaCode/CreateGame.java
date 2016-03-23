@@ -7,16 +7,16 @@ public class CreateGame {
 
 		 GUI gui = new GUI();
 		  gui.GenerateCardsField();
-		  
-		  
-		  
-		  
-		  
-		  //blabla spelcode
-		  
-		  
-		  
 		  gui.GenerateCardsHand();
+		  
+		  GameActions test = new GameActions();
+		  test.basicTurn();
+		  test.copperAction();
+		  
+		  
+		  System.out.println(test.getCoins());
+		  
+		  
 	}
 
 }

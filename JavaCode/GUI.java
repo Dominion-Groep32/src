@@ -156,13 +156,16 @@ public class GUI extends JFrame {
     	 Collections.shuffle((Arrays.asList(actieKaarten)));    
  
         // fill top panel (field)
-        for (int i = 0; i < 10; i++) {
-            String path = "../images/Action/" + actieKaarten[i] + ".jpg"; // PATH??????
+        for (int i = 0; i < aantalActieKaarten; i++) {
+            String path = "../images/Action/" + actieKaarten[i] + ".jpg"; 
             image = new ImageIcon(getClass().getResource(path));
             ButtonsTopPannel[i].setIcon(image);
+            ButtonsTopPannel[i].setName(actieKaarten[i]);
         }
  
     }
+    
+    
     
    
  
