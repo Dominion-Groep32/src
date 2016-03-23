@@ -1,6 +1,6 @@
 package JavaCode;
 
-public class gameSetup {
+public class GameSetup {
 	
 	public static int[][] treasureCardsArray = new int[3][2];
 	public static int[][] victoryCardsArray = new int[3][2];
