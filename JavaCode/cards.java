@@ -8,6 +8,9 @@ public class cards {
 	public static void main(String[] args)
 	{
 		cardDetails.currentCardInfo();
+		cardDetails.smithy();
+		cardDetails.currentCardInfo();
+		
 		setup.fillTreasureCardsArray();
 		setup.fillVictoryCardsArray();
 		setup.fillCurseCardsArray();
