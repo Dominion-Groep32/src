@@ -14,5 +14,10 @@ public class cards {
 		setup.fillTreasureCardsArray();
 		setup.fillVictoryCardsArray();
 		setup.fillCurseCardsArray();
+		
+		cardDetails.ambassador();
+		cardDetails.currentCardInfo();
+		System.out.println(cardDetails.cardCost);
+		
 	}
 }
