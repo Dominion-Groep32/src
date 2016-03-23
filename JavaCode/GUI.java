@@ -110,8 +110,8 @@ public class GUI extends JFrame {
         
  
         // buttons adden aan top pannel
-        //pannelTop.setLayout(new GridLayout(2, aantalActieKaarten / 2));
-        pannelTop.setLayout(new FlowLayout());
+        pannelTop.setLayout(new GridLayout(2, aantalActieKaarten / 2));
+        
         for (int i = 0; i < ButtonsTopPannel.length; i++) {
             pannelTop.add(ButtonsTopPannel[i]);
         }
