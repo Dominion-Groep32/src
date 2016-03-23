@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class GUI extends JFrame {
     private JPanel pannelTop, pannelBottom, pannelRight, pannelLeft, pannelCenter, pannelCenterCenter;
-    private JButton b1, b2, b3, b4;
+    private JButton b1, b2, b3, b4,ButtonsTopPannel[],ButtonsBottomPannel[];
     private JLabel labelsTopPannel[], labelsBottomPannel[],labelsRightPannel[];
     private int aantalActieKaarten = 10;
     private int aantalKaartenHand = 5;
@@ -48,22 +48,25 @@ public class GUI extends JFrame {
         b1 = new JButton("Province");
         b2 = new JButton("Dutchy");
         b3 = new JButton("Estate");
-        b4 = new JButton("test");
+        
  
-        // labels 10 kaarten toppanel
-        labelsTopPannel = new JLabel[aantalActieKaarten];
+        // buttons 10 kaarten toppanel
+        ButtonsTopPannel = new JButton[aantalActieKaarten];
  
-        for (int i = 0; i < labelsTopPannel.length; i++) {
-            labelsTopPannel[i] = new JLabel(i + "");
-            labelsTopPannel[i].setBorder(BorderFactory.createLineBorder(Color.white));
+       
+        
+        for (int i = 0; i < ButtonsTopPannel.length; i++) {
+        	ButtonsTopPannel[i] = new JButton(i + "");
+        	ButtonsTopPannel[i].setBorder(BorderFactory.createLineBorder(Color.white));
+        	
             
         }
  
         // labels 5 kaarten bottompanel
-        labelsBottomPannel = new JLabel[aantalKaartenHand];
-        for (int i = 0; i < labelsBottomPannel.length; i++) {
-            labelsBottomPannel[i] = new JLabel(i + "");
-            labelsBottomPannel[i].setBorder(BorderFactory.createLineBorder(Color.white));
+        ButtonsBottomPannel = new JButton[aantalKaartenHand];
+        for (int i = 0; i < ButtonsBottomPannel.length; i++) {
+        	ButtonsBottomPannel[i] = new JButton(i + "");
+        	ButtonsBottomPannel[i].setBorder(BorderFactory.createLineBorder(Color.white));
         }
  
         // venster
@@ -106,16 +109,17 @@ public class GUI extends JFrame {
             }
         
  
-        // labels adden aan top pannel
-        pannelTop.setLayout(new GridLayout(2, aantalActieKaarten / 2));
-        for (int i = 0; i < labelsTopPannel.length; i++) {
-            pannelTop.add(labelsTopPannel[i]);
+        // buttons adden aan top pannel
+        //pannelTop.setLayout(new GridLayout(2, aantalActieKaarten / 2));
+        pannelTop.setLayout(new FlowLayout());
+        for (int i = 0; i < ButtonsTopPannel.length; i++) {
+            pannelTop.add(ButtonsTopPannel[i]);
         }
  
-        // labels adden aan bottom panel
+        // buttons adden aan bottom panel
         pannelBottom.setLayout(new FlowLayout());
-        for (int i = 0; i < labelsBottomPannel.length; i++) {
-            pannelBottom.add(labelsBottomPannel[i]);
+        for (int i = 0; i < ButtonsBottomPannel.length; i++) {
+            pannelBottom.add(ButtonsBottomPannel[i]);
         }
        
  
@@ -138,7 +142,7 @@ public class GUI extends JFrame {
             String path = "../images/" + startKaarten[randomGetal] + ".jpg"; // PATH??????
             
             image = new ImageIcon(getClass().getResource(path));
-            labelsBottomPannel[i].setIcon(image);
+            ButtonsBottomPannel[i].setIcon(image);
  
         }
     }
@@ -155,7 +159,7 @@ public class GUI extends JFrame {
         for (int i = 0; i < 10; i++) {
             String path = "../images/Action/" + actieKaarten[i] + ".jpg"; // PATH??????
             image = new ImageIcon(getClass().getResource(path));
-            labelsTopPannel[i].setIcon(image);
+            ButtonsTopPannel[i].setIcon(image);
         }
  
     }
