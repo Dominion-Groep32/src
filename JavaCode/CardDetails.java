@@ -2,28 +2,32 @@ package JavaCode;
 
 public class CardDetails {
 	
-	GameActions actions = new GameActions();
-	
+	//Geld kaarten
 	public int amountCopper;
 	public int amountSilver;
 	public int amountGold;
 	
+	//Grond kaarten
 	public int amountEstate;
 	public int amountDuchy;
 	public int amountProvince;
 	
+	//Vloek kaarten
 	public int amountCurse ;
 	
+	//Kaart details
 	public String cardName;
 	public String cardAbility;
 	public String cardType;
-	public int cardValue;
 	public int cardCost;
-	public int cardActions;
 	public int extraCards;
-	public int cardBuys;
-
 	
+	//Waarde en actie van de kaart
+	public int coins;
+	public int buys;
+	public int actions;
+
+	//Moet in het begin van het spel opgeroepen worden
 	public void startUp() {
 		amountCopper = 60;
 		amountSilver = 40;
@@ -38,23 +42,25 @@ public class CardDetails {
 		resetCards();
 	}
 	
+	//Moet voor elke beurt opgeroepen worden
 	public void resetCards()
 	{
 		cardName = "";
 		cardAbility = "";
-		cardValue = 0;
 		cardType = "";
 		cardCost = 0;
-		cardActions = 1;
 		extraCards = 0;
-		cardBuys = 1;
+		
+		actions = 1;
+		coins = 0;
+		buys = 1;
 	}
 	
 	public void currentCardInfo()
 	{
 		System.out.println(cardName);
 		System.out.println(cardAbility);
-		System.out.println(cardValue);
+		System.out.println(coins);
 		System.out.println(cardType);
 		System.out.println(cardCost);
 	}
@@ -63,25 +69,27 @@ public class CardDetails {
 	{
 		cardName = "COPPER";
 		cardType = "TREASURE";
-		cardValue += 1;
+		coins += 1;
 		cardCost += 0;
-		actions.buyCopper();
+		amountCopper --;
 	}
 	
 	public void coinSilver()
 	{
 		cardName = "SILVER";
 		cardType = "TREASURE";
-		cardValue += 2;
+		coins += 2;
 		cardCost += 3;
+		amountSilver --;
 	}
 	
 	public void coinGold()
 	{
 		cardName = "GOLD";
 		cardType = "TREASURE";
-		cardValue = 3;
+		coins += 3;
 		cardCost = 6;
+		amountGold --;
 	}
 	
 	public void adventurer()
@@ -98,7 +106,7 @@ public class CardDetails {
 		cardAbility = "+2 Cards & +1 Action - When you discard this from play, you may put this on top of your deck if you have a Potion in play.";
 		cardType = "ACTION";
 		cardCost = 3;
-		cardActions += 1;
+		actions += 1;
 		extraCards += 2;
 	}
 	
@@ -116,7 +124,7 @@ public class CardDetails {
 		cardAbility = "+1 Card & +1 Action - Reveal the top 4 cards of your deck. Put the revealed Coppers and Potions into your hand. Put the other cards back on top of your deck in any order.";
 		cardType = "ACTION";
 		cardCost = 2;
-		cardActions += 1;
+		actions += 1;
 		extraCards += 1;
 	}
 	

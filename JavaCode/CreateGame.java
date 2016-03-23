@@ -1,5 +1,7 @@
 package JavaCode;
 
+import java.awt.Desktop.Action;
+
 import javax.smartcardio.Card;
 
 public class CreateGame {
@@ -8,15 +10,19 @@ public class CreateGame {
 				
 		// TODO Auto-generated method stub
 
-		// GUI gui = new GUI();
+		//GUI gui = new GUI();
 		//gui.GenerateCardsField();
 		//gui.GenerateCardsHand();
 		  
-		  GameActions test = new GameActions();
-		  test.basicTurn(); // zorgt ervoor dat je 1 actie / 1 buy / 0 gp's hebt 
+		  GameActions action = new GameActions();
+		  CardDetails card = new CardDetails();
+		   
+		  card.startUp();
+		  card.coinGold();
+		  card.coinGold();
+		  card.coinGold();
 		  
-		  System.out.println("aantal coins is "+test.getCoins());
+		  System.out.println(card.coins);
 		  
 	}
-
 }
