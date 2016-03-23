@@ -16,6 +16,94 @@ public class CardDetails {
 		System.out.println(cardCost);
 	}
 	
+	public void adventurer()
+	{
+		cardName = "ADVENTURER";
+		cardAbility = "Reveal cards from your deck until you reveal 2 Treasure cards. Put those Treasure cards into your hand and discard the other revealed cards.";
+		cardType = "ACTION";
+		cardCost = 6;
+	}
+	
+	public void alchemist()
+	{
+		cardName = "ALCHEMIST";
+		cardAbility = "+2 Cards & +1 Action - When you discard this from play, you may put this on top of your deck if you have a Potion in play.";
+		cardType = "ACTION";
+		cardCost = 3;
+	}
+	
+	public void ambassador()
+	{
+		cardName = "AMBASSADOR";
+		cardAbility = "Reveal a card from your hand. Return up to 2 copies of it from your hand to the Supply. Then each other player gains a copy of it.";
+		cardType = "ACTION - ATTACK";
+		cardCost = 3;
+	}
+	
+	public void apothecary()
+	{
+		cardName = "APOTHECARY";
+		cardAbility = "+1 Card & +1 Action - Reveal the top 4 cards of your deck. Put the revealed Coppers and Potions into your hand. Put the other cards back on top of your deck in any order.";
+		cardType = "ACTION";
+		cardCost = 2;
+	}
+	
+	public void apprentice()
+	{
+		cardName = "APPRENTICE";
+		cardAbility = "+1 Action - Trash a card from your hand. +1 Card per Coin it costs. +2 Cards if it has Potions in it cost.";
+		cardType = "ACTION";
+		cardCost = 5;
+	}
+	
+	public void baron()
+	{
+		cardName = "BARON";
+		cardAbility = "+1 Buy - You may discard an Estate card. If you do, +4 Coins. Otherwise, gain an Estate card.";
+		cardType = "ACTION";
+		cardCost = 4;
+	}
+	
+	public void bazaar()
+	{
+		cardName = "BAZAAR";
+		cardAbility = "+1 Card & +2 Actions & +1 Coin";
+		cardType = "ACTION";
+		cardCost = 5;
+	}
+	
+	public void blackMarket()
+	{
+		cardName = "BLACK MARKET";
+		cardAbility = "+2 Coins - Reveal the top 3 cards of the Black Market deck. You may buy one of them immediately. Put the unbought cards on the bottom of the Black Market deck in any order.";
+		cardType = "ACTION";
+		cardCost = 3;
+	}
+	
+	public void bridge()
+	{
+		cardName = "BRIDGE";
+		cardAbility = "+1 Buy & +1 Coin - All cards (including cards in players hand) cost 1 Coin less this turn, but not less than 0 Coins.";
+		cardType = "ACTION";
+		cardCost = 4;
+	}
+	
+	public void bureaucrat()
+	{
+		cardName = "BUREAUCRAT";
+		cardAbility = "Gain a Silver card; put it on top of your deck. Each other player reveals a Victory card from his hand and puts it on his deck (or reveals a hand with no Victory cards).";
+		cardType = "ACTION - ATTACK";
+		cardCost = 4;
+	}
+	
+	public void caravan()
+	{
+		cardName = "CARAVAN";
+		cardAbility = "+1 Card & +1 Action - At the start of your next turn, +1 Card";
+		cardType = "ACTION - DURATION";
+		cardCost = 4;
+	}
+	
 	public void chellar()
 	{
 		cardName = "CELLAR";
@@ -452,6 +540,214 @@ public class CardDetails {
 		cardAbility = "Discard any number of cards. +1 Coin per card discarded. --- When another player plays an Attack card, you may reveal this from your hand. If you do, +2 Cards, then put 2 cards from your hand on top of your deck.";
 		cardType = "ACTION - REACTION";
 		cardCost = 2;
+	}
+	
+	public void shantyTown()
+	{
+		cardName = "SHANTY TOWN";
+		cardAbility = "+2 Actions - Reveal your hand. If you have no Action cards in hand, +2 Cards.";
+		cardType = "ACTION";
+		cardCost = 3;
+	}
+	
+	public void smithy()
+	{
+		cardName = "SMITHY";
+		cardAbility = "+3 Cards";
+		cardType = "ACTION";
+		cardCost = 4;
+	}
+	
+	public void smugglers()
+	{
+		cardName = "SMUGGLERS";
+		cardAbility = "Gain a copy of a card costing up to 6 Coins that the player to your right gained on his last turn.";
+		cardType = "ACTION";
+		cardCost = 3;
+	}
+	
+	public void spy()
+	{
+		cardName = "SPY";
+		cardAbility = "+1 Card & +1 Action - Each player (including you) reveals the top card of his deck and either discards it or puts it back, your choise.";
+		cardType = "ACTION - ATTACK";
+		cardCost = 4;
+	}
+	
+	public void stash()
+	{
+		cardName = "STASH";
+		cardAbility = "2 Coins --- When you shuffle, you may put this anywhere in your deck.";
+		cardType = "TREASURE";
+		cardCost = 5;
+	}
+	
+	public void steward()
+	{
+		cardName = "STEWARD";
+		cardAbility = "Choose one: +2 Cards, or +2 Coins; or trash 2 cards from your hand.";
+		cardType = "ACTION";
+		cardCost = 3;
+	}
+	
+	public void swindler()
+	{
+		cardName = "SWINDLER";
+		cardAbility = "+2 Coins - Each other player trashes the top card of his deck and gains a card with the same cost that you choose.";
+		cardType = "ACTION - ATTACK";
+		cardCost = 3;
+	}
+	
+	public void tactician()
+	{
+		cardName = "TACTICIAN";
+		cardAbility = "Discard your hand. If you discarded any cards this way. Then at the start of your next turn, +5 Cards, +1 Buy, and +1 Action.";
+		cardType = "ACTION - DURATIONS";
+		cardCost = 5;
+	}
+	
+	public void thief()
+	{
+		cardName = "THIEF";
+		cardAbility = "Each other player reveals the top 2 cards of his deck. If they revealed any Treasure cards, they trash one of them that you choose. You may gain any or all of these trashed cards. They discard the other revealed cards.";
+		cardType = "ACTION - ATTACK";
+		cardCost = 4;
+	}
+	
+	public void throneRoom()
+	{
+		cardName = "THRONE ROOM";
+		cardAbility = "Choose an Action card in your hand. Play it twice";
+		cardType = "ACTION";
+		cardCost = 4;
+	}
+	
+	public void torturer()
+	{
+		cardName = "TORTURER";
+		cardAbility = "+3 Cards - Each other player chooses one: he discards 2 cards";
+		cardType = "ACTION - ATTACK";
+		cardCost = 5;
+	}
+	
+	public void tradingPost()
+	{
+		cardName = "TRADING POST";
+		cardAbility = "Trash 2 cards from your hand. If you do, gain a Silver card; put it into your hand.";
+		cardType = "ACTION";
+		cardCost = 5;
+	}
+	
+	public void transmute()
+	{
+		cardName = "TRANSMUTE";
+		cardAbility = "Trash a card from your hand. If it is an... Action card, gain a Duchy; Treasure card, gain a Transmute; Victory card, gain a Gold.";
+		cardType = "ACTION";
+		cardCost = 0;
+	}
+	
+	public void treasureMap()
+	{
+		cardName = "TREASURE MAP";
+		cardAbility = "Trash this and another copy of Treasure Map from your hand. If you do trash two Treasure Maps, gain 4 Gold cards, putting them on top of your deck.";
+		cardType = "ACTION";
+		cardCost = 4;
+	}
+	
+	public void treasury()
+	{
+		cardName = "TREASURE";
+		cardAbility = "+1 Card & +1 Action & +1 Coin - When you discard this from play, if you didn't buy a Victory card this turn, you may put this on top of your deck.";
+		cardType = "ACTION";
+		cardCost = 5;
+	}
+	
+	public void tribute()
+	{
+		cardName = "TRIBUTE";
+		cardAbility = "The player to your left reveals then discards the top 2 cards of his deck. For each differently named card revealed, if it is an... Action Card, +2 Actions; Treasure Card, +2 Coins; Victory Card, +2 Cards";
+		cardType = "ACTION";
+		cardCost = 5;
+	}
+	
+	public void university()
+	{
+		cardName = "UNIVERSITY";
+		cardAbility = "+2 Actions - You may gain an Action card costing up to 5 Coins";
+		cardType = "ACTION";
+		cardCost = 2;
+	}
+	
+	public void upgrade()
+	{
+		cardName = "UPGRADE";
+		cardAbility = "+1 Card & +1 Action - Trash a card from your hand. Gain a card costing exactly 1 Coin more than it.";
+		cardType = "ACTION";
+		cardCost = 5;
+	}
+	
+	public void village()
+	{
+		cardName = "VILLAGE";
+		cardAbility = "+1 Card & +1 Actions";
+		cardType = "ACTION";
+		cardCost = 3;
+	}
+	
+	public void vineyard()
+	{
+		cardName = "VINEYARD";
+		cardAbility = "Worth 1 Shield for every 3 Action cards in your deck (rounded down).";
+		cardType = "VICTORY";
+		cardCost = 0;
+	}
+	
+	public void warehouse()
+	{
+		cardName = "WAREHOUSE";
+		cardAbility = "+3 Cards & +1 Action - Discard 3 cards";
+		cardType = "ACTION";
+		cardCost = 3;
+	}
+	
+	public void whare()
+	{
+		cardName = "WHARE";
+		cardAbility = "Now and at the start of your next turn: +2 Cards & +1 Buy";
+		cardType = "ACTION";
+		cardCost = 2;
+	}
+	
+	public void whihingWell()
+	{
+		cardName = "WHARE";
+		cardAbility = "+1 Card & +1 Action - Name a card. Reveal the top card of your deck. If it's the named card, put it into your hand.";
+		cardType = "ACTION";
+		cardCost = 3;
+	}
+	
+	public void witch()
+	{
+		cardName = "WITCH";
+		cardAbility = "+2 Cards - Each other player gains a Curse card.";
+		cardType = "ACTION - ATTACK";
+		cardCost = 5;
+	}
+	
+	public void woodcutter()
+	{
+		cardName = "WOODCUTTER";
+		cardAbility = "+1 Buy & +2 Coins";
+		cardType = "ACTION";
+		cardCost = 3;
+	}
+	
+	public void workshop()
+	{
+		cardName = "WORKSHOP";
+		cardAbility = "Gain a card costing up to 4 Coins";
+		cardType = "ACTION";
+		cardCost = 3;
 	}
 	
 }
