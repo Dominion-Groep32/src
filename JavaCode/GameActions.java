@@ -5,6 +5,7 @@ public class GameActions {
 	private int coins;
 	private int buys;
 	private int actions;
+	private String[] deck;
 	
 	
 	public void basicTurn(){
@@ -28,6 +29,8 @@ public class GameActions {
 	public void copperAction(){
 		coins ++;
 	}
+	
+	
 	
 	
 	
