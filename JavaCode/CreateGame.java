@@ -23,13 +23,11 @@ public class CreateGame {
 =======
 
 		// GUI gui = new GUI();
-		// gui.GenerateCardsField();
-		  // gui.GenerateCardsHand();
+		 //gui.GenerateCardsField();
+		   //gui.GenerateCardsHand();
 		  
 		  GameActions test = new GameActions();
-		  test.basicTurn();
-		  test.copperAction();
-		  test.copperAction();
+		  test.basicTurn(); // zorgt ervoor dat je 1 actie / 1 buy / 0 gp's hebt 
 		  
 		  
 		  System.out.println("aantal coins is "+test.getCoins());

@@ -14,9 +14,6 @@ import java.util.*;
 import sun.net.www.content.image.jpeg;
 import java.util.Random;
 
-
-
-
 public class GUI extends JFrame {
     private JPanel pannelTop, pannelBottom, pannelRight, pannelLeft, pannelCenter, pannelCenterCenter;
     private JButton b1, b2, b3, b4,ButtonsTopPannel[],ButtonsBottomPannel[];
@@ -32,6 +29,7 @@ public class GUI extends JFrame {
         InitListeners();
     }
  
+    
     // maakt componenten
     public void InitComponents() {
         // 4 sides pannels
@@ -42,8 +40,7 @@ public class GUI extends JFrame {
         pannelCenter = new JPanel();
         pannelCenterCenter = new JPanel();
         
-
- 
+        
         // test buttons
         b1 = new JButton("Province");
         b2 = new JButton("Dutchy");
@@ -58,8 +55,7 @@ public class GUI extends JFrame {
         for (int i = 0; i < ButtonsTopPannel.length; i++) {
         	ButtonsTopPannel[i] = new JButton(i + "");
         	ButtonsTopPannel[i].setBorder(BorderFactory.createLineBorder(Color.white));
-        	
-            
+        	 
         }
  
         // labels 5 kaarten bottompanel
@@ -164,10 +160,6 @@ public class GUI extends JFrame {
         }
  
     }
-    
-    
-    
-   
  
 }
 	
