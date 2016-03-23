@@ -11,7 +11,8 @@ public class CardDetails {
 	public void currentCardInfo()
 	{
 		System.out.println(cardName);
-		System.out.println(cardValue);
+		System.out.println(cardAbility);
+		//System.out.println(cardValue);
 		System.out.println(cardType);
 		System.out.println(cardCost);
 	}
