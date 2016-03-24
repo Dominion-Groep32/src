@@ -19,9 +19,9 @@ public class CreateGame {
 				
 		// TODO Auto-generated method stub
 		
-		//GUI gui = new GUI();
-		//gui.GenerateCardsField();
-		//gui.GenerateCardsHand();
+		GUI gui = new GUI();
+		gui.GenerateCardsField();
+		gui.GenerateCardsHand();
 		
 		
 		GameActions action = new GameActions();
