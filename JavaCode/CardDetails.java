@@ -29,6 +29,7 @@ public class CardDetails {
 
 	//Moet in het begin van het spel opgeroepen worden
 	public void startUp() {
+		
 		amountCopper = 60;
 		amountSilver = 40;
 		amountGold = 30;
