@@ -9,8 +9,7 @@ import javax.swing.*;
 
 import org.omg.CORBA.PUBLIC_MEMBER;
 
-import javafx.geometry.VerticalDirection;
-import jdk.internal.org.objectweb.asm.Label;
+
 import java.util.*;
 import sun.net.www.content.image.jpeg;
 
