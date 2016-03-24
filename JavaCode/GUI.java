@@ -171,6 +171,7 @@ public class GUI extends JFrame {
        String path = "../images/Action/" + actieKaartenList.get(i) + ".jpg"; 
        image = new ImageIcon(getClass().getResource(path));
        ButtonsTopPannel[i].setIcon(image);
+       
    }
 	
 }
