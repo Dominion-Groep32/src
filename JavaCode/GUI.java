@@ -110,28 +110,30 @@ public class GUI extends JFrame {
    
     public void InitListeners() {
     	// acties (buttons/labels...etc)
+    	
+    	
     	}
  
     
     
     
     public void GenerateCardsHand() {
-        String[] startKaarten = { "copper", "copper", "copper", "copper", "copper", "copper", "copper", "estate",
-                "estate", "estate" };
+    	 LinkedList list = new LinkedList();
+    	 
+		 for (int i = 0; i < 7; i++) {list.add("copper");}
+		 for (int j = 0; j < 3; j++) {list.add("estate");}
 
-        for (int i = 0; i < aantalKaartenHand; i++) {
-            Random rng = new Random();
-            int randomGetal = rng.nextInt(startKaarten.length);
-            
-            
-            String path = "../images/" + startKaarten[randomGetal] + ".jpg";
-            image = new ImageIcon(getClass().getResource(path));
-            ButtonsBottomPannel[i].setIcon(image);
-        
- 
-        }
+
+		 for (int i = 0; i < aantalKaartenHand; i++) {
+	            Random rng = new Random();
+	            int randomGetal = rng.nextInt(list.size());
+	           
+	            String path = "../images/" + list.get(randomGetal) + ".jpg";
+	            image = new ImageIcon(getClass().getResource(path));
+	            ButtonsBottomPannel[i].setIcon(image);
+
+	        }
     }
-    
     
     public void GenerateMoneyCards(){
     	String[] geldKaarten = {"copper","silver","gold","curse"};
@@ -145,9 +147,8 @@ public class GUI extends JFrame {
 	}}
 
     public void GenerateFieldCards(){
-	 String[] landKaarten = {"province","duchy","estate"};
+	String[] landKaarten = {"province","duchy","estate"};
 	 for (int i = 0; i < landKaarten.length; i++) {
-		 
 		 
 		String path = "../images/Side/" + landKaarten[i] + ".jpg"; 
 		image = new ImageIcon(getClass().getResource(path));
@@ -155,19 +156,21 @@ public class GUI extends JFrame {
 		
 	}
 }
-
 	public void GenerateActionCards(){
+	LinkedList actieKaartenList = new LinkedList();
 	String[] actieKaarten = { "ambassador", "cellar", "chancellor", "chapel", "councilroom", "feast",
            "festival", "laboratory", "library", "market", "militia", "moat", "moneylender", "smithy", "spy",
            "thief", "village", "witch", "woodcutter", "workshop" };
-	 Collections.shuffle((Arrays.asList(actieKaarten)));    
+	Collections.shuffle((Arrays.asList(actieKaarten)));
+	for (int i = 0; i < actieKaarten.length; i++) {actieKaartenList.add(actieKaarten[i]);}
+	
+	    
 
    for (int i = 0; i < aantalActieKaarten; i++) {
 	   
-       String path = "../images/Action/" + actieKaarten[i] + ".jpg"; 
+       String path = "../images/Action/" + actieKaartenList.get(i) + ".jpg"; 
        image = new ImageIcon(getClass().getResource(path));
        ButtonsTopPannel[i].setIcon(image);
-
    }
 	
 }
