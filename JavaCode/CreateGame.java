@@ -25,7 +25,6 @@ public class CreateGame {
 		GUI gui = new GUI();
 		gui.GenerateCardsField();
 		gui.GenerateCardsHand();
-<<<<<<< HEAD
 		*/
 		
 		GameActions action = new GameActions();
@@ -40,19 +39,10 @@ public class CreateGame {
 		
 		System.out.println(card.amountCopper);
 		System.out.println(card.amountGold);
-=======
-		  GameActions action = new GameActions();
-		  CardDetails card = new CardDetails();
 		   
-		  card.startUp();
-		  card.coinCopper();
-		  card.coinGold();
-		  
-		 
-		  
-
-		  
->>>>>>> d54ebdeca103cd44f3412a8c7f12f5c85cb83fd4
+		card.startUp();
+		card.coinCopper();
+		card.coinGold();
 		  
 		System.out.println(card.coins);
 	}
