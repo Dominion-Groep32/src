@@ -1,8 +1,11 @@
 package JavaCode;
 
+import java.awt.Button;
 import java.awt.Desktop.Action;
 
 import javax.smartcardio.Card;
+
+import junit.framework.Test;
 
 public class CreateGame {
 
@@ -10,19 +13,24 @@ public class CreateGame {
 				
 		// TODO Auto-generated method stub
 
-		//GUI gui = new GUI();
-		//gui.GenerateCardsField();
-		//gui.GenerateCardsHand();
+		GUI gui = new GUI();
+		gui.GenerateCardsField();
+		gui.GenerateCardsHand();
 		  
 		  GameActions action = new GameActions();
 		  CardDetails card = new CardDetails();
 		   
 		  card.startUp();
-		  card.coinGold();
-		  card.coinGold();
+		  card.coinCopper();
 		  card.coinGold();
 		  
+		  
+		 
+		 
+		  
 		  System.out.println(card.coins);
+		 
+		  
 		  
 	}
 }
