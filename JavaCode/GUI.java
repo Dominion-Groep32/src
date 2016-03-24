@@ -6,9 +6,7 @@ import java.awt.event.ActionListener;
 import javax.annotation.Generated;
 import javax.swing.*;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
-//import org.junit.validator.PublicClassValidator;
+
 import org.omg.CORBA.PUBLIC_MEMBER;
 
 import javafx.geometry.VerticalDirection;
@@ -110,12 +108,7 @@ public class GUI extends JFrame {
    
     public void InitListeners() {
     	// acties (buttons/labels...etc)
-    	
-    	
     	}
- 
-    
-    
     
     public void GenerateCardsHand() {
     	 LinkedList list = new LinkedList();
