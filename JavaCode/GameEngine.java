@@ -4,9 +4,14 @@ package JavaCode;
 
 import java.util.LinkedList;
 
+import javax.smartcardio.Card;
+
+import org.eclipse.swt.widgets.Link;
+import org.omg.CORBA.PUBLIC_MEMBER;
 
 
-public class CreateGame {
+
+public class GameEngine {
 
 	public static void main(String[] args) {
 				
@@ -19,6 +24,10 @@ public class CreateGame {
 		
 		DeckActions action = new DeckActions();
 		CardDetails card = new CardDetails();
+		GameActions game = new GameActions();
+		int coins = card.coins;
+		int actions = card.actions;
+		int buys = card.buys;
 		
 		
 		card.startUp();
@@ -28,7 +37,7 @@ public class CreateGame {
 		LinkedList<String> startDeck = action.startDeckCards();
 		action.displayDeck(startDeck);
 
-		System.out.println("-------------------------------shuffle--------------------------------------------");
+		System.out.println("-------------------------------shuffle-------------------------------x-------------");
 		
 		LinkedList<String> playableDeck = action.shuffle(action.startDeckCards()); 
 		action.displayDeck(playableDeck);
@@ -65,5 +74,24 @@ public class CreateGame {
 		
 		drawHand = action.drawHand(playableDeck);
 		action.displayDeck(drawHand);
+		
+		card.alchemist();
+		System.out.println(card.coins);
+		System.out.println(card.actions);
+		System.out.println(card.buys);
+		
+		System.out.println(card.cardType.toLowerCase());
+	
+		
+		
+		
+		
+		game.loopTest(discardDeck);
+		
+		
 	}
+	
+	
+	
+
 }

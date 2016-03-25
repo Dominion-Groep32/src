@@ -70,7 +70,10 @@ public class DeckActions {
 			return shuffle(newPlayableList);
 		}
 		else{return playableList;}
-	}}
+	}
+	
+
+}
 	
 	
 
