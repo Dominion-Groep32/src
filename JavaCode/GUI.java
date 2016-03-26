@@ -15,12 +15,12 @@ import sun.net.www.content.image.jpeg;
 
 public class GUI extends JFrame {
     private JPanel pannelTop, pannelBottom, pannelRight, pannelLeft, pannelCenter, pannelCenterCenter;
-    private JButton b1, b2, b3, b4,ButtonsTopPannel[],ButtonsBottomPannel[],ButtonsRightPannel[],ButtonsLeftPanel[];
-    private JLabel labelsTopPannel[], labelsBottomPannel[],labelsRightPannel[],actions,buys,coins;
+    private JButton ButtonsTopPannel[],ButtonsBottomPannel[],ButtonsRightPannel[],ButtonsLeftPanel[];
+    private JLabel actions,buys,coins;
     private int aantalActieKaarten = 10;
     private int aantalKaartenHand = 5;
     private ImageIcon image;
-    private JScrollPane vertical;
+
     
     
  
