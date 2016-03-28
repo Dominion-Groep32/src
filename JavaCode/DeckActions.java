@@ -1,12 +1,18 @@
 package JavaCode;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 
 public class DeckActions {
 	
-	//public LinkedList<String> discardedCardList = new LinkedList<String>();
-	public LinkedList<String> CardsInHand = new LinkedList<String>();
+		//public LinkedList<String> discardedCardList = new LinkedList<String>();
+		public LinkedList<String> CardsInHand = new LinkedList<String>();
+		private String[] actieKaarten = { "ambassador", "cellar", "chancellor", "chapel", "councilroom", "feast",
+	            "festival", "laboratory", "library", "market", "militia", "moat", "moneylender", "smithy", "spy",
+	            "thief", "village", "witch", "woodcutter", "workshop" };
+	    private String[] landKaarten = {"province","duchy","estate"};
+	    private String[] geldKaarten = {"copper","silver","gold","curse"};
 	
 	public LinkedList<String> startDeckCards(){
 		
@@ -17,9 +23,11 @@ public class DeckActions {
 		return list;
 	}	
 	
+
+	
 	public void displayDeck(LinkedList<String> list){
 	
-		for(String x : list) System.out.println(x);
+		for(String x : list) System.out.println(x );
 		}
 	
 	public LinkedList<String> shuffle(LinkedList<String> list){
@@ -38,11 +46,6 @@ public class DeckActions {
 		return CardsInHand;
 	}
 	
-	//public LinkedList<String> discardDeck(LinkedList<String> list) {
-		
-		//for (int i = 0; i < list.size(); i++) {discardedCardList.add(list.get(i));}
-		//return discardedCardList;
-	//}
 	
 	public LinkedList<String> mergeLists(LinkedList<String> mainList, LinkedList<String> addToAnotherList ){
 		
@@ -72,8 +75,19 @@ public class DeckActions {
 		else{return playableList;}
 	}
 	
+	  public LinkedList<String> GenerateActionCards(){
+	    	LinkedList actieKaartenList = new LinkedList();
+	    	
+	    	Collections.shuffle((Arrays.asList(actieKaarten)));
+	    	for (int i = 0; i < actieKaarten.length; i++) {actieKaartenList.add(actieKaarten[i]);}
+	    	
+	    	return actieKaartenList;
+	    	
+	    }
 
 }
+
+
 	
 	
 

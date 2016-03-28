@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import javax.annotation.Generated;
 import javax.swing.*;
 
-
+import org.eclipse.swt.widgets.Link;
 import org.omg.CORBA.PUBLIC_MEMBER;
 
 
@@ -20,8 +20,13 @@ public class GUI extends JFrame {
     private int aantalActieKaarten = 10;
     private int aantalKaartenHand = 5;
     private ImageIcon image;
-
+    private String[] actieKaarten = { "ambassador", "cellar", "chancellor", "chapel", "councilroom", "feast",
+            "festival", "laboratory", "library", "market", "militia", "moat", "moneylender", "smithy", "spy",
+            "thief", "village", "witch", "woodcutter", "workshop" };
+    private String[] landKaarten = {"province","duchy","estate"};
+    private String[] geldKaarten = {"copper","silver","gold","curse"};
     
+    DeckActions deckActions = new DeckActions();
     
  
     public GUI() {
@@ -52,13 +57,13 @@ public class GUI extends JFrame {
         // buttons 10 kaarten toppanel
         ButtonsTopPannel = new JButton[aantalActieKaarten];
         for (int i = 0; i < ButtonsTopPannel.length; i++) {
-        	ButtonsTopPannel[i] = new JButton(i + "");
+        	ButtonsTopPannel[i] = new JButton();
         	ButtonsTopPannel[i].setBorder(BorderFactory.createLineBorder(Color.white));}
 
          // labels 5 kaarten bottompanel
         ButtonsBottomPannel = new JButton[aantalKaartenHand];
         for (int i = 0; i < ButtonsBottomPannel.length; i++) {
-        	ButtonsBottomPannel[i] = new JButton(i + "");
+        	ButtonsBottomPannel[i] = new JButton();
         	ButtonsBottomPannel[i].setBorder(BorderFactory.createLineBorder(Color.white));}}
     
     // geeft waardes aan componenten
@@ -69,7 +74,7 @@ public class GUI extends JFrame {
         add(pannelLeft, BorderLayout.WEST);
         add(pannelCenter, BorderLayout.CENTER);
         add(pannelRight, BorderLayout.EAST);
- 
+        
         // center in 3 delen boven elkaar verdelen
         pannelCenter.setLayout(new BorderLayout());
         pannelCenter.add(pannelTop, BorderLayout.NORTH);
@@ -80,7 +85,7 @@ public class GUI extends JFrame {
         pannelLeft.setLayout(new GridLayout(3, 1));
         ButtonsLeftPanel = new JButton[3];
         for (int i = 0; i < 3; i++) {
-        	ButtonsLeftPanel[i] = new JButton(i +"");
+        	ButtonsLeftPanel[i] = new JButton();
         	pannelLeft.add(ButtonsLeftPanel[i]);}
        
  
@@ -88,7 +93,7 @@ public class GUI extends JFrame {
         pannelRight.setLayout(new GridLayout(4, 1));
         ButtonsRightPannel = new JButton[4];
         for (int i = 0; i < 4; i++) {
-        	ButtonsRightPannel[i] = new JButton(i + "");
+        	ButtonsRightPannel[i] = new JButton();
         	pannelRight.add(ButtonsRightPannel[i]);}
     
         // top buttons generaten
@@ -109,37 +114,24 @@ public class GUI extends JFrame {
     	// acties (buttons/labels...etc)
     	}
     
-    public void GenerateCardsHand() {
-    	 LinkedList list = new LinkedList();
-    	 
-		 for (int i = 0; i < 7; i++) {list.add("copper");}
-		 for (int j = 0; j < 3; j++) {list.add("estate");}
+ 
+    
 
-
-		 for (int i = 0; i < aantalKaartenHand; i++) {
-	            Random rng = new Random();
-	            int randomGetal = rng.nextInt(list.size());
-	           
-	            String path = "../images/" + list.get(randomGetal) + ".jpg";
-	            image = new ImageIcon(getClass().getResource(path));
-	            ButtonsBottomPannel[i].setIcon(image);
-
-	        }
-    }
+   
+    
     
     public void GenerateMoneyCards(){
-    	String[] geldKaarten = {"copper","silver","gold","curse"};
+    	
     	for (int i = 0; i < geldKaarten.length; i++) {
-		 
-		 
-    		String path = "../images/Side/" + geldKaarten[i] + ".jpg"; 
-    		image = new ImageIcon(getClass().getResource(path));
+
+    	String path = "../images/Side/" + geldKaarten[i] + ".jpg"; 
+    	image = new ImageIcon(getClass().getResource(path));
 		ButtonsRightPannel[i].setIcon(image);
 		
 	}}
 
     public void GenerateFieldCards(){
-	String[] landKaarten = {"province","duchy","estate"};
+	
 	 for (int i = 0; i < landKaarten.length; i++) {
 		 
 		String path = "../images/Side/" + landKaarten[i] + ".jpg"; 
@@ -148,31 +140,72 @@ public class GUI extends JFrame {
 		
 	}
 }
-	public void GenerateActionCards(){
-	LinkedList actieKaartenList = new LinkedList();
-	String[] actieKaarten = { "ambassador", "cellar", "chancellor", "chapel", "councilroom", "feast",
-           "festival", "laboratory", "library", "market", "militia", "moat", "moneylender", "smithy", "spy",
-           "thief", "village", "witch", "woodcutter", "workshop" };
-	Collections.shuffle((Arrays.asList(actieKaarten)));
-	for (int i = 0; i < actieKaarten.length; i++) {actieKaartenList.add(actieKaarten[i]);}
-	
-	    
+    
+
+    
+	public void displayActionCards(LinkedList<String> list){
 
    for (int i = 0; i < aantalActieKaarten; i++) {
 	   
-       String path = "../images/Action/" + actieKaartenList.get(i) + ".jpg"; 
-       image = new ImageIcon(getClass().getResource(path));
+       String path = "../images/Action/" + list.get(i) + ".jpg"; 
+       image = new ImageIcon(getClass().getResource(path));	
+       
+       
        ButtonsTopPannel[i].setIcon(image);
+       ButtonsTopPannel[i].setName(list.get(i));
+       ButtonsTopPannel[i].setBorder(BorderFactory.createEmptyBorder());
        
    }
 	
+   
 }
+	
+	   
+    public void AddDrawHandImages(LinkedList<String> list) {
+
+		 for (int i = 0; i < aantalKaartenHand; i++) {
+	            Random rng = new Random();
+	            int randomGetal = rng.nextInt(list.size());
+	            String path = "../images/" + list.get(randomGetal) + ".jpg";
+	            image = new ImageIcon(getClass().getResource(path));
+	            ButtonsBottomPannel[i].setIcon(image);
+	           
+	            ButtonsBottomPannel[i].setBorder(BorderFactory.createEmptyBorder());
+	            ButtonsBottomPannel[i].setName(list.get(randomGetal).toLowerCase());
+
+	        }
+    }
  
+	public void getNameButton(){
+		for (int i = 0; i < ButtonsTopPannel.length; i++) {
+			int getal = i;
+			ButtonsTopPannel[i].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {System.out.println("Select Card: "+ButtonsTopPannel[getal].getName());}
+			} ); 
+		}
+		
+	}
+	public void getNameDrawhand(){
+		for (int i = 0; i < ButtonsBottomPannel.length; i++) {
+			int getal = i;
+			ButtonsBottomPannel[i].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {System.out.println("Select Card: "+ButtonsBottomPannel[getal].getName());}
+			} ); 
+		}
+		
+	}
+	
+	
     public void GenerateCardsField() {
-    	GenerateActionCards();
+    	displayActionCards(deckActions.GenerateActionCards());
     	GenerateFieldCards();
     	GenerateMoneyCards();  	 
     }
+    
+    
+  
     
 
  

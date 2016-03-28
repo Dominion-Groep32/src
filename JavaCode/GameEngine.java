@@ -2,11 +2,14 @@ package JavaCode;
 
 
 
+import java.io.Console;
 import java.util.LinkedList;
 
 import javax.smartcardio.Card;
 
+import org.eclipse.core.internal.databinding.observable.ConstantObservableValue;
 import org.eclipse.swt.widgets.Link;
+import org.junit.experimental.theories.suppliers.TestedOn;
 import org.omg.CORBA.PUBLIC_MEMBER;
 
 
@@ -17,14 +20,16 @@ public class GameEngine {
 				
 		// TODO Auto-generated method stub
 		
-		//GUI gui = new GUI();
-		//gui.GenerateCardsField();
-		//gui.GenerateCardsHand();
-		
-		
+		GUI gui = new GUI();
 		DeckActions action = new DeckActions();
 		CardDetails card = new CardDetails();
 		GameActions game = new GameActions();
+		ConsoleTest gameConsole = new ConsoleTest();
+		gui.GenerateCardsField();
+		
+		//gui.AddDrawHandImages((action.startDeckCards()));
+	
+
 		int coins = card.coins;
 		int actions = card.actions;
 		int buys = card.buys;
@@ -54,10 +59,12 @@ public class GameEngine {
 		action.displayDeck(playableDeck);
 		
 		System.out.println("--------------------------add actioncard to discardDeck------------------------------------------");
-		
-		card.witch();
 		LinkedList<String> startDiscardDeck = new LinkedList<String>();
+		card.witch();
+		
 		LinkedList<String> discardDeck = action.addCardToList(startDiscardDeck, card.cardName);
+		card.village();
+		action.addCardToList(startDiscardDeck, card.cardName);
 		action.displayDeck(discardDeck);
 		
 		System.out.println("--------------------add drawhand to discarddeck & show discardDeck-------------------------------------------");
@@ -75,18 +82,39 @@ public class GameEngine {
 		drawHand = action.drawHand(playableDeck);
 		action.displayDeck(drawHand);
 		
-		card.alchemist();
-		System.out.println(card.coins);
-		System.out.println(card.actions);
-		System.out.println(card.buys);
+		System.out.println("---------------------------------tester-----------------------------------------------------");
 		
-		System.out.println(card.cardType.toLowerCase());
+		action.displayDeck(drawHand);
+		
+		
+		System.out.println("---------------------- functie die type toont------------------------------------------");
+		game.checkType(drawHand);
+		
+		System.out.println("-------------------------------------------------------------------------------------");
+		
+		
+		LinkedList<String> testlist = new LinkedList<String>();
+		
+		testlist.add("witch");
+		testlist.add("village");
+		testlist.add("copper");
+		testlist.add("province");
+		testlist.add("smithy");
+		
+		action.displayDeck(testlist);
+		System.out.println("------types-------");
+		game.checkType(testlist);
+		
+		
+		System.out.println("----------------------------------------------------------------------------------------");
+		gui.getNameButton();
+		gui.getNameDrawhand();
+		
+		
+		gui.AddDrawHandImages(discardDeck);
+		
 	
-		
-		
-		
-		
-		game.loopTest(discardDeck);
+		//gameConsole.consoleTest();
 		
 		
 	}

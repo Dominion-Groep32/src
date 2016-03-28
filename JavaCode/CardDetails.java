@@ -45,7 +45,7 @@ public class CardDetails {
 	
 	//Moet voor elke beurt opgeroepen worden
 	public void resetCards()
-	{
+	{ 		
 		cardName = "";
 		cardAbility = "";
 		cardType = "";
@@ -73,6 +73,13 @@ public class CardDetails {
 		coins += 1;
 		cardCost += 0;
 		amountCopper --;
+	}
+	
+	public void estate()
+	{
+		cardName = "ESTATE";
+		cardType = "VICTORY";
+		
 	}
 	
 	public void coinSilver()
