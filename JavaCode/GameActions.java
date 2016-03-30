@@ -30,9 +30,7 @@ public class GameActions {
 			
 			if(Arrays.asList(actionCards).contains(list.get(j)))
 			{
-				
-				System.out.println("action");
-				
+				System.out.println("action");	
 			}
 		
 			else if (Arrays.asList(groundCards).contains(list.get(j))) {
@@ -41,10 +39,13 @@ public class GameActions {
 			else {System.out.println("money");}
 			
 			}
-
+	}
+	public void showTypeOftest(String string){
+		System.out.println("-----------------------------"+ string +"--------------------------------------------");
 	}
 }
 	
+
 	
 	
 

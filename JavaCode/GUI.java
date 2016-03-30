@@ -9,12 +9,17 @@ import javax.swing.*;
 import org.eclipse.swt.widgets.Link;
 import org.omg.CORBA.PUBLIC_MEMBER;
 
+import com.sun.javafx.geom.AreaOp.NZWindOp;
+
+import javafx.scene.layout.Background;
+import javafx.scene.layout.Border;
+import junit.framework.Test;
 
 import java.util.*;
 import sun.net.www.content.image.jpeg;
 
 public class GUI extends JFrame {
-    private JPanel pannelTop, pannelBottom, pannelRight, pannelLeft, pannelCenter, pannelCenterCenter;
+    private JPanel pannelTop, pannelBottom, pannelRight, pannelLeft, pannelCenter, pannelCenterCenter,pannelCenterLeft,pannelCenterRight,pannelLeftTop,pannelLeftBottom,pannelRightTop,pannelRightBottom;
     private JButton ButtonsTopPannel[],ButtonsBottomPannel[],ButtonsRightPannel[],ButtonsLeftPanel[];
     private JLabel actions,buys,coins;
     private int aantalActieKaarten = 10;
@@ -44,7 +49,9 @@ public class GUI extends JFrame {
         setTitle("JENS IS PRO");
         setVisible(true);
         setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
-    	
+       // setLayout(new BorderLayout());
+        //setContentPane(new JLabel(new ImageIcon(getClass().getResource("C:/Users/jensp/git/DominionProject/Dominion/src/images/background.jpg"))));
+           	
     	// 4 sides pannels
         pannelRight = new JPanel();
         pannelLeft = new JPanel();
@@ -52,6 +59,14 @@ public class GUI extends JFrame {
         pannelBottom = new JPanel();
         pannelCenter = new JPanel();
         pannelCenterCenter = new JPanel();
+        pannelLeftTop = new JPanel();
+        pannelLeftBottom = new JPanel();
+        pannelRightTop = new JPanel();
+        pannelRightBottom = new JPanel();
+     
+  
+        
+       
        
  
         // buttons 10 kaarten toppanel
@@ -71,9 +86,21 @@ public class GUI extends JFrame {
  
         // main frame in 3 verdelen
         setLayout(new BorderLayout());
+        //pannelLeft.setPreferredSize(new Dimension(30,30));
         add(pannelLeft, BorderLayout.WEST);
         add(pannelCenter, BorderLayout.CENTER);
         add(pannelRight, BorderLayout.EAST);
+        
+        //left in 2 delen 
+        pannelLeft.setLayout(new BorderLayout());
+        pannelLeft.add(pannelLeftTop, BorderLayout.NORTH);
+        pannelLeft.add(pannelLeftBottom, BorderLayout.SOUTH);
+        
+        //right in 2 delen
+        pannelRight.setLayout(new BorderLayout());
+        pannelRight.add(pannelRightTop,BorderLayout.NORTH);
+        pannelRight.add(pannelRightBottom, BorderLayout.SOUTH);
+        
         
         // center in 3 delen boven elkaar verdelen
         pannelCenter.setLayout(new BorderLayout());
@@ -82,44 +109,45 @@ public class GUI extends JFrame {
         pannelCenter.add(pannelBottom, BorderLayout.SOUTH);
  
         //left buttons generaten
-        pannelLeft.setLayout(new GridLayout(3, 1));
+        pannelLeftTop.setLayout(new GridLayout(3,1 ));
         ButtonsLeftPanel = new JButton[3];
         for (int i = 0; i < 3; i++) {
         	ButtonsLeftPanel[i] = new JButton();
-        	pannelLeft.add(ButtonsLeftPanel[i]);}
+        	ButtonsLeftPanel[i].setPreferredSize(new Dimension(120, 190));
+        	pannelLeftTop.add(ButtonsLeftPanel[i]);}
+        
        
  
         // right buttons generaten
-        pannelRight.setLayout(new GridLayout(4, 1));
+        pannelRightTop.setLayout(new GridLayout(4, 1));
         ButtonsRightPannel = new JButton[4];
         for (int i = 0; i < 4; i++) {
         	ButtonsRightPannel[i] = new JButton();
-        	pannelRight.add(ButtonsRightPannel[i]);}
+        	ButtonsRightPannel[i].setPreferredSize(new Dimension(120, 190));
+        	
+        	pannelRightTop.add(ButtonsRightPannel[i]);}
     
         // top buttons generaten
      
-        pannelTop.setLayout(new GridLayout(2, aantalActieKaarten / 2));
-        
+        //pannelTop.setLayout(new GridLayout(2, aantalActieKaarten / 2));
+        pannelTop.setLayout(new FlowLayout());
         for (int i = 0; i < ButtonsTopPannel.length; i++) {
             pannelTop.add(ButtonsTopPannel[i]);}
+        
  
         
         // bottom buttons generaten
         pannelBottom.setLayout(new FlowLayout());
         for (int i = 0; i < ButtonsBottomPannel.length; i++) {
-            pannelBottom.add(ButtonsBottomPannel[i]);}}
+            pannelBottom.add(ButtonsBottomPannel[i]);
+       ;}}
  
    
     public void InitListeners() {
     	// acties (buttons/labels...etc)
     	}
     
- 
-    
 
-   
-    
-    
     public void GenerateMoneyCards(){
     	
     	for (int i = 0; i < geldKaarten.length; i++) {
@@ -149,8 +177,6 @@ public class GUI extends JFrame {
 	   
        String path = "../images/Action/" + list.get(i) + ".jpg"; 
        image = new ImageIcon(getClass().getResource(path));	
-       
-       
        ButtonsTopPannel[i].setIcon(image);
        ButtonsTopPannel[i].setName(list.get(i));
        ButtonsTopPannel[i].setBorder(BorderFactory.createEmptyBorder());
@@ -162,6 +188,7 @@ public class GUI extends JFrame {
 	
 	   
     public void AddDrawHandImages(LinkedList<String> list) {
+    	JButton testbutton = new JButton();
 
 		 for (int i = 0; i < aantalKaartenHand; i++) {
 	            Random rng = new Random();
@@ -169,11 +196,18 @@ public class GUI extends JFrame {
 	            String path = "../images/" + list.get(randomGetal) + ".jpg";
 	            image = new ImageIcon(getClass().getResource(path));
 	            ButtonsBottomPannel[i].setIcon(image);
+	            
 	           
 	            ButtonsBottomPannel[i].setBorder(BorderFactory.createEmptyBorder());
 	            ButtonsBottomPannel[i].setName(list.get(randomGetal).toLowerCase());
 
 	        }
+		 
+		 //ZEKER VERDER OP TESTEN @#@#!
+		 //testbutton = new JButton("jens",image);
+         //testbutton.setPreferredSize(new Dimension(60, 120));
+         
+        // pannelBottom.add(testbutton);
     }
  
 	public void getNameButton(){

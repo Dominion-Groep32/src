@@ -17,17 +17,16 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 public class GameEngine {
 
 	public static void main(String[] args) {
-				
-		// TODO Auto-generated method stub
-		
+			
 		GUI gui = new GUI();
 		DeckActions action = new DeckActions();
 		CardDetails card = new CardDetails();
 		GameActions game = new GameActions();
-		ConsoleTest gameConsole = new ConsoleTest();
+		
 		gui.GenerateCardsField();
 		
-		//gui.AddDrawHandImages((action.startDeckCards()));
+		gui.AddDrawHandImages(action.startDeckCards());
+		
 	
 
 		int coins = card.coins;
@@ -37,28 +36,27 @@ public class GameEngine {
 		
 		card.startUp();
 		
-		System.out.println("--------------------------Standaard------------------------------------------");
+		
 		
 		LinkedList<String> startDeck = action.startDeckCards();
 		action.displayDeck(startDeck);
-
-		System.out.println("-------------------------------shuffle-------------------------------x-------------");
 		
+		game.showTypeOftest("Shuffle");
+		
+	
 		LinkedList<String> playableDeck = action.shuffle(action.startDeckCards()); 
 		action.displayDeck(playableDeck);
 		
-
-		System.out.println("--------------------------------------drawHand-------------------------------------------");
+		game.showTypeOftest("DrawHand");
 		
 		LinkedList<String> drawHand = action.drawHand(playableDeck);
 		action.displayDeck(drawHand);
-
-		System.out.println("--------------------------playableDeck------------------------------------------");
+		game.showTypeOftest("playableDeck");
 		
 		playableDeck = action.decreasePlayableDeck(playableDeck,5);
 		action.displayDeck(playableDeck);
+		game.showTypeOftest("Add ActionCard To Deck");
 		
-		System.out.println("--------------------------add actioncard to discardDeck------------------------------------------");
 		LinkedList<String> startDiscardDeck = new LinkedList<String>();
 		card.witch();
 		
@@ -67,51 +65,35 @@ public class GameEngine {
 		action.addCardToList(startDiscardDeck, card.cardName);
 		action.displayDeck(discardDeck);
 		
-		System.out.println("--------------------add drawhand to discarddeck & show discardDeck-------------------------------------------");
+		game.showTypeOftest("Add DrawHand To DiscardDeck & Show DiscardDeck");
 		
 		discardDeck = action.mergeLists(discardDeck, drawHand);
 		action.displayDeck(discardDeck);
 	
-		System.out.println("--------------------Controle playabledeck-------------------------------------------");
+		game.showTypeOftest("Controle PlayableDeck");
 		
 		playableDeck=action.newPlayableDeck(playableDeck, discardDeck);
 		action.displayDeck(playableDeck);
 		
-		System.out.println("--------------------------------------drawHand-------------------------------------------");
-		
+		game.showTypeOftest("DrawHand");
+				
 		drawHand = action.drawHand(playableDeck);
 		action.displayDeck(drawHand);
 		
-		System.out.println("---------------------------------tester-----------------------------------------------------");
+		game.showTypeOftest("Tester");
 		
 		action.displayDeck(drawHand);
 		
+		game.showTypeOftest("Function that shows the Type");
 		
-		System.out.println("---------------------- functie die type toont------------------------------------------");
 		game.checkType(drawHand);
 		
-		System.out.println("-------------------------------------------------------------------------------------");
-		
-		
-		LinkedList<String> testlist = new LinkedList<String>();
-		
-		testlist.add("witch");
-		testlist.add("village");
-		testlist.add("copper");
-		testlist.add("province");
-		testlist.add("smithy");
-		
-		action.displayDeck(testlist);
-		System.out.println("------types-------");
-		game.checkType(testlist);
-		
-		
-		System.out.println("----------------------------------------------------------------------------------------");
+	
 		gui.getNameButton();
 		gui.getNameDrawhand();
 		
 		
-		gui.AddDrawHandImages(discardDeck);
+		//gui.AddDrawHandImages(discardDeck);
 		
 	
 		//gameConsole.consoleTest();
