@@ -198,21 +198,21 @@ public class GUI extends JFrame {
 			ButtonsBottomPannel[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-				gameActions.getCardDetails(ButtonsBottomPannel[getal].getName());
-				
-				ButtonsBottomPannel[getal].setVisible(false);
-				
-				pannelCenterCenter.add(testbutton);
-				image = new ImageIcon(getClass().getResource("../images/"+ButtonsBottomPannel[getal].getName()+".jpg"));
-				testbutton.setIcon(image);
-				
-				
-				
-				
-			
-				
-				}
-				
+					String selectedCardName = ButtonsBottomPannel[getal].getName();
+					
+					LinkedList<String> playableField = new LinkedList<>();
+					playableField.add(selectedCardName);
+					
+					gameActions.getCardDetails(selectedCardName);
+					gameActions.showTypeOfPRINT("playable field");
+					deckActions.displayDeck(playableField);
+					
+					ButtonsBottomPannel[getal].setVisible(false);
+					pannelCenterCenter.add(testbutton);
+					image = new ImageIcon(getClass().getResource("../images/"+selectedCardName+".jpg"));
+					testbutton.setIcon(image);
+					
+					}
 			} ); 
 		}
 		

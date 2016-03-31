@@ -46,7 +46,7 @@ public class DeckActionsTester {
 	@Test
 	public void testDecreasePlayableDeck(){
 		
-		int decreasedList = action.decreasePlayablePile(startDeckList, 3).size();
+		int decreasedList = action.decreasePile(startDeckList, 3).size();
 		if(decreasedList!=7)
 			System.err.println("decreasedPlayableDeck Fails");
 	}
