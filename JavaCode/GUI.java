@@ -68,7 +68,7 @@ public class GUI extends JFrame {
         l1.setIcon(image);
         
         testbutton = new JButton();
-        testlabel = new JLabel();
+       
       
         add(l1);
       setSize(2000,1100);

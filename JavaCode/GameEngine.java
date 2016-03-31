@@ -31,13 +31,6 @@ public class GameEngine {
 		
 		gui.GenerateCardsField();
 		
-	
-		
-		
-	
-
-		
-		
 		card.startUp();
 		
 		
@@ -59,7 +52,7 @@ public class GameEngine {
 		
 		//game.showTypeOfPRINT("playableDeck");
 		
-		playablePile = action.decreasePlayablePile(playablePile,5);
+		playablePile = action.decreasePile(playablePile,5);
 		//action.displayDeck(playablePile);
 		
 		//game.showTypeOfPRINT("Add ActionCard To Deck");
@@ -104,7 +97,7 @@ public class GameEngine {
 		//gui.AddDrawHandImages(discardDeck);
 		//gameConsole.consoleTest();
 		
-	
+		
 		
 		
 	}
