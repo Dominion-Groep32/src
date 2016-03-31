@@ -7,6 +7,7 @@ import java.io.File;
 
 import javax.annotation.Generated;
 import javax.imageio.ImageIO;
+import javax.smartcardio.Card;
 import javax.swing.*;
 
 //import org.eclipse.swt.widgets.Link;
@@ -23,7 +24,7 @@ import sun.net.www.content.image.jpeg;
 
 public class GUI extends JFrame {
     private JPanel pannelTop, pannelBottom, pannelRight, pannelLeft, pannelCenter, pannelCenterCenter,pannelCenterLeft,pannelCenterRight,pannelLeftTop,pannelLeftBottom,pannelRightTop,pannelRightBottom;
-    private JButton ButtonsTopPannel[],ButtonsBottomPannel[],ButtonsRightPannel[],ButtonsLeftPanel[],b1;
+    private JButton ButtonsTopPannel[],ButtonsBottomPannel[],ButtonsRightPannel[],ButtonsLeftPanel[],b1,testbutton;
     private JLabel actions,buys,coins,l1;
     private int aantalActieKaarten = 10;
     private int aantalKaartenHand = 5;
@@ -65,6 +66,8 @@ public class GUI extends JFrame {
         
         l1=new JLabel();
         l1.setIcon(image);
+        
+        testbutton = new JButton();
       
         add(l1);
       setSize(2000,1100);
@@ -183,10 +186,7 @@ public class GUI extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					gameActions.getCardDetails(ButtonsTopPannel[getal].getName());
-					
-					
-					
-					
+
 					}
 			} ); 
 		}
@@ -199,6 +199,16 @@ public class GUI extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 				gameActions.getCardDetails(ButtonsBottomPannel[getal].getName());
+				
+				ButtonsBottomPannel[getal].setVisible(false);
+				
+				pannelCenterCenter.add(testbutton);
+				image = new ImageIcon(getClass().getResource("../images/"+ButtonsBottomPannel[getal].getName()+".jpg"));
+				testbutton.setIcon(image);
+				
+				
+				
+				
 			
 				
 				}
