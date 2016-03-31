@@ -27,6 +27,7 @@ public class GameEngine {
 		
 		System.out.println("Actions : "+card.actions);
 		System.out.println("Buys : "+card.buys);
+		System.out.println("coins : "+card.coins);
 		
 		
 		gui.GenerateCardsField();

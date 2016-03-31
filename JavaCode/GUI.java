@@ -24,7 +24,7 @@ import sun.net.www.content.image.jpeg;
 
 public class GUI extends JFrame {
     private JPanel pannelTop, pannelBottom, pannelRight, pannelLeft, pannelCenter, pannelCenterCenter,pannelCenterLeft,pannelCenterRight,pannelLeftTop,pannelLeftBottom,pannelRightTop,pannelRightBottom;
-    private JButton ButtonsTopPannel[],ButtonsBottomPannel[],ButtonsRightPannel[],ButtonsLeftPanel[],b1,testbutton;
+    private JButton ButtonsTopPannel[],ButtonsBottomPannel[],ButtonsRightPannel[],ButtonsLeftPanel[],ButtonsPlayField[],b1;
     private JLabel actions,buys,coins,l1,testlabel;
     private int aantalActieKaarten = 10;
     private int aantalKaartenHand = 5;
@@ -37,6 +37,7 @@ public class GUI extends JFrame {
     
     DeckActions deckActions = new DeckActions();
     GameActions gameActions = new GameActions();
+    CardDetails cardDetails = new CardDetails();
     LinkedList<String> playableField = new LinkedList<String>();
     
  
@@ -68,7 +69,7 @@ public class GUI extends JFrame {
         l1=new JLabel();
         l1.setIcon(image);
         
-        testbutton = new JButton();
+       
        
       
         add(l1);
@@ -93,11 +94,7 @@ public class GUI extends JFrame {
         pannelRightTop = new JPanel();
         pannelRightBottom = new JPanel();
      
-  
-        
-       
-       
- 
+
         // buttons 10 kaarten toppanel
         ButtonsTopPannel = new JButton[aantalActieKaarten];
         for (int i = 0; i < ButtonsTopPannel.length; i++) {
@@ -198,30 +195,54 @@ public class GUI extends JFrame {
 	}
 	public void getNameDrawhand(){
 		for (int i = 0; i < ButtonsBottomPannel.length; i++) {
+			
+		
 			int getal = i;
 			
+
 			ButtonsBottomPannel[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
+					
+					
 				String selectedCardName = ButtonsBottomPannel[getal].getName();
-				playableField.add(selectedCardName);
-				gameActions.getCardDetails(selectedCardName);
-				gameActions.showTypeOfPRINT("playable field");
-				deckActions.displayDeck(playableField);
 				
-				ButtonsBottomPannel[getal].setVisible(false);
-				pannelCenterCenter.add(testbutton);
-				image = new ImageIcon(getClass().getResource("../images/"+ButtonsBottomPannel[getal].getName()+".jpg"));
-				testbutton.setIcon(image);
-				testbutton.setPreferredSize(new Dimension(190, 300));
+				String selectedCardType = gameActions.getCardDetails(selectedCardName);
+				System.out.println(selectedCardType);
+				
+				
+				
+				
+				
+				if ( gameActions.checkType(selectedCardName)== "treasure" || gameActions.checkType(selectedCardName)== "actions" ) {
+					
+					playableField.add(selectedCardName);	
+					ButtonsBottomPannel[getal].setVisible(false);
+					playableFieldButtons(playableField, selectedCardName, getal);
+					
 				}
+				System.out.println(cardDetails.coins);
 				
 				
-			} ); 
+				
+				
+				
+
+			}} ); 
 		}
 		
 	}
     
+	public void playableFieldButtons(LinkedList<String> list,String selectedCardName,int getal){
+		ButtonsPlayField = new JButton[50];
+	       
+	        ButtonsPlayField[getal] = new JButton();
+	        image = new ImageIcon(getClass().getResource("../images/"+selectedCardName+".jpg"));
+			ButtonsPlayField[getal].setIcon(image);
+			ButtonsPlayField[getal].setPreferredSize(new Dimension(190, 300));
+			pannelCenterCenter.add(ButtonsPlayField[getal]);
+	}
+		
 
     public void GenerateMoneyCards(){
     	
@@ -254,7 +275,7 @@ public class GUI extends JFrame {
        image = new ImageIcon(getClass().getResource(path));	
        ButtonsTopPannel[i].setIcon(image);
        ButtonsTopPannel[i].setName(list.get(i));
-       ButtonsTopPannel[i].setBorder(BorderFactory.createEmptyBorder());
+      
        }
 
 }
@@ -269,7 +290,6 @@ public class GUI extends JFrame {
 	           
 	            image = new ImageIcon(getClass().getResource(path));
 	            ButtonsBottomPannel[i].setIcon(image);
-	            ButtonsBottomPannel[i].setBorder(BorderFactory.createEmptyBorder());
 	            ButtonsBottomPannel[i].setName(list.get(randomGetal).toLowerCase());
 
 	        }

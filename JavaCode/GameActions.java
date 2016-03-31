@@ -24,25 +24,26 @@ public class GameActions {
 	
 
 	
-	public void checkType(LinkedList<String> list){
+	public String checkType(String naam){
 		
-		for (int j = 0; j < list.size(); j++) {
+		for (int j = 0; j < 30; j++) {
 			
-			if(Arrays.asList(actionCards).contains(list.get(j)))
+			if(Arrays.asList(actionCards).contains(naam))
 			{
-				System.out.println("action");	
+				return "action";	
 			}
 		
-			else if (Arrays.asList(groundCards).contains(list.get(j))) {
-				System.out.println("ground");
+			else if (Arrays.asList(groundCards).contains(naam)) {
+				return "victory";	
 			}
-			else {System.out.println("money");}
+			else {return "treasure";}
 			
 			}
+		return "fail";
 	}
 	
 	
-	public void getCardDetails(String kaart){
+	public String getCardDetails(String kaart){
 		
 		switch (kaart) {
 		case "witch":
@@ -66,7 +67,8 @@ public class GameActions {
 			card.resetCards();
 			break;
 		}
-		card.currentCardInfo();
+		
+		return card.cardType;
 		
 		
 	}
