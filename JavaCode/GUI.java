@@ -37,6 +37,7 @@ public class GUI extends JFrame {
     
     DeckActions deckActions = new DeckActions();
     GameActions gameActions = new GameActions();
+    LinkedList<String> playableField = new LinkedList<String>();
     
  
     public GUI() {
@@ -198,24 +199,23 @@ public class GUI extends JFrame {
 	public void getNameDrawhand(){
 		for (int i = 0; i < ButtonsBottomPannel.length; i++) {
 			int getal = i;
+			
 			ButtonsBottomPannel[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-				gameActions.getCardDetails(ButtonsBottomPannel[getal].getName());
+				String selectedCardName = ButtonsBottomPannel[getal].getName();
+				playableField.add(selectedCardName);
+				gameActions.getCardDetails(selectedCardName);
+				gameActions.showTypeOfPRINT("playable field");
+				deckActions.displayDeck(playableField);
 				
 				ButtonsBottomPannel[getal].setVisible(false);
-				
 				pannelCenterCenter.add(testbutton);
 				image = new ImageIcon(getClass().getResource("../images/"+ButtonsBottomPannel[getal].getName()+".jpg"));
 				testbutton.setIcon(image);
 				testbutton.setPreferredSize(new Dimension(190, 300));
-				
-				
-				
-				
-			
-				
 				}
+				
 				
 			} ); 
 		}
