@@ -25,7 +25,7 @@ import sun.net.www.content.image.jpeg;
 public class GUI extends JFrame {
     private JPanel pannelTop, pannelBottom, pannelRight, pannelLeft, pannelCenter, pannelCenterCenter,pannelCenterLeft,pannelCenterRight,pannelLeftTop,pannelLeftBottom,pannelRightTop,pannelRightBottom;
     private JButton ButtonsTopPannel[],ButtonsBottomPannel[],ButtonsRightPannel[],ButtonsLeftPanel[],b1,testbutton;
-    private JLabel actions,buys,coins,l1;
+    private JLabel actions,buys,coins,l1,testlabel;
     private int aantalActieKaarten = 10;
     private int aantalKaartenHand = 5;
     private ImageIcon image;
@@ -68,6 +68,7 @@ public class GUI extends JFrame {
         l1.setIcon(image);
         
         testbutton = new JButton();
+        testlabel = new JLabel();
       
         add(l1);
       setSize(2000,1100);
@@ -160,7 +161,9 @@ public class GUI extends JFrame {
         //pannelTop.setLayout(new GridLayout(2, aantalActieKaarten / 2));
         pannelTop.setLayout(new FlowLayout());
         for (int i = 0; i < ButtonsTopPannel.length; i++) {
-            pannelTop.add(ButtonsTopPannel[i]);}
+            pannelTop.add(ButtonsTopPannel[i]);
+           
+        }
         
  
         
@@ -205,6 +208,7 @@ public class GUI extends JFrame {
 				pannelCenterCenter.add(testbutton);
 				image = new ImageIcon(getClass().getResource("../images/"+ButtonsBottomPannel[getal].getName()+".jpg"));
 				testbutton.setIcon(image);
+				testbutton.setPreferredSize(new Dimension(190, 300));
 				
 				
 				
