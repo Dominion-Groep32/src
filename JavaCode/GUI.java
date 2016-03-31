@@ -3,25 +3,28 @@ package JavaCode;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+
 import javax.annotation.Generated;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import org.eclipse.swt.widgets.Link;
+//import org.eclipse.swt.widgets.Link;
 import org.omg.CORBA.PUBLIC_MEMBER;
 
 import com.sun.javafx.geom.AreaOp.NZWindOp;
 
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Border;
-import junit.framework.Test;
+//import junit.framework.Test;
 
 import java.util.*;
 import sun.net.www.content.image.jpeg;
 
 public class GUI extends JFrame {
     private JPanel pannelTop, pannelBottom, pannelRight, pannelLeft, pannelCenter, pannelCenterCenter,pannelCenterLeft,pannelCenterRight,pannelLeftTop,pannelLeftBottom,pannelRightTop,pannelRightBottom;
-    private JButton ButtonsTopPannel[],ButtonsBottomPannel[],ButtonsRightPannel[],ButtonsLeftPanel[];
-    private JLabel actions,buys,coins;
+    private JButton ButtonsTopPannel[],ButtonsBottomPannel[],ButtonsRightPannel[],ButtonsLeftPanel[],b1;
+    private JLabel actions,buys,coins,l1;
     private int aantalActieKaarten = 10;
     private int aantalKaartenHand = 5;
     private ImageIcon image;
@@ -32,6 +35,7 @@ public class GUI extends JFrame {
     private String[] geldKaarten = {"copper","silver","gold","curse"};
     
     DeckActions deckActions = new DeckActions();
+    GameActions gameActions = new GameActions();
     
  
     public GUI() {
@@ -39,10 +43,13 @@ public class GUI extends JFrame {
         LayoutComponents();
         InitListeners();
     }
+    
 
     // maakt componenten
     public void InitComponents() {
-        
+    	
+    	
+    	  
     	 // venster
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocation(50, 50);
@@ -51,6 +58,23 @@ public class GUI extends JFrame {
         setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
        // setLayout(new BorderLayout());
         //setContentPane(new JLabel(new ImageIcon(getClass().getResource("C:/Users/jensp/git/DominionProject/Dominion/src/images/background.jpg"))));
+        
+        
+       
+        image = new ImageIcon(getClass().getResource("../images/background.jpg"));
+        
+        l1=new JLabel();
+        l1.setIcon(image);
+      
+        add(l1);
+      setSize(2000,1100);
+        // Just for refresh :) Not optional!
+        
+       
+        
+        
+        
+        
            	
     	// 4 sides pannels
         pannelRight = new JPanel();
@@ -95,6 +119,7 @@ public class GUI extends JFrame {
         pannelLeft.setLayout(new BorderLayout());
         pannelLeft.add(pannelLeftTop, BorderLayout.NORTH);
         pannelLeft.add(pannelLeftBottom, BorderLayout.SOUTH);
+       
         
         //right in 2 delen
         pannelRight.setLayout(new BorderLayout());
@@ -140,12 +165,48 @@ public class GUI extends JFrame {
         pannelBottom.setLayout(new FlowLayout());
         for (int i = 0; i < ButtonsBottomPannel.length; i++) {
             pannelBottom.add(ButtonsBottomPannel[i]);
+            
        ;}}
  
    
     public void InitListeners() {
     	// acties (buttons/labels...etc)
+    	
+    	
+
+    	
     	}
+	public void getNameButton(){
+		for (int i = 0; i < ButtonsTopPannel.length; i++) {
+			int getal = i;
+			ButtonsTopPannel[i].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					gameActions.getCardDetails(ButtonsTopPannel[getal].getName());
+					
+					
+					
+					
+					}
+			} ); 
+		}
+		
+	}
+	public void getNameDrawhand(){
+		for (int i = 0; i < ButtonsBottomPannel.length; i++) {
+			int getal = i;
+			ButtonsBottomPannel[i].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+				gameActions.getCardDetails(ButtonsBottomPannel[getal].getName());
+			
+				
+				}
+				
+			} ); 
+		}
+		
+	}
     
 
     public void GenerateMoneyCards(){
@@ -180,62 +241,36 @@ public class GUI extends JFrame {
        ButtonsTopPannel[i].setIcon(image);
        ButtonsTopPannel[i].setName(list.get(i));
        ButtonsTopPannel[i].setBorder(BorderFactory.createEmptyBorder());
-       
-   }
-	
-   
+       }
+
 }
 	
 	   
     public void AddDrawHandImages(LinkedList<String> list) {
-    	JButton testbutton = new JButton();
-
+    	
 		 for (int i = 0; i < aantalKaartenHand; i++) {
 	            Random rng = new Random();
 	            int randomGetal = rng.nextInt(list.size());
 	            String path = "../images/" + list.get(randomGetal) + ".jpg";
+	           
 	            image = new ImageIcon(getClass().getResource(path));
 	            ButtonsBottomPannel[i].setIcon(image);
-	            
-	           
 	            ButtonsBottomPannel[i].setBorder(BorderFactory.createEmptyBorder());
 	            ButtonsBottomPannel[i].setName(list.get(randomGetal).toLowerCase());
 
 	        }
 		 
-		 //ZEKER VERDER OP TESTEN @#@#!
-		 //testbutton = new JButton("jens",image);
-         //testbutton.setPreferredSize(new Dimension(60, 120));
-         
-        // pannelBottom.add(testbutton);
+		 
     }
  
-	public void getNameButton(){
-		for (int i = 0; i < ButtonsTopPannel.length; i++) {
-			int getal = i;
-			ButtonsTopPannel[i].addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {System.out.println("Select Card: "+ButtonsTopPannel[getal].getName());}
-			} ); 
-		}
-		
-	}
-	public void getNameDrawhand(){
-		for (int i = 0; i < ButtonsBottomPannel.length; i++) {
-			int getal = i;
-			ButtonsBottomPannel[i].addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {System.out.println("Select Card: "+ButtonsBottomPannel[getal].getName());}
-			} ); 
-		}
-		
-	}
+
 	
 	
     public void GenerateCardsField() {
     	displayActionCards(deckActions.GenerateActionCards());
     	GenerateFieldCards();
     	GenerateMoneyCards();  	 
+    	AddDrawHandImages(deckActions.startDeckCards());
     }
     
     

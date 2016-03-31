@@ -6,10 +6,11 @@ import java.io.Console;
 import java.util.LinkedList;
 
 import javax.smartcardio.Card;
-
+/*
 import org.eclipse.core.internal.databinding.observable.ConstantObservableValue;
 import org.eclipse.swt.widgets.Link;
 import org.junit.experimental.theories.suppliers.TestedOn;
+*/
 import org.omg.CORBA.PUBLIC_MEMBER;
 
 
@@ -22,16 +23,19 @@ public class GameEngine {
 		DeckActions action = new DeckActions();
 		CardDetails card = new CardDetails();
 		GameActions game = new GameActions();
+		card.startTurn();
+		
+		System.out.println("Actions : "+card.actions);
+		System.out.println("Buys : "+card.buys);
+		
 		
 		gui.GenerateCardsField();
 		
-		gui.AddDrawHandImages(action.startDeckCards());
+	
+		
 		
 	
 
-		int coins = card.coins;
-		int actions = card.actions;
-		int buys = card.buys;
 		
 		
 		card.startUp();
@@ -39,23 +43,26 @@ public class GameEngine {
 		
 		
 		LinkedList<String> startDeck = action.startDeckCards();
-		action.displayDeck(startDeck);
 		
-		game.showTypeOftest("Shuffle");
+		
+		
+		//game.showTypeOfPRINT("Shuffle");
 		
 	
-		LinkedList<String> playableDeck = action.shuffle(action.startDeckCards()); 
-		action.displayDeck(playableDeck);
+		LinkedList<String> playablePile = action.shuffle(action.startDeckCards()); 
+		//action.displayDeck(playablePile);
 		
-		game.showTypeOftest("DrawHand");
+		//game.showTypeOfPRINT("DrawHand");
 		
-		LinkedList<String> drawHand = action.drawHand(playableDeck);
-		action.displayDeck(drawHand);
-		game.showTypeOftest("playableDeck");
+		LinkedList<String> drawHand = action.drawHand(playablePile);
+		//action.displayDeck(drawHand);
 		
-		playableDeck = action.decreasePlayableDeck(playableDeck,5);
-		action.displayDeck(playableDeck);
-		game.showTypeOftest("Add ActionCard To Deck");
+		//game.showTypeOfPRINT("playableDeck");
+		
+		playablePile = action.decreasePlayablePile(playablePile,5);
+		//action.displayDeck(playablePile);
+		
+		//game.showTypeOfPRINT("Add ActionCard To Deck");
 		
 		LinkedList<String> startDiscardDeck = new LinkedList<String>();
 		card.witch();
@@ -63,40 +70,41 @@ public class GameEngine {
 		LinkedList<String> discardDeck = action.addCardToList(startDiscardDeck, card.cardName);
 		card.village();
 		action.addCardToList(startDiscardDeck, card.cardName);
-		action.displayDeck(discardDeck);
+		//action.displayDeck(discardDeck);
 		
-		game.showTypeOftest("Add DrawHand To DiscardDeck & Show DiscardDeck");
+		//game.showTypeOfPRINT("Add DrawHand To DiscardDeck & Show DiscardDeck");
 		
 		discardDeck = action.mergeLists(discardDeck, drawHand);
-		action.displayDeck(discardDeck);
+		//action.displayDeck(discardDeck);
 	
-		game.showTypeOftest("Controle PlayableDeck");
+		//game.showTypeOfPRINT("Controle PlayableDeck");
 		
-		playableDeck=action.newPlayableDeck(playableDeck, discardDeck);
-		action.displayDeck(playableDeck);
+		playablePile=action.newPlayableDeck(playablePile, discardDeck);
+		//action.displayDeck(playablePile);
 		
-		game.showTypeOftest("DrawHand");
+		//game.showTypeOfPRINT("DrawHand");
 				
-		drawHand = action.drawHand(playableDeck);
-		action.displayDeck(drawHand);
+		drawHand = action.drawHand(playablePile);
+		//action.displayDeck(drawHand);
 		
-		game.showTypeOftest("Tester");
+		//game.showTypeOfPRINT("Tester");
 		
-		action.displayDeck(drawHand);
+		//action.displayDeck(drawHand);
 		
-		game.showTypeOftest("Function that shows the Type");
+		//game.showTypeOfPRINT("Function that shows the Type");
 		
-		game.checkType(drawHand);
+		//game.checkType(drawHand);
 		
 	
 		gui.getNameButton();
+		
 		gui.getNameDrawhand();
 		
 		
 		//gui.AddDrawHandImages(discardDeck);
+		//gameConsole.consoleTest();
 		
 	
-		//gameConsole.consoleTest();
 		
 		
 	}

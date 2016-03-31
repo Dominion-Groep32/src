@@ -53,7 +53,7 @@ public class DeckActions {
 		return mainList;
 	}
 	
-	public LinkedList<String> decreasePlayableDeck(LinkedList<String> list,int size){
+	public LinkedList<String> decreasePlayablePile(LinkedList<String> list,int size){
 		
 		for (int i = 0; i < size; i++) {list.removeFirst();}
 		return list;

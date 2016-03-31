@@ -40,7 +40,7 @@ public class CardDetails {
 		
 		amountCurse = 30;
 		
-		resetCards();
+		startTurn();
 	}
 	
 	//Moet voor elke beurt opgeroepen worden
@@ -51,7 +51,10 @@ public class CardDetails {
 		cardType = "";
 		cardCost = 0;
 		extraCards = 0;
-		
+
+	}
+	
+	public void startTurn(){
 		actions = 1;
 		coins = 0;
 		buys = 1;
@@ -59,11 +62,10 @@ public class CardDetails {
 	
 	public void currentCardInfo()
 	{
-		System.out.println(cardName);
-		System.out.println(cardAbility);
-		System.out.println(coins);
-		System.out.println(cardType);
-		System.out.println(cardCost);
+		System.out.println("Name "+cardName.toLowerCase());
+		System.out.println("Coins "+coins);
+		System.out.println("Type "+cardType.toLowerCase());
+		System.out.println("Cost "+cardCost);
 	}
 	
 	public void coinCopper()

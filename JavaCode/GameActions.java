@@ -3,9 +3,9 @@ package JavaCode;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-import org.eclipse.swt.widgets.Link;
+//import org.eclipse.swt.widgets.Link;
 
-import com.mysql.fabric.xmlrpc.base.Array;
+//import com.mysql.fabric.xmlrpc.base.Array;
 import com.sun.org.apache.xml.internal.serializer.NamespaceMappings;
 import com.sun.org.apache.xml.internal.serializer.utils.SystemIDResolver;
 
@@ -40,7 +40,39 @@ public class GameActions {
 			
 			}
 	}
-	public void showTypeOftest(String string){
+	
+	
+	public void getCardDetails(String kaart){
+		
+		switch (kaart) {
+		case "witch":
+			card.witch();
+			break;
+		case "copper":
+			card.coinCopper();
+			break;
+		case "silver":
+			card.coinSilver();			
+			break;
+		case "gold":
+			card.coinGold();
+			break;
+		case "estate":
+			card.estate();
+			break;
+			
+
+		default:
+			card.resetCards();
+			break;
+		}
+		card.currentCardInfo();
+		
+		
+	}
+	
+	
+	public void showTypeOfPRINT(String string){
 		System.out.println("-----------------------------"+ string +"--------------------------------------------");
 	}
 }
