@@ -2,11 +2,15 @@ package JavaCode;
 
 
 
+import java.io.Console;
 import java.util.LinkedList;
 
 import javax.smartcardio.Card;
-
+/*
+import org.eclipse.core.internal.databinding.observable.ConstantObservableValue;
 import org.eclipse.swt.widgets.Link;
+import org.junit.experimental.theories.suppliers.TestedOn;
+*/
 import org.omg.CORBA.PUBLIC_MEMBER;
 
 
@@ -14,79 +18,87 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 public class GameEngine {
 
 	public static void main(String[] args) {
-				
-		// TODO Auto-generated method stub
-		
-		//GUI gui = new GUI();
-		//gui.GenerateCardsField();
-		//gui.GenerateCardsHand();
-		
-		
+			
+		GUI gui = new GUI();
 		DeckActions action = new DeckActions();
 		CardDetails card = new CardDetails();
 		GameActions game = new GameActions();
-		int coins = card.coins;
-		int actions = card.actions;
-		int buys = card.buys;
+		card.startTurn();
 		
+		System.out.println("Actions : "+card.actions);
+		System.out.println("Buys : "+card.buys);
+		System.out.println("coins : "+card.coins);
+		
+		
+		gui.GenerateCardsField();
 		
 		card.startUp();
 		
-		System.out.println("--------------------------Standaard------------------------------------------");
+		
 		
 		LinkedList<String> startDeck = action.startDeckCards();
-		action.displayDeck(startDeck);
-
-		System.out.println("-------------------------------shuffle-------------------------------x-------------");
 		
-		LinkedList<String> playableDeck = action.shuffle(action.startDeckCards()); 
-		action.displayDeck(playableDeck);
 		
-
-		System.out.println("--------------------------------------drawHand-------------------------------------------");
 		
-		LinkedList<String> drawHand = action.drawHand(playableDeck);
-		action.displayDeck(drawHand);
-
-		System.out.println("--------------------------playableDeck------------------------------------------");
+		//game.showTypeOfPRINT("Shuffle");
 		
-		playableDeck = action.decreasePlayableDeck(playableDeck,5);
-		action.displayDeck(playableDeck);
+	
+		LinkedList<String> playablePile = action.shuffle(action.startDeckCards()); 
+		//action.displayDeck(playablePile);
 		
-		System.out.println("--------------------------add actioncard to discardDeck------------------------------------------");
+		//game.showTypeOfPRINT("DrawHand");
 		
-		card.witch();
+		LinkedList<String> drawHand = action.drawHand(playablePile);
+		//action.displayDeck(drawHand);
+		
+		//game.showTypeOfPRINT("playableDeck");
+		
+		playablePile = action.decreasePile(playablePile,5);
+		//action.displayDeck(playablePile);
+		
+		//game.showTypeOfPRINT("Add ActionCard To Deck");
+		
 		LinkedList<String> startDiscardDeck = new LinkedList<String>();
-		LinkedList<String> discardDeck = action.addCardToList(startDiscardDeck, card.cardName);
-		action.displayDeck(discardDeck);
+		card.witch();
 		
-		System.out.println("--------------------add drawhand to discarddeck & show discardDeck-------------------------------------------");
+		LinkedList<String> discardDeck = action.addCardToList(startDiscardDeck, card.cardName);
+		card.village();
+		action.addCardToList(startDiscardDeck, card.cardName);
+		//action.displayDeck(discardDeck);
+		
+		//game.showTypeOfPRINT("Add DrawHand To DiscardDeck & Show DiscardDeck");
 		
 		discardDeck = action.mergeLists(discardDeck, drawHand);
-		action.displayDeck(discardDeck);
+		//action.displayDeck(discardDeck);
 	
-		System.out.println("--------------------Controle playabledeck-------------------------------------------");
+		//game.showTypeOfPRINT("Controle PlayableDeck");
 		
-		playableDeck=action.newPlayableDeck(playableDeck, discardDeck);
-		action.displayDeck(playableDeck);
+		playablePile=action.newPlayableDeck(playablePile, discardDeck);
+		//action.displayDeck(playablePile);
 		
-		System.out.println("--------------------------------------drawHand-------------------------------------------");
+		//game.showTypeOfPRINT("DrawHand");
+				
+		drawHand = action.drawHand(playablePile);
+		//action.displayDeck(drawHand);
 		
-		drawHand = action.drawHand(playableDeck);
-		action.displayDeck(drawHand);
+		//game.showTypeOfPRINT("Tester");
 		
-		card.alchemist();
-		System.out.println(card.coins);
-		System.out.println(card.actions);
-		System.out.println(card.buys);
+		//action.displayDeck(drawHand);
 		
-		System.out.println(card.cardType.toLowerCase());
+		//game.showTypeOfPRINT("Function that shows the Type");
+		
+		//game.checkType(drawHand);
+		
 	
+		gui.getNameButton();
+		
+		gui.getNameDrawhand();
 		
 		
+		//gui.AddDrawHandImages(discardDeck);
+		//gameConsole.consoleTest();
 		
 		
-		game.loopTest(discardDeck);
 		
 		
 	}
