@@ -25,7 +25,7 @@ import sun.net.www.content.image.jpeg;
 public class GUI extends JFrame {
     private JPanel pannelTop, pannelBottom, pannelRight, pannelLeft, pannelCenter, pannelCenterCenter,pannelCenterLeft,pannelCenterRight,pannelLeftTop,pannelLeftBottom,pannelRightTop,pannelRightBottom;
     private JButton ButtonsTopPannel[],ButtonsBottomPannel[],ButtonsRightPannel[],ButtonsLeftPanel[],ButtonsPlayField[],b1;
-    private JLabel actions,buys,coins,l1,testlabel;
+    private JLabel actions,buys,coins,l1,testLabel[];
     private int aantalActieKaarten = 10;
     private int aantalKaartenHand = 5;
     private ImageIcon image;
@@ -40,7 +40,9 @@ public class GUI extends JFrame {
     CardDetails cardDetails = new CardDetails();
     LinkedList<String> playableField = new LinkedList<String>();
     
+    
  
+    
     public GUI() {
         InitComponents();
         LayoutComponents();
@@ -51,7 +53,7 @@ public class GUI extends JFrame {
     // maakt componenten
     public void InitComponents() {
     	
-    	
+    	 
     	  
     	 // venster
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -63,18 +65,18 @@ public class GUI extends JFrame {
         //setContentPane(new JLabel(new ImageIcon(getClass().getResource("C:/Users/jensp/git/DominionProject/Dominion/src/images/background.jpg"))));
         
         
-       
         image = new ImageIcon(getClass().getResource("../images/background.jpg"));
         
-        l1=new JLabel();
-        l1.setIcon(image);
+        l1=new JLabel(image);
         
+        setSize(2000,1080);
+		add(l1);
        
        
+
+        
       
-        add(l1);
-      setSize(2000,1100);
-        // Just for refresh :) Not optional!
+      
         
        
         
@@ -93,11 +95,13 @@ public class GUI extends JFrame {
         pannelLeftBottom = new JPanel();
         pannelRightTop = new JPanel();
         pannelRightBottom = new JPanel();
+        pannelCenterLeft = new JPanel();
+        pannelCenterRight = new JPanel();
      
 
         // buttons 10 kaarten toppanel
         ButtonsTopPannel = new JButton[aantalActieKaarten];
-        for (int i = 0; i < ButtonsTopPannel.length; i++) {
+       for (int i = 0; i < ButtonsTopPannel.length; i++) {
         	ButtonsTopPannel[i] = new JButton();
         	ButtonsTopPannel[i].setBorder(BorderFactory.createLineBorder(Color.white));}
 
@@ -105,7 +109,10 @@ public class GUI extends JFrame {
         ButtonsBottomPannel = new JButton[aantalKaartenHand];
         for (int i = 0; i < ButtonsBottomPannel.length; i++) {
         	ButtonsBottomPannel[i] = new JButton();
-        	ButtonsBottomPannel[i].setBorder(BorderFactory.createLineBorder(Color.white));}}
+        	ButtonsBottomPannel[i].setBorder(BorderFactory.createLineBorder(Color.white));}
+    
+       
+    }
     
     // geeft waardes aan componenten
     public void LayoutComponents() {
@@ -118,6 +125,8 @@ public class GUI extends JFrame {
         add(pannelRight, BorderLayout.EAST);
         
         //left in 2 delen 
+        
+        
         pannelLeft.setLayout(new BorderLayout());
         pannelLeft.add(pannelLeftTop, BorderLayout.NORTH);
         pannelLeft.add(pannelLeftBottom, BorderLayout.SOUTH);
@@ -130,10 +139,17 @@ public class GUI extends JFrame {
         
         
         // center in 3 delen boven elkaar verdelen
+       
         pannelCenter.setLayout(new BorderLayout());
         pannelCenter.add(pannelTop, BorderLayout.NORTH);
         pannelCenter.add(pannelCenterCenter, BorderLayout.CENTER);
         pannelCenter.add(pannelBottom, BorderLayout.SOUTH);
+       // pannelTop.add(pannelCenterLeft,BorderLayout.WEST);
+        //pannelTop.add(pannelCenterRight,BorderLayout.EAST);
+        
+        
+        
+       
  
         //left buttons generaten
         pannelLeftTop.setLayout(new GridLayout(3,1 ));
@@ -155,13 +171,49 @@ public class GUI extends JFrame {
         	pannelRightTop.add(ButtonsRightPannel[i]);}
     
         // top buttons generaten
+        
+        
+        
      
-        //pannelTop.setLayout(new GridLayout(2, aantalActieKaarten / 2));
-        pannelTop.setLayout(new FlowLayout());
-        for (int i = 0; i < ButtonsTopPannel.length; i++) {
+        pannelTop.setLayout(new GridLayout(2, 7));
+        testLabel = new JLabel[20];
+        
+       
+     
+        	testLabel[0] = new JLabel();
+        	pannelTop.add(testLabel[0]);
+        	testLabel[0] = new JLabel();
+        	pannelTop.add(testLabel[0]);
+        	
+		
+        
+        for (int i = 0; i < 5; i++) {
+        	
             pannelTop.add(ButtonsTopPannel[i]);
            
         }
+        
+        testLabel[1] = new JLabel();
+        pannelTop.add(testLabel[1]);
+        testLabel[1] = new JLabel();
+        pannelTop.add(testLabel[1]);
+        testLabel[1] = new JLabel();
+        pannelTop.add(testLabel[1]);
+        testLabel[1] = new JLabel();
+        pannelTop.add(testLabel[1]);
+        
+        for (int i = 5; i < 10; i++) {
+        	 pannelTop.add(ButtonsTopPannel[i]);
+			
+		}
+    
+        testLabel[1] = new JLabel();
+        pannelTop.add(testLabel[1]);
+        pannelTop.add(testLabel[1]);
+    
+  
+
+
         
  
         
@@ -206,7 +258,6 @@ public class GUI extends JFrame {
 					
 					
 				String selectedCardName = ButtonsBottomPannel[getal].getName();
-				
 				String selectedCardType = gameActions.getCardDetails(selectedCardName);
 				System.out.println(selectedCardType);
 				
@@ -305,12 +356,14 @@ public class GUI extends JFrame {
     	GenerateFieldCards();
     	GenerateMoneyCards();  	 
     	AddDrawHandImages(deckActions.startDeckCards());
+    	
     }
     
     
   
     
-
+   
+    
  
 }
 	
