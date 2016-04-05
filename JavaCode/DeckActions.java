@@ -6,7 +6,6 @@ import java.util.LinkedList;
 
 public class DeckActions {
 	
-		//public LinkedList<String> discardedCardList = new LinkedList<String>();
 		public LinkedList<String> CardsInHand = new LinkedList<String>();
 		private String[] actieKaarten = { "ambassador", "cellar", "chancellor", "chapel", "councilroom", "feast",
 	            "festival", "laboratory", "library", "market", "militia", "moat", "moneylender", "smithy", "spy",
@@ -17,7 +16,6 @@ public class DeckActions {
 	public LinkedList<String> startDeckCards(){
 		
 		LinkedList<String> list = new LinkedList<String>();
-	 
 		for (int i = 0; i < 7; i++) {list.add("copper");}
 		for (int j = 0; j < 3; j++) {list.add("estate");}
 		return list;
@@ -25,10 +23,7 @@ public class DeckActions {
 	
 
 	
-	public void displayDeck(LinkedList<String> list){
-	
-		for(String x : list) System.out.println(x );
-		}
+	public void displayDeck(LinkedList<String> list){for(String x : list) System.out.println(x );}
 	
 	public LinkedList<String> shuffle(LinkedList<String> list){
 		Collections.shuffle(list);
@@ -59,15 +54,11 @@ public class DeckActions {
 		return list;
 	}
 	
-	private int getListSize(LinkedList<String> list){
-		return list.size();
-	}
 	
 	
 	public LinkedList<String> newPlayableDeck(LinkedList<String> playableList, LinkedList<String> discardList){
 		
-		if(getListSize(playableList)<5){
-			
+		if(playableList.size()<5){
 			LinkedList<String> newPlayableList = mergeLists(playableList, discardList);
 			discardList.clear();
 			return shuffle(newPlayableList);
@@ -79,7 +70,8 @@ public class DeckActions {
 	    	LinkedList actieKaartenList = new LinkedList();
 	    	
 	    	Collections.shuffle((Arrays.asList(actieKaarten)));
-	    	for (int i = 0; i < actieKaarten.length; i++) {actieKaartenList.add(actieKaarten[i]);}
+	    	for (int i = 0; i < actieKaarten.length; i++) {
+	    		actieKaartenList.add(actieKaarten[i]);}
 	    	
 	    	return actieKaartenList;
 	    	
