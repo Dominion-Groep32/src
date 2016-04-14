@@ -1,9 +1,10 @@
-package JavaCode;
+/*package JavaCode;
 
 import java.util.LinkedList;
 import org.junit.*;
 
 import OudeCode.CardDetails;
+import OudeCode.DeckActions;
 
 import static org.junit.Assert.*;
 
@@ -42,7 +43,7 @@ public class TestFuncties {
 	public void testMergeLists(){
 		
 		
-		newList = acties.lijstenSamenvoegen(startDeckList, newList);
+		newList = action.lijstenSamenvoegen(startDeckList, newList);
 		if(startDeckSize != newList.size())
 			System.err.println("mergeLists Fails");
 	}
@@ -66,3 +67,4 @@ public class TestFuncties {
 			System.err.println("newPlayableDeck Fails");
 	}
 }
+*/

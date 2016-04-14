@@ -15,8 +15,8 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 
 import com.sun.javafx.geom.AreaOp.NZWindOp;
 
-import JavaCode.DeckActions;
 import OudeCode.CardDetails;
+import OudeCode.DeckActions;
 import OudeCode.GameActions;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Border;

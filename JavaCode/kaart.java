@@ -1,5 +1,18 @@
 package JavaCode;
 
-public class kaart {
+public interface Kaart {
 
+	public String naam();
+	public String kaartType();
+	public int kost();
+	
+	
+
+	
+	
+
+	
+
+	
+	
 }

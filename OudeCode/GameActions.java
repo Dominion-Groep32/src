@@ -1,6 +1,4 @@
-package OudeCode;
-
-import JavaCode.DeckActions;
+/*package OudeCode;
 
 public class GameActions {
 	CardDetails card = new CardDetails();
@@ -79,3 +77,4 @@ public String getCardType(String kaart){
 
 }
 	
+*/
