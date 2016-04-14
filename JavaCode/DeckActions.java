@@ -11,8 +11,7 @@ public class DeckActions {
 		private String[] actieKaarten = { "ambassador", "cellar", "chancellor", "chapel", "councilroom", "feast",
 	            "festival", "laboratory", "library", "market", "militia", "moat", "moneylender", "smithy", "spy",
 	            "thief", "village", "witch", "woodcutter", "workshop" };
-	    private String[] landKaarten = {"province","duchy","estate"};
-	    private String[] geldKaarten = {"copper","silver","gold","curse"};
+	    
 	
 	    
 	    
@@ -76,7 +75,6 @@ public class DeckActions {
 
 	
 	  public LinkedList<String> GenerateActionCards(){
-	    	
 	    
 	    	Collections.shuffle((Arrays.asList(actieKaarten)));
 	    	for (int i = 0; i < actieKaarten.length; i++) {	
