@@ -12,12 +12,7 @@ public class DeckActionsTester {
 	int startDeckSize = action.startDeckCards().size(); 
 	LinkedList<String> startDeckList= action.startDeckCards(); 
 	
-<<<<<<< HEAD
-	
-	int startDeckSize = action.startDeckCards().size(); //10
-	LinkedList<String> startDeckList= action.startDeckCards(); //10 cards (3 estate + 7 coppers)
-=======
->>>>>>> origin/master
+
 	
 	@Test
 	public void testStartDeckCards() {
