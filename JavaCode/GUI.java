@@ -205,16 +205,19 @@ public class GUI extends JFrame {
 					
 					String selectedCardName = ButtonsBottomPannel[getal].getName();
 					String selectedCardType = gameActions.getCardType(selectedCardName);
-					if (selectedCardType.toLowerCase().equals("treasure") || selectedCardType.toLowerCase().equals("actions")) {
-						playableField.add(selectedCardName);
+										
+					//if (!gameActions.getCardType(ButtonsBottomPannel[getal].getName()).toLowerCase().equals("victory")) {
+						System.out.println(selectedCardName);
+						System.out.println(gameActions.getCardCoins(selectedCardName));
+						
+						playableField.add(ButtonsBottomPannel[getal].getName());
 						ButtonsBottomPannel[getal].setVisible(false);
-						playableFieldButtons(playableField, selectedCardName, getal);	
-						//verkeerd
-						System.out.println(ButtonsRightPannel[getal].getName());
-						System.out.println(gameActions.getCardCoins(ButtonsRightPannel[getal].getName()));
-					}}});}
+						playableFieldButtons(playableField, ButtonsBottomPannel[getal].getName(), getal);	
+					//}
+				}});}
 		
 		ButtonsActions[1].addActionListener(new ActionListener() {
+		
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < aantalKaartenHand; i++) {
@@ -225,7 +228,7 @@ public class GUI extends JFrame {
 						ButtonsBottomPannel[i].setVisible(false);
 						playableFieldButtons(playableField,selectedCardName, i);
 						
-						}}}});
+						}}}}); 
 		
 		for (int i = 0; i < ButtonsTopPannel.length; i++) {
 			int getal = i;
@@ -273,6 +276,7 @@ public class GUI extends JFrame {
 			String path = "../images/Side/" + landKaarten[i] + ".jpg";
 			image = new ImageIcon(getClass().getResource(path));
 			ButtonsLeftPanel[i].setIcon(image);
+			ButtonsLeftPanel[i].setName(landKaarten[i]);
 		}
 	}
 
