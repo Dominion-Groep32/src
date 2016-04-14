@@ -22,7 +22,6 @@ public class GameEngine {
 		DeckActions action = new DeckActions();
 		CardDetails card = new CardDetails();
 		GameActions game = new GameActions();
-		
 		GUI gui = new GUI();
 		gui.GenerateCardsField();
 	

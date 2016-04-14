@@ -18,6 +18,7 @@ public class DeckActions {
 		LinkedList<String> list = new LinkedList<String>();
 		for (int i = 0; i < 7; i++) {list.add("copper");}
 		for (int j = 0; j < 3; j++) {list.add("estate");}
+		Collections.shuffle(list);
 		return list;
 	}	
 	

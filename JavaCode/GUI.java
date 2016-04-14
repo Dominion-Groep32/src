@@ -280,7 +280,6 @@ public class GUI extends JFrame {
 	
 	public void AddDrawHandImages(LinkedList<String> list) {
 		
-		Collections.shuffle(list);
 		for (int i = 0; i < aantalKaartenHand; i++) {
 			String path = "../images/" + list.get(i) + ".jpg";
 			image = new ImageIcon(getClass().getResource(path));

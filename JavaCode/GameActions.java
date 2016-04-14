@@ -31,7 +31,6 @@ public class GameActions {
 			break;
 		case "silver":
 			card.coinSilver();	
-			
 			break;
 		case "gold":
 			card.coinGold();
