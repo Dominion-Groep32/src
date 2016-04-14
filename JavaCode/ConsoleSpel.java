@@ -3,6 +3,7 @@ package JavaCode;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+import Grafisch.GUI;
 import sun.awt.image.ImageWatched.Link;
 
 public class ConsoleSpel {

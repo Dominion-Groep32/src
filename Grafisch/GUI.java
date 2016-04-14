@@ -16,8 +16,7 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 import com.sun.javafx.geom.AreaOp.NZWindOp;
 
 import OudeCode.CardDetails;
-import OudeCode.DeckActions;
-import OudeCode.GameActions;
+
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Border;
 //import junit.framework.Test;
@@ -41,19 +40,15 @@ public class GUI extends JFrame {
 	private String[] geldKaarten = { "copper", "silver", "gold", "curse" };
 	
 
-	DeckActions deckActions = new DeckActions();
-	GameActions gameActions = new GameActions();
-	CardDetails cardDetails = new CardDetails();
 	
-	LinkedList<String> playableField = new LinkedList<String>();
-	LinkedList<String> TestDrawHand = new LinkedList<String>();
+
 	
 	
 	
 	public GUI() {
 		InitComponents();
 		LayoutComponents();
-		InitListeners();
+		//InitListeners();
 		 
 	}
 
@@ -69,10 +64,10 @@ public class GUI extends JFrame {
 		setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
 
 		// background
-		image = new ImageIcon(getClass().getResource("../images/background.jpg"));
-		imageLabel = new JLabel(image);
-		setSize(1940, 1100);
-		add(imageLabel);
+		//image = new ImageIcon(getClass().getResource("../images/background.jpg"));
+		//imageLabel = new JLabel(image);
+		//setSize(1940, 1100);
+		//add(imageLabel);
 		
 		
 		
@@ -195,7 +190,7 @@ public class GUI extends JFrame {
 		}
 
 	
-	public void InitListeners() {
+/*	public void InitListeners() {
 		
 		ButtonsActions[0].addActionListener(new ActionListener() {
 			@Override
@@ -260,7 +255,7 @@ public class GUI extends JFrame {
 				}});}
 			}
 	
-	
+	*/
 	
 	public void playableFieldButtons(LinkedList<String> list, String selectedCardName, int getal) {
 		ButtonsPlayField = new JButton[50];
@@ -314,12 +309,12 @@ public class GUI extends JFrame {
 		}
 	}
 
-	public void GenerateCardsField() {
+	/*public void GenerateCardsField() {
 		displayActionCards(deckActions.actieKaartenGenereren());
 		GenerateFieldCards();
 		GenerateMoneyCards();
 		AddDrawHandImages(deckActions.startKaarten());
 
-	}
+	}*/
 
 }
