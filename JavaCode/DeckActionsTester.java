@@ -5,13 +5,19 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 public class DeckActionsTester {
-		
+	public LinkedList<String> newList = new LinkedList<String>();
+	public LinkedList<String> playableList = new LinkedList<String>();
 	DeckActions action = new DeckActions();
 	CardDetails card = new CardDetails();
+	int startDeckSize = action.startDeckCards().size(); 
+	LinkedList<String> startDeckList= action.startDeckCards(); 
 	
+<<<<<<< HEAD
 	
 	int startDeckSize = action.startDeckCards().size(); //10
 	LinkedList<String> startDeckList= action.startDeckCards(); //10 cards (3 estate + 7 coppers)
+=======
+>>>>>>> origin/master
 	
 	@Test
 	public void testStartDeckCards() {
@@ -27,6 +33,7 @@ public class DeckActionsTester {
 		assertEquals((startDeckSize+1),deckWithAddedCard,0.01);
 	}
 	
+	
 	@Test
 	public void testDrawHand(){
 		int drawHand = action.drawHand(action.startDeckCards()).size();
@@ -37,9 +44,8 @@ public class DeckActionsTester {
 	@Test
 	public void testMergeLists(){
 		
-		LinkedList<String> newList = new LinkedList<String>();
-		newList = action.mergeLists(startDeckList, newList);
 		
+		newList = action.mergeLists(startDeckList, newList);
 		if(startDeckSize != newList.size())
 			System.err.println("mergeLists Fails");
 	}
@@ -47,16 +53,18 @@ public class DeckActionsTester {
 	@Test
 	public void testDecreasePlayableDeck(){
 		
+		
 		int decreasedList = action.decreasePile(startDeckList, 3).size();
 		if(decreasedList!=7)
 			System.err.println("decreasedPlayableDeck Fails");
 	}
 	@Test
 	public void testNewPlayableDeck(){
-		LinkedList<String> playableList = new LinkedList<String>();
+		
 		for (int i = 0; i < 3; i++) {playableList.add("Value"+i);};
 		
 		int newPlayableListSize= action.newPlayableDeck(playableList, startDeckList).size();
+		
 		if(newPlayableListSize != 13)
 			System.err.println("newPlayableDeck Fails");
 	}

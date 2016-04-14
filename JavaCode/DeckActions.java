@@ -11,9 +11,7 @@ public class DeckActions {
 		private String[] actieKaarten = { "ambassador", "cellar", "chancellor", "chapel", "councilroom", "feast",
 	            "festival", "laboratory", "library", "market", "militia", "moat", "moneylender", "smithy", "spy",
 	            "thief", "village", "witch", "woodcutter", "workshop" };
-	    
-	
-	    
+   
 	    
 	    
     public LinkedList<String> startDeckCards(){

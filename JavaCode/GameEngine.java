@@ -10,6 +10,7 @@ public class GameEngine {
 		GameActions gameActions = new GameActions();
 		GUI gui = new GUI();
 		gui.GenerateCardsField();
+<<<<<<< HEAD
 		
 		
 	
@@ -17,19 +18,11 @@ public class GameEngine {
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+=======
+
+>>>>>>> origin/master
 		
 	}
-	
-	
-	
-
 }
+
+
