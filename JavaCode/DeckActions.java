@@ -72,15 +72,13 @@ public class DeckActions {
 		else{return playableList;}
 	}
 	
-
-	
-	  public LinkedList<String> GenerateActionCards(){
+	public LinkedList<String> GenerateActionCards(){
 	    
-	    	Collections.shuffle((Arrays.asList(actieKaarten)));
-	    	for (int i = 0; i < actieKaarten.length; i++) {	
-	    		actieKaartenList.add(actieKaarten[i]);}
+	 	Collections.shuffle((Arrays.asList(actieKaarten)));
+	   	for (int i = 0; i < actieKaarten.length; i++) {	
+	   		actieKaartenList.add(actieKaarten[i]);}
 	    	
-	    	return actieKaartenList;
+	   		return actieKaartenList;
 	    	
 	    }
 	  

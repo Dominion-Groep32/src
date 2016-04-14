@@ -41,6 +41,7 @@ public class GUI extends JFrame {
 	DeckActions deckActions = new DeckActions();
 	GameActions gameActions = new GameActions();
 	CardDetails cardDetails = new CardDetails();
+	
 	LinkedList<String> playableField = new LinkedList<String>();
 	LinkedList<String> TestDrawHand = new LinkedList<String>();
 	
@@ -192,48 +193,58 @@ public class GUI extends JFrame {
 		ButtonsActions[0].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AddDrawHandImages(deckActions.startDeckCards());}});
+				AddDrawHandImages(deckActions.startDeckCards());
+			}});
 		
 		
-			for (int i = 0; i < ButtonsBottomPannel.length; i++) {
+		for (int i = 0; i < ButtonsBottomPannel.length; i++) {
 			int getal = i;
-			ButtonsBottomPannel[i].addActionListener(new ActionListener() {
+			ButtonsBottomPannel[i].addActionListener(new ActionListener() {		
 				@Override
 				public void actionPerformed(ActionEvent e) {
-
+					
+					
+					
 					String selectedCardName = ButtonsBottomPannel[getal].getName();
-					String selectedCardType = gameActions.getCardDetails(selectedCardName);
+					String selectedCardType = gameActions.getCardType(selectedCardName);
 					if (selectedCardType.toLowerCase().equals("treasure") || selectedCardType.toLowerCase().equals("actions")) {
 						playableField.add(selectedCardName);
 						ButtonsBottomPannel[getal].setVisible(false);
-						playableFieldButtons(playableField, selectedCardName, getal);
-						
+						playableFieldButtons(playableField, selectedCardName, getal);	
+						//verkeerd
+						System.out.println(ButtonsRightPannel[getal].getName());
+						System.out.println(gameActions.getCardCoins(ButtonsRightPannel[getal].getName()));
 					}}});}
 		
-		
-		
 		ButtonsActions[1].addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < aantalKaartenHand; i++) {
 					String selectedCardName = ButtonsBottomPannel[i].getName();
-					String selectedCardType = gameActions.getCardDetails(selectedCardName);
+					String selectedCardType = gameActions.getCardType(selectedCardName);
 					if (selectedCardType.toLowerCase().equals("treasure")) {
 						playableField.add(selectedCardName);
 						ButtonsBottomPannel[i].setVisible(false);
 						playableFieldButtons(playableField,selectedCardName, i);
 						
-						
-					}}}});
+						}}}});
 		
 		for (int i = 0; i < ButtonsTopPannel.length; i++) {
 			int getal = i;
 			ButtonsTopPannel[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					gameActions.getCardDetails(ButtonsTopPannel[getal].getName());
+					gameActions.getCardType(ButtonsTopPannel[getal].getName());
 					System.out.println(ButtonsTopPannel[getal].getName());
+				}});}
+		
+		for (int i = 0; i < ButtonsRightPannel.length; i++) {
+			int getal = i;
+			ButtonsRightPannel[i].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					System.out.println(ButtonsRightPannel[getal].getName());
+					System.out.println(gameActions.getCardCoins(ButtonsRightPannel[getal].getName()));
 				}});}
 			}
 	
@@ -253,7 +264,9 @@ public class GUI extends JFrame {
 		for (int i = 0; i < geldKaarten.length; i++) {
 			String path = "../images/Side/" + geldKaarten[i] + ".jpg";
 			image = new ImageIcon(getClass().getResource(path));
-			ButtonsRightPannel[i].setIcon(image);}
+			ButtonsRightPannel[i].setIcon(image);
+			ButtonsRightPannel[i].setName(geldKaarten[i]);
+			}
 	}
 
 	public void GenerateFieldCards() {
