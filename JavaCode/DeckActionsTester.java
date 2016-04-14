@@ -10,6 +10,7 @@ public class DeckActionsTester {
 	DeckActions action = new DeckActions();
 	CardDetails card = new CardDetails();
 	int startDeckSize = action.startDeckCards().size(); 
+	LinkedList<String> startDeckList= action.startDeckCards(); 
 	
 	
 	@Test
@@ -45,6 +46,7 @@ public class DeckActionsTester {
 	
 	@Test
 	public void testDecreasePlayableDeck(){
+		
 		
 		int decreasedList = action.decreasePile(startDeckList, 3).size();
 		if(decreasedList!=7)
