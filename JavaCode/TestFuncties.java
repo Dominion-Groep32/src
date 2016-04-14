@@ -2,36 +2,38 @@ package JavaCode;
 
 import java.util.LinkedList;
 import org.junit.*;
+
+import OudeCode.CardDetails;
+
 import static org.junit.Assert.*;
 
-public class DeckActionsTester {
+public class TestFuncties {
 	public LinkedList<String> newList = new LinkedList<String>();
 	public LinkedList<String> playableList = new LinkedList<String>();
 	DeckActions action = new DeckActions();
 	CardDetails card = new CardDetails();
-	int startDeckSize = action.startDeckCards().size(); 
-	LinkedList<String> startDeckList= action.startDeckCards(); 
+	int startDeckSize = action.startKaarten().size(); 
+	LinkedList<String> startDeckList= action.startKaarten(); 
 	
-
 	
 	@Test
 	public void testStartDeckCards() {
 		
-		if (action.startDeckCards().size()!= 10)
+		if (action.startKaarten().size()!= 10)
 			System.out.println("startDeck Fails");
 	}
 
 	@Test
 	public void testAddCardToList(){
 		card.witch();
-		int deckWithAddedCard = action.addCardToList(action.startDeckCards(), card.cardName).size();
+		int deckWithAddedCard = action.kaartToevoegenBijEenLijst(action.startKaarten(), card.cardName).size();
 		assertEquals((startDeckSize+1),deckWithAddedCard,0.01);
 	}
 	
 	
 	@Test
 	public void testDrawHand(){
-		int drawHand = action.drawHand(action.startDeckCards()).size();
+		int drawHand = action.getrokkenHand(action.startKaarten()).size();
 		if(drawHand!=5)
 				System.err.println("drawHand Fails");
 	}
@@ -40,7 +42,7 @@ public class DeckActionsTester {
 	public void testMergeLists(){
 		
 		
-		newList = action.mergeLists(startDeckList, newList);
+		newList = acties.lijstenSamenvoegen(startDeckList, newList);
 		if(startDeckSize != newList.size())
 			System.err.println("mergeLists Fails");
 	}
@@ -49,7 +51,7 @@ public class DeckActionsTester {
 	public void testDecreasePlayableDeck(){
 		
 		
-		int decreasedList = action.decreasePile(startDeckList, 3).size();
+		int decreasedList = action.lijstVerminderen(startDeckList, 3).size();
 		if(decreasedList!=7)
 			System.err.println("decreasedPlayableDeck Fails");
 	}
@@ -58,7 +60,7 @@ public class DeckActionsTester {
 		
 		for (int i = 0; i < 3; i++) {playableList.add("Value"+i);};
 		
-		int newPlayableListSize= action.newPlayableDeck(playableList, startDeckList).size();
+		int newPlayableListSize= action.nieuweLijst(playableList, startDeckList).size();
 		
 		if(newPlayableListSize != 13)
 			System.err.println("newPlayableDeck Fails");

@@ -1,4 +1,4 @@
-package JavaCode;
+package Grafisch;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,6 +15,9 @@ import org.omg.CORBA.PUBLIC_MEMBER;
 
 import com.sun.javafx.geom.AreaOp.NZWindOp;
 
+import JavaCode.DeckActions;
+import OudeCode.CardDetails;
+import OudeCode.GameActions;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.Border;
 //import junit.framework.Test;
@@ -24,7 +27,7 @@ import sun.net.www.content.image.jpeg;
 
 public class GUI extends JFrame {
 	private JPanel pannelTop, pannelBottom, pannelRight, pannelLeft, pannelCenter, pannelCenterCenter, pannelCenterLeft,
-			pannelCenterRight, pannelLeftTop, pannelLeftBottom, pannelRightTop, pannelRightBottom;
+			pannelCenterRight, pannelLeftTop, pannelLeftBottom, pannelRightTop, pannelRightBottom,testpannel;
 	private JButton ButtonsTopPannel[], ButtonsBottomPannel[], ButtonsRightPannel[], ButtonsLeftPanel[],
 			ButtonsPlayField[], ButtonsActions[];
 	private JLabel actions, buys, coins, imageLabel, testLabel[],test;
@@ -51,6 +54,7 @@ public class GUI extends JFrame {
 		InitComponents();
 		LayoutComponents();
 		InitListeners();
+		 
 	}
 
 	// maakt componenten
@@ -69,6 +73,9 @@ public class GUI extends JFrame {
 		imageLabel = new JLabel(image);
 		setSize(1940, 1100);
 		add(imageLabel);
+		
+		
+		
 
 		// pannels aanmaken
 		pannelRight = new JPanel();
@@ -193,7 +200,7 @@ public class GUI extends JFrame {
 		ButtonsActions[0].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AddDrawHandImages(deckActions.startDeckCards());
+				AddDrawHandImages(deckActions.startKaarten());
 			}});
 		
 		
@@ -203,27 +210,31 @@ public class GUI extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					
-					String selectedCardName = ButtonsBottomPannel[getal].getName();
-					String selectedCardType = gameActions.getCardType(selectedCardName);
+					
+					String selectedCardName = ButtonsBottomPannel[getal].getName().toLowerCase();					
+					String selectedCardType = gameActions.getCardType(selectedCardName).toLowerCase();
 										
-					//if (!gameActions.getCardType(ButtonsBottomPannel[getal].getName()).toLowerCase().equals("victory")) {
-						System.out.println(selectedCardName);
-						System.out.println(gameActions.getCardCoins(selectedCardName));
+					
+					if (!selectedCardType.equals("victory")) {
 						
 						playableField.add(ButtonsBottomPannel[getal].getName());
 						ButtonsBottomPannel[getal].setVisible(false);
-						playableFieldButtons(playableField, ButtonsBottomPannel[getal].getName(), getal);	
-					//}
-				}});}
+						playableFieldButtons(playableField, selectedCardName, getal);
+						
+						//System.out.println("tester " + gameActions.getCardCoins(selectedCardName));
+
+					}}});}
+		
 		
 		ButtonsActions[1].addActionListener(new ActionListener() {
-		
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < aantalKaartenHand; i++) {
+					
 					String selectedCardName = ButtonsBottomPannel[i].getName();
-					String selectedCardType = gameActions.getCardType(selectedCardName);
-					if (selectedCardType.toLowerCase().equals("treasure")) {
+					String selectedCardType = gameActions.getCardType(selectedCardName).toLowerCase();
+					
+					if (selectedCardType.equals("treasure")) {
 						playableField.add(selectedCardName);
 						ButtonsBottomPannel[i].setVisible(false);
 						playableFieldButtons(playableField,selectedCardName, i);
@@ -235,8 +246,8 @@ public class GUI extends JFrame {
 			ButtonsTopPannel[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					gameActions.getCardType(ButtonsTopPannel[getal].getName());
-					System.out.println(ButtonsTopPannel[getal].getName());
+					//gameActions.getCardType(ButtonsTopPannel[getal].getName());
+			
 				}});}
 		
 		for (int i = 0; i < ButtonsRightPannel.length; i++) {
@@ -286,7 +297,7 @@ public class GUI extends JFrame {
 			String path = "../images/Action/" + list.get(i) + ".jpg";
 			image = new ImageIcon(getClass().getResource(path));
 			ButtonsTopPannel[i].setIcon(image);
-			ButtonsTopPannel[i].setName(list.get(i));
+			ButtonsTopPannel[i].setName(list.get(i).toLowerCase());
 		}
 
 	}
@@ -304,10 +315,10 @@ public class GUI extends JFrame {
 	}
 
 	public void GenerateCardsField() {
-		displayActionCards(deckActions.GenerateActionCards());
+		displayActionCards(deckActions.actieKaartenGenereren());
 		GenerateFieldCards();
 		GenerateMoneyCards();
-		AddDrawHandImages(deckActions.startDeckCards());
+		AddDrawHandImages(deckActions.startKaarten());
 
 	}
 
