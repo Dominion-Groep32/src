@@ -25,8 +25,7 @@ import sun.net.www.content.image.jpeg;
 public class GUI extends JFrame {
 	private JPanel pannelTop, pannelBottom, pannelRight, pannelLeft, pannelCenter, pannelCenterCenter, pannelCenterLeft,
 			pannelCenterRight, pannelLeftTop, pannelLeftBottom, pannelRightTop, pannelRightBottom;
-	private JButton ButtonsTopPannel[], ButtonsBottomPannel[], ButtonsRightPannel[], ButtonsLeftPanel[],
-			ButtonsPlayField[], ButtonsActions[];
+	private JButton ButtonsTopPannel[], ButtonsBottomPannel[], ButtonsRightPannel[], ButtonsLeftPanel[],ButtonsPlayField[], ButtonsActions[];
 	private JLabel actions, buys, coins, imageLabel, testLabel[],test;
 	private int aantalActieKaarten = 10;
 	private int aantalKaartenHand = 5;
@@ -180,45 +179,52 @@ public class GUI extends JFrame {
 		// action buttons generaten
 		pannelRightBottom.setLayout(new GridLayout(2, 1));
 		ButtonsActions = new JButton[2];
-		ButtonsActions[0] = new JButton("Swap cards");
-		ButtonsActions[1] = new JButton("PlayTressuers");
+		ButtonsActions[1] = new JButton("Swap cards");
+		ButtonsActions[0] = new JButton();
+		
+		image = new ImageIcon(getClass().getResource("../images/knop.jpg"));
+		ButtonsActions[0].setIcon(image);
+		ButtonsActions[0].setPreferredSize(new Dimension(120, 65));
 		pannelRightBottom.add(ButtonsActions[0]);
 		pannelRightBottom.add(ButtonsActions[1]);
+	
 		}
 
 	
 	public void InitListeners() {
 		
-		ButtonsActions[0].addActionListener(new ActionListener() {
+		ButtonsActions[1].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				AddDrawHandImages(deckActions.startDeckCards());}});
 		
 		
-			for (int i = 0; i < ButtonsBottomPannel.length; i++) {
-			int getal = i;
-			ButtonsBottomPannel[i].addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
+		for (int i = 0; i < ButtonsBottomPannel.length; i++) {
+		int getal = i;
+		ButtonsBottomPannel[i].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
 
-					String selectedCardName = ButtonsBottomPannel[getal].getName();
-					String selectedCardType = gameActions.getCardDetails(selectedCardName);
-					if (selectedCardType.toLowerCase().equals("treasure") || selectedCardType.toLowerCase().equals("actions")) {
-						playableField.add(selectedCardName);
-						ButtonsBottomPannel[getal].setVisible(false);
-						playableFieldButtons(playableField, selectedCardName, getal);
-						
-					}}});}
+				String selectedCardName = ButtonsBottomPannel[getal].getName();
+				String selectedCardType = gameActions.getCardDetails(selectedCardName);
+					
+					
+			if (selectedCardType.toLowerCase().equals("treasure") || selectedCardType.toLowerCase().equals("actions")) {
+				playableField.add(selectedCardName);
+				ButtonsBottomPannel[getal].setVisible(false);
+				playableFieldButtons(playableField, selectedCardName, getal);	
+			}}});}
 		
 		
 		
-		ButtonsActions[1].addActionListener(new ActionListener() {
+		ButtonsActions[0].addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < aantalKaartenHand; i++) {
 					String selectedCardName = ButtonsBottomPannel[i].getName();
 					String selectedCardType = gameActions.getCardDetails(selectedCardName);
+					
 					if (selectedCardType.toLowerCase().equals("treasure")) {
 						playableField.add(selectedCardName);
 						ButtonsBottomPannel[i].setVisible(false);

@@ -9,21 +9,9 @@ public class GameEngine {
 		
 		GUI gui = new GUI();
 		gui.GenerateCardsField();
-	
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 	}
-	
-	
-	
-
 }
+
+
