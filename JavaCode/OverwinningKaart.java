@@ -1,28 +1,31 @@
 package JavaCode;
 
-public class LandKaart implements Kaart {
-	private String KaartType="overwinningsKaarten";
+import com.sun.org.apache.bcel.internal.generic.RETURN;
+
+public class OverwinningKaart implements Kaart {
+	private String KaartType="overwinningsKaart";
 	private String kaartNaam;
 	private int cost;
 	private int waarde;
+	private int overwinningpunten;
 	
-	public LandKaart(String kaartnaam) {
+	public OverwinningKaart(String kaartnaam) {
 		
 		this.kaartNaam = kaartnaam;
 		switch (kaartnaam) {
 		case "estate":
-			this.cost = 1;
-			this.waarde = 1;
+			this.cost = 2;
+			this.overwinningpunten = 1;
 			this.kaartNaam = "estate";
 			break;
 		case "dutchy":
-			this.cost = 3;
-			this.waarde = 3; //GEEN IDEE!
+			this.cost = 5;
+			this.overwinningpunten = 3; 
 			this.kaartNaam = "dutchy";
 			break;
 		case "province":
 			this.cost = 8;
-			this.waarde = 6; //GEEN IDEE!
+			this.overwinningpunten = 6;
 			this.kaartNaam = "province";
 			break;
 
@@ -31,23 +34,30 @@ public class LandKaart implements Kaart {
 		}
 		
 	}
+	
+	public int krijgAantalOverwinnigsPunten() 
+	{
+		return this.overwinningpunten;	
+	}
 
 	@Override
 	public String naam() {
-		// TODO Auto-generated method stub
 		return this.kaartNaam;
 	}
 
 	@Override
 	public String kaartType() {
-		// TODO Auto-generated method stub
 		return this.KaartType;
 	}
 
 	@Override
 	public int kost() {
-		// TODO Auto-generated method stub
 		return this.cost;
+	}
+
+	@Override
+	public int waarde() {
+		return this.waarde;
 	}
 
 }

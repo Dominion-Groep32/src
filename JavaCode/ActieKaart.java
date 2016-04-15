@@ -1,26 +1,46 @@
 package JavaCode;
 
 public class ActieKaart implements Kaart {
+	private String KaartType="ActieKaart";
+	private String kaartNaam;
+	private int cost;
+	private int waarde;
+	
+	public ActieKaart(String naam) {
+		this.kaartNaam = naam;
+		
+		switch (naam) {
+		case "village":
+			//voer functies uit 
+			break;
 
-	public void geefHetType(){
-		System.out.println("actie");	}
+		default:
+			break;
+		}
+		
+	}
+	
 
 	@Override
 	public String naam() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.kaartNaam;
 	}
 
 	@Override
 	public String kaartType() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.KaartType;
 	}
 
 	@Override
 	public int kost() {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+
+
+	@Override
+	public int waarde() {
+	
+		return this.waarde;
 	}
 	
 }

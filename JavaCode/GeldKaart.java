@@ -44,22 +44,22 @@ public class GeldKaart implements Kaart {
 	
 	@Override
 	public String naam() {
-		
 		return this.kaartNaam;
 	}
 
 	@Override
 	public String kaartType() {
-		
-		return this.kaartType();
+		return this.KaartType;
 	}
 
 	@Override
 	public int kost() {
-		
-		return this.kost();
+		return this.cost;
 	}
-	
+	@Override
+	public int waarde(){
+		return this.waarde;
+	}
 	
 	
 

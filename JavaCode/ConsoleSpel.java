@@ -1,28 +1,33 @@
 package JavaCode;
+import java.io.InputStream;
+import java.util.*;
 
-import java.util.LinkedList;
-import java.util.Scanner;
-
-import sun.awt.image.ImageWatched.Link;
 
 public class ConsoleSpel {
 	
 
 	public static void main(String[] args) {
-		Speler speler1 = new Speler("Jens");
 		GameEngine gameEngine = new GameEngine();
+		Speler jens = new Speler("Jens");
+		
+
 		gameEngine.dominionTitel();
+
+	
+		//gameEngine.toonLijst(jens.trekStapel()); // Dit toont de startstapel van een speler
+		System.out.println("De kaarten in drawhand zijn:");
+		gameEngine.toonLijst(gameEngine.trekKaart(jens.trekStapel(), 5)); // dit toont de drawhand
+		System.out.println("------");
 		
-		LinkedList<Kaart> startStapel = speler1.startKaarten();
-		LinkedList<Kaart> aflegStapel = speler1.aflegStapel();
+		gameEngine.geefKeuze();
 		
-		speler1.trekHand(startStapel, 5);
-		System.out.println("---------");
-		speler1.toonLijst(speler1.aflegStapel());
-		System.out.println("---------");
-		speler1.maakHandLeeg();
 		
-		speler1.toonLijst(speler1.trekHand(speler1.startKaarten(), 6));
+		
+		
+		//gameEngine.toonDeInfo(gameEngine.kaartInHand());
+		
+		
+		//gameEngine.toonActieLijst(gameEngine.actieKaartenGenereren());
 		
 	
 		
@@ -42,11 +47,7 @@ public class ConsoleSpel {
 		
 		
 		//TESTING AREA //
-		/*
-		speler1.GeefTypes(actieKaart);
-		speler1.GeefTypes(geldKaart);
 		
-		*/
 		
 		
 	}
