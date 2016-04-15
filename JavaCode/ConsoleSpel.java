@@ -10,7 +10,7 @@ public class ConsoleSpel {
 		GameEngine gameEngine = new GameEngine();
 		Speler jens = new Speler("Jens");
 		
-
+		
 		gameEngine.dominionTitel();
 
 	
