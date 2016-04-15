@@ -1,6 +1,6 @@
 package JavaCode;
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
+
 
 public class OverwinningKaart implements Kaart {
 	private String KaartType="overwinningsKaart";

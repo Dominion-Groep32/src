@@ -1,6 +1,5 @@
 package JavaCode;
-import java.io.InputStream;
-import java.util.*;
+
 
 
 public class ConsoleSpel {
@@ -18,36 +17,18 @@ public class ConsoleSpel {
 		System.out.println("De kaarten in drawhand zijn:");
 		gameEngine.toonLijst(gameEngine.trekKaart(jens.trekStapel(), 5)); // dit toont de drawhand
 		System.out.println("------");
+		gameEngine.geefKeuze(); // toont de acties van de beurt
 		
-		gameEngine.geefKeuze();
-		
-		
-		
+		//gameEngine.toonLijst(gameEngine.testfunctie(jens.trekStapel(), 1));
 		
 		//gameEngine.toonDeInfo(gameEngine.kaartInHand());
 		
 		
 		//gameEngine.toonActieLijst(gameEngine.actieKaartenGenereren());
 		
+		
 	
-		
-		
-		
-		
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//TESTING AREA //
-		
 		
 		
 	}

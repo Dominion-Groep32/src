@@ -8,12 +8,5 @@ public interface Kaart {
 	public int waarde();
 	
 	
-
-	
-	
-
-	
-
-	
 	
 }

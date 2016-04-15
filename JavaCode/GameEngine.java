@@ -1,19 +1,16 @@
 package JavaCode;
 import java.util.*;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
-import sun.awt.image.ImageWatched.Link;
 
 public class GameEngine {
 	private LinkedList<Kaart> kaartenInHand = new LinkedList<Kaart>();
 	private LinkedList<Kaart> aflegStapel = new LinkedList<Kaart>();
 	private LinkedList<Kaart> trekStapel = new LinkedList<Kaart>();
 	private LinkedList<String> actiekaarten = new LinkedList<String>();
+	private LinkedList<Kaart> testlijst = new LinkedList<Kaart>();
 	Scanner scanner = new Scanner(System.in);
 
 	private String actieKaarten[] =  {"ambassador","celler","chancellor","chapel","councilroom","feast","festival","laboratory","libary","market","militia","moat","moneylender","smithy","spy","thief","village","witch","woodcutter","workshop"};
-
 	
             
 		public void dominionTitel()
@@ -21,9 +18,6 @@ public class GameEngine {
 			System.out.println("----------------------------------WELKOM BIJ DOMINION------------------------------------");
 		}
 
-		
-		
-		
 		public LinkedList<Kaart> startKaarten()
 		{
 			for (int i = 0; i < 7; i++) {trekStapel.add(new GeldKaart("koper"));}
@@ -75,7 +69,15 @@ public class GameEngine {
 			{
 				System.out.print((i+1)+": ");
 				System.out.println(lijst.get(i));
+				lijst.get(i);
 			}
+		}
+		
+		public LinkedList<Kaart> koopKaart(Kaart kaart,LinkedList<Kaart> lijst) 
+		{
+			lijst.add(kaart);
+			return lijst;
+			
 		}
 		
 		
@@ -115,7 +117,8 @@ public class GameEngine {
 			}
 		}
 		
-		public int geldInHand(LinkedList<Kaart> lijst){
+		public int geldInHand(LinkedList<Kaart> lijst)
+		{
 			int coins = 0;
 			for (int i = 0; i < lijst.size(); i++) {
 				coins += kaartenInHand.get(i).waarde();
@@ -126,18 +129,14 @@ public class GameEngine {
 		public void keuzeSpeler(int keuze)
 		{
 			
-			switch (keuze) {
+			switch (keuze)
+			{
 			case 1:
 				System.out.println("hier moet je actiekaarten kunnen uitvoeren");
 				break;
 			case 2:
-				System.out.println("----");
 				System.out.println("Je hebt " + geldInHand(kaartenInHand) + " coins om te spenderen");
 				//speel je geldkaarten
-			case 3:
-				
-				break;
-				
 
 			default:
 				break;
@@ -191,6 +190,24 @@ public class GameEngine {
 			}
 			System.out.println("-------");
 			System.out.println("je hebt " + coinsUitHand + " coins om te spenderen");
+		}
+		
+		public LinkedList<Kaart> testfunctie(LinkedList<Kaart>lijst,int coins)
+		{
+			for (int i = 0; i < lijst.size(); i++) 
+			{
+				if (lijst.get(i).kost() < coins)
+				{
+					if (!testlijst.contains(lijst.get(i))) 
+					{
+						testlijst.add(lijst.get(i));
+					}
+	
+				}
+			}
+			
+			return testlijst;
+			
 		}
 	
 }
