@@ -41,7 +41,6 @@ public class GeldKaart implements Kaart {
 	
 	
 	
-	
 	@Override
 	public String naam() {
 		return this.kaartNaam;
@@ -56,11 +55,11 @@ public class GeldKaart implements Kaart {
 	public int kost() {
 		return this.cost;
 	}
+
 	@Override
-	public int waarde(){
+	public int waarde() {
 		return this.waarde;
 	}
-	
 	
 
 }
