@@ -41,6 +41,8 @@ public class ConsoleSpel {
 		gameEngine.trekKaart(Spelertrekstapel, 5);
 		gameEngine.toonLijst(Spelertrekstapel);
 		
+
+		
 		//gameEngine.geefKeuze();
 		
 		// gameEngine.toonDeInfo(gameEngine.kaartInHand());
