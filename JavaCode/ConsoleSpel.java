@@ -13,7 +13,7 @@ public class ConsoleSpel {
 		
 		gameEngine.dominionTitel();
 
-		
+		/*
 		gameEngine.toonLijst(trekstapel);
 		System.out.println("--1ste drawhand---");
 		
@@ -40,13 +40,11 @@ public class ConsoleSpel {
 		gameEngine.toonLijst(kaartenInHand);
 		
 		
-
 		
-		//gameEngine.geefKeuze();
+		*/
+		 
 		
-		// gameEngine.toonDeInfo(gameEngine.kaartInHand());
-
-		// gameEngine.toonActieLijst(gameEngine.actieKaartenGenereren());
+		
 		
 		/*
 		 * BENODIGDHEDEN
