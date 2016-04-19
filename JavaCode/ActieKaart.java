@@ -1,17 +1,23 @@
 package JavaCode;
 
+import java.util.LinkedList;
+
 public class ActieKaart implements Kaart {
 	private String KaartType="ActieKaart";
 	private String kaartNaam;
 	private int cost;
 	private int waarde;
 	
+	
+	
 	public ActieKaart(String naam) {
 		this.kaartNaam = naam;
 		
 		switch (naam) {
-		case "village":
-			//voer functies uit 
+		case "councilRoom":
+			LinkedList<Kaart> tmp = engine.lijstenSamenvoegen(engine.kaartInHand(), engine.trekKaart(engine.trekstapel(), 4));
+			engine.toonLijst(tmp);
+			
 			break;
 
 		default:

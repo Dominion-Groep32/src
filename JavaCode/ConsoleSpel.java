@@ -9,13 +9,17 @@ public class ConsoleSpel {
 		Speler jens = new Speler("Jens");
 	
 		LinkedList<Kaart> trekstapel = jens.trekStapel();
-		LinkedList<Kaart> kaartenDieTekoopZijn = gameEngine.kaartenDieTekoopZijn(gameEngine.actieKaartenGenereren(), gameEngine.getAndereKaarten());
+		LinkedList<Kaart> kaartenDieTekoopZijn = gameEngine.lijstenSamenvoegen(gameEngine.actieKaartenGenereren(), gameEngine.getAndereKaarten());
+			
 		
 		
 		gameEngine.dominionTitel();
 
-		gameEngine.beurt(trekstapel,kaartenDieTekoopZijn, 5);
+		gameEngine.beurt(trekstapel,kaartenDieTekoopZijn);
+		gameEngine.beurt(trekstapel,kaartenDieTekoopZijn);
+		gameEngine.beurt(trekstapel,kaartenDieTekoopZijn);
 		
+
 		
 		
 		
