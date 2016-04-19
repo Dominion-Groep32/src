@@ -2,9 +2,6 @@ package JavaCode;
 
 import java.util.*;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
-import sun.awt.image.ImageWatched.Link;
 
 public class GameEngine {
 	private LinkedList<Kaart> kaartenInHand = new LinkedList<Kaart>();
@@ -38,6 +35,7 @@ public class GameEngine {
 		for (int i = 0; i < bijTeVoegenLijst.size(); i++) {
 			primaireLijst.add(bijTeVoegenLijst.get(i));
 		}
+		bijTeVoegenLijst.clear();
 		Collections.shuffle(primaireLijst);
 		return primaireLijst;
 	}
@@ -177,8 +175,7 @@ public class GameEngine {
 		{
 		for (int i = 0; i < lijst.size(); i++) {
 			if (lijst.get(i).kost() < coins) {
-				if (!testlijst.contains(lijst
-						)) {
+				if (!testlijst.contains(lijst.get(i))) {
 					testlijst.add(lijst.get(i));
 				}
 			}

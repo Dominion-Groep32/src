@@ -33,7 +33,7 @@ public class ActieKaart implements Kaart {
 
 	@Override
 	public int kost() {
-		return 0;
+		return this.cost;
 	}
 
 

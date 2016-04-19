@@ -1,9 +1,7 @@
 package JavaCode;
 import java.util.*;
 
-import org.omg.CORBA.PUBLIC_MEMBER;
 
-import sun.awt.image.ImageWatched.Link;
 
 public class Speler {
 	GameEngine engine = new GameEngine();
@@ -21,6 +19,7 @@ public class Speler {
 		
 	}
 	
+	
 	public LinkedList<Kaart> trekStapel()
 	{
 		return trekStapel;
@@ -35,6 +34,13 @@ public class Speler {
 	{
 		return kaartenInHand;
 	}
+
+
+	public String Naam() {
+		return naam;
+	}
+
+
 	
 	
 
