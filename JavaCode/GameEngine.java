@@ -3,21 +3,36 @@ package JavaCode;
 import java.util.*;
 
 
+
 public class GameEngine {
 	private LinkedList<Kaart> kaartenInHand = new LinkedList<Kaart>();
 	private LinkedList<Kaart> aflegStapel = new LinkedList<Kaart>();
 	private LinkedList<Kaart> trekStapel = new LinkedList<Kaart>();
-	private LinkedList<String> actiekaarten = new LinkedList<String>();
-	private LinkedList<Kaart> testlijst = new LinkedList<Kaart>();
-	Scanner scanner = new Scanner(System.in);
+	private LinkedList<Kaart> andereKaarten = new LinkedList<Kaart>(Arrays.asList(new GeldKaart("koper"),new GeldKaart("zilver"),new GeldKaart("goud"),
+			new OverwinningKaart("estate"),new OverwinningKaart("dutchy"),new OverwinningKaart("province")));
+	private LinkedList<Kaart> actieKaarten = new LinkedList<Kaart>(Arrays.asList(new ActieKaart("ambassador"),new ActieKaart("celler"),new ActieKaart("chancellor")
+			,new ActieKaart("chapel"),new ActieKaart("councilroom"),new ActieKaart("feast"),new ActieKaart("festival"),new ActieKaart("laboratory"),new ActieKaart("libary"),new ActieKaart("market")
+			,new ActieKaart("militia"),new ActieKaart("moat"),new ActieKaart("moneylender"),new ActieKaart("smithy"),new ActieKaart("spy"),new ActieKaart("thief"),new ActieKaart("village")
+			,new ActieKaart("witch"),new ActieKaart("woodcutter"),new ActieKaart("workshop")));
+	private LinkedList<Kaart> kaartenDieTekoopZijn = new LinkedList<Kaart>();
+	Scanner scanner = new Scanner(System.in);	
 
-	private String actieKaarten[] = { "ambassador", "celler", "chancellor", "chapel", "councilroom", "feast",
-			"festival", "laboratory", "libary", "market", "militia", "moat", "moneylender", "smithy", "spy", "thief",
-			"village", "witch", "woodcutter", "workshop" };
 
 	public void dominionTitel() {
 		System.out.println("----------------------------------WELKOM BIJ DOMINION------------------------------------");
 	}
+	
+	public void beurt (LinkedList<Kaart> trekstapel,LinkedList<Kaart> koopKaarten,int aantal )
+	{	int koopMogelijkheden = 1;
+		int acties = 1;
+		System.out.println("----DrawHand----");
+		LinkedList<Kaart> drawHand = trekKaart(trekstapel, aantal);
+		toonLijst(drawHand);
+		System.out.println("--------------");
+		geefKeuze(drawHand,koopKaarten);
+		maakKaartInHandLeeg();
+	}
+
 
 	public LinkedList<Kaart> startKaarten() {
 		for (int i = 0; i < 7; i++) {
@@ -38,20 +53,17 @@ public class GameEngine {
 		bijTeVoegenLijst.clear();
 		Collections.shuffle(primaireLijst);
 		return primaireLijst;
+		
 	}
 
-	public LinkedList<Kaart> trekKaart(LinkedList<Kaart> lijst, int aantal) {
-
-		
+	public LinkedList<Kaart> trekKaart(LinkedList<Kaart> lijst, int aantal) 
+	{
 		if (lijst.size() < aantal) {
 			lijst = lijstenSamenvoegen(trekStapel, aflegStapel);
 		}
 		for (int i = 0; i < aantal; i++) {
 			kaartenInHand.add(lijst.get(i));
 			aflegStapel.add(lijst.get(i));
-			// TREKSTAPEL NOG KLEINER MAKEN
-			
-
 		}
 		for (int i = 0; i < aantal; i++) {
 			lijst.removeFirst();
@@ -60,51 +72,27 @@ public class GameEngine {
 	}
 
 	public void toonLijst(LinkedList<Kaart> lijst) {
-		for (int i = 0; i < lijst.size(); i++) {
-			
-			
-			System.out.print((i + 1) + ": ");
-			System.out.println(lijst.get(i).naam());
+		for (int i = 0; i < lijst.size(); i++) 
+		{
+			System.out.println((i + 1) + ": "+lijst.get(i).naam());
 		}
 	}
 
-	// aanpassen
-	public void toonActieLijst(LinkedList<String> lijst) {
+	public LinkedList<Kaart> actieKaartenGenereren() {
+
+		Collections.shuffle(actieKaarten);
 		for (int i = 0; i < 10; i++) {
-			System.out.print((i + 1) + ": ");
-			System.out.println(lijst.get(i));
+			kaartenDieTekoopZijn.add(actieKaarten.get(i));
 		}
+		return kaartenDieTekoopZijn;
+	}
+	
+	public LinkedList<Kaart> kaartenDieTekoopZijn(LinkedList<Kaart> actieKaarten, LinkedList<Kaart> andereKaarten){
+		kaartenDieTekoopZijn = lijstenSamenvoegen(actieKaarten,andereKaarten);
+		return kaartenDieTekoopZijn;
 	}
 
-	public LinkedList<String> actieKaartenGenereren() {
 
-		Collections.shuffle((Arrays.asList(actieKaarten)));
-		for (int i = 0; i < actieKaarten.length; i++) {
-			actiekaarten.add(actieKaarten[i]);
-		}
-
-		return actiekaarten;
-
-	}
-
-	public LinkedList<Kaart> aflegStapel() {
-		return this.aflegStapel;
-	}
-
-	public LinkedList<Kaart> kaartInHand() {
-		return this.kaartenInHand;
-	}
-
-	public LinkedList<Kaart> maakKaartInHandLeeg() {
-		kaartenInHand.clear();
-		return kaartenInHand;
-	}
-
-	public void maakHandLeeg(LinkedList<Kaart> lijst) {
-		for (int i = 0; i < lijst.size(); i++) {
-			lijst.clear();
-		}
-	}
 
 	public int geldInHand(LinkedList<Kaart> lijst) {
 		int coins = 0;
@@ -113,32 +101,80 @@ public class GameEngine {
 		}
 		return coins;
 	}
+	
+	public LinkedList<Kaart> kaartenDieJeKuntKopen(LinkedList<Kaart> lijst, int coins)
+	{
+		LinkedList<Kaart> tmp = new LinkedList<Kaart>();
+		for (int i = 0; i < lijst.size(); i++) {
+			if (lijst.get(i).kost() <= coins) {
+				tmp.add(lijst.get(i));
+			}
+		}
+		return tmp;
+	}
+	
+	public void koopKaart(LinkedList<Kaart> lijst){
+		System.out.print("vul het nummer in van de kaart die je wilt kopen : ");
+		int kaartDieJeWiltKopen = (scanner.nextInt()-1);
+		while(kaartDieJeWiltKopen< 0 || kaartDieJeWiltKopen>lijst.size())
+		{
+			System.out.println("Sorry geef een geldig getal in ");
+			kaartDieJeWiltKopen = (scanner.nextInt()-1);
+		}
+		
+		System.out.println("Bent u zeker dat u de kaart " + lijst.get(kaartDieJeWiltKopen).naam() + " wilt kopen?");
+		System.out.print("typ 1 om door te gaan, 2 om te herkiezen : ");
+		int keuze = scanner.nextInt();
+		
+		switch (keuze) {
+			case 1:
+				aflegStapel.add(lijst.get(kaartDieJeWiltKopen));
+				System.out.println("-----");
+				toonLijst(aflegStapel());
+				break;
+			case 2:
+				koopKaart(lijst);
+				break;
+	
+			default:
+				break;
+		}
+		
+	
+	}
 
-	public void keuzeSpeler(int keuze) {
+
+	public void keuzeSpeler(int keuze, LinkedList<Kaart> kaartenInHand , LinkedList<Kaart> koopKaarten) {
 
 		switch (keuze) {
 		case 1:
 			System.out.println("hier moet je actiekaarten kunnen uitvoeren");
 			break;
 		case 2:
+			int coins = geldInHand(kaartenInHand);
 			System.out.println("----");
-			System.out.println("Je hebt " + geldInHand(kaartenInHand) + " coins om te spenderen");
-			// speel je geldkaarten
-		case 3:
-
-			break;
+			System.out.println("Je hebt " + coins + " coins om te spenderen");
+			System.out.println("-----");
+			System.out.println("je kunt de volgende kaarten kopen");
+			System.out.println("------");
+			LinkedList<Kaart> lijstWaarvanJeKanKopen = kaartenDieJeKuntKopen(koopKaarten, coins);
+			toonLijst(lijstWaarvanJeKanKopen);
+			System.out.println("------");
+			koopKaart(lijstWaarvanJeKanKopen);
 
 		default:
 			break;
 		}
 	}
+	
+	
 
-	public void geefKeuze() {
+	public void geefKeuze(LinkedList<Kaart> kaartenInHand,LinkedList<Kaart> koopKaarten) {
 		System.out.println("1: gebruik actie Kaarten");
 		System.out.println("2: gebruik geld kaarten");
 		System.out.println("3: beëindig je beurt");
 		System.out.print("geef een keuze in : ");
-		Scanner scanner = new Scanner(System.in);
+		
 		int keuze = scanner.nextInt();
 
 		while (keuze < 0 || keuze > 3) {
@@ -147,44 +183,23 @@ public class GameEngine {
 			keuze = scanner.nextInt();
 		}
 
-		keuzeSpeler(keuze);
-
-	}
-
-	// ----------------------------------------PLAYFIELD
-	// ----------------------//
-	// ------------------------------HIER TEST IK
-	// DINGEN------------------------//
-
-	public void toonDeInfo(LinkedList<Kaart> lijst) {
-		int coinsUitHand = 0;
-		for (int i = 0; i < kaartenInHand.size(); i++) {
-			System.out.println("-----");
-
-			System.out.println("de naam van de kaart is " + kaartenInHand.get(i).naam());
-			System.out.println("het type van de kaart is : " + kaartenInHand.get(i).kaartType());
-			System.out.println("de kaart kost: " + kaartenInHand.get(i).kost() + " coins");
-			System.out.println("je krijgt " + kaartenInHand.get(i).waarde() + " coin van deze kaart");
-			coinsUitHand += kaartenInHand.get(i).waarde();
-		}
-		System.out.println("-------");
-		System.out.println("je hebt " + coinsUitHand + " coins om te spenderen");
-	}
-
-	public LinkedList<Kaart> testfunctie(LinkedList<Kaart> lijst, int coins)
-		{
-		for (int i = 0; i < lijst.size(); i++) {
-			if (lijst.get(i).kost() < coins) {
-				if (!testlijst.contains(lijst.get(i))) {
-					testlijst.add(lijst.get(i));
-				}
-			}
-		}
-
-		return testlijst;
+		keuzeSpeler(keuze,kaartenInHand , koopKaarten);
 
 	}
 	
-	
+	public LinkedList<Kaart> getAndereKaarten() {
+		return this.andereKaarten;
+	}
+	public LinkedList<Kaart> aflegStapel() {
+		return this.aflegStapel;
+	}
+
+	public LinkedList<Kaart> kaartInHand() {
+		return this.kaartenInHand;
+	}
+	public LinkedList<Kaart> maakKaartInHandLeeg() {
+		kaartenInHand.clear();
+		return kaartenInHand;
+	}
 
 }
