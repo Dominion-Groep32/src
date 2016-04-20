@@ -18,6 +18,11 @@ public class ConsoleSpel {
 		gameEngine.beurt(trekstapel,kaartenDieTekoopZijn);
 		gameEngine.beurt(trekstapel,kaartenDieTekoopZijn);
 		gameEngine.beurt(trekstapel,kaartenDieTekoopZijn);
+		gameEngine.beurt(trekstapel,kaartenDieTekoopZijn);
+		gameEngine.beurt(trekstapel,kaartenDieTekoopZijn);
+		gameEngine.beurt(trekstapel,kaartenDieTekoopZijn);
+		gameEngine.beurt(trekstapel,kaartenDieTekoopZijn);
+		
 		
 
 		

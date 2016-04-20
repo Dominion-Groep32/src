@@ -2,7 +2,6 @@ package JavaCode;
 
 import java.util.*;
 
-import org.eclipse.swt.widgets.Link;
 
 public class GameEngine {
 	private LinkedList<Kaart> kaartenInHand = new LinkedList<Kaart>();
@@ -37,11 +36,14 @@ public class GameEngine {
 	public void beurt(LinkedList<Kaart> trekstapel, LinkedList<Kaart> koopKaarten) {
 		int koopMogelijkheden = 1;
 		int acties = 1;
+		
 		LinkedList<Kaart> drawHand = trekKaart(trekstapel, 5);
 		toonLijst(drawHand);
 		layout();
+		
 		geefKeuze(drawHand, koopKaarten,koopMogelijkheden);
 		maakKaartInHandLeeg();
+		
 		layout();
 	}
 
@@ -98,18 +100,20 @@ public class GameEngine {
 	}
 
 	public void koopKaart(LinkedList<Kaart> lijst) {
+		
 		System.out.print("vul het nummer in van de kaart die je wilt kopen : ");
-		int kaartDieJeWiltKopen = (scanner.nextInt() - 1);
-		while (kaartDieJeWiltKopen < 0 || kaartDieJeWiltKopen > lijst.size()) {
+		int keuze = (scanner.nextInt() - 1);
+		
+		while (keuze < 0 || keuze > lijst.size()) {
 			System.out.println("Sorry geef een geldig getal in ");
-			kaartDieJeWiltKopen = (scanner.nextInt() - 1);
+			keuze = (scanner.nextInt() - 1);
 		}
-		bevestigKeuze(kaartDieJeWiltKopen,lijst);
+		bevestigKeuze(keuze,lijst);
 
 	}
 	
-	public void bevestigKeuze(int kaartDieJeWiltKopen,LinkedList<Kaart> lijst){
-		System.out.println("Bent u zeker dat u de kaart " + lijst.get(kaartDieJeWiltKopen).naam() + " wilt kopen?");
+	public void bevestigKeuze(int gekozen,LinkedList<Kaart> lijst){
+		System.out.println("Bent u zeker dat u de kaart " + lijst.get(gekozen).naam() + " wilt kopen?");
 		System.out.print("typ 1 om door te gaan, 2 om te herkiezen : ");
 
 		int keuze = scanner.nextInt();
@@ -120,7 +124,7 @@ public class GameEngine {
 
 		switch (keuze) {
 		case 1:
-			aflegStapel.add(lijst.get(kaartDieJeWiltKopen));
+			aflegStapel.add(lijst.get(gekozen));
 			layout();
 			toonLijst(aflegStapel());
 			break;
