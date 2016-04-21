@@ -5,6 +5,7 @@ import org.junit.*;
 
 import engine.GameEngine;
 import engine.Kaart;
+import engine.Speler;
 
 
 
@@ -12,7 +13,8 @@ import engine.Kaart;
 
 public class TestFuncties {
 	GameEngine Engine = new GameEngine();
-	LinkedList<Kaart> testlijst = Engine.startKaarten();
+	Speler speler = new Speler("testspeler");
+	LinkedList<Kaart> testlijst = speler.startKaarten();
 	
 	@Test
 	public void mainTest(){System.out.println("this works");}
@@ -20,7 +22,7 @@ public class TestFuncties {
 	@Test
 	public void startKaartenTest()
 	{
-		if (!Engine.startKaarten().equals(10))
+		if (!speler.startKaarten().equals(10))
 		{
 		}
 		else

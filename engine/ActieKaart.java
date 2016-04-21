@@ -1,6 +1,5 @@
 package engine;
 
-import java.util.LinkedList;
 
 public class ActieKaart implements Kaart {
 	private String KaartType="ActieKaart";
@@ -15,8 +14,7 @@ public class ActieKaart implements Kaart {
 		
 		switch (naam) {
 		case "councilRoom":
-			LinkedList<Kaart> tmp = engine.lijstenSamenvoegen(engine.kaartInHand(), engine.trekKaart(engine.trekstapel(), 4));
-			engine.toonLijst(tmp);
+			
 			
 			break;
 

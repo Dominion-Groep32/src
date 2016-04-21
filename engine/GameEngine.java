@@ -2,6 +2,8 @@ package engine;
 
 import java.util.*;
 
+import console.ConsoleSpel;
+
 
 public class GameEngine {
 	private LinkedList<Kaart> kaartenInHand = new LinkedList<Kaart>();
@@ -20,20 +22,13 @@ public class GameEngine {
 	private LinkedList<Kaart> kaartenDieTekoopZijn = new LinkedList<Kaart>();
 	Scanner scanner = new Scanner(System.in);
 	
-	public LinkedList<Kaart> startKaarten() {
-		for (int i = 0; i < 7; i++) {
-			trekStapel.add(new GeldKaart("koper"));
-		}
-		for (int j = 0; j < 3; j++) {
-			trekStapel.add(new OverwinningKaart("estate"));
-		}
-		Collections.shuffle(trekStapel);
-		return trekStapel;
-	}
+	
+	
 
+	/*
 
-
-	public void beurt(LinkedList<Kaart> trekstapel, LinkedList<Kaart> koopKaarten) {
+	public void beurt(LinkedList<Kaart> trekstapel, LinkedList<Kaart> 
+en) {
 		int koopMogelijkheden = 1;
 		int acties = 1;
 		
@@ -46,8 +41,10 @@ public class GameEngine {
 		
 		layout();
 	}
-
-	public LinkedList<Kaart> lijstenSamenvoegen(LinkedList<Kaart> primaireLijst, LinkedList<Kaart> bijTeVoegenLijst) {
+*/
+	
+	
+	public LinkedList<Kaart> lijstenSamenvoegenShuffle(LinkedList<Kaart> primaireLijst, LinkedList<Kaart> bijTeVoegenLijst) {
 
 		for (int i = 0; i < bijTeVoegenLijst.size(); i++) {
 			primaireLijst.add(bijTeVoegenLijst.get(i));
@@ -58,19 +55,15 @@ public class GameEngine {
 
 	}
 
-	public LinkedList<Kaart> trekKaart(LinkedList<Kaart> lijst, int aantal) {
-		if (lijst.size() < aantal) {
-			lijst = lijstenSamenvoegen(trekStapel, aflegStapel);
+	public LinkedList<Kaart> lijstenSamenvoegenZonderShuffle(LinkedList<Kaart> primaireLijst, LinkedList<Kaart> bijTeVoegenLijst) {
+
+		for (int i = 0; i < bijTeVoegenLijst.size(); i++) {
+			primaireLijst.add(bijTeVoegenLijst.get(i));
 		}
-		for (int i = 0; i < aantal; i++) {
-			kaartenInHand.add(lijst.get(i));
-			aflegStapel.add(lijst.get(i));
-		}
-		for (int i = 0; i < aantal; i++) {
-			lijst.removeFirst();
-		}
-		return kaartenInHand;
-	}
+		bijTeVoegenLijst.clear();
+		return primaireLijst;
+
+	}	
 
 	public LinkedList<Kaart> actieKaartenGenereren() {
 
@@ -84,7 +77,7 @@ public class GameEngine {
 	public int geldInHand(LinkedList<Kaart> lijst) {
 		int coins = 0;
 		for (int i = 0; i < lijst.size(); i++) {
-			coins += kaartenInHand.get(i).waarde();
+			coins += lijst.get(i).waarde();
 		}
 		return coins;
 	}
@@ -99,7 +92,7 @@ public class GameEngine {
 		return tmp;
 	}
 
-	public void koopKaart(LinkedList<Kaart> lijst) {
+	public LinkedList<Kaart> koopKaart(LinkedList<Kaart> lijst,LinkedList<Kaart> aflegStapel) {
 		
 		System.out.print("vul het nummer in van de kaart die je wilt kopen : ");
 		int keuze = (scanner.nextInt() - 1);
@@ -108,92 +101,23 @@ public class GameEngine {
 			System.out.println("Sorry geef een geldig getal in ");
 			keuze = (scanner.nextInt() - 1);
 		}
-		bevestigKeuze(keuze,lijst);
-
-	}
-	
-	public void bevestigKeuze(int gekozen,LinkedList<Kaart> lijst){
-		System.out.println("Bent u zeker dat u de kaart " + lijst.get(gekozen).naam() + " wilt kopen?");
-		System.out.print("typ 1 om door te gaan, 2 om te herkiezen : ");
-
-		int keuze = scanner.nextInt();
-		while (keuze < 1 || keuze > 2) {
-			System.out.print("geef een geldige keuze in : ");
-			keuze = scanner.nextInt();
-		}
-
-		switch (keuze) {
-		case 1:
-			aflegStapel.add(lijst.get(gekozen));
-			layout();
-			toonLijst(aflegStapel());
-			break;
-		case 2:
-			koopKaart(lijst);
-			break;
-
-		default:
-			break;
-		}
-	}
-
-	public void keuzeSpeler(int keuze, LinkedList<Kaart> kaartenInHand, LinkedList<Kaart> koopKaarten,int koopMogelijkHeden) {
-
-		switch (keuze) {
-		case 1:
-			LinkedList<Kaart> actieKaartenUitDrawHand = controleerActieKaarten(kaartenInHand);
-			toonLijst(actieKaartenUitDrawHand);
-			break;
-		case 2:
-			int coins = geldInHand(kaartenInHand);
-			layout();
-			System.out.println("Je hebt " + coins + " coins om te spenderen");
-			layout();
-			System.out.println("je kunt de volgende kaarten kopen");
-			layout();
-			LinkedList<Kaart> lijstWaarvanJeKanKopen = kaartenDieJeKuntKopen(koopKaarten, coins);
-			toonLijst(lijstWaarvanJeKanKopen);
-			layout();
-			for (int i = 0; i < koopMogelijkHeden; i++) {
-				
-				koopKaart(lijstWaarvanJeKanKopen);
-			}
-			
-			break;
-		case 3:
-			System.out.println("De beurt is beëindigd");
-			break;
-
-		default:
-			break;
-		}
-	}
-
-	public void geefKeuze(LinkedList<Kaart> kaartenInHand, LinkedList<Kaart> koopKaarten,int koopMogelijkHeden) {
-		System.out.println("1: gebruik actie Kaarten");
-		System.out.println("2: gebruik geld kaarten");
-		System.out.println("3: beëindig je beurt");
-		System.out.print("geef een keuze in : ");
-
-		int keuze = scanner.nextInt();
-
-		while (keuze < 0 || keuze > 3) {
-			System.out.println("geef een correcte waarde in ");
-			System.out.print("geef een keuze in : ");
-			keuze = scanner.nextInt();
+		aflegStapel.add(lijst.get(keuze));
 		
-		}
-		layout();
-
-		keuzeSpeler(keuze, kaartenInHand , koopKaarten , koopMogelijkHeden);
-
-	}
+		return aflegStapel;
 	
-	public LinkedList<Kaart> controleerActieKaarten(LinkedList<Kaart> drawHand){
+	}
+
+	
+	
+
+	
+	
+	
+	public LinkedList<Kaart> controleerActieKaarten(LinkedList<Kaart> kaartenInHand){
 		LinkedList<Kaart> tmp = new LinkedList<Kaart>();
-		for (int i = 0; i < drawHand.size(); i++) {
-			if (drawHand.get(i).kaartType().equals("ActieKaart")) {
-				tmp.add(drawHand.get(i));
+		for (int i = 0; i < kaartenInHand.size(); i++) {
+			if (kaartenInHand.get(i).kaartType().equals("ActieKaart")) {
+				tmp.add(kaartenInHand.get(i));
 			}
 		}
 		return tmp;
@@ -215,22 +139,16 @@ public class GameEngine {
 		return this.kaartenInHand;
 	}
 
-	public LinkedList<Kaart> maakKaartInHandLeeg() {
-		kaartenInHand.clear();
-		return kaartenInHand;
+	public void maakKaartInHandLeeg(LinkedList<Kaart> lijst) {
+		lijst.clear();
+		
 	}
 
-	public void toonLijst(LinkedList<Kaart> lijst) {
-		for (int i = 0; i < lijst.size(); i++) {
-			System.out.println((i + 1) + ": " + lijst.get(i).naam());
-		}
-	}
-	public void dominionTitel() {
-		System.out.println("----------------------------------WELKOM BIJ DOMINION------------------------------------");
-	}
+
+
+
+
+
 	
-	public void layout(){
-		System.out.println("-------------------");
-	}
 
 }
