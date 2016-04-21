@@ -12,13 +12,16 @@ public class GameEngine {
 	private LinkedList<Kaart> andereKaarten = new LinkedList<Kaart>(
 			Arrays.asList(new GeldKaart("koper"), new GeldKaart("zilver"), new GeldKaart("goud"),
 					new OverwinningKaart("estate"), new OverwinningKaart("dutchy"), new OverwinningKaart("province")));
-	private LinkedList<Kaart> actieKaarten = new LinkedList<Kaart>(Arrays.asList(new ActieKaart("ambassador"),
-			new ActieKaart("celler"), new ActieKaart("chancellor"), new ActieKaart("chapel"),
-			new ActieKaart("councilroom"), new ActieKaart("feast"), new ActieKaart("festival"),
-			new ActieKaart("laboratory"), new ActieKaart("libary"), new ActieKaart("market"), new ActieKaart("militia"),
-			new ActieKaart("moat"), new ActieKaart("moneylender"), new ActieKaart("smithy"), new ActieKaart("spy"),
-			new ActieKaart("thief"), new ActieKaart("village"), new ActieKaart("witch"), new ActieKaart("woodcutter"),
-			new ActieKaart("workshop")));
+	
+	private LinkedList<Kaart> actieKaarten = new LinkedList<Kaart>(Arrays.asList(new ActieKaart("avonturier"),
+			new ActieKaart("bureaucraat"), new ActieKaart("kelder"), new ActieKaart("raadsheer"),
+			new ActieKaart("kapel"), new ActieKaart("raadszaal"), new ActieKaart("feest"),
+			new ActieKaart("festival"), new ActieKaart("tuinen"), new ActieKaart("laboratorium"), new ActieKaart("bibliotheek"),
+			new ActieKaart("markt"), new ActieKaart("militie"), new ActieKaart("mijn"), new ActieKaart("slotgracht"),
+			new ActieKaart("geldschieter"), new ActieKaart("verbouwing"), new ActieKaart("smidse"), new ActieKaart("spion"),
+			new ActieKaart("dief"), new ActieKaart("troonzaal"), new ActieKaart("dorp"), new ActieKaart("heks"), new ActieKaart("houthakker")
+			, new ActieKaart("werkplaats")));
+	
 	private LinkedList<Kaart> kaartenDieTekoopZijn = new LinkedList<Kaart>();
 	Scanner scanner = new Scanner(System.in);
 	
