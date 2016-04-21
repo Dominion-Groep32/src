@@ -1,58 +1,56 @@
 package Controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.*;
+
+import com.sun.javafx.stage.StagePeerListener;
+
+import JavaCode.*;
+
+
 /**
- * Servlet implementation class homeServlet
+ * Servlet implementation class Dominion
  */
-public class homeServlet extends HttpServlet {
+public class Dominion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public homeServlet() {
+    public Dominion() {
         super();
         // TODO Auto-generated constructor stub
     }
-    
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            response.setContentType("text/html");
-            response.setHeader("Cache-Control", "no-cache");
-            PrintWriter out = response.getWriter();
-            out.print("<h3>DATA HAS BEEN CHANEGD</h3>");
-            System.out.println("I WAS HERE");
-        	}
-        catch (IOException io) {
-            io.printStackTrace();
-        	}
-    }
 
-    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-        PrintWriter out = response.getWriter();
-        out.println("Hello World");
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		/*JSONObject jsonke = new JSONObject();
+		jsonke.put("Naam", "koentje");*/
+		Speler speler = new Speler("Maxim");
+		
+		JSONObject jsonke = new JSONObject();
+		jsonke.put("speler", speler.getNaam());
+		
+		//response.getWriter().append("hello world ");
+		response.getWriter().write(jsonke.toString());
 	}
-	*/
-    
-    
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.getWriter().append("hello world vanuit post");
 	}
 
 }

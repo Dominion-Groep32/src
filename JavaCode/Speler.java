@@ -36,7 +36,9 @@ public class Speler {
 		return kaartenInHand;
 	}
 	
-	
+	public String getNaam(){
+		return this.naam; 
+	}
 
 	
 	
