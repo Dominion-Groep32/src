@@ -1,4 +1,4 @@
-package JavaCode;
+package engine;
 
 public interface Kaart {
 	GameEngine engine = new GameEngine();

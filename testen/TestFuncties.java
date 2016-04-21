@@ -1,7 +1,10 @@
-package JavaCode;
+package testen;
 
 import java.util.LinkedList;
 import org.junit.*;
+
+import engine.GameEngine;
+import engine.Kaart;
 
 
 

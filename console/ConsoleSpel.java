@@ -1,6 +1,10 @@
-package JavaCode;
+package console;
 
 import java.util.*;
+
+import engine.GameEngine;
+import engine.Kaart;
+import engine.Speler;
 
 public class ConsoleSpel {
 
@@ -15,12 +19,6 @@ public class ConsoleSpel {
 		
 		gameEngine.dominionTitel();
 
-		gameEngine.beurt(trekstapel,kaartenDieTekoopZijn);
-		gameEngine.beurt(trekstapel,kaartenDieTekoopZijn);
-		gameEngine.beurt(trekstapel,kaartenDieTekoopZijn);
-		gameEngine.beurt(trekstapel,kaartenDieTekoopZijn);
-		gameEngine.beurt(trekstapel,kaartenDieTekoopZijn);
-		gameEngine.beurt(trekstapel,kaartenDieTekoopZijn);
 		gameEngine.beurt(trekstapel,kaartenDieTekoopZijn);
 		
 		
@@ -66,4 +64,5 @@ public class ConsoleSpel {
 
 
 	}
+	
 }

@@ -1,4 +1,4 @@
-package JavaCode;
+package engine;
 
 import java.util.*;
 
@@ -37,11 +37,11 @@ public class GameEngine {
 		int koopMogelijkheden = 1;
 		int acties = 1;
 		
-		LinkedList<Kaart> drawHand = trekKaart(trekstapel, 5);
-		toonLijst(drawHand);
+		LinkedList<Kaart> kaatenInHand = trekKaart(trekstapel, 5);
+		toonLijst(kaatenInHand);
 		layout();
 		
-		geefKeuze(drawHand, koopKaarten,koopMogelijkheden);
+		geefKeuze(kaatenInHand, koopKaarten,koopMogelijkheden);
 		maakKaartInHandLeeg();
 		
 		layout();
