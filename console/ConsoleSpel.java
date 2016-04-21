@@ -22,36 +22,46 @@ public class ConsoleSpel {
 	
 		public void run() {
 			System.out.println("----------------------------------WELKOM BIJ DOMINION------------------------------------");
-			//aantal spelers?
-			//Speler speler = new Speler("jos");
 			spel();
 		}
 		
 	public void spel(){
 		
-		//stap 1: wie is er aan de beurt?
-		Speler speler = new Speler("jos");
-		//stap 2: welke kaarten heb je in je hand?
+
+		//Speler speler = new Speler("jos");
 		LinkedList<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.actieKaartenGenereren(), engine.getAndereKaarten());
 		
+	
+		
+		Speler speler[] = engine.maakSpelersAan("Griet", "Jens");
+		
+		
 		while(engine.spelNogNietBeëindigd()){
-			System.out.println("");
-			layout("Nieuwe beurt");
-			layout("Kaarten in uw hand");
-			toonLijst(speler.trekKaart(speler.trekStapel(), 5));
-			layout("Geef uw keuze");
-			int keuze = geefKeuze(speler.kaartenInHand());
-			keuzeSpeler(keuze, speler.kaartenInHand(),tafelKaarten,speler.aflegStapel());
-			engine.maakKaartInHandLeeg(speler.kaartenInHand());
-			layout("de beurt is beëindigd");
-			System.out.println("");
+			
+			
+			for (int i = 0; i < 2; i++)
+			{
+				
+				Speler huidigeSpeler = engine.krijgSpelerNaam(speler,i);
+				System.out.println("");
+				printFunctie("Nu aan de beurt: "+huidigeSpeler.Naam());
+				printFunctie("Kaarten in uw hand");
+				toonLijst(huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 5));
+				printFunctie("Geef uw keuze");
+				int keuze = geefKeuze(huidigeSpeler.kaartenInHand());
+				keuzeSpeler(keuze, huidigeSpeler.kaartenInHand(),tafelKaarten,huidigeSpeler.aflegStapel());
+				engine.maakKaartInHandLeeg(huidigeSpeler.kaartenInHand());
+				printFunctie("de beurt is beëindigd");
+				System.out.println("");
+			}
+					
 			
 		}
 		
 		
 	}
 		
-	public void layout(String tekst){
+	public void printFunctie(String tekst){
 			System.out.println("--------"+tekst+"-----------");
 		}
 	public void toonLijst(LinkedList<Kaart> lijst) {
@@ -92,7 +102,7 @@ public class ConsoleSpel {
 		switch (keuze) {
 		case 1:
 			LinkedList<Kaart> actieKaartenUitDrawHand = engine.controleerActieKaarten(kaartenInHand);
-			layout("Actiekaarten");
+			printFunctie("Actiekaarten");
 			toonLijst(actieKaartenUitDrawHand);
 			break;
 		
@@ -111,14 +121,14 @@ public class ConsoleSpel {
 	}
 	
 	private void koopActie(LinkedList<Kaart> tafelKaarten, int geld, LinkedList<Kaart> aflegStapel) {
-		layout("");
+		printFunctie("");
 		System.out.println("Geld:  " + geld);
-		layout("");
+		printFunctie("");
 		System.out.println("je kunt de volgende kaarten kopen");
-		layout("");
+		printFunctie("");
 		LinkedList<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(tafelKaarten, geld);
 		toonLijst(lijstWaarvanJeKanKopen);
-		layout("");
+		printFunctie("");
 		for (int i = 0; i < 1; i++) {
 			
 			koopKaart(lijstWaarvanJeKanKopen,aflegStapel);

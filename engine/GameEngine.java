@@ -27,24 +27,21 @@ public class GameEngine {
 	
 	
 	
-
-	/*
-
-	public void beurt(LinkedList<Kaart> trekstapel, LinkedList<Kaart> 
-en) {
-		int koopMogelijkheden = 1;
-		int acties = 1;
-		
-		LinkedList<Kaart> kaatenInHand = trekKaart(trekstapel, 5);
-		toonLijst(kaatenInHand);
-		layout();
-		
-		geefKeuze(kaatenInHand, koopKaarten,koopMogelijkheden);
-		maakKaartInHandLeeg();
-		
-		layout();
+	public  Speler[] maakSpelersAan(String eersteSpeler,String tweedeSpeler){
+		Speler speler[] = new Speler[2];
+		speler[0] = new Speler(eersteSpeler);
+		speler[1] = new Speler(tweedeSpeler);
+		return speler;
 	}
-*/
+	
+	public Speler krijgSpelerNaam(Speler[] spelers,int persoon){
+		Speler huidigeSpeler = spelers[persoon];
+		if (huidigeSpeler == spelers[0])
+		{huidigeSpeler = spelers[1];}
+		else {huidigeSpeler = spelers[0];}
+		return huidigeSpeler;
+	}
+
 	
 	
 	public LinkedList<Kaart> lijstenSamenvoegenShuffle(LinkedList<Kaart> primaireLijst, LinkedList<Kaart> bijTeVoegenLijst) {
