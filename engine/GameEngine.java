@@ -95,27 +95,7 @@ en) {
 		return tmp;
 	}
 
-	public LinkedList<Kaart> koopKaart(LinkedList<Kaart> lijst,LinkedList<Kaart> aflegStapel) {
 		
-		System.out.print("vul het nummer in van de kaart die je wilt kopen : ");
-		int keuze = (scanner.nextInt() - 1);
-		
-		while (keuze < 0 || keuze > lijst.size()) {
-			System.out.println("Sorry geef een geldig getal in ");
-			keuze = (scanner.nextInt() - 1);
-		}
-		aflegStapel.add(lijst.get(keuze));
-		
-		return aflegStapel;
-	
-	}
-
-	
-	
-
-	
-	
-	
 	public LinkedList<Kaart> controleerActieKaarten(LinkedList<Kaart> kaartenInHand){
 		LinkedList<Kaart> tmp = new LinkedList<Kaart>();
 		for (int i = 0; i < kaartenInHand.size(); i++) {
@@ -145,6 +125,10 @@ en) {
 	public void maakKaartInHandLeeg(LinkedList<Kaart> lijst) {
 		lijst.clear();
 		
+	}
+	public boolean spelNogNietBeëindigd(){
+		
+		return true;
 	}
 
 
