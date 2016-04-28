@@ -1,4 +1,4 @@
-package JavaCode;
+package engine;
 
 public class GeldKaart implements Kaart {
 	private String KaartType="Geldkaart";

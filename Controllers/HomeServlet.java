@@ -39,10 +39,16 @@ public class homeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<<<<<<< HEAD
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
         PrintWriter out = response.getWriter();
         out.println("Hello World");
+=======
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html");
+		response.getWriter().write("<h1>Dit Werkt!</h1>");
+>>>>>>> 9f986dd5efa5ae6f96ae59a463ac3d8c439103ac
 	}
 	*/
     
@@ -51,7 +57,6 @@ public class homeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
