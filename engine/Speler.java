@@ -21,7 +21,8 @@ public class Speler {
 	
 	public LinkedList<Kaart> startKaarten() {
 		for (int i = 0; i < 7; i++) {
-			trekStapel.add(new GeldKaart("koper"));
+			//trekStapel.add(new GeldKaart("koper"));
+			trekStapel.add(new ActieKaart("smidse"));
 		}
 		for (int j = 0; j < 3; j++) {
 			trekStapel.add(new OverwinningKaart("estate"));

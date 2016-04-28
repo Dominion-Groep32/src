@@ -13,6 +13,9 @@ public class ConsoleSpel {
 	GameEngine engine = new GameEngine();
 	
 	
+		
+		
+	
 	
 
 	public static void main(String[] args) {
@@ -120,8 +123,12 @@ public class ConsoleSpel {
 			toonLijst(actieKaartenUitDrawHand);
 			Kaart gekozenKaart = voerActieKaartUit(actieKaartenUitDrawHand);
 			
-			ActieKaart ak = (ActieKaart) gekozenKaart;
-			ak.actieUitvoeren(gekozenKaart, engine.geefHuidigeSpeler());
+			ActieKaart actiekaart = (ActieKaart) gekozenKaart;
+			actiekaart.actieUitvoeren(gekozenKaart, engine.geefHuidigeSpeler());
+			
+			
+			
+			
 			
 			break;
 		
@@ -153,8 +160,7 @@ public class ConsoleSpel {
 			int kost = koopKaart(lijstWaarvanJeKanKopen,aflegStapel);
 			geld = geld - kost;
 		}
-			
-			
+		
 		
 		
 	}
@@ -183,8 +189,8 @@ public Kaart voerActieKaartUit(LinkedList<Kaart> lijstVanActieKaarten) {
 		keuze = (sc.nextInt() - 1);
 	}
 	
-	
 	return lijstVanActieKaarten.get(keuze);
+	
 
 }
 

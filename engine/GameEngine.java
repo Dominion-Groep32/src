@@ -43,7 +43,7 @@ public class GameEngine {
 		if (huidigeSpeler == spelersNamen[1])
 		{huidigeSpeler = spelersNamen[0];}
 		
-		else {huidigeSpeler = spelersNamen[0];}
+		else {huidigeSpeler = spelersNamen[1];}
 		
 	
 	}
@@ -52,13 +52,6 @@ public class GameEngine {
 		
 		return this.huidigeSpeler;
 	}
-	
-	
-	
-	
-
-	
-
 	
 	
 	public LinkedList<Kaart> lijstenSamenvoegenShuffle(LinkedList<Kaart> primaireLijst, LinkedList<Kaart> bijTeVoegenLijst) {
