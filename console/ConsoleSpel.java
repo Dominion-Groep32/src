@@ -46,7 +46,7 @@ public class ConsoleSpel {
 				Speler huidigeSpeler = engine.geefHuidigeSpeler();
 				
 				System.out.println("");
-				printFunctie("Nu aan de beurt: "+huidigeSpeler.Naam());
+				printFunctie("Nu aan de beurt: "+huidigeSpeler.getNaam());
 				printFunctie("Kaarten in uw hand");
 				toonLijst(engine.geefHuidigeSpeler().trekKaart(huidigeSpeler.trekStapel(), 5));
 				printFunctie("Geef uw keuze");
