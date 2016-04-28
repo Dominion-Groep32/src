@@ -64,7 +64,9 @@ public class Speler {
 	public String getNaam() {
 		return naam;
 	}
+	
 
+	
 
 	
 	

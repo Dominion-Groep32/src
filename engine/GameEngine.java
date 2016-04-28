@@ -21,26 +21,43 @@ public class GameEngine {
 			new ActieKaart("geldschieter"), new ActieKaart("verbouwing"), new ActieKaart("smidse"), new ActieKaart("spion"),
 			new ActieKaart("dief"), new ActieKaart("troonzaal"), new ActieKaart("dorp"), new ActieKaart("heks"), new ActieKaart("houthakker")
 			, new ActieKaart("werkplaats")));
-	
+	private Speler[] spelersNamen = new Speler[2];
 	private LinkedList<Kaart> kaartenDieTekoopZijn = new LinkedList<Kaart>();
 	Scanner scanner = new Scanner(System.in);
+	private Speler huidigeSpeler;
 	
 	
 	
-	public  Speler[] maakSpelersAan(String eersteSpeler,String tweedeSpeler){
-		Speler speler[] = new Speler[2];
-		speler[0] = new Speler(eersteSpeler);
-		speler[1] = new Speler(tweedeSpeler);
-		return speler;
+	public  void maakSpelersAan(String SpelersNamen[]){
+		
+		
+		for (int i = 0; i < SpelersNamen.length; i++) {
+			spelersNamen[i] = new Speler(SpelersNamen[i]);
+		}
 	}
 	
-	public Speler krijgSpelerNaam(Speler[] spelers,int persoon){
-		Speler huidigeSpeler = spelers[persoon];
-		if (huidigeSpeler == spelers[0])
-		{huidigeSpeler = spelers[1];}
-		else {huidigeSpeler = spelers[0];}
-		return huidigeSpeler;
+	public void veranderSpeler(){
+
+	
+		
+		if (huidigeSpeler == spelersNamen[1])
+		{huidigeSpeler = spelersNamen[0];}
+		
+		else {huidigeSpeler = spelersNamen[0];}
+		
+	
 	}
+	
+	public Speler geefHuidigeSpeler(){
+		
+		return this.huidigeSpeler;
+	}
+	
+	
+	
+	
+
+	
 
 	
 	
@@ -127,6 +144,7 @@ public class GameEngine {
 		
 		return true;
 	}
+
 
 
 
