@@ -62,7 +62,7 @@ public class Speler {
 	}
 
 
-	public String Naam() {
+	public String getNaam() {
 		return naam;
 	}
 	

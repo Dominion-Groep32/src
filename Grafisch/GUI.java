@@ -1,4 +1,4 @@
-/*package Grafisch;
+package Grafisch;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -200,7 +200,7 @@ public class GUI extends JFrame {
 		ButtonsActions[0].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			
+				AddDrawHandImages(deckActions.startKaarten());
 			}});
 		
 		
@@ -211,7 +211,17 @@ public class GUI extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					
 					
+					String selectedCardName = ButtonsBottomPannel[getal].getName().toLowerCase();					
+					String selectedCardType = gameActions.getCardType(selectedCardName).toLowerCase();
+										
 					
+					if (!selectedCardType.equals("victory")) {
+						
+						playableField.add(ButtonsBottomPannel[getal].getName());
+						ButtonsBottomPannel[getal].setVisible(false);
+						playableFieldButtons(playableField, selectedCardName, getal);
+						
+						//System.out.println("tester " + gameActions.getCardCoins(selectedCardName));
 
 					}}});}
 		
@@ -219,20 +229,34 @@ public class GUI extends JFrame {
 		ButtonsActions[1].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				}}); 
+				for (int i = 0; i < aantalKaartenHand; i++) {
+					
+					String selectedCardName = ButtonsBottomPannel[i].getName();
+					String selectedCardType = gameActions.getCardType(selectedCardName).toLowerCase();
+					
+					if (selectedCardType.equals("treasure")) {
+						playableField.add(selectedCardName);
+						ButtonsBottomPannel[i].setVisible(false);
+						playableFieldButtons(playableField,selectedCardName, i);
+						
+						}}}}); 
 		
 		for (int i = 0; i < ButtonsTopPannel.length; i++) {
 			int getal = i;
 			ButtonsTopPannel[i].addActionListener(new ActionListener() {
 				@Override
-				);}
+				public void actionPerformed(ActionEvent e) {
+					//gameActions.getCardType(ButtonsTopPannel[getal].getName());
+			
+				}});}
 		
 		for (int i = 0; i < ButtonsRightPannel.length; i++) {
 			int getal = i;
 			ButtonsRightPannel[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-				
+					System.out.println(ButtonsRightPannel[getal].getName());
+					System.out.println(gameActions.getCardCoins(ButtonsRightPannel[getal].getName()));
 				}});}
 			}
 	
@@ -299,4 +323,3 @@ public class GUI extends JFrame {
 	}
 
 }
-*/
