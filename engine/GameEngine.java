@@ -91,6 +91,8 @@ public class GameEngine {
 		}
 		return coins;
 	}
+	
+
 
 	public LinkedList<Kaart> kaartenDieJeKuntKopen(LinkedList<Kaart> lijst, int coins) {
 		LinkedList<Kaart> tmp = new LinkedList<Kaart>();

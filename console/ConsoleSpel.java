@@ -2,6 +2,8 @@ package console;
 
 import java.util.*;
 
+import com.sun.org.apache.xml.internal.dtm.ref.DTMDefaultBaseIterators.PrecedingIterator;
+
 import engine.ActieKaart;
 import engine.GameEngine;
 import engine.Kaart;
@@ -11,18 +13,17 @@ import engine.Speler;
 public class ConsoleSpel {
 	Scanner sc = new Scanner(System.in);
 	GameEngine engine = new GameEngine();
+	private LinkedList<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.actieKaartenGenereren(), engine.getAndereKaarten());
+	private int aankoop = 1;
+	private int actie = 1;
+	private int geld = 0;
 	
-	
-		
-		
-	
-	
-
 	public static void main(String[] args) {
 		
 		ConsoleSpel console = new ConsoleSpel();
 		console.run();
 	}
+	
 	public ConsoleSpel(){
 	}
 	
@@ -33,7 +34,7 @@ public class ConsoleSpel {
 		
 	public void spel(){
 		
-		LinkedList<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.actieKaartenGenereren(), engine.getAndereKaarten());
+		
 		
 		engine.maakSpelersAan(vraagSpelersNamen());
 		
@@ -44,22 +45,24 @@ public class ConsoleSpel {
 			{
 				engine.veranderSpeler();
 				Speler huidigeSpeler = engine.geefHuidigeSpeler();
-				
 				System.out.println("");
 				printFunctie("Nu aan de beurt: "+huidigeSpeler.getNaam());
 				printFunctie("Kaarten in uw hand");
 				toonLijst(engine.geefHuidigeSpeler().trekKaart(huidigeSpeler.trekStapel(), 5));
 				printFunctie("Geef uw keuze");
 				int keuze = geefKeuze(huidigeSpeler.kaartenInHand());
-				keuzeSpeler(keuze,huidigeSpeler.kaartenInHand(),tafelKaarten,huidigeSpeler.aflegStapel());
+				while(this.actie >0){
+					keuzeSpeler(keuze,huidigeSpeler.kaartenInHand(),tafelKaarten,huidigeSpeler.aflegStapel());
+				}
+				
+				
+				
+				//toonLijst(huidigeSpeler.kaartenInHand());
 				engine.maakKaartInHandLeeg(huidigeSpeler.kaartenInHand());
 				printFunctie("de beurt is beëindigd");
-				
 				System.out.println("");
-				
-			}
-					
-			
+				resetWaarden();
+			}		
 		}
 		
 		
@@ -75,6 +78,12 @@ public class ConsoleSpel {
 		return spelers;
 		
 	}
+	public void resetWaarden()
+	{
+		this.geld =0;
+		this.actie = 1;
+		this.aankoop = 1;
+	}
 		
 	public void printFunctie(String tekst){
 			System.out.println("--------"+tekst+"-----------");
@@ -88,13 +97,13 @@ public class ConsoleSpel {
 		int getal = 1;
 		boolean tmp = false;
 		
-		if(engine.controleerActieKaarten(kaartenInHand).size()>0)
-			{System.out.println("1: gebruik actie Kaarten");
+		if(engine.controleerActieKaarten(kaartenInHand).size()>0 & actie>0)
+			{System.out.println("1: gebruik actiekaarten");
 			getal++;
 			tmp = true;
 			}
 		
-		System.out.println(getal+": gebruik geld kaarten");
+		System.out.println(getal+": gebruik geldkaarten");
 		System.out.println((getal+1)+": beëindig je beurt");
 		System.out.print("geef een keuze in : ");
 		
@@ -113,28 +122,24 @@ public class ConsoleSpel {
 	
 	public void keuzeSpeler(int keuze, LinkedList<Kaart> kaartenInHand, LinkedList<Kaart> tafelKaarten,LinkedList<Kaart> aflegStapel) {
 		int geld = engine.geldInHand(kaartenInHand);
-		int aankoop = 1;
-		int actie = 1;
+		
 		
 		switch (keuze) {
 		case 1:
 			LinkedList<Kaart> actieKaartenUitDrawHand = engine.controleerActieKaarten(kaartenInHand);
 			printFunctie("Actiekaarten");
 			toonLijst(actieKaartenUitDrawHand);
-			Kaart gekozenKaart = voerActieKaartUit(actieKaartenUitDrawHand);
-			
-			ActieKaart actiekaart = (ActieKaart) gekozenKaart;
-			actiekaart.actieUitvoeren(gekozenKaart, engine.geefHuidigeSpeler());
-			
-			
-			
-			
+			Kaart gekozenKaart = kiesActiekaart(actieKaartenUitDrawHand);
+			actieUitvoeren(gekozenKaart, engine.geefHuidigeSpeler());
 			
 			break;
+			
+	
 		
 		case 2:
-		
+			
 			koopActie(tafelKaarten, geld, aankoop, actie, aflegStapel);
+			aankoop--;
 			break;
 			
 		case 3:
@@ -156,7 +161,7 @@ public class ConsoleSpel {
 		LinkedList<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(tafelKaarten, geld);
 		toonLijst(lijstWaarvanJeKanKopen);
 		printFunctie("");
-		while (geld >0){
+		while (geld >0 & actie > 0){
 			int kost = koopKaart(lijstWaarvanJeKanKopen,aflegStapel);
 			geld = geld - kost;
 		}
@@ -180,7 +185,7 @@ public int koopKaart(LinkedList<Kaart> lijstWaarvanJeKanKopen,LinkedList<Kaart> 
 
 	}
 
-public Kaart voerActieKaartUit(LinkedList<Kaart> lijstVanActieKaarten) {
+public Kaart kiesActiekaart(LinkedList<Kaart> lijstVanActieKaarten) {
 	
 	System.out.print("vul het nummer in van de kaart die je wilt uitvoeren : ");
 	int keuze = (sc.nextInt() - 1);
@@ -188,7 +193,6 @@ public Kaart voerActieKaartUit(LinkedList<Kaart> lijstVanActieKaarten) {
 		System.out.println("Sorry geef een geldig getal in ");
 		keuze = (sc.nextInt() - 1);
 	}
-	
 	return lijstVanActieKaarten.get(keuze);
 	
 
@@ -201,6 +205,24 @@ public void huidigeWaarden(int geld, int aankoop, int actie) {
 	System.out.println("Actie: " + actie);
 }
 
+public void actieUitvoeren(Kaart kaart , Speler speler) {
+	this.actie--;
+	switch (kaart.naam()) {
+	case "smidse":
+		speler.kaartenInHand().remove(kaart);
+		speler.trekKaart(speler.trekStapel(), 3);
+		printFunctie("Kaarten in uw hand");
+		toonLijst(speler.kaartenInHand());
+		printFunctie("");
+		int keuze = geefKeuze(speler.kaartenInHand());
+		keuzeSpeler(keuze, speler.kaartenInHand(),tafelKaarten,speler.aflegStapel());
+		break;
 
+	default:
+		break;
+		
+	}
+	
+}
 	
 }

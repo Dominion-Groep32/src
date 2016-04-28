@@ -3,7 +3,10 @@ package engine;
 import java.io.Console;
 import java.util.LinkedList;
 
+import org.eclipse.swt.widgets.Link;
+
 import com.mysql.fabric.xmlrpc.Client;
+import com.sun.xml.internal.ws.api.pipe.Engine;
 
 import console.ConsoleSpel;
 
@@ -12,7 +15,7 @@ public class ActieKaart implements Kaart {
 	private String kaartNaam;
 	private int cost;
 	private int waarde;
-	private int extraKaart;
+
 	
 	
 	
@@ -91,7 +94,7 @@ public class ActieKaart implements Kaart {
 		case "smidse":
 			this.cost = 4;
 			this.kaartNaam = naam;
-			this.extraKaart = 3;
+			
 		
 			break;
 		case "spion":
@@ -126,17 +129,7 @@ public class ActieKaart implements Kaart {
 		
 		
 	}
-	public void actieUitvoeren(Kaart kaart , Speler speler) {
-		
-		switch (kaart.naam()) {
-		case "smidse":
-			console.toonLijst(engine.lijstenSamenvoegenShuffle(speler.kaartenInHand(), speler.trekKaart(speler.kaartenInHand(), 3)));
-			break;
-
-		default:
-			break;
-		}
-	}
+	
 	
 
 	@Override
