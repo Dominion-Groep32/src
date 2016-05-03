@@ -108,7 +108,8 @@ public class GameEngine {
 	public LinkedList<Kaart> controleerActieKaarten(LinkedList<Kaart> kaartenInHand){
 		LinkedList<Kaart> tmp = new LinkedList<Kaart>();
 		for (int i = 0; i < kaartenInHand.size(); i++) {
-			if (kaartenInHand.get(i).kaartType().equals("ActieKaart")) {
+			//if (kaartenInHand.get(i).kaartType().equals("ActieKaart")) {
+			if (kaartenInHand.get(i) instanceof ActieKaart) {
 				tmp.add(kaartenInHand.get(i));
 			}
 		}

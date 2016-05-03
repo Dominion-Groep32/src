@@ -53,6 +53,7 @@ public class ConsoleSpel {
 				int keuze = geefKeuze(huidigeSpeler.kaartenInHand());
 				while(this.actie >0){
 					keuzeSpeler(keuze,huidigeSpeler.kaartenInHand(),tafelKaarten,huidigeSpeler.aflegStapel());
+					this.actie--;
 				}
 				
 				
@@ -72,6 +73,9 @@ public class ConsoleSpel {
 		String spelers[] = new String[2];
 		System.out.print("Eerste spelersnaam: ");
 		spelers[1] = sc.nextLine();
+		//
+		if (spelers[1] instanceof String)
+	
 		System.out.print("Tweede spelersnaam: ");
 		spelers[0] = sc.nextLine();
 		
@@ -88,6 +92,7 @@ public class ConsoleSpel {
 	public void printFunctie(String tekst){
 			System.out.println("--------"+tekst+"-----------");
 		}
+	
 	public void toonLijst(LinkedList<Kaart> lijst) {
 		for (int i = 0; i < lijst.size(); i++) {
 			System.out.println((i + 1) + ": " + lijst.get(i).naam());
@@ -138,8 +143,8 @@ public class ConsoleSpel {
 		
 		case 2:
 			
-			koopActie(tafelKaarten, geld, aankoop, actie, aflegStapel);
-			aankoop--;
+			koopActie(tafelKaarten, aflegStapel);
+			
 			break;
 			
 		case 3:
@@ -152,21 +157,24 @@ public class ConsoleSpel {
 		}
 	}
 	
-	private void koopActie(LinkedList<Kaart> tafelKaarten, int geld, int aankoop, int actie, LinkedList<Kaart> aflegStapel) {
+	private void koopActie(LinkedList<Kaart> tafelKaarten,LinkedList<Kaart> aflegStapel) {
 		printFunctie("");
-		huidigeWaarden(geld, aankoop, actie);
+		huidigeWaarden(engine.geldInHand(engine.geefHuidigeSpeler().kaartenInHand()), aankoop, actie);
 		printFunctie("");
 		System.out.println("je kunt de volgende kaarten kopen");
 		printFunctie("");
-		LinkedList<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(tafelKaarten, geld);
+		LinkedList<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(tafelKaarten, engine.geldInHand(engine.geefHuidigeSpeler().kaartenInHand()));
 		toonLijst(lijstWaarvanJeKanKopen);
 		printFunctie("");
-		while (geld >0 & actie > 0){
+		
+		while(this.aankoop>0)
+		{
 			int kost = koopKaart(lijstWaarvanJeKanKopen,aflegStapel);
-			geld = geld - kost;
+			this.geld = this.geld - kost;
+			this.aankoop--;
 		}
 		
-		
+
 		
 	}
 	
@@ -207,21 +215,48 @@ public void huidigeWaarden(int geld, int aankoop, int actie) {
 
 public void actieUitvoeren(Kaart kaart , Speler speler) {
 	this.actie--;
+	speler.kaartenInHand().remove(kaart);
 	switch (kaart.naam()) {
+	
 	case "smidse":
-		speler.kaartenInHand().remove(kaart);
+		
 		speler.trekKaart(speler.trekStapel(), 3);
-		printFunctie("Kaarten in uw hand");
-		toonLijst(speler.kaartenInHand());
-		printFunctie("");
-		int keuze = geefKeuze(speler.kaartenInHand());
-		keuzeSpeler(keuze, speler.kaartenInHand(),tafelKaarten,speler.aflegStapel());
+		break;
+		
+	case "troonzaal":
+		speler.trekKaart(speler.trekStapel(), 4);
+		aankoop++;
+		break;
+		
+	case "festival":
+		actie =+ 2;
+		aankoop++;
+		geld =+2;
+		break;
+	
+	case "laboratorium":
+		speler.trekKaart(speler.trekStapel(), 2);
+		actie++;
+		break;
+		
+	case "markt":
+		speler.trekKaart(speler.trekStapel(), 1);
+		actie++;
+		aankoop++;
+		geld++;
 		break;
 
 	default:
 		break;
 		
 	}
+	huidigeWaarden(geld, aankoop, actie);
+	printFunctie("");
+	printFunctie("Kaarten in uw hand");
+	toonLijst(speler.kaartenInHand());
+	printFunctie("");
+	int keuze = geefKeuze(speler.kaartenInHand());
+	keuzeSpeler(keuze, speler.kaartenInHand(),tafelKaarten,speler.aflegStapel());
 	
 }
 	
