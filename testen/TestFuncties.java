@@ -20,7 +20,7 @@ public class TestFuncties {
 	@Test
 	public void startKaartenTest()
 	{
-		if (eersteTestlijst.equals(0))
+		if (!eersteTestlijst.equals(0))
 		{System.err.println("aantal startkaarten kloppen niet");}
 	}
 	
