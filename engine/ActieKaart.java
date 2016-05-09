@@ -1,14 +1,6 @@
 package engine;
 
-import java.io.Console;
-import java.util.LinkedList;
 
-import org.eclipse.swt.widgets.Link;
-
-import com.mysql.fabric.xmlrpc.Client;
-import com.sun.xml.internal.ws.api.pipe.Engine;
-
-import console.ConsoleSpel;
 
 public class ActieKaart implements Kaart {
 	private String KaartType="ActieKaart";
