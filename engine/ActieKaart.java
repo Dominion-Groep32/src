@@ -86,8 +86,6 @@ public class ActieKaart implements Kaart {
 		case "smidse":
 			this.cost = 4;
 			this.kaartNaam = naam;
-			
-		
 			break;
 		case "spion":
 			this.cost = 4;

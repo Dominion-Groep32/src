@@ -56,11 +56,9 @@ public class ConsoleSpel {
 					this.actie--;
 				}
 				
-				
-				
 				//toonLijst(huidigeSpeler.kaartenInHand());
 				engine.maakKaartInHandLeeg(huidigeSpeler.kaartenInHand());
-				printFunctie("de beurt is beëindigd");
+				printFunctie("de beurt van "+huidigeSpeler+" is beëindigd");
 				System.out.println("");
 				resetWaarden();
 			}		
@@ -98,6 +96,7 @@ public class ConsoleSpel {
 			System.out.println((i + 1) + ": " + lijst.get(i).naam());
 		}
 	}
+	
 	public int geefKeuze(LinkedList<Kaart> kaartenInHand) {
 		int getal = 1;
 		boolean tmp = false;
@@ -128,7 +127,6 @@ public class ConsoleSpel {
 	public void keuzeSpeler(int keuze, LinkedList<Kaart> kaartenInHand, LinkedList<Kaart> tafelKaarten,LinkedList<Kaart> aflegStapel) {
 		int geld = engine.geldInHand(kaartenInHand);
 		
-		
 		switch (keuze) {
 		case 1:
 			LinkedList<Kaart> actieKaartenUitDrawHand = engine.controleerActieKaarten(kaartenInHand);
@@ -136,15 +134,11 @@ public class ConsoleSpel {
 			toonLijst(actieKaartenUitDrawHand);
 			Kaart gekozenKaart = kiesActiekaart(actieKaartenUitDrawHand);
 			actieUitvoeren(gekozenKaart, engine.geefHuidigeSpeler());
-			
 			break;
-			
-	
 		
 		case 2:
 			
 			koopActie(tafelKaarten, aflegStapel);
-			
 			break;
 			
 		case 3:
@@ -217,39 +211,74 @@ public void actieUitvoeren(Kaart kaart , Speler speler) {
 	this.actie--;
 	speler.kaartenInHand().remove(kaart);
 	switch (kaart.naam()) {
-	
-	case "smidse":
+	case "avonturier":
 		
-		speler.trekKaart(speler.trekStapel(), 3);
 		break;
-		
-	case "troonzaal":
-		speler.trekKaart(speler.trekStapel(), 4);
-		aankoop++;
+	case "bureaucraat":
 		break;
-		
+	case "kelder":
+		actie =+1;
+		break;
+	case "raadsheer":
+		break;
+	case "kapel":
+		break;
+	case "raadszaal":
+		break;
+	case "feest":
+		break;
 	case "festival":
 		actie =+ 2;
 		aankoop++;
 		geld =+2;
 		break;
-	
+	case "tuinen":
+		break;
 	case "laboratorium":
 		speler.trekKaart(speler.trekStapel(), 2);
 		actie++;
 		break;
-		
+	case "bibliotheek":
+		break;
 	case "markt":
 		speler.trekKaart(speler.trekStapel(), 1);
 		actie++;
 		aankoop++;
 		geld++;
 		break;
-
+	case "militie":
+		break;
+	case "mijn":
+		break;
+	case "slotgracht":
+		break;
+	case "geldschieter":
+		break;
+	case "verbouwing":
+		break;
+	case "smidse":
+		speler.trekKaart(speler.trekStapel(), 3);
+		break;
+	case "spion":
+		break;
+	case "dief":
+		break;
+	case "troonzaal":
+		speler.trekKaart(speler.trekStapel(), 4);
+		aankoop++;
+		break;
+	case "dorp":
+		break;
+	case "heks":
+		break;
+	case "houthakker":
+		break;
+	case "werkplaats":
+		break;
 	default:
 		break;
-		
 	}
+	
 	huidigeWaarden(geld, aankoop, actie);
 	printFunctie("");
 	printFunctie("Kaarten in uw hand");

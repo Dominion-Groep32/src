@@ -46,10 +46,8 @@ public class TestFuncties {
 	public void lijstenSamenvoegenShuffle()
 	{
 	
-		LinkedList<Kaart> tester = engine.lijstenSamenvoegenShuffle(eersteTestlijst, derdeTestLijst);
-		System.out.println(tester.size());
-		
-		if (tester.size() == 20){System.out.println("het werkt");}
+		LinkedList<Kaart> tester = engine.lijstenSamenvoegenShuffle(eersteTestlijst, derdeTestLijst);		
+		if (tester.size() != 20){System.out.println("Fout in lijsten samenvoegen shuffle");}
 		
 	}
 	
@@ -57,15 +55,13 @@ public class TestFuncties {
 	@Test
 	public void lijstenSamenvoegenZonderSuffle()
 	{
-		
-	
 	}
 	
 	@Test
 	public void ControleerActiekaarten()
 	{
 		
-		if (engine.controleerActieKaarten(derdeTestLijst).size() != 5){System.err.println("fail");}
+		if (engine.controleerActieKaarten(derdeTestLijst).size() != 5){System.err.println("Fout in controle actiekaarten");}
 		
 	}
 	
@@ -73,16 +69,13 @@ public class TestFuncties {
 	public void geldInHand()
 	{
 		int geld = engine.geldInHand(eersteTestlijst);
-		
 		if (geld != 7){System.err.println("fail");}
-		
 	}
 	
 	@Test
 	public void kaartenDieJeKuntKopen()
 	{
-		if (engine.kaartenDieJeKuntKopen(derdeTestLijst, 3).size() != 8){System.err.println("fail");}
-		
+		if (engine.kaartenDieJeKuntKopen(derdeTestLijst, 3).size() != 8){System.err.println("Fout aaantal kaarten die je kunt kopen");}
 	}
 	
 	@Test
@@ -90,9 +83,8 @@ public class TestFuncties {
 	{
 		eersteTestlijst.clear();
 		if (eersteTestlijst.size() != 0) {
-			System.err.println("fail");
-		}
-		
+			System.err.println("Lijst is niet leeggemaakt");
+		}	
 	}
 }	
 	
