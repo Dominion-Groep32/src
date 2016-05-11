@@ -109,6 +109,7 @@ public class ConsoleSpel {
 		
 		if(engine.controleerActieKaarten(kaartenInHand).size()>0 & engine.geefHuidigeSpeler().geefActie()>0)
 			{System.out.println("1: gebruik actiekaarten");
+			System.out.println("Let op: u kan optie 1 niet meer kiezen als u eerst optie 2 neemt !");
 			getal++;
 			tmp = true;
 			}

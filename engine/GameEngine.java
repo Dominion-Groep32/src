@@ -13,7 +13,7 @@ public class GameEngine {
 	private LinkedList<Kaart> andereKaarten = new LinkedList<Kaart>(
 			Arrays.asList(new GeldKaart("koper"), new GeldKaart("zilver"), new GeldKaart("goud"),
 					new OverwinningKaart("estate"), new OverwinningKaart("dutchy"), new OverwinningKaart("province")));
-	
+	//in lijst steken
 	private LinkedList<Kaart> actieKaarten = new LinkedList<Kaart>(Arrays.asList(new ActieKaart("avonturier"),
 			new ActieKaart("bureaucraat"), new ActieKaart("kelder"), new ActieKaart("raadsheer"),
 			new ActieKaart("kapel"), new ActieKaart("raadszaal"), new ActieKaart("feest"),
