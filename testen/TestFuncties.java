@@ -15,7 +15,6 @@ public class TestFuncties {
 	GameEngine engine = new GameEngine();
 	Speler speler = new Speler("testspeler");
 	private LinkedList<Kaart> eersteTestlijst = speler.trekStapel();
-	private LinkedList<Kaart> tweedeTestLijst = eersteTestlijst;
 	private LinkedList<Kaart> derdeTestLijst = new LinkedList<Kaart>(Arrays.asList(new ActieKaart("avonturier"),
 			new ActieKaart("bureaucraat"), new ActieKaart("kelder"), new ActieKaart("raadsheer"),new ActieKaart("heks"),new GeldKaart("koper"),new GeldKaart("koper"),
 			new GeldKaart("koper"),new OverwinningKaart("estate"),new OverwinningKaart("estate"),new OverwinningKaart("estate")));	

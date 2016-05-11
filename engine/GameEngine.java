@@ -2,7 +2,7 @@ package engine;
 
 import java.util.*;
 
-import console.ConsoleSpel;
+
 
 
 public class GameEngine {
@@ -61,7 +61,6 @@ public class GameEngine {
 		}
 		bijTeVoegenLijst.clear();
 		Collections.shuffle(primaireLijst);
-		System.out.println("lengte van de lijst"+primaireLijst.size());
 		return primaireLijst;
 
 	}
@@ -86,11 +85,11 @@ public class GameEngine {
 	}
 
 	public int geldInHand(LinkedList<Kaart> lijst) {
-		int coins = 0;
+		int geld = 0;
 		for (int i = 0; i < lijst.size(); i++) {
-			coins += lijst.get(i).waarde();
+			geld += lijst.get(i).waarde();
 		}
-		return coins;
+		return geld;
 	}
 	
 
@@ -141,7 +140,123 @@ public class GameEngine {
 		return true;
 	}
 	
+	public void actieUitvoeren(int actie, int aankoop, int geld ,Kaart kaart) {
+		actie--;
+		huidigeSpeler.kaartenInHand().remove(kaart);
+		switch (kaart.naam()) {
+		case "avonturier":
+			//lees kaart
+			break;
+		case "bureaucraat":
+			//zilver krijgen en op je top van je deck leggen
+			break;
+		case "kelder":
+			//leg een aantal kaarten weg, per elke weggelegde kaart krijg je een bij van je afneemstapel
+			actie ++;
+			break;
+		case "raadsheer":
+			geld =+2;
+			//trekstapel naar aflegstapel
+			huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 4);
+			break;
+		case "kapel":
+			//je kan max 4 kaarten van je hand naar de vuilbak brengen
+			break;
+		case "raadszaal":
+			huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 4);
+			aankoop ++;
+			//ander spelers krijgen elk een extra kaart in hun hand
+			break;
+		case "feest":
+			//actiekaart verdwijnt in vuilbak
+			geld =+ 5;
+			break;
+		case "festival":
+			actie =+ 2;
+			aankoop++;
+			geld =+2;
+			break;
+		case "tuinen":
+			// elke 10 kaarten op het einde van het spel zijn 1 overwinningspunt waard.
+			break;
+		case "laboratorium":
+			huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 2);
+			actie++;
+			break;
+		case "bibliotheek":
+			// Trek kaarten tot er 7 kaarten in hand zijn
+			
+			//Wanneer er actiekaarten getrokken worden, kan je kiezen of je deze wilt of niet
+			break;
+		case "markt":
+			huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 1);
+			actie++;
+			aankoop++;
+			geld++;
+			break;
+		case "militie":
+			geld =+2;
+			//elke ander speler moet hand verminderen tot 3 kaarten
+			break;
+		case "mijn":
+			// Geldkaart van je hand naar vuilbak brengen
+			// andere geldkaart kopen die met waarde +3 van weggebrachte kaart
+			break;
+		case "slotgracht":
+			huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 2);
+			// bij gebruik van een aanvalskaart kan deze kaart gebruikt worden om zich te verdedigen.
+			break;
+		case "geldschieter":
+			// Indien je een kooper van je hand naar de vuilbak brengt
+			geld=+3;
+			break;
+		case "verbouwing":
+			//breng een kaart van je hand naar de vuilbank
+			//kost van deze kaart +2 om andere kaart te kunnen kopen
+			break;
+		case "smidse":
+			huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 3);
+			break;
+		case "spion":
+			huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 1);
+			actie++;
+			//elke speler (ook huidigespeler) toont zijn bovenste kaart van zijn aftrekstapel
+			//speler kiest of hij deze teruglegt of naar zijn aflegstapel verplaatst
+			break;
+		case "dief":
+			//elke speler toont zijn twee bovenste kaarten van zijn aftrekstapel
+			// als het een geldkaart is, ... (bekijk dit verder)
+			break;
+		case "troonzaal":
+			// kies actiekaart uit hand
+			// speel twee x actiekaart
+			break;
+		case "dorp":
+			actie =+2;
+			huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 1);
+			break;
+		case "heks":
+			huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 2);
+			// andere spelers krijgen 1 vloekkaart
+			break;
+		case "houthakker":
+			aankoop++;
+			geld =+2;
+			break;
+		case "werkplaats":
+			//koop een kaart die max 4 kost
+			break;
+		default:
+			break;
+		}
+	actie--;
+		
+		
+		
+	}
 
+
+	
 
 
 
