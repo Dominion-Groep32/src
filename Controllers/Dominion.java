@@ -36,16 +36,17 @@ public class Dominion extends HttpServlet {
 
     private void initEngine(HttpServletRequest request, HttpServletResponse response)
     {
-    	gameEngine = getServletContext().getAttribute("gameEngine");
+    	//gameEngine = getServletContext().getAttribute(gameEngine);
     	
     	if(gameEngine == null)
     	{
     		gameEngine = new GameEngine();
     		//  dit moet gebeuren bij addplayer call      gameEngine.maakSpelersAan("test", "test");	
+    		//gameEngine.maakSpelersAan("test", "test");
     	}
     }
     
-    private void addPlayer(HttpServletRequest request, HttpServletResponse response)
+    private void addPlayer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
 		/*JSONObject jsonke = new JSONObject();
 		jsonke.put("Naam", "koentje");*/
@@ -57,9 +58,9 @@ public class Dominion extends HttpServlet {
 		// dus player opgeslagen IN de engine ipv erbuiten
 		// zoals je hier deed en nu ook nog in consoleversie gebeurt (daar was het een array)
 		
-		JSONObject jsonke = new JSONObject();
-		jsonke.put("speler", gebruiker.getNaam());
-		response.getWriter().write(jsonke.toString());
+		JSONObject jsonObj = new JSONObject();
+		jsonObj.put("speler", gebruiker.getNaam());
+		response.getWriter().write(jsonObj.toString());
 
 		//JSONObject jsonke2 = new JSONObject();
 		//jsonke.put("trekStapel", gebruiker.kaartenInHand()); //linkedlist van kaarten
@@ -71,10 +72,10 @@ public class Dominion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	initEngine(request, response);
-    	
 		// TODO Auto-generated method stub
-		response.setHeader("Access-Control-Allow-Origin", "*");
+		//response.setHeader("Access-Control-Allow-Origin", "*");
+		
+    	initEngine(request, response);
 		
 		switch(request.getParameter("operation"))
 		{
@@ -86,7 +87,7 @@ public class Dominion extends HttpServlet {
 			break;
 					
 		default:
-			// ErrorMsg(request, response;
+			// ErrorMsg(request, response);
 			break;
 		}
 	}
