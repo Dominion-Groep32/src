@@ -9,6 +9,7 @@ public class GameEngine {
 	private LinkedList<Kaart> kaartenInHand = new LinkedList<Kaart>();
 	private LinkedList<Kaart> aflegStapel = new LinkedList<Kaart>();
 	private LinkedList<Kaart> trekStapel = new LinkedList<Kaart>();
+	private LinkedList<Kaart> vuilbakStapel = new LinkedList<Kaart>();
 	private LinkedList<Kaart> andereKaarten = new LinkedList<Kaart>(
 			Arrays.asList(new GeldKaart("koper"), new GeldKaart("zilver"), new GeldKaart("goud"),
 					new OverwinningKaart("estate"), new OverwinningKaart("dutchy"), new OverwinningKaart("province")));
@@ -131,6 +132,10 @@ public class GameEngine {
 	public LinkedList<Kaart> kaartInHand() {
 		return this.kaartenInHand;
 	}
+	
+	public LinkedList<Kaart> vuilbakStapel(){
+		return this.vuilbakStapel;
+	}
 
 	public void maakKaartInHandLeeg(LinkedList<Kaart> lijst) {
 		lijst.clear();
@@ -193,7 +198,7 @@ public class GameEngine {
 			break;
 		case "markt":
 			huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 1);
-			//actie++;
+			geefHuidigeSpeler().vermeerderActie(1);
 			geefHuidigeSpeler().vermeerderAankoop(1);
 			geefHuidigeSpeler().vermeerderGeld(1);
 			break;
