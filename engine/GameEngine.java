@@ -54,6 +54,7 @@ public class GameEngine {
 	}
 	
 	
+	
 	public LinkedList<Kaart> lijstenSamenvoegenShuffle(LinkedList<Kaart> primaireLijst, LinkedList<Kaart> bijTeVoegenLijst) {
 
 		for (int i = 0; i < bijTeVoegenLijst.size(); i++) {
@@ -140,8 +141,8 @@ public class GameEngine {
 		return true;
 	}
 	
-	public void actieUitvoeren(int actie, int aankoop, int geld ,Kaart kaart) {
-		actie--;
+	public void actieUitvoeren(Kaart kaart) {
+		huidigeSpeler.zetActie(huidigeSpeler.geefActie());
 		huidigeSpeler.kaartenInHand().remove(kaart);
 		switch (kaart.naam()) {
 		case "avonturier":
@@ -249,7 +250,7 @@ public class GameEngine {
 		default:
 			break;
 		}
-	actie--;
+
 		
 		
 		

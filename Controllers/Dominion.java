@@ -58,7 +58,7 @@ public class Dominion extends HttpServlet {
 		// zoals je hier deed en nu ook nog in consoleversie gebeurt (daar was het een array)
 		
 		JSONObject jsonke = new JSONObject();
-		jsonke.put("speler", gebruiker.getNaam());
+		jsonke.put("speler", gebruiker.krijgNaam());
 		response.getWriter().write(jsonke.toString());
 
 		//JSONObject jsonke2 = new JSONObject();

@@ -9,6 +9,9 @@ public class Speler {
 	private LinkedList<Kaart> aflegStapel = new LinkedList<Kaart>();
 	private LinkedList<Kaart> trekStapel = new LinkedList<Kaart>();
 	private String naam;
+	private int aankoop ;
+	private int actie;
+	private int geld;
 
 	
 	public Speler(String naam){
@@ -21,8 +24,8 @@ public class Speler {
 	
 	public LinkedList<Kaart> startKaarten() {
 		for (int i = 0; i < 7; i++) {
-			trekStapel.add(new GeldKaart("koper"));
-			//trekStapel.add(new ActieKaart("smidse"));
+			//trekStapel.add(new GeldKaart("koper"));
+			trekStapel.add(new ActieKaart("dorp"));
 		}
 		for (int j = 0; j < 3; j++) {
 			trekStapel.add(new OverwinningKaart("estate"));
@@ -62,15 +65,40 @@ public class Speler {
 	}
 
 
-	public String getNaam() {
+	public String geefNaam() {
 		return naam;
 	}
+	public int geefActie() {
+		return actie;
+	}
 	
+	public int geefGeld() {
+		return geld;
+	}
+	
+	public int geefAankoop() {
+		return aankoop;
+	}
+	
+	public void vermeerderActie(int actie) {
+		this.actie = this.actie+actie;
+	}
+	public void verminderActie(int actie) {
+		this.actie = this.actie - actie;
+	}
 
-	
-
-	
-	
+	public void vermeerderGeld(int geld) {
+		this.geld = this.geld + geld;
+	}
+	public void verminderGeld(int geld) {
+		this.geld = this.geld - geld;
+	}
+	public void vermeerderAankoop(int aankoop) {
+		this.aankoop = this.aankoop +aankoop;
+	}
+	public void verminderAankoop(int aankoop) {
+		this.aankoop = this.aankoop - aankoop;
+	}
 
 	
 	
