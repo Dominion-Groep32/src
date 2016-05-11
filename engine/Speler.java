@@ -19,13 +19,16 @@ public class Speler {
 		kaartenInHand = new LinkedList<Kaart>();
 		trekStapel = startKaarten();
 		aflegStapel = new LinkedList<Kaart>();
+		aankoop = 1;
+		actie = 1;
+		geld = 0;
 		
 	}
 	
 	public LinkedList<Kaart> startKaarten() {
 		for (int i = 0; i < 7; i++) {
-			//trekStapel.add(new GeldKaart("koper"));
-			trekStapel.add(new ActieKaart("dorp"));
+			trekStapel.add(new GeldKaart("koper"));
+			//trekStapel.add(new ActieKaart("dorp"));
 		}
 		for (int j = 0; j < 3; j++) {
 			trekStapel.add(new OverwinningKaart("estate"));
@@ -81,25 +84,30 @@ public class Speler {
 	}
 	
 	public void vermeerderActie(int actie) {
-		this.actie = this.actie+actie;
+		this.actie = this.actie +actie;
 	}
 	public void verminderActie(int actie) {
 		this.actie = this.actie - actie;
 	}
 
 	public void vermeerderGeld(int geld) {
-		this.geld = this.geld + geld;
+		this.geld =this.geld+ geld;
 	}
 	public void verminderGeld(int geld) {
-		this.geld = this.geld - geld;
+		this.geld =this.geld- geld;
 	}
 	public void vermeerderAankoop(int aankoop) {
-		this.aankoop = this.aankoop +aankoop;
+		this.aankoop =this.aankoop+aankoop;
 	}
 	public void verminderAankoop(int aankoop) {
-		this.aankoop = this.aankoop - aankoop;
+		this.aankoop =this.aankoop- aankoop;
 	}
 
+	public void herstelWaarden(){
+		this.geld = 0;
+		this.aankoop = 1;
+		this.actie = 1;
+	}
 	
 	
 	

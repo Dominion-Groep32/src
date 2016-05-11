@@ -142,7 +142,8 @@ public class GameEngine {
 	}
 	
 	public void actieUitvoeren(Kaart kaart) {
-		huidigeSpeler.zetActie(huidigeSpeler.geefActie());
+		//huidigeSpeler.zetActie(huidigeSpeler.geefActie());
+		
 		huidigeSpeler.kaartenInHand().remove(kaart);
 		switch (kaart.naam()) {
 		case "avonturier":
@@ -153,10 +154,11 @@ public class GameEngine {
 			break;
 		case "kelder":
 			//leg een aantal kaarten weg, per elke weggelegde kaart krijg je een bij van je afneemstapel
-			actie ++;
+			
+			geefHuidigeSpeler().vermeerderActie(1);
 			break;
 		case "raadsheer":
-			geld =+2;
+			geefHuidigeSpeler().vermeerderGeld(2);
 			//trekstapel naar aflegstapel
 			huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 4);
 			break;
@@ -165,24 +167,24 @@ public class GameEngine {
 			break;
 		case "raadszaal":
 			huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 4);
-			aankoop ++;
+			geefHuidigeSpeler().vermeerderAankoop(1);
 			//ander spelers krijgen elk een extra kaart in hun hand
 			break;
 		case "feest":
 			//actiekaart verdwijnt in vuilbak
-			geld =+ 5;
+			geefHuidigeSpeler().vermeerderGeld(5);
 			break;
 		case "festival":
-			actie =+ 2;
-			aankoop++;
-			geld =+2;
+			geefHuidigeSpeler().vermeerderActie(2);
+			geefHuidigeSpeler().vermeerderAankoop(1);
+			geefHuidigeSpeler().vermeerderGeld(2);
 			break;
 		case "tuinen":
 			// elke 10 kaarten op het einde van het spel zijn 1 overwinningspunt waard.
 			break;
 		case "laboratorium":
 			huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 2);
-			actie++;
+			geefHuidigeSpeler().vermeerderActie(1);
 			break;
 		case "bibliotheek":
 			// Trek kaarten tot er 7 kaarten in hand zijn
@@ -191,12 +193,12 @@ public class GameEngine {
 			break;
 		case "markt":
 			huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 1);
-			actie++;
-			aankoop++;
-			geld++;
+			//actie++;
+			geefHuidigeSpeler().vermeerderAankoop(1);
+			geefHuidigeSpeler().vermeerderGeld(1);
 			break;
 		case "militie":
-			geld =+2;
+			geefHuidigeSpeler().vermeerderGeld(2);
 			//elke ander speler moet hand verminderen tot 3 kaarten
 			break;
 		case "mijn":
@@ -209,7 +211,7 @@ public class GameEngine {
 			break;
 		case "geldschieter":
 			// Indien je een kooper van je hand naar de vuilbak brengt
-			geld=+3;
+			geefHuidigeSpeler().vermeerderGeld(3);
 			break;
 		case "verbouwing":
 			//breng een kaart van je hand naar de vuilbank
@@ -220,7 +222,7 @@ public class GameEngine {
 			break;
 		case "spion":
 			huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 1);
-			actie++;
+			geefHuidigeSpeler().vermeerderActie(1);
 			//elke speler (ook huidigespeler) toont zijn bovenste kaart van zijn aftrekstapel
 			//speler kiest of hij deze teruglegt of naar zijn aflegstapel verplaatst
 			break;
@@ -233,7 +235,8 @@ public class GameEngine {
 			// speel twee x actiekaart
 			break;
 		case "dorp":
-			actie =+2;
+			
+			geefHuidigeSpeler().vermeerderActie(2);
 			huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 1);
 			break;
 		case "heks":
@@ -241,8 +244,8 @@ public class GameEngine {
 			// andere spelers krijgen 1 vloekkaart
 			break;
 		case "houthakker":
-			aankoop++;
-			geld =+2;
+			geefHuidigeSpeler().vermeerderAankoop(1);
+			geefHuidigeSpeler().vermeerderGeld(2);
 			break;
 		case "werkplaats":
 			//koop een kaart die max 4 kost
@@ -251,7 +254,7 @@ public class GameEngine {
 			break;
 		}
 
-		
+		geefHuidigeSpeler().verminderActie(1);
 		
 		
 	}
