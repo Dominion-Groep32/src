@@ -2,9 +2,9 @@ package console;
 
 import java.util.*;
 
-import engine.ActieKaart;
+
 import engine.GameEngine;
-import engine.GeldKaart;
+
 import engine.Kaart;
 import engine.Speler;
 
@@ -31,8 +31,6 @@ public class ConsoleSpel {
 		}
 		
 	public void spel(){
-		
-		
 		
 		engine.maakSpelersAan(vraagSpelersNamen());
 		
@@ -119,6 +117,7 @@ public class ConsoleSpel {
 			getal++;
 			tmp = true;
 			}
+		
 		/*
 		if (engine.geefHuidigeSpeler().geefGeld() > 0)
 		{	
@@ -126,6 +125,7 @@ public class ConsoleSpel {
 			tmp2 = true;
 		}
 		*/
+		
 		System.out.println(getal+": gebruik geldkaarten");
 		System.out.println((getal+1)+": beëindig je beurt");
 		int keuze = printGeefKeuze();

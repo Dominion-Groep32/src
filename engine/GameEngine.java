@@ -32,7 +32,6 @@ public class GameEngine {
 		}
 	
 	
-	
 	public  void maakSpelersAan(String SpelersNamen[]){
 
 		for (int i = 0; i < SpelersNamen.length; i++) {
@@ -43,9 +42,7 @@ public class GameEngine {
 	public void veranderSpeler(){
 		if (huidigeSpeler == spelersNamen[1])
 		{huidigeSpeler = spelersNamen[0];}
-		
 		else {huidigeSpeler = spelersNamen[1];}
-		
 	
 	}
 	
@@ -53,14 +50,11 @@ public class GameEngine {
 		Speler tmp;
 		if (huidigeSpeler == spelersNamen[1])
 		{tmp = spelersNamen[0];}
-		
 		else {tmp = spelersNamen[1];}
-		
 		return tmp;
 	}
 	
 	public Speler geefHuidigeSpeler(){
-		
 		return this.huidigeSpeler;
 	}
 	
@@ -260,12 +254,10 @@ public class GameEngine {
 		int getal = 0 ;
 		int i = 0;
 		while (getal <=2 ) {
-			
 			Kaart huidigeKaart = geefHuidigeSpeler().trekStapel().get(i);
 			if(huidigeKaart instanceof GeldKaart){
 				geefHuidigeSpeler().kaartenInHand().add(huidigeKaart);
-				geefHuidigeSpeler().trekStapel().remove(huidigeKaart);
-				
+				geefHuidigeSpeler().trekStapel().remove(huidigeKaart);	
 				}
 			getal ++;
 			i++;
@@ -307,8 +299,6 @@ public class GameEngine {
 	
 	public void militie() {
 		geefHuidigeSpeler().vermeerderGeld(2);
-		
-		
 		//elke ander speler moet hand verminderen tot 3 kaarten
 		
 	}

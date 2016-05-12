@@ -11,7 +11,7 @@ import engine.Kaart;
 import engine.OverwinningKaart;
 import engine.Speler;
 
-public class TestFuncties {
+public class EngineTesten {
 	GameEngine engine = new GameEngine();
 	Speler speler = new Speler("testspeler");
 	private LinkedList<Kaart> eersteTestlijst = speler.trekStapel();
@@ -59,7 +59,6 @@ public class TestFuncties {
 	@Test
 	public void ControleerActiekaarten()
 	{
-		
 		if (engine.controleerActieKaarten(derdeTestLijst).size() != 5){System.err.println("Fout in controle actiekaarten");}
 		
 	}
@@ -68,7 +67,7 @@ public class TestFuncties {
 	public void geldInHand()
 	{
 		int geld = engine.geldInHand(eersteTestlijst);
-		if (geld != 7){System.err.println("fail");}
+		if (geld != 7){System.err.println("Fout aantal geld in hand");}
 	}
 	
 	@Test

@@ -8,7 +8,7 @@ public class Speler {
 	private LinkedList<Kaart> kaartenInHand = new LinkedList<Kaart>();
 	private LinkedList<Kaart> aflegStapel = new LinkedList<Kaart>();
 	private LinkedList<Kaart> trekStapel = new LinkedList<Kaart>();
-	private LinkedList<Kaart> trashStapel = new LinkedList<Kaart>();
+	private LinkedList<Kaart> vuilbakStapel = new LinkedList<Kaart>();
 	private String naam;
 	private int aankoop ;
 	private int actie;
@@ -20,6 +20,7 @@ public class Speler {
 		kaartenInHand = new LinkedList<Kaart>();
 		trekStapel = startKaarten();
 		aflegStapel = new LinkedList<Kaart>();
+		vuilbakStapel = new LinkedList<Kaart>();
 		aankoop = 1;
 		actie = 1;
 		geld = 0;
@@ -55,7 +56,7 @@ public class Speler {
 	public void verwijderKaart(Kaart kaart){
 		//nog bekijken
 		kaartenInHand.remove(kaart);
-		trashStapel.add(kaart);
+		vuilbakStapel.add(kaart);
 	}
 	
 	
