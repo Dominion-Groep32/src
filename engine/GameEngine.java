@@ -219,6 +219,7 @@ public class GameEngine {
 			geefHuidigeSpeler().vermeerderGeld(3);
 			break;
 		case "verbouwing":
+			//test
 			//breng een kaart van je hand naar de vuilbank
 			//kost van deze kaart +2 om andere kaart te kunnen kopen
 			break;
