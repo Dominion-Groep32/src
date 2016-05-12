@@ -253,7 +253,7 @@ public class GameEngine {
 		default:
 			break;
 		}
-
+		//Test
 		geefHuidigeSpeler().verminderActie(1);
 		
 		
