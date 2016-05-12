@@ -3,6 +3,7 @@ package engine;
 public class GeldKaart implements Kaart {
 	private String KaartType="Geldkaart";
 	private String kaartNaam;
+	private String info;
 	private int cost;
 	private int waarde;
 
@@ -61,5 +62,9 @@ public class GeldKaart implements Kaart {
 		return this.waarde;
 	}
 	
+	@Override
+	public String info(){
+		return this.info;
+	}
 
 }

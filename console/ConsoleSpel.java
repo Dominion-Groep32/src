@@ -110,10 +110,10 @@ public class ConsoleSpel {
 	public int geefKeuze(LinkedList<Kaart> kaartenInHand) {
 		int getal = 1;
 		boolean tmp = false;
-		boolean tmp2 = false;
+		//boolean tmp2 = false;
 		
 		if(engine.controleerActieKaarten(kaartenInHand).size()>0 & engine.geefHuidigeSpeler().geefActie()>0)
-			{System.out.println("Let op: u kan optie 1 niet meer kiezen als u eerst optie 2 neemt !");
+			{System.err.println("Let op: u kan optie 1 niet meer kiezen als u eerst optie 2 neemt !");
 			System.out.println("1: gebruik actiekaarten");
 			
 			getal++;
@@ -127,24 +127,14 @@ public class ConsoleSpel {
 		}
 		*/
 		System.out.println(getal+": gebruik geldkaarten");
-		
 		System.out.println((getal+1)+": beëindig je beurt");
-	
+		int keuze = printGeefKeuze();
 		
-		System.out.print("geef een keuze in : ");
-		
-		
-		int keuze = sc.nextInt();
-		
-		//oplossing zoeken
-		
-		while (keuze < 0 || keuze > 3) {
-			System.out.println("geef een correcte waarde in ");
-			System.out.print("geef een keuze in : ");
-			keuze = sc.nextInt();
+		if (tmp){int gecontroleerdeKeuze = controleKeuze(keuze,3);
+		return gecontroleerdeKeuze;
 		}
-		if (tmp){return keuze;}
-		else return keuze+1;
+		else {int gecontroleerdeKeuze = controleKeuze(keuze,2);
+			return gecontroleerdeKeuze+1;}
 	}
 	
 	
@@ -158,7 +148,6 @@ public class ConsoleSpel {
 			printFunctie("Actiekaarten");
 			toonLijst(actieKaartenUitDrawHand);
 			Kaart gekozenKaart = kiesActiekaart(actieKaartenUitDrawHand);
-			
 			engine.actieUitvoeren(gekozenKaart);
 			tmpFunctie();
 			break;
@@ -182,45 +171,35 @@ public class ConsoleSpel {
 		printFunctie("");
 		LinkedList<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(tafelKaarten, engine.geldInHand(speler.kaartenInHand()));
 		toonLijst(lijstWaarvanJeKanKopen);
-		printFunctie("");
-		
-		while(engine.geefHuidigeSpeler().geefAankoop()>0)
+		vragenNaarInfoOverKaarten();
+		while(speler.geefAankoop()>0)
 		{
 			int kost = koopKaart(lijstWaarvanJeKanKopen,aflegStapel);
 			speler.verminderGeld(kost);
 			speler.verminderAankoop(1);
 		}
-		
-
-		
 	}
 	
+private int kaartnummerInvullen(String kopenOfWeten) {
+	printFunctie("");
+	System.out.print("vul het nummer in van de kaart die je wilt "+kopenOfWeten+" : "); 
+	return sc.nextInt();
+}
+
 public int koopKaart(LinkedList<Kaart> lijstWaarvanJeKanKopen,LinkedList<Kaart> aflegStapel) {
 	
-		System.out.print("vul het nummer in van de kaart die je wilt kopen : ");
-		int keuze = (sc.nextInt() - 1);
-		
-		while (keuze < 0 || keuze > lijstWaarvanJeKanKopen.size()) {
-			System.out.println("Sorry geef een geldig getal in ");
-			keuze = (sc.nextInt() - 1);
-		}
-		
-		aflegStapel.add(lijstWaarvanJeKanKopen.get(keuze));	
-		return lijstWaarvanJeKanKopen.get(keuze).kost();
+		int keuze = kaartnummerInvullen("kopen")-1;
+		int gecontroleerdekeuze = controleKeuze(keuze, lijstWaarvanJeKanKopen.size());
+		aflegStapel.add(lijstWaarvanJeKanKopen.get(gecontroleerdekeuze));	
+		return lijstWaarvanJeKanKopen.get(gecontroleerdekeuze).kost();
 
 	}
 
 public Kaart kiesActiekaart(LinkedList<Kaart> lijstVanActieKaarten) {
 	
-	System.out.print("vul het nummer in van de kaart die je wilt uitvoeren : ");
-	int keuze = (sc.nextInt() - 1);
-	while (keuze < 0 || keuze > lijstVanActieKaarten.size()) {
-		System.out.println("Sorry geef een geldig getal in ");
-		keuze = (sc.nextInt() - 1);
-	}
-	return lijstVanActieKaarten.get(keuze);
-	
-
+	int keuze = kaartnummerInvullen("kopen")-1;
+	int gecontroleerdekeuze = controleKeuze(keuze, lijstVanActieKaarten.size());
+	return lijstVanActieKaarten.get(gecontroleerdekeuze);
 }
 
 
@@ -228,13 +207,10 @@ public void huidigeWaarden() {
 	System.out.println("Geld:  " + engine.geefHuidigeSpeler().geefGeld());
 	System.out.println("Aankoop: "+ engine.geefHuidigeSpeler().geefAankoop());
 	System.out.println("Actie: " + engine.geefHuidigeSpeler().geefActie());
-	
-	
 }
 
 public void tmpFunctie(){
 	Speler speler = engine.geefHuidigeSpeler();
-	
 	printFunctie("");
 	huidigeWaarden();
 	printFunctie("Kaarten in uw hand");
@@ -244,9 +220,41 @@ public void tmpFunctie(){
 	keuzeSpeler(keuze, speler.kaartenInHand(),tafelKaarten,speler.aflegStapel());
 }
 
+private void vragenNaarInfoOverKaarten() {
+	printFunctie("");
+	System.out.println("Wenst u informatie over bepaalde actiekaarten?");
+	System.out.println("1: Ja");
+	System.out.println("2: Nee");
+	int keuze = printGeefKeuze();
+	int gecontroleerdeKeuze = controleKeuze(keuze, 2);
+	if (gecontroleerdeKeuze==1){
+		int kaartKeuze = kaartnummerInvullen("weten");
+		LinkedList<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(tafelKaarten, engine.geldInHand(engine.geefHuidigeSpeler().kaartenInHand()));
+		int gecontroleerdeKaartKeuze = controleKeuze(kaartKeuze, lijstWaarvanJeKanKopen.size());
+		geefInfoOverKaarten(gecontroleerdeKaartKeuze,lijstWaarvanJeKanKopen);
+	}
+}
 
 
+private int controleKeuze(int keuze, int max) {
+	while (keuze < 0 || keuze > max) {
+		System.out.println("geef een waarde in tussen 1 en " + max +" :");
+		keuze = sc.nextInt();
+	}
+	return keuze;
+}
+
+private int printGeefKeuze() {
+	System.out.print("geef een keuze in : ");
+	 return sc.nextInt();
+}
+private void geefInfoOverKaarten(int kaartKeuze, LinkedList<Kaart> lijstWaarvanJeKanKopen) {
+	Kaart gekozenKaart = lijstWaarvanJeKanKopen.get(kaartKeuze);
+	System.out.println(gekozenKaart.info());
 	
+	
+	vragenNaarInfoOverKaarten();
+}
 }
 
 
