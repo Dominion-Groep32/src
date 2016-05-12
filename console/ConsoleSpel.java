@@ -2,7 +2,7 @@ package console;
 
 import java.util.*;
 
-
+import engine.ActieKaart;
 import engine.GameEngine;
 import engine.GeldKaart;
 import engine.Kaart;
@@ -13,6 +13,7 @@ public class ConsoleSpel {
 	Scanner sc = new Scanner(System.in);
 	GameEngine engine = new GameEngine();
 	private LinkedList<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.actieKaartenGenereren(), engine.getAndereKaarten());
+	
 
 	
 	public static void main(String[] args) {
@@ -37,7 +38,6 @@ public class ConsoleSpel {
 		
 		while(engine.spelNogNietBeëindigd()){
 			
-			//deze for zorgt ervoor dat met 2 kan spelen
 			for (int i = 0; i < 2; i++)
 			{
 				engine.veranderSpeler();
@@ -53,8 +53,6 @@ public class ConsoleSpel {
 					engine.geefHuidigeSpeler().verminderActie(1);
 					
 				}
-				
-				//toonLijst(huidigeSpeler.kaartenInHand());
 				engine.maakKaartInHandLeeg(huidigeSpeler.kaartenInHand());
 				printFunctie("de beurt van "+engine.geefHuidigeSpeler().geefNaam()+" is beëindigd");
 				System.out.println("");
@@ -65,15 +63,21 @@ public class ConsoleSpel {
 		
 	}
 	public String[] vraagSpelersNamen(){
-		System.out.println("Geef de spelersnamen in : ");
+		System.out.println("Geef de spelersnamen in  ");
 		String spelers[] = new String[2];
 		System.out.print("Eerste spelersnaam: ");
 		spelers[1] = sc.nextLine();
-		//
-		if (spelers[1] instanceof String)
+		
+		while (!(spelers[1] instanceof String))
+		{System.out.print("geef een geldige naam in :");
+		spelers[1] = sc.nextLine();}
+		
 	
 		System.out.print("Tweede spelersnaam: ");
 		spelers[0] = sc.nextLine();
+		while (!(spelers[0] instanceof String))
+		{System.out.print("geef een geldige naam in :");
+		spelers[0] = sc.nextLine();}
 		
 		return spelers;
 		
@@ -106,19 +110,33 @@ public class ConsoleSpel {
 	public int geefKeuze(LinkedList<Kaart> kaartenInHand) {
 		int getal = 1;
 		boolean tmp = false;
+		boolean tmp2 = false;
 		
 		if(engine.controleerActieKaarten(kaartenInHand).size()>0 & engine.geefHuidigeSpeler().geefActie()>0)
-			{System.out.println("1: gebruik actiekaarten");
-			System.out.println("Let op: u kan optie 1 niet meer kiezen als u eerst optie 2 neemt !");
+			{System.out.println("Let op: u kan optie 1 niet meer kiezen als u eerst optie 2 neemt !");
+			System.out.println("1: gebruik actiekaarten");
+			
 			getal++;
 			tmp = true;
 			}
-		
+		/*
+		if (engine.geefHuidigeSpeler().geefGeld() > 0)
+		{	
+			System.out.println(getal+": gebruik geldkaarten");
+			tmp2 = true;
+		}
+		*/
 		System.out.println(getal+": gebruik geldkaarten");
+		
 		System.out.println((getal+1)+": beëindig je beurt");
+	
+		
 		System.out.print("geef een keuze in : ");
 		
+		
 		int keuze = sc.nextInt();
+		
+		//oplossing zoeken
 		
 		while (keuze < 0 || keuze > 3) {
 			System.out.println("geef een correcte waarde in ");
@@ -133,7 +151,6 @@ public class ConsoleSpel {
 	
 	public void keuzeSpeler(int keuze, LinkedList<Kaart> kaartenInHand, LinkedList<Kaart> tafelKaarten,LinkedList<Kaart> aflegStapel) {
 		engine.geefHuidigeSpeler().vermeerderGeld(engine.geldInHand(kaartenInHand));
-		int geld = engine.geefHuidigeSpeler().geefGeld();
 		
 		switch (keuze) {
 		case 1:
@@ -147,35 +164,31 @@ public class ConsoleSpel {
 			break;
 		
 		case 2:
-			
 			koopActie(tafelKaarten, aflegStapel);
 			break;
 			
-		case 3:
-			System.out.println("De beurt is beëindigd");
-			System.out.println("");
-			break;
-
 		default:
 			break;
 		}
 	}
 	
 	private void koopActie(LinkedList<Kaart> tafelKaarten,LinkedList<Kaart> aflegStapel) {
+		Speler speler = engine.geefHuidigeSpeler();
+	
 		printFunctie("");
-		huidigeWaarden(engine.geldInHand(engine.geefHuidigeSpeler().kaartenInHand()), engine.geefHuidigeSpeler().geefAankoop(), engine.geefHuidigeSpeler().geefActie());
+		huidigeWaarden();
 		printFunctie("");
 		System.out.println("je kunt de volgende kaarten kopen");
 		printFunctie("");
-		LinkedList<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(tafelKaarten, engine.geldInHand(engine.geefHuidigeSpeler().kaartenInHand()));
+		LinkedList<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(tafelKaarten, engine.geldInHand(speler.kaartenInHand()));
 		toonLijst(lijstWaarvanJeKanKopen);
 		printFunctie("");
 		
 		while(engine.geefHuidigeSpeler().geefAankoop()>0)
 		{
 			int kost = koopKaart(lijstWaarvanJeKanKopen,aflegStapel);
-			engine.geefHuidigeSpeler().verminderGeld(kost);
-			engine.geefHuidigeSpeler().verminderAankoop(1);
+			speler.verminderGeld(kost);
+			speler.verminderAankoop(1);
 		}
 		
 
@@ -211,23 +224,24 @@ public Kaart kiesActiekaart(LinkedList<Kaart> lijstVanActieKaarten) {
 }
 
 
-public void huidigeWaarden(int geld, int aankoop, int actie) {
-	System.out.println("Geld:  " + geld);
-	System.out.println("Aankoop: "+ aankoop);
-	System.out.println("Actie: " + actie);
+public void huidigeWaarden() {
+	System.out.println("Geld:  " + engine.geefHuidigeSpeler().geefGeld());
+	System.out.println("Aankoop: "+ engine.geefHuidigeSpeler().geefAankoop());
+	System.out.println("Actie: " + engine.geefHuidigeSpeler().geefActie());
 	
 	
 }
 
 public void tmpFunctie(){
+	Speler speler = engine.geefHuidigeSpeler();
 	
 	printFunctie("");
-	huidigeWaarden(engine.geldInHand(engine.geefHuidigeSpeler().kaartenInHand()), engine.geefHuidigeSpeler().geefAankoop(), engine.geefHuidigeSpeler().geefActie());
+	huidigeWaarden();
 	printFunctie("Kaarten in uw hand");
-	toonLijst(engine.geefHuidigeSpeler().kaartenInHand());
+	toonLijst(speler.kaartenInHand());
 	printFunctie("");
-	int keuze = geefKeuze(engine.geefHuidigeSpeler().kaartenInHand());
-	keuzeSpeler(keuze, engine.geefHuidigeSpeler().kaartenInHand(),tafelKaarten,engine.geefHuidigeSpeler().aflegStapel());
+	int keuze = geefKeuze(speler.kaartenInHand());
+	keuzeSpeler(keuze, speler.kaartenInHand(),tafelKaarten,speler.aflegStapel());
 }
 
 

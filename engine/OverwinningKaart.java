@@ -28,6 +28,9 @@ public class OverwinningKaart implements Kaart {
 			this.overwinningpunten = 6;
 			this.kaartNaam = "province";
 			break;
+		case "vloek":
+			this.overwinningpunten = - 1;
+			this.kaartNaam = "vloek";
 
 		default:
 			break;
