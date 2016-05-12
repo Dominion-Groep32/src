@@ -8,11 +8,11 @@ public class Speler {
 	private LinkedList<Kaart> kaartenInHand = new LinkedList<Kaart>();
 	private LinkedList<Kaart> aflegStapel = new LinkedList<Kaart>();
 	private LinkedList<Kaart> trekStapel = new LinkedList<Kaart>();
+<<<<<<< HEAD
 	private LinkedList<Kaart> vuilbakStapel = new LinkedList<Kaart>();
+=======
+>>>>>>> origin/master
 	private String naam;
-	private int aankoop ;
-	private int actie;
-	private int geld;
 
 	
 	public Speler(String naam){
@@ -20,17 +20,20 @@ public class Speler {
 		kaartenInHand = new LinkedList<Kaart>();
 		trekStapel = startKaarten();
 		aflegStapel = new LinkedList<Kaart>();
+<<<<<<< HEAD
 		vuilbakStapel = new LinkedList<Kaart>();
 		aankoop = 1;
 		actie = 1;
 		geld = 0;
+=======
+>>>>>>> origin/master
 		
 	}
 	
 	public LinkedList<Kaart> startKaarten() {
 		for (int i = 0; i < 7; i++) {
 			trekStapel.add(new GeldKaart("koper"));
-			//trekStapel.add(new ActieKaart("raadszaal"));
+			//trekStapel.add(new ActieKaart("smidse"));
 		}
 		for (int j = 0; j < 3; j++) {
 			trekStapel.add(new OverwinningKaart("estate"));
@@ -53,12 +56,15 @@ public class Speler {
 		return kaartenInHand;
 	}
 	
+<<<<<<< HEAD
 	public void verwijderKaart(Kaart kaart){
 		//nog bekijken
 		kaartenInHand.remove(kaart);
 		vuilbakStapel.add(kaart);
 	}
 	
+=======
+>>>>>>> origin/master
 	
 	public LinkedList<Kaart> trekStapel()
 	{
@@ -76,46 +82,16 @@ public class Speler {
 	}
 
 
-	public String geefNaam() {
+	public String getNaam() {
 		return naam;
 	}
-	public int geefActie() {
-		return actie;
-	}
 	
-	public int geefGeld() {
-		return geld;
-	}
-	
-	public int geefAankoop() {
-		return aankoop;
-	}
-	
-	public void vermeerderActie(int actie) {
-		this.actie = this.actie +actie;
-	}
-	public void verminderActie(int actie) {
-		this.actie = this.actie - actie;
-	}
 
-	public void vermeerderGeld(int geld) {
-		this.geld =this.geld+ geld;
-	}
-	public void verminderGeld(int geld) {
-		this.geld =this.geld- geld;
-	}
-	public void vermeerderAankoop(int aankoop) {
-		this.aankoop =this.aankoop+aankoop;
-	}
-	public void verminderAankoop(int aankoop) {
-		this.aankoop =this.aankoop- aankoop;
-	}
+	
 
-	public void herstelWaarden(){
-		this.geld = 0;
-		this.aankoop = 1;
-		this.actie = 1;
-	}
+	
+	
+
 	
 	
 	

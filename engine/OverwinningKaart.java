@@ -5,7 +5,6 @@ package engine;
 public class OverwinningKaart implements Kaart {
 	private String KaartType="overwinningsKaart";
 	private String kaartNaam;
-	private String info;
 	private int cost;
 	private int waarde;
 	private int overwinningpunten;
@@ -29,9 +28,6 @@ public class OverwinningKaart implements Kaart {
 			this.overwinningpunten = 6;
 			this.kaartNaam = "province";
 			break;
-		case "vloek":
-			this.overwinningpunten = - 1;
-			this.kaartNaam = "vloek";
 
 		default:
 			break;
@@ -62,11 +58,6 @@ public class OverwinningKaart implements Kaart {
 	@Override
 	public int waarde() {
 		return this.waarde;
-	}
-	
-	@Override
-	public String info(){
-		return this.info;
 	}
 
 }

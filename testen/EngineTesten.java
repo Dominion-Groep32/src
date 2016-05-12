@@ -1,23 +1,23 @@
 package testen;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import org.junit.*;
 
-import engine.ActieKaart;
 import engine.GameEngine;
-import engine.GeldKaart;
 import engine.Kaart;
-import engine.OverwinningKaart;
 import engine.Speler;
 
+<<<<<<< HEAD:testen/EngineTesten.java
 public class EngineTesten {
 	GameEngine engine = new GameEngine();
+=======
+public class TestFuncties {
+	GameEngine Engine = new GameEngine();
+>>>>>>> origin/master:testen/TestFuncties.java
 	Speler speler = new Speler("testspeler");
-	private LinkedList<Kaart> eersteTestlijst = speler.trekStapel();
-	private LinkedList<Kaart> derdeTestLijst = new LinkedList<Kaart>(Arrays.asList(new ActieKaart("avonturier"),
-			new ActieKaart("bureaucraat"), new ActieKaart("kelder"), new ActieKaart("raadsheer"),new ActieKaart("heks"),new GeldKaart("koper"),new GeldKaart("koper"),
-			new GeldKaart("koper"),new OverwinningKaart("estate"),new OverwinningKaart("estate"),new OverwinningKaart("estate")));	
+	LinkedList<Kaart> eersteTestlijst = speler.startKaarten();
+	LinkedList<Kaart> tweedeTestLijst = speler.startKaarten();
+	
 	
 	@Test
 	public void mainTest(){System.out.println("this works");}
@@ -25,10 +25,8 @@ public class EngineTesten {
 	@Test
 	public void startKaartenTest()
 	{
-		
-		if (eersteTestlijst.size() != 10)
+		if (!eersteTestlijst.equals(0))
 		{System.err.println("aantal startkaarten kloppen niet");}
-		
 	}
 	
 	@Test
@@ -37,43 +35,60 @@ public class EngineTesten {
 		String spelers[] = new String[2];
 		spelers[0]="naamEersteSpeler";
 		spelers[1]="naamTweedeSpeler";
-		engine.maakSpelersAan(spelers);
-		
+		Engine.maakSpelersAan(spelers);
 	}
-
-	@Test
-	public void lijstenSamenvoegenShuffle()
-	{
 	
-		LinkedList<Kaart> tester = engine.lijstenSamenvoegenShuffle(eersteTestlijst, derdeTestLijst);		
-		if (tester.size() != 20){System.out.println("Fout in lijsten samenvoegen shuffle");}
+	@Test
+	public void veranderSpeler() {
 		
 	}
 	
-	
 	@Test
-	public void lijstenSamenvoegenZonderSuffle()
-	{
+	public void geefHuidigeSpeler(){
+		
 	}
+	/*
+	@Test
+	public void lijstenSamenvoegenSuffle()
+	{
+		int lengte = Engine.lijstenSamenvoegenShuffle(eersteTestlijst, tweedeTestLijst).size();
+		if(lengte == 20){System.err.println("Juist");}
+		else{System.out.println("verkeerd");}
+	}
+	*/
 	
 	@Test
+<<<<<<< HEAD:testen/EngineTesten.java
 	public void ControleerActiekaarten()
 	{
 		if (engine.controleerActieKaarten(derdeTestLijst).size() != 5){System.err.println("Fout in controle actiekaarten");}
+=======
+	public void lijstenSamenvoegenZonderSuffle(){
+		
+	
+	}
+	
+	@Test
+	public void actiekaartenGenereren(){
+>>>>>>> origin/master:testen/TestFuncties.java
 		
 	}
 	
 	@Test
+<<<<<<< HEAD:testen/EngineTesten.java
 	public void geldInHand()
 	{
 		int geld = engine.geldInHand(eersteTestlijst);
 		if (geld != 7){System.err.println("Fout aantal geld in hand");}
+=======
+	public void geldInHand(){
+		
+>>>>>>> origin/master:testen/TestFuncties.java
 	}
 	
 	@Test
-	public void kaartenDieJeKuntKopen()
-	{
-		if (engine.kaartenDieJeKuntKopen(derdeTestLijst, 3).size() != 8){System.err.println("Fout aaantal kaarten die je kunt kopen");}
+	public void kaartenDieJeKuntKopen(){
+		
 	}
 	
 	@Test
@@ -81,8 +96,9 @@ public class EngineTesten {
 	{
 		eersteTestlijst.clear();
 		if (eersteTestlijst.size() != 0) {
-			System.err.println("Lijst is niet leeggemaakt");
-		}	
+			System.err.println("fail");
+		}
+		
 	}
 }	
 	

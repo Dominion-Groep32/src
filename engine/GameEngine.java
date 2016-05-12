@@ -2,50 +2,50 @@ package engine;
 
 import java.util.*;
 
-
+import console.ConsoleSpel;
 
 
 public class GameEngine {
-	
 	private LinkedList<Kaart> kaartenInHand = new LinkedList<Kaart>();
 	private LinkedList<Kaart> aflegStapel = new LinkedList<Kaart>();
 	private LinkedList<Kaart> trekStapel = new LinkedList<Kaart>();
-	private LinkedList<Kaart> vuilbakStapel = new LinkedList<Kaart>();
-	private String[] namenVanDeActieKaarten = {"avonturier","bureaucraat","kelder","raadsheer","kapel","raadszaal","feest","festival","tuinen","laboratorium"
-			,"bibliotheek","markt","militie","mijn","slotgracht","geldschieter","verbouwing","smidse","spion","dief","troonzaal","dorp","heks","werkplaats","houthakker",}; 
-	private String[] namenVanDeAndereKaarten = {"koper","zilver","goud","estate","dutchy","province"};
+	private LinkedList<Kaart> andereKaarten = new LinkedList<Kaart>(
+			Arrays.asList(new GeldKaart("koper"), new GeldKaart("zilver"), new GeldKaart("goud"),
+					new OverwinningKaart("estate"), new OverwinningKaart("dutchy"), new OverwinningKaart("province")));
 	
-	private LinkedList<Kaart> andereKaarten = new LinkedList<Kaart>();
-	
-	private LinkedList<Kaart> actieKaarten = new LinkedList<Kaart>();
-	
+	private LinkedList<Kaart> actieKaarten = new LinkedList<Kaart>(Arrays.asList(new ActieKaart("avonturier"),
+			new ActieKaart("bureaucraat"), new ActieKaart("kelder"), new ActieKaart("raadsheer"),
+			new ActieKaart("kapel"), new ActieKaart("raadszaal"), new ActieKaart("feest"),
+			new ActieKaart("festival"), new ActieKaart("tuinen"), new ActieKaart("laboratorium"), new ActieKaart("bibliotheek"),
+			new ActieKaart("markt"), new ActieKaart("militie"), new ActieKaart("mijn"), new ActieKaart("slotgracht"),
+			new ActieKaart("geldschieter"), new ActieKaart("verbouwing"), new ActieKaart("smidse"), new ActieKaart("spion"),
+			new ActieKaart("dief"), new ActieKaart("troonzaal"), new ActieKaart("dorp"), new ActieKaart("heks"), new ActieKaart("houthakker")
+			, new ActieKaart("werkplaats")));
 	private Speler[] spelersNamen = new Speler[2];
 	private LinkedList<Kaart> kaartenDieTekoopZijn = new LinkedList<Kaart>();
 	Scanner scanner = new Scanner(System.in);
 	private Speler huidigeSpeler;
 	
-		public GameEngine() {
-			for (int i = 0; i < namenVanDeActieKaarten.length; i++) {actieKaarten.add(new ActieKaart(namenVanDeActieKaarten[i]));}
-			for (int i = 0; i < 3; i++) {andereKaarten.add(new GeldKaart(namenVanDeAndereKaarten[i]));}
-			for (int i = 3; i < 6; i++) {andereKaarten.add(new OverwinningKaart(namenVanDeAndereKaarten[i]));}
-			
-		}
-	
 	
 	public  void maakSpelersAan(String SpelersNamen[]){
-
+		
+		
 		for (int i = 0; i < SpelersNamen.length; i++) {
 			spelersNamen[i] = new Speler(SpelersNamen[i]);
 		}
 	}
 	
 	public void veranderSpeler(){
+
+	
+		
 		if (huidigeSpeler == spelersNamen[1])
 		{huidigeSpeler = spelersNamen[0];}
 		else {huidigeSpeler = spelersNamen[1];}
 	
 	}
 	
+<<<<<<< HEAD
 	public Speler andereSpeler(){
 		Speler tmp;
 		if (huidigeSpeler == spelersNamen[1])
@@ -54,10 +54,11 @@ public class GameEngine {
 		return tmp;
 	}
 	
+=======
+>>>>>>> origin/master
 	public Speler geefHuidigeSpeler(){
 		return this.huidigeSpeler;
 	}
-	
 	
 	
 	public LinkedList<Kaart> lijstenSamenvoegenShuffle(LinkedList<Kaart> primaireLijst, LinkedList<Kaart> bijTeVoegenLijst) {
@@ -91,11 +92,11 @@ public class GameEngine {
 	}
 
 	public int geldInHand(LinkedList<Kaart> lijst) {
-		int geld = 0;
+		int coins = 0;
 		for (int i = 0; i < lijst.size(); i++) {
-			geld += lijst.get(i).waarde();
+			coins += lijst.get(i).waarde();
 		}
-		return geld;
+		return coins;
 	}
 	
 
@@ -114,6 +115,7 @@ public class GameEngine {
 	public LinkedList<Kaart> controleerActieKaarten(LinkedList<Kaart> kaartenInHand){
 		LinkedList<Kaart> tmp = new LinkedList<Kaart>();
 		for (int i = 0; i < kaartenInHand.size(); i++) {
+			//if (kaartenInHand.get(i).kaartType().equals("ActieKaart")) {
 			if (kaartenInHand.get(i) instanceof ActieKaart) {
 				tmp.add(kaartenInHand.get(i));
 			}
@@ -136,119 +138,14 @@ public class GameEngine {
 	public LinkedList<Kaart> kaartInHand() {
 		return this.kaartenInHand;
 	}
-	
-	public LinkedList<Kaart> vuilbakStapel(){
-		return this.vuilbakStapel;
-	}
 
 	public void maakKaartInHandLeeg(LinkedList<Kaart> lijst) {
 		lijst.clear();
 		
 	}
 	public boolean spelNogNietBeëindigd(){
-		//stapels nog voor maken
-		return true;
-	}
-	
-	public void actieUitvoeren(Kaart kaart) {
 		
-		
-		huidigeSpeler.kaartenInHand().remove(kaart);
-		switch (kaart.naam()) {
-		case "avonturier":
-			avonturier();
-			
-			break;
-		case "bureaucraat":
-			
-			geefHuidigeSpeler().trekStapel().addFirst(new GeldKaart("zilver"));
-			break;
-		case "kelder":
-			//leg een aantal kaarten weg, per elke weggelegde kaart krijg je een bij van je afneemstapel
-			
-			geefHuidigeSpeler().vermeerderActie(1);
-			break;
-		case "raadsheer":
-			raadsheer();
-			break;
-		case "kapel":
-			//je kan max 4 kaarten van je hand naar de vuilbak brengen
-			break;
-		case "raadszaal":
-			raadszaal();
-
-			break;
-		case "feest":
-			feest(kaart);
-			break;
-		case "festival":
-			festival();
-			break;
-		case "tuinen":
-			// elke 10 kaarten op het einde van het spel zijn 1 overwinningspunt waard.
-			break;
-		case "laboratorium":
-			laboratorium();
-			break;
-		case "bibliotheek":
-			// Trek kaarten tot er 7 kaarten in hand zijn
-			
-			//Wanneer er actiekaarten getrokken worden, kan je kiezen of je deze wilt of niet
-			break;
-		case "markt":
-			markt();
-			break;
-		case "militie":
-			militie();
-			break;
-		case "mijn":
-			// Geldkaart van je hand naar vuilbak brengen
-			// andere geldkaart kopen die met waarde +3 van weggebrachte kaart
-			break;
-		case "slotgracht":
-			slotgracht();
-			break;
-		case "geldschieter":
-			// Indien je een kooper van je hand naar de vuilbak brengt
-			geefHuidigeSpeler().vermeerderGeld(3);
-			break;
-		case "verbouwing":
-			//breng een kaart van je hand naar de vuilbank
-			//kost van deze kaart +2 om andere kaart te kunnen kopen
-			break;
-		case "smidse":
-			huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 3);
-			break;
-		case "spion":
-			spion();
-			break;
-		case "dief":
-			//elke speler toont zijn twee bovenste kaarten van zijn aftrekstapel
-			// als het een geldkaart is, ... (bekijk dit verder)
-			break;
-		case "troonzaal":
-			// kies actiekaart uit hand
-			// speel twee x actiekaart			
-			break;
-		case "dorp":
-			dorp();
-			break;
-		case "heks":
-			heks();
-			break;
-		case "houthakker":
-			houthakker();
-			break;
-		case "werkplaats":
-			//koop een kaart die max 4 kost
-			break;
-		default:
-			break;
-		}
-
-		geefHuidigeSpeler().verminderActie(1);
-		
-		
+<<<<<<< HEAD
 	}
 	public void avonturier (){
 		int getal = 0 ;
@@ -329,10 +226,11 @@ public class GameEngine {
 	public void houthakker(){
 		geefHuidigeSpeler().vermeerderAankoop(1);
 		geefHuidigeSpeler().vermeerderGeld(2);
+=======
+		return true;
+>>>>>>> origin/master
 	}
 
-	
-	
 
 
 
