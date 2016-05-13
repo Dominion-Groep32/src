@@ -1,6 +1,6 @@
 package testen;
 
-import java.util.Arrays;
+import java.util.*;
 import java.util.LinkedList;
 import org.junit.*;
 
@@ -14,8 +14,8 @@ import engine.Speler;
 public class TestFuncties {
 	GameEngine engine = new GameEngine();
 	Speler speler = new Speler("testspeler");
-	private LinkedList<Kaart> eersteTestlijst = speler.trekStapel();
-	private LinkedList<Kaart> derdeTestLijst = new LinkedList<Kaart>(Arrays.asList(new ActieKaart("avonturier"),
+	private List<Kaart> eersteTestlijst = speler.trekStapel();
+	private List<Kaart> derdeTestLijst = new LinkedList<Kaart>(Arrays.asList(new ActieKaart("avonturier"),
 			new ActieKaart("bureaucraat"), new ActieKaart("kelder"), new ActieKaart("raadsheer"),new ActieKaart("heks"),new GeldKaart("koper"),new GeldKaart("koper"),
 			new GeldKaart("koper"),new OverwinningKaart("estate"),new OverwinningKaart("estate"),new OverwinningKaart("estate")));	
 	
@@ -45,7 +45,7 @@ public class TestFuncties {
 	public void lijstenSamenvoegenShuffle()
 	{
 	
-		LinkedList<Kaart> tester = engine.lijstenSamenvoegenShuffle(eersteTestlijst, derdeTestLijst);		
+		List<Kaart> tester = engine.lijstenSamenvoegenShuffle(eersteTestlijst, derdeTestLijst);		
 		if (tester.size() != 20){System.out.println("Fout in lijsten samenvoegen shuffle");}
 		
 	}
