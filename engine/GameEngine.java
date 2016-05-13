@@ -5,6 +5,7 @@ import java.util.*;
 
 
 
+
 public class GameEngine {
 	
 	private String[] namenVanDeActieKaarten = {"avonturier","bureaucraat","kelder","raadsheer","kapel","raadszaal","feest","festival","tuinen","laboratorium"
@@ -18,9 +19,9 @@ public class GameEngine {
 	private Speler huidigeSpeler;
 	
 		public GameEngine() {
-			for (int i = 0; i < namenVanDeActieKaarten.length; i++) {actieKaarten.add(new ActieKaart(namenVanDeActieKaarten[i]));}
-			for (int i = 0; i < 3; i++) {andereKaarten.add(new GeldKaart(namenVanDeAndereKaarten[i]));}
-			for (int i = 3; i < 6; i++) {andereKaarten.add(new OverwinningKaart(namenVanDeAndereKaarten[i]));}
+			for (int i = 0; i < namenVanDeActieKaarten.length; i++) {actieKaarten.add(new Kaart(namenVanDeActieKaarten[i]));}
+			for (int i = 0; i < 3; i++) {andereKaarten.add(new Kaart(namenVanDeAndereKaarten[i]));}
+			for (int i = 3; i < 6; i++) {andereKaarten.add(new Kaart(namenVanDeAndereKaarten[i]));}
 			
 		}
 	
@@ -38,8 +39,7 @@ public class GameEngine {
 		{huidigeSpeler = spelersNamen[0];}
 		
 		else {huidigeSpeler = spelersNamen[1];}
-		
-	
+
 	}
 	
 	public Speler andereSpeler(){
@@ -52,10 +52,7 @@ public class GameEngine {
 		return tmp;
 	}
 	
-	public Speler geefHuidigeSpeler(){
-		
-		return this.huidigeSpeler;
-	}
+	
 	
 	
 	
@@ -113,7 +110,7 @@ public class GameEngine {
 	public List<Kaart> controleerActieKaarten(List<Kaart> kaartenInHand){
 		List<Kaart> tmp = new LinkedList<Kaart>();
 		for (int i = 0; i < kaartenInHand.size(); i++) {
-			if (kaartenInHand.get(i) instanceof ActieKaart) {
+			if (kaartenInHand.get(i).kaartType() == "actieKaart") {
 				tmp.add(kaartenInHand.get(i));
 			}
 		}
@@ -126,13 +123,18 @@ public class GameEngine {
 	}
 
 
-	public void maakKaartInHandLeeg(LinkedList<Kaart> lijst) {
+	public void maakKaartInHandLeeg(List<Kaart> lijst) {
 		lijst.clear();
 		
 	}
 	public boolean spelNogNietBeëindigd(){
 		//stapels nog voor maken
 		return true;
+	}
+	
+	public Speler geefHuidigeSpeler(){
+		
+		return this.huidigeSpeler;
 	}
 	
 	public void actieUitvoeren(Kaart kaart) {
@@ -244,7 +246,7 @@ public class GameEngine {
 		while (getal <=2 ) {
 			
 			Kaart huidigeKaart = geefHuidigeSpeler().trekStapel().get(i);
-			if(huidigeKaart instanceof GeldKaart){
+			if(huidigeKaart.kaartType() == "GeldKaart"){
 				geefHuidigeSpeler().kaartenInHand().add(huidigeKaart);
 				geefHuidigeSpeler().trekStapel().remove(huidigeKaart);
 				
@@ -315,7 +317,7 @@ public class GameEngine {
 	public void heks(){
 		huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 2);
 		
-		andereSpeler().trekStapel().add(new OverwinningKaart("vloek"));
+		andereSpeler().trekStapel().add(new Kaart("vloek"));
 	}
 
 	public void houthakker(){

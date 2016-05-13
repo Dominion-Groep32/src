@@ -1,18 +1,14 @@
 package console;
 
 import java.util.*;
+import engine.*;
 
-import engine.ActieKaart;
-import engine.GameEngine;
-import engine.GeldKaart;
-import engine.Kaart;
-import engine.Speler;
 
 
 public class ConsoleSpel {
 	Scanner sc = new Scanner(System.in);
 	GameEngine engine = new GameEngine();
-	private LinkedList<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.actieKaartenGenereren(), engine.getAndereKaarten());
+	private List<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.actieKaartenGenereren(), engine.getAndereKaarten());
 	
 
 	
@@ -101,13 +97,13 @@ public class ConsoleSpel {
 			System.out.println();
 		}
 	
-	public void toonLijst(LinkedList<Kaart> lijst) {
+	public void toonLijst(List<Kaart> lijst) {
 		for (int i = 0; i < lijst.size(); i++) {
 			System.out.println((i + 1) + ": " + lijst.get(i).naam());
 		}
 	}
 	
-	public int geefKeuze(LinkedList<Kaart> kaartenInHand) {
+	public int geefKeuze(List<Kaart> kaartenInHand) {
 		int getal = 1;
 		boolean tmp = false;
 		//boolean tmp2 = false;
@@ -139,12 +135,12 @@ public class ConsoleSpel {
 	
 	
 	
-	public void keuzeSpeler(int keuze, LinkedList<Kaart> kaartenInHand, LinkedList<Kaart> tafelKaarten,LinkedList<Kaart> aflegStapel) {
+	public void keuzeSpeler(int keuze, List<Kaart> kaartenInHand, List<Kaart> tafelKaarten, List<Kaart> aflegStapel) {
 		engine.geefHuidigeSpeler().vermeerderGeld(engine.geldInHand(kaartenInHand));
 		
 		switch (keuze) {
 		case 1:
-			LinkedList<Kaart> actieKaartenUitDrawHand = engine.controleerActieKaarten(kaartenInHand);
+			List<Kaart> actieKaartenUitDrawHand = engine.controleerActieKaarten(kaartenInHand);
 			printFunctie("Actiekaarten");
 			toonLijst(actieKaartenUitDrawHand);
 			Kaart gekozenKaart = kiesActiekaart(actieKaartenUitDrawHand);
@@ -161,7 +157,7 @@ public class ConsoleSpel {
 		}
 	}
 	
-	private void koopActie(LinkedList<Kaart> tafelKaarten,LinkedList<Kaart> aflegStapel) {
+	private void koopActie(List<Kaart> tafelKaarten,List<Kaart> aflegStapel) {
 		Speler speler = engine.geefHuidigeSpeler();
 	
 		printFunctie("");
@@ -169,7 +165,7 @@ public class ConsoleSpel {
 		printFunctie("");
 		System.out.println("je kunt de volgende kaarten kopen");
 		printFunctie("");
-		LinkedList<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(tafelKaarten, engine.geldInHand(speler.kaartenInHand()));
+		List<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(tafelKaarten, engine.geldInHand(speler.kaartenInHand()));
 		toonLijst(lijstWaarvanJeKanKopen);
 		vragenNaarInfoOverKaarten();
 		while(speler.geefAankoop()>0)
@@ -186,7 +182,7 @@ private int kaartnummerInvullen(String kopenOfWeten) {
 	return sc.nextInt();
 }
 
-public int koopKaart(LinkedList<Kaart> lijstWaarvanJeKanKopen,LinkedList<Kaart> aflegStapel) {
+public int koopKaart(List<Kaart> lijstWaarvanJeKanKopen,List<Kaart> aflegStapel) {
 	
 		int keuze = kaartnummerInvullen("kopen")-1;
 		int gecontroleerdekeuze = controleKeuze(keuze, lijstWaarvanJeKanKopen.size());
@@ -195,7 +191,7 @@ public int koopKaart(LinkedList<Kaart> lijstWaarvanJeKanKopen,LinkedList<Kaart> 
 
 	}
 
-public Kaart kiesActiekaart(LinkedList<Kaart> lijstVanActieKaarten) {
+public Kaart kiesActiekaart(List<Kaart> lijstVanActieKaarten) {
 	
 	int keuze = kaartnummerInvullen("kopen")-1;
 	int gecontroleerdekeuze = controleKeuze(keuze, lijstVanActieKaarten.size());
@@ -229,7 +225,7 @@ private void vragenNaarInfoOverKaarten() {
 	int gecontroleerdeKeuze = controleKeuze(keuze, 2);
 	if (gecontroleerdeKeuze==1){
 		int kaartKeuze = kaartnummerInvullen("weten");
-		LinkedList<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(tafelKaarten, engine.geldInHand(engine.geefHuidigeSpeler().kaartenInHand()));
+		List<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(tafelKaarten, engine.geldInHand(engine.geefHuidigeSpeler().kaartenInHand()));
 		int gecontroleerdeKaartKeuze = controleKeuze(kaartKeuze, lijstWaarvanJeKanKopen.size());
 		geefInfoOverKaarten(gecontroleerdeKaartKeuze,lijstWaarvanJeKanKopen);
 	}
@@ -248,7 +244,7 @@ private int printGeefKeuze() {
 	System.out.print("geef een keuze in : ");
 	 return sc.nextInt();
 }
-private void geefInfoOverKaarten(int kaartKeuze, LinkedList<Kaart> lijstWaarvanJeKanKopen) {
+private void geefInfoOverKaarten(int kaartKeuze, List<Kaart> lijstWaarvanJeKanKopen) {
 	Kaart gekozenKaart = lijstWaarvanJeKanKopen.get(kaartKeuze);
 	System.out.println(gekozenKaart.info());
 	

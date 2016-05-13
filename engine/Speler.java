@@ -3,6 +3,7 @@ import java.util.*;
 
 
 
+
 public class Speler {
 	GameEngine engine = new GameEngine();
 	private List<Kaart> kaartenInHand = new LinkedList<>();
@@ -28,11 +29,11 @@ public class Speler {
 	
 	public List<Kaart> startKaarten() {
 		for (int i = 0; i < 7; i++) {
-			trekStapel.add(new GeldKaart("koper"));
+			trekStapel.add(new Kaart("koper"));
 			//trekStapel.add(new ActieKaart("raadszaal"));
 		}
 		for (int j = 0; j < 3; j++) {
-			trekStapel.add(new OverwinningKaart("estate"));
+			trekStapel.add(new Kaart("estate"));
 		}
 		Collections.shuffle(trekStapel);
 		return trekStapel;
@@ -47,7 +48,8 @@ public class Speler {
 			aflegStapel.add(lijst.get(i));
 		}
 		for (int i = 0; i < aantal; i++) {
-			//lijst.//removeFirst();
+			//lijst.removeFirst();
+			lijst.remove(i);
 		}
 		return kaartenInHand;
 	}

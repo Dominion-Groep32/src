@@ -1,12 +1,12 @@
 package testen;
 
-import java.util.LinkedList;
+
 import java.util.*;
 import org.junit.*;
 
-import engine.GameEngine;
-import engine.Kaart;
-import engine.Speler;
+
+import engine.*;
+
 
 public class EngineTesten {
 	GameEngine engine = new GameEngine();
@@ -17,8 +17,6 @@ public class TestFuncties {
 	List<Kaart> eersteTestlijst = speler.startKaarten();
 	List<Kaart> tweedeTestLijst = speler.startKaarten();
 	
-	//test
-	//test
 	@Test
 	public void mainTest(){System.out.println("this works");}
 	
