@@ -6,24 +6,22 @@ import java.util.*;
 
 
 
+
 public class GameEngine {
 	
-	private String[] namenVanDeActieKaarten = {"avonturier","bureaucraat","kelder","raadsheer","kapel","raadszaal","feest","festival","tuinen","laboratorium"
-			,"bibliotheek","markt","militie","mijn","slotgracht","geldschieter","verbouwing","smidse","spion","dief","troonzaal","dorp","heks","werkplaats","houthakker",}; 
-	private String[] namenVanDeAndereKaarten = {"koper","zilver","goud","estate","dutchy","province"};
-	private List<Kaart> andereKaarten = new LinkedList<>();
-	private List<Kaart> actieKaarten = new LinkedList<>();
+	
+	private List<Kaart> andereKaarten = new LinkedList<>(Arrays.asList(new Kaart("koper","geldKaart",0,1),new Kaart("zilver","geldKaart",3,2),new Kaart("goud","geldKaart",6,3),
+			new Kaart("estate","overwinningsKaart",2,0,1),new Kaart("dutchy","overwinningsKaart",5,0,3),new Kaart("province","overwinningsKaart",8,0,6)));
+	private List<Kaart> actieKaarten = new LinkedList<>(Arrays.asList(new Kaart("avonturier","actieKaart",6),
+			new Kaart("bureaucraat","actieKaart",4), new Kaart("kelder","actieKaart",2), new Kaart("raadsheer","actieKaart",3),new Kaart("kapel","actieKaart",2),new Kaart("raadszaal","actieKaart",5),new Kaart("feest","actieKaart",4),
+			new Kaart("festival","actieKaart",5),new Kaart("tuinen","actieKaart",4),new Kaart("laboratorium","actieKaart",5),new Kaart("bibliotheek","actieKaart",5),new Kaart("markt","actieKaart",5),new Kaart("militie","actieKaart",4),new Kaart("mijn","actieKaart",5)
+			,new Kaart("slotgracht","actieKaart",2),new Kaart("geldschieter","actieKaart",4),new Kaart("verbouwing","actieKaart",4),new Kaart("smidse","actieKaart",4),new Kaart("spion","actieKaart",4),new Kaart("dief","actieKaart",4),new Kaart("troonzaal","actieKaart",4)
+			,new Kaart("dorp","actieKaart",3),new Kaart("heks","actieKaart",5),new Kaart("werkplaats","actieKaart",3),new Kaart("houthakker","actieKaart",3)));
 	private Speler[] spelersNamen = new Speler[2];
 	private List<Kaart> kaartenDieTekoopZijn = new LinkedList<>();
 	Scanner scanner = new Scanner(System.in);
 	private Speler huidigeSpeler;
-	
-		public GameEngine() {
-			for (int i = 0; i < namenVanDeActieKaarten.length; i++) {actieKaarten.add(new Kaart(namenVanDeActieKaarten[i]));}
-			for (int i = 0; i < 3; i++) {andereKaarten.add(new Kaart(namenVanDeAndereKaarten[i]));}
-			for (int i = 3; i < 6; i++) {andereKaarten.add(new Kaart(namenVanDeAndereKaarten[i]));}
-			
-		}
+
 	
 	
 	
@@ -317,7 +315,7 @@ public class GameEngine {
 	public void heks(){
 		huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 2);
 		
-		andereSpeler().trekStapel().add(new Kaart("vloek"));
+		andereSpeler().trekStapel().add(new Kaart("vloek","overwinningsKaart",0,0,-1));
 	}
 
 	public void houthakker(){

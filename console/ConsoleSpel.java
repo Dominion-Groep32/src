@@ -88,7 +88,6 @@ public class ConsoleSpel {
 	public void printFunctie(String tekst){
 			int lengte = 20 ;
 			int tePrintenLijntjes = (lengte-tekst.length()/2);
-			
 			if (tePrintenLijntjes%2 != 0){tePrintenLijntjes++;}
 
 			for (int i = 0; i < tePrintenLijntjes; i++) {System.out.print("-");}

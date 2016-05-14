@@ -1,16 +1,23 @@
-package testen;
+	package testen;
 
 import java.util.*;
 import org.junit.*;
 import engine.*;
-
+/*
 public class TestFuncties {
 	GameEngine engine = new GameEngine();
 	Speler speler = new Speler("testspeler");
 	private List<Kaart> eersteTestlijst = speler.trekStapel();
+
 	private List<Kaart> derdeTestLijst = new LinkedList<Kaart>(Arrays.asList(new Kaart("avonturier"),
 			new Kaart("bureaucraat"), new Kaart("kelder"), new Kaart("raadsheer"),new Kaart("heks"),new Kaart("koper"),new Kaart("koper"),
 			new Kaart("koper"),new Kaart("estate"),new Kaart("estate"),new Kaart("estate")));	
+	
+	 * new LinkedList<Kaart>(Arrays.asList(new Kaart("avonturier"),
+			new Kaart("bureaucraat"), new Kaart("kelder"), new Kaart("raadsheer"),new Kaart("heks"),new Kaart("koper"),new Kaart("koper"),
+			new Kaart("koper"),new Kaart("estate"),new Kaart("estate"),new Kaart("estate")));
+	
+	
 	
 	@Test
 	public void mainTest(){System.out.println("this works");}
@@ -79,4 +86,4 @@ public class TestFuncties {
 		}	
 	}
 }	
-	
+	 */

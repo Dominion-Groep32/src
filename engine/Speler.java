@@ -15,7 +15,6 @@ public class Speler {
 	private int actie;
 	private int geld;
 
-	
 	public Speler(String naam){
 		this.naam = naam;
 		kaartenInHand = new LinkedList<Kaart>();
@@ -29,11 +28,11 @@ public class Speler {
 	
 	public List<Kaart> startKaarten() {
 		for (int i = 0; i < 7; i++) {
-			trekStapel.add(new Kaart("koper"));
+			trekStapel.add(new Kaart("koper","GeldKaart",0,1,0));
 			//trekStapel.add(new ActieKaart("raadszaal"));
 		}
 		for (int j = 0; j < 3; j++) {
-			trekStapel.add(new Kaart("estate"));
+			trekStapel.add(new Kaart("estate","overwinningsKaart",2,0,1));
 		}
 		Collections.shuffle(trekStapel);
 		return trekStapel;

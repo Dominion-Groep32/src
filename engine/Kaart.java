@@ -1,14 +1,51 @@
 package engine;
 
+
 public class Kaart {
 	
 	private String KaartType;
-	private String kaartNaam;
+	private String kaartNaam;	
 	private String info;
 	private int cost;
 	private int waarde;
 	private int overwinningpunten;
 	
+
+	public Kaart(String naam,String Type, int cost ,int waarde,int overwinningpunten )
+	{
+		this.kaartNaam = naam;
+		this.KaartType = Type;
+		this.cost = cost;
+		this.waarde = waarde;
+		this.overwinningpunten = overwinningpunten;
+	}
+	public Kaart(String naam,String Type, int cost )
+	{
+		this.kaartNaam = naam;
+		this.KaartType = Type;
+		this.cost = cost;
+	}
+	public Kaart(String naam,String Type, int cost ,int waarde)
+	{
+		this.kaartNaam = naam;
+		this.KaartType = Type;
+		this.cost = cost;
+		this.waarde = waarde;
+	}
+	
+	/*
+	public Kaart(String naam,String Type, int cost ,int waarde,int overwinningpunten, String actie)
+	{
+		this.kaartNaam = naam;
+		this.KaartType = Type;
+		this.cost = cost;
+		this.waarde = waarde;
+		//hieronder staat pseudo 
+		//this.actie = actie();
+	}
+	*/	
+	
+	/*
 	public Kaart(String kaartnaam)
 	{
 		this.kaartNaam = kaartnaam;
@@ -213,6 +250,7 @@ public class Kaart {
 		}
 		
 	}
+	*/
 
 	public int krijgAantalOverwinnigsPunten() 
 	{
