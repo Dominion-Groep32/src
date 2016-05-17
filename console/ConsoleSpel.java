@@ -8,7 +8,7 @@ import engine.*;
 public class ConsoleSpel {
 	Scanner sc = new Scanner(System.in);
 	GameEngine engine = new GameEngine();
-	private List<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.actiekaartenGenereren(), engine.lijstGeldEnOverwinningskaarten());
+	private List<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.kaartenGenereren(), engine.lijstGeldEnOverwinningskaarten());
 	
 
 	
@@ -31,11 +31,10 @@ public class ConsoleSpel {
 		
 		
 		engine.maakSpelersAan(vraagSpelersNamen());
-		
+	
 		while(engine.spelNogNietBeëindigd()){
 			
-			for (int i = 0; i < 2; i++)
-			{
+				
 				engine.veranderSpeler();
 				Speler huidigeSpeler = engine.geefHuidigeSpeler();
 				System.out.println("");
@@ -50,11 +49,11 @@ public class ConsoleSpel {
 					engine.geefHuidigeSpeler().verminderActie(1);
 					
 				}
-				engine.maakKaartInHandLeeg(huidigeSpeler.kaartenInHand());
+				engine.brengKaartenInHandStapelNaarAflegstapel(huidigeSpeler.kaartenInHand(), huidigeSpeler.aflegStapel());
+				System.out.println("Lengte aflegstapel:"+huidigeSpeler.aflegStapel().size());
 				printFunctie("de beurt van "+engine.geefHuidigeSpeler().geefNaam()+" is beëindigd");
 				System.out.println("");
-				huidigeSpeler.herstelWaarden();
-			}		
+				huidigeSpeler.herstelWaarden();	
 		}
 		
 		
@@ -179,7 +178,8 @@ public int koopKaart(List<Kaart> lijstWaarvanJeKanKopen,List<Kaart> aflegStapel)
 	
 		int keuze = kaartnummerInvullen("kopen")-1;
 		int gecontroleerdekeuze = controleKeuze(keuze, lijstWaarvanJeKanKopen.size());
-		aflegStapel.add(lijstWaarvanJeKanKopen.get(gecontroleerdekeuze));	
+		aflegStapel.add(lijstWaarvanJeKanKopen.get(gecontroleerdekeuze));
+		engine.verminderStapel(lijstWaarvanJeKanKopen.get(gecontroleerdekeuze).naam());
 		return lijstWaarvanJeKanKopen.get(gecontroleerdekeuze).kost();
 
 	}
@@ -238,10 +238,8 @@ private int printGeefKeuze() {
 	 return sc.nextInt();
 }
 private void geefInfoOverKaarten(int kaartKeuze, List<Kaart> lijstWaarvanJeKanKopen) {
-	Kaart gekozenKaart = lijstWaarvanJeKanKopen.get(kaartKeuze);
-	System.out.println(gekozenKaart.info());
-	
-	
+	Kaart gekozenKaart = lijstWaarvanJeKanKopen.get(kaartKeuze-1);
+	System.out.println(gekozenKaart.naam()+" : "+gekozenKaart.info());
 	vragenNaarInfoOverKaarten();
 }
 }
