@@ -50,7 +50,6 @@ public class ConsoleSpel {
 					
 				}
 				engine.brengKaartenInHandStapelNaarAflegstapel(huidigeSpeler.kaartenInHand(), huidigeSpeler.aflegStapel());
-				System.out.println("Lengte aflegstapel:"+huidigeSpeler.aflegStapel().size());
 				printFunctie("de beurt van "+engine.geefHuidigeSpeler().geefNaam()+" is beëindigd");
 				System.out.println("");
 				huidigeSpeler.herstelWaarden();	
