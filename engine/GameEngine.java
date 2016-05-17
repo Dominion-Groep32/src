@@ -39,12 +39,21 @@ public class GameEngine {
 	public void verminderStapel(String kaartnaam){
 		
 		for (int i = 0; i < Stapels.length; i++) {
-			if (kaartnaam.equals(Stapels[i][0].toString()))
+			String Kaart = (String) Stapels[i][0];
+			if (kaartnaam.equals(Kaart))
 			{
 				int waarde = (int) Stapels[i][1];
 				Stapels[i][1] = (waarde-1);
 			}
 		}
+	}
+	
+	public boolean spelNogNietBeëindigd(){
+		
+		for (int i = 0; i < Stapels.length; i++) {
+			//if(Stapels[i][0])
+		}
+		return true;
 	}
 	
 	public Speler andereSpeler(){
@@ -136,10 +145,7 @@ public class GameEngine {
 		lijst.clear();
 		
 	}
-	public boolean spelNogNietBeëindigd(){
-		//stapels nog voor maken
-		return true;
-	}
+	
 	
 	public Speler geefHuidigeSpeler(){
 		
