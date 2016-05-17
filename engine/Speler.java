@@ -17,6 +17,7 @@ public class Speler {
 	
 	public Speler(String naam){
 		//testt
+		//Test
 		this.naam = naam;
 		kaartenInHand = new LinkedList<Kaart>();
 		trekStapel = startKaarten();
