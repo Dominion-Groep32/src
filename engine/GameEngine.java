@@ -14,7 +14,8 @@ public class GameEngine {
 			,new Kaart("dorp","actiekaart",3,"+1 kaart / +2 acties"),new Kaart("heks","actiekaart",5,"+2 kaarten / Iedere andere speler pakt 1 vloekkaart."),new Kaart("werkplaats","actiekaart",3,"Pak een kaart die maximaal 4 munten kost."),new Kaart("houthakker","actiekaart",3,"+1 aanschaf / +2 munten")));
 	private Speler[] spelersNamen = new Speler[2];
 	private List<Kaart> kaartenDieTekoopZijn = new LinkedList<>();
-	private Object[][] Stapels = new Object[17][2];
+	private List<Kaart> testLijst = new LinkedList<>();
+	private Object[][] Stapels = new Object[16][2];
 	Scanner scanner = new Scanner(System.in);
 	private Speler huidigeSpeler;
 
@@ -54,20 +55,20 @@ public class GameEngine {
 		{
 			if((int) Stapels[i][1] <= 0)
 			{
-				if (Stapels[i][0].equals("provincie"))
+				if (Stapels[i][0].equals("provincie") && Legestapels >=3)
 				{
 					return false;
 				}
 				Legestapels = Legestapels+1;
 			}
+			else {
+				return true;
+			}
+			
 			
 		}
-		if(Legestapels >=3)
-		{
-			return false;
-		}
-		
 		return true;
+		
 	}
 	
 	
@@ -105,19 +106,17 @@ public class GameEngine {
 	public List<Kaart> kaartenGenereren() {
 
 		Collections.shuffle(actiekaarten);
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++) 
+		{
 			kaartenDieTekoopZijn.add(actiekaarten.get(i));
-			Stapels[i][0] = actiekaarten.get(i).naam();
-			Stapels[i][1] = 10;
+		}
+		testLijst = lijstenSamenvoegenZonderShuffle(kaartenDieTekoopZijn, geldEnOverwinningskaarten);
+		for (int j = 0; j < testLijst.size(); j++) {
+			Stapels[j][0] = testLijst.get(j).naam();
+			Stapels[j][1] = 10;
 		}
 		
-		for (int k = 10; k < 17; k++) {
-			int i = 0;
-			Stapels[k][0] = geldEnOverwinningskaarten.get(i).naam();
-			Stapels[k][1] = 10;
-			i++;
-			
-		}
+		
 		return kaartenDieTekoopZijn;
 	}
 
