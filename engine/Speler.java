@@ -4,6 +4,7 @@ import java.util.*;
 
 
 public class Speler {
+	// het werkt
 	GameEngine engine = new GameEngine();
 	private LinkedList<Kaart> kaartenInHand = new LinkedList<Kaart>();
 	private LinkedList<Kaart> aflegStapel = new LinkedList<Kaart>();
