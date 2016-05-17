@@ -16,6 +16,7 @@ public class Speler {
 	private int geld;
 
 	public Speler(String naam){
+		//testt
 		this.naam = naam;
 		kaartenInHand = new LinkedList<Kaart>();
 		trekStapel = startKaarten();
