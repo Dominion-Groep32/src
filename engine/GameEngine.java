@@ -153,8 +153,8 @@ public class GameEngine {
 	}
 	
 	public void brengKaartenInHandStapelNaarAflegstapel(List<Kaart> kaartenInHand, List<Kaart> aflegstapel){
-		
 		lijstenSamenvoegenZonderShuffle(aflegstapel, kaartenInHand);
+		maakKaartInHandLeeg(huidigeSpeler.kaartenInHand());
 	}
 	
 	public void actieUitvoeren(Kaart kaart) {
