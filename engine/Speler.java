@@ -12,6 +12,7 @@ public class Speler {
 	private int actie;
 	private int geld;
 
+	//als je nu werkt suckt griet
 	public Speler(String naam){
 		this.naam = naam;
 		kaartenInHand = new LinkedList<Kaart>();
