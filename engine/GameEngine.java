@@ -49,12 +49,27 @@ public class GameEngine {
 	}
 	
 	public boolean spelNogNietBeëindigd(){
-		
-		for (int i = 0; i < Stapels.length; i++) {
-			//if(Stapels[i][0])
+		int Legestapels = 0;
+		for (int i = 0; i < Stapels.length; i++) 
+		{
+			if((int) Stapels[i][1] <= 0)
+			{
+				if (Stapels[i][0].equals("provincie"))
+				{
+					return false;
+				}
+				Legestapels = Legestapels+1;
+			}
+			
 		}
+		if(Legestapels >=3)
+		{
+			return false;
+		}
+		
 		return true;
 	}
+	
 	
 	public Speler andereSpeler(){
 		Speler tmp;
@@ -96,9 +111,11 @@ public class GameEngine {
 			Stapels[i][1] = 10;
 		}
 		
-		for (int i = 10; i < geldEnOverwinningskaarten.size(); i++) {
-			Stapels[i][0] = geldEnOverwinningskaarten.get(i).naam();
-			Stapels[i][1] = 10;
+		for (int k = 10; k < 17; k++) {
+			int i = 0;
+			Stapels[k][0] = geldEnOverwinningskaarten.get(i).naam();
+			Stapels[k][1] = 10;
+			i++;
 			
 		}
 		return kaartenDieTekoopZijn;
