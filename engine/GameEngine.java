@@ -21,7 +21,7 @@ public class GameEngine {
 
 	
 	
-	
+	//TEST
 	public  void maakSpelersAan(String SpelersNamen[]){
 
 		for (int i = 0; i < SpelersNamen.length; i++) {
