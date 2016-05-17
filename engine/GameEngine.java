@@ -146,6 +146,11 @@ public class GameEngine {
 		return this.huidigeSpeler;
 	}
 	
+	public void brengKaartenInHandStapelNaarAflegstapel(List<Kaart> kaartenInHand, List<Kaart> aflegstapel){
+		
+		lijstenSamenvoegenZonderShuffle(aflegstapel, kaartenInHand);
+	}
+	
 	public void actieUitvoeren(Kaart kaart) {
 		
 		
@@ -333,6 +338,7 @@ public class GameEngine {
 		geefHuidigeSpeler().vermeerderAankoop(1);
 		geefHuidigeSpeler().vermeerderGeld(2);
 	}
+
 
 	
 	

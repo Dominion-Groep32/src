@@ -51,6 +51,7 @@ public class ConsoleSpel {
 					
 				}
 				engine.maakKaartInHandLeeg(huidigeSpeler.kaartenInHand());
+				engine.brengKaartenInHandStapelNaarAflegstapel(huidigeSpeler.kaartenInHand(), huidigeSpeler.aflegStapel());
 				printFunctie("de beurt van "+engine.geefHuidigeSpeler().geefNaam()+" is beëindigd");
 				System.out.println("");
 				huidigeSpeler.herstelWaarden();
@@ -241,8 +242,6 @@ private int printGeefKeuze() {
 private void geefInfoOverKaarten(int kaartKeuze, List<Kaart> lijstWaarvanJeKanKopen) {
 	Kaart gekozenKaart = lijstWaarvanJeKanKopen.get(kaartKeuze-1);
 	System.out.println(gekozenKaart.naam()+" : "+gekozenKaart.info());
-	
-	
 	vragenNaarInfoOverKaarten();
 }
 }
