@@ -30,6 +30,7 @@ public class Speler {
 		for (int i = 0; i < 7; i++) {
 			trekStapel.add(new Kaart("koper","GeldKaart",0,1,0));
 			//trekStapel.add(new ActieKaart("raadszaal"));
+			//test
 		}
 		for (int j = 0; j < 3; j++) {
 			trekStapel.add(new Kaart("estate","overwinningsKaart",2,0,1));
