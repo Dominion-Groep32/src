@@ -14,6 +14,7 @@ public class GameEngine {
 			,new Kaart("dorp","actiekaart",3),new Kaart("heks","actiekaart",5),new Kaart("werkplaats","actiekaart",3),new Kaart("houthakker","actiekaart",3)));
 	private Speler[] spelersNamen = new Speler[2];
 	private List<Kaart> kaartenDieTekoopZijn = new LinkedList<>();
+	private Object[][] Stapels = new Object[17][2];
 	Scanner scanner = new Scanner(System.in);
 	private Speler huidigeSpeler;
 
@@ -33,6 +34,17 @@ public class GameEngine {
 		
 		else {huidigeSpeler = spelersNamen[0];}
 
+	}
+	
+	public void verminderStapel(String kaartnaam){
+		
+		for (int i = 0; i < Stapels.length; i++) {
+			if (kaartnaam.equals(Stapels[i][0].toString()))
+			{
+				int waarde = (int) Stapels[i][1];
+				Stapels[i][1] = (waarde-1);
+			}
+		}
 	}
 	
 	public Speler andereSpeler(){
@@ -66,11 +78,19 @@ public class GameEngine {
 
 	}	
 
-	public List<Kaart> actiekaartenGenereren() {
+	public List<Kaart> kaartenGenereren() {
 
 		Collections.shuffle(actiekaarten);
 		for (int i = 0; i < 10; i++) {
 			kaartenDieTekoopZijn.add(actiekaarten.get(i));
+			Stapels[i][0] = actiekaarten.get(i).naam();
+			Stapels[i][1] = 10;
+		}
+		
+		for (int i = 10; i < geldEnOverwinningskaarten.size(); i++) {
+			Stapels[i][0] = geldEnOverwinningskaarten.get(i).naam();
+			Stapels[i][1] = 10;
+			
 		}
 		return kaartenDieTekoopZijn;
 	}

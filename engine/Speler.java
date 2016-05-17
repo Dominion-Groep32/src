@@ -12,7 +12,7 @@ public class Speler {
 	private int actie;
 	private int geld;
 
-	//als je nu werkt suckt griet
+	
 	public Speler(String naam){
 		this.naam = naam;
 		kaartenInHand = new LinkedList<Kaart>();
@@ -27,11 +27,11 @@ public class Speler {
 	
 	public List<Kaart> startKaarten() {
 		for (int i = 0; i < 7; i++) {
-			trekStapel.add(new Kaart("koper","GeldKaart",0,1));
+			trekStapel.add(new Kaart("koper","geldkaart",0,1));
 			//trekStapel.add(new ActieKaart("raadszaal"));
 		}
 		for (int j = 0; j < 3; j++) {
-			trekStapel.add(new Kaart("estate","overwinningsKaart",2,1));
+			trekStapel.add(new Kaart("estate","overwinningskaart",2,1));
 		}
 		Collections.shuffle(trekStapel);
 		return trekStapel;
