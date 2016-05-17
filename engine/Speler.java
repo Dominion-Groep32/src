@@ -32,7 +32,7 @@ public class Speler {
 		}
 		for (int j = 0; j < 3; j++) {
 			trekStapel.add(new Kaart("landgoed","overwinningsKaart",2,1,""));
-		}
+		}//dssqfq
 		Collections.shuffle(trekStapel);
 		return trekStapel;
 	}
