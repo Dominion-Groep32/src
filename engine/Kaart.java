@@ -16,7 +16,7 @@ public class Kaart {
 		this.kaartNaam = naam;
 		this.KaartType = Type;
 		this.cost = cost;
-		if(Type == "overwinningsKaart"){this.overwinningpunten = waarde;}
+		if(Type == "overwinningskaart"){this.overwinningpunten = waarde;}
 		else {this.waarde = waarde;}
 		
 	}

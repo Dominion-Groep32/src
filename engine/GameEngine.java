@@ -5,20 +5,20 @@ import java.util.*;
 public class GameEngine {
 	
 	
-	private List<Kaart> andereKaarten = new LinkedList<>(Arrays.asList(new Kaart("koper","geldKaart",0,1),new Kaart("zilver","geldKaart",3,2),new Kaart("goud","geldKaart",6,3),
-			new Kaart("estate","overwinningsKaart",2,1),new Kaart("dutchy","overwinningsKaart",5,3),new Kaart("province","overwinningsKaart",8,6)));
-	private List<Kaart> actieKaarten = new LinkedList<>(Arrays.asList(new Kaart("avonturier","actieKaart",6),
-			new Kaart("bureaucraat","actieKaart",4), new Kaart("kelder","actieKaart",2), new Kaart("raadsheer","actieKaart",3),new Kaart("kapel","actieKaart",2),new Kaart("raadszaal","actieKaart",5),new Kaart("feest","actieKaart",4),
-			new Kaart("festival","actieKaart",5),new Kaart("tuinen","actieKaart",4),new Kaart("laboratorium","actieKaart",5),new Kaart("bibliotheek","actieKaart",5),new Kaart("markt","actieKaart",5),new Kaart("militie","actieKaart",4),new Kaart("mijn","actieKaart",5)
-			,new Kaart("slotgracht","actieKaart",2),new Kaart("geldschieter","actieKaart",4),new Kaart("verbouwing","actieKaart",4),new Kaart("smidse","actieKaart",4),new Kaart("spion","actieKaart",4),new Kaart("dief","actieKaart",4),new Kaart("troonzaal","actieKaart",4)
-			,new Kaart("dorp","actieKaart",3),new Kaart("heks","actieKaart",5),new Kaart("werkplaats","actieKaart",3),new Kaart("houthakker","actieKaart",3)));
+	private List<Kaart> geldEnOverwinningskaarten = new LinkedList<>(Arrays.asList(new Kaart("koper","geldKaart",0,1),new Kaart("zilver","geldKaart",3,2),new Kaart("goud","geldKaart",6,3),
+			new Kaart("estate","overwinningskaart",2,1),new Kaart("dutchy","overwinningskaart",5,3),new Kaart("province","overwinningskaart",8,6)));
+	private List<Kaart> actiekaarten = new LinkedList<>(Arrays.asList(new Kaart("avonturier","actiekaart",6),
+			new Kaart("bureaucraat","actiekaart",4), new Kaart("kelder","actiekaart",2), new Kaart("raadsheer","actiekaart",3),new Kaart("kapel","actiekaart",2),new Kaart("raadszaal","actiekaart",5),new Kaart("feest","actiekaart",4),
+			new Kaart("festival","actiekaart",5),new Kaart("tuinen","actiekaart",4),new Kaart("laboratorium","actiekaart",5),new Kaart("bibliotheek","actiekaart",5),new Kaart("markt","actiekaart",5),new Kaart("militie","actiekaart",4),new Kaart("mijn","actiekaart",5)
+			,new Kaart("slotgracht","actiekaart",2),new Kaart("geldschieter","actiekaart",4),new Kaart("verbouwing","actieKaart",4),new Kaart("smidse","actiekaart",4),new Kaart("spion","actiekaart",4),new Kaart("dief","actiekaart",4),new Kaart("troonzaal","actiekaart",4)
+			,new Kaart("dorp","actiekaart",3),new Kaart("heks","actiekaart",5),new Kaart("werkplaats","actiekaart",3),new Kaart("houthakker","actiekaart",3)));
 	private Speler[] spelersNamen = new Speler[2];
 	private List<Kaart> kaartenDieTekoopZijn = new LinkedList<>();
 	Scanner scanner = new Scanner(System.in);
 	private Speler huidigeSpeler;
 
 	
-	//Test
+	
 	
 	public  void maakSpelersAan(String SpelersNamen[]){
 
@@ -28,10 +28,10 @@ public class GameEngine {
 	}
 	
 	public void veranderSpeler(){
-		if (huidigeSpeler == spelersNamen[1])
-		{huidigeSpeler = spelersNamen[0];}
+		if (huidigeSpeler == spelersNamen[0])
+		{huidigeSpeler = spelersNamen[1];}
 		
-		else {huidigeSpeler = spelersNamen[1];}
+		else {huidigeSpeler = spelersNamen[0];}
 
 	}
 	
@@ -66,11 +66,11 @@ public class GameEngine {
 
 	}	
 
-	public List<Kaart> actieKaartenGenereren() {
+	public List<Kaart> actiekaartenGenereren() {
 
-		Collections.shuffle(actieKaarten);
+		Collections.shuffle(actiekaarten);
 		for (int i = 0; i < 10; i++) {
-			kaartenDieTekoopZijn.add(actieKaarten.get(i));
+			kaartenDieTekoopZijn.add(actiekaarten.get(i));
 		}
 		return kaartenDieTekoopZijn;
 	}
@@ -96,19 +96,19 @@ public class GameEngine {
 	}
 
 		
-	public List<Kaart> controleerActieKaarten(List<Kaart> kaartenInHand){
-		List<Kaart> tmp = new LinkedList<Kaart>();
+	public List<Kaart> neemActiekaartenUitHand(List<Kaart> kaartenInHand){
+		List<Kaart> actiekaartenUitHand = new LinkedList<Kaart>();
 		for (int i = 0; i < kaartenInHand.size(); i++) {
 			if (kaartenInHand.get(i).kaartType() == "actieKaart") {
-				tmp.add(kaartenInHand.get(i));
+				actiekaartenUitHand.add(kaartenInHand.get(i));
 			}
 		}
-		return tmp;
+		return actiekaartenUitHand;
 	}
 	
 
-	public List<Kaart> getAndereKaarten() {
-		return this.andereKaarten;
+	public List<Kaart> lijstGeldEnOverwinningskaarten() {
+		return this.geldEnOverwinningskaarten;
 	}
 
 

@@ -8,7 +8,7 @@ import engine.*;
 public class ConsoleSpel {
 	Scanner sc = new Scanner(System.in);
 	GameEngine engine = new GameEngine();
-	private List<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.actieKaartenGenereren(), engine.getAndereKaarten());
+	private List<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.actiekaartenGenereren(), engine.lijstGeldEnOverwinningskaarten());
 	
 
 	
@@ -63,18 +63,11 @@ public class ConsoleSpel {
 		System.out.println("Geef de spelersnamen in  ");
 		String spelers[] = new String[2];
 		System.out.print("Eerste spelersnaam: ");
-		spelers[1] = sc.nextLine();
-		
-		while (!(spelers[1] instanceof String))
-		{System.out.print("geef een geldige naam in :");
-		spelers[1] = sc.nextLine();}
-		
+		spelers[0] = sc.nextLine();
 	
 		System.out.print("Tweede spelersnaam: ");
-		spelers[0] = sc.nextLine();
-		while (!(spelers[0] instanceof String))
-		{System.out.print("geef een geldige naam in :");
-		spelers[0] = sc.nextLine();}
+		spelers[1] = sc.nextLine();
+		
 		
 		return spelers;
 		
@@ -108,7 +101,7 @@ public class ConsoleSpel {
 		boolean tmp = false;
 		//boolean tmp2 = false;
 		
-		if(engine.controleerActieKaarten(kaartenInHand).size()>0 & engine.geefHuidigeSpeler().geefActie()>0)
+		if(engine.neemActiekaartenUitHand(kaartenInHand).size()>0 & engine.geefHuidigeSpeler().geefActie()>0)
 			{System.err.println("Let op: u kan optie 1 niet meer kiezen als u eerst optie 2 neemt !");
 			System.out.println("1: gebruik actiekaarten");
 			
@@ -140,7 +133,7 @@ public class ConsoleSpel {
 		
 		switch (keuze) {
 		case 1:
-			List<Kaart> actieKaartenUitDrawHand = engine.controleerActieKaarten(kaartenInHand);
+			List<Kaart> actieKaartenUitDrawHand = engine.neemActiekaartenUitHand(kaartenInHand);
 			printFunctie("Actiekaarten");
 			toonLijst(actieKaartenUitDrawHand);
 			Kaart gekozenKaart = kiesActiekaart(actieKaartenUitDrawHand);
