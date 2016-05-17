@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.*;
+
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
+
 import engine.*;
 
 /**
@@ -32,6 +35,7 @@ public class DominionServlet extends HttpServlet {
     private void spelerToevoegen(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
     	// this is the call that initiates a NEWLY begun game
     	engine = new GameEngine();
+    	JSONObject jsonObj = new JSONObject();
     	
     	String spelerNaam = request.getParameter("spelerNaam");
     	String spelerNaam2 = request.getParameter("spelerNaam2");
@@ -40,28 +44,25 @@ public class DominionServlet extends HttpServlet {
     	spelers[0] = spelerNaam;
     	spelers[1] = spelerNaam2;
     	
-		engine.maakSpelersAan(spelers);
-		
-		//JSONObject jsonObj = new JSONObject();
+    	engine.maakSpelersAan(spelers);
+    	Speler huidigeSpeler = engine.geefHuidigeSpeler();
+    	engine.geefHuidigeSpeler().trekKaart(huidigeSpeler.trekStapel(), 5);
+    	
+    	jsonObj.put("Kaarten in hand van " + huidigeSpeler , huidigeSpeler.kaartenInHand());
+		response.getWriter().write(jsonObj.toString());
+    	
 		//Speler speler = new Speler(spelerNaam);
     	//jsonObj.put("speler", speler.geefNaam());
     }
-		
+	
     private void kaartenInHand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	JSONObject jsonObj = new JSONObject();
     	//jsonObj.put("Huidige kaarten in hand", engine.kaartInHand());
+    	    	
+    	jsonObj.put("Kaarten in hand", speler.kaartenInHand());
     	response.getWriter().write(jsonObj.toString());
 	}
     
-    private void koperKopen(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	JSONObject jsonObj = new JSONObject();    	
-    	response.getWriter().write(jsonObj.toString());
-	}
-    
-    private void huidigeKaarten(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	speler.kaartenInHand();
-	}
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -78,13 +79,6 @@ public class DominionServlet extends HttpServlet {
 		case "kaartenInHand":
 			kaartenInHand(request, response);
 			break;
-			
-		case "koperKopen":
-			koperKopen(request, response);
-			break;
-			
-		case "huidigeKaarten":
-			huidigeKaarten(request, response);
 					
 		default:
 			//ErrorMsg(request, response);
