@@ -1,9 +1,6 @@
 package engine;
 import java.util.*;
 
-
-
-
 public class Speler {
 	GameEngine engine = new GameEngine();
 	private List<Kaart> kaartenInHand = new LinkedList<>();
@@ -23,17 +20,17 @@ public class Speler {
 		aankoop = 1;
 		actie = 1;
 		geld = 0;
-		//testing
+	
 		
 	}
 	
 	public List<Kaart> startKaarten() {
 		for (int i = 0; i < 7; i++) {
-			trekStapel.add(new Kaart("koper","GeldKaart",0,1,0));
+			trekStapel.add(new Kaart("koper","GeldKaart",0,1));
 			//trekStapel.add(new ActieKaart("raadszaal"));
 		}
 		for (int j = 0; j < 3; j++) {
-			trekStapel.add(new Kaart("estate","overwinningsKaart",2,0,1));
+			trekStapel.add(new Kaart("estate","overwinningsKaart",2,1));
 		}
 		Collections.shuffle(trekStapel);
 		return trekStapel;
@@ -48,7 +45,6 @@ public class Speler {
 			aflegStapel.add(lijst.get(i));
 		}
 		for (int i = 0; i < aantal; i++) {
-			//lijst.removeFirst();
 			lijst.remove(i);
 		}
 		return kaartenInHand;
