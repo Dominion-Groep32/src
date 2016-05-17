@@ -2,11 +2,6 @@ package engine;
 
 import java.util.*;
 
-
-
-
-
-
 public class GameEngine {
 	
 	
@@ -49,10 +44,6 @@ public class GameEngine {
 		
 		return tmp;
 	}
-	
-	
-	
-	
 	
 	public List<Kaart> lijstenSamenvoegenShuffle(List<Kaart> primaireLijst, List<Kaart> bijTeVoegenLijst) {
 
