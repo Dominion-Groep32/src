@@ -44,7 +44,8 @@ public class ConsoleSpel {
 				toonLijst(engine.geefHuidigeSpeler().trekKaart(huidigeSpeler.trekStapel(), 5));
 				printFunctie("Geef uw keuze");
 				int keuze = geefKeuze(huidigeSpeler.kaartenInHand());
-				while(engine.geefHuidigeSpeler().geefActie() >0){
+				while(engine.geefHuidigeSpeler().geefActie() >0)
+				{
 					keuzeSpeler(keuze,huidigeSpeler.kaartenInHand(),tafelKaarten,huidigeSpeler.aflegStapel());
 					engine.geefHuidigeSpeler().verminderActie(1);
 					
