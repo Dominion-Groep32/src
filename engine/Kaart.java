@@ -11,20 +11,22 @@ public class Kaart {
 	private int overwinningpunten;
 	
 	
-	public Kaart(String naam,String Type, int cost ,int waarde )
+	public Kaart(String naam,String Type, int cost ,int waarde, String info )
 	{
 		this.kaartNaam = naam;
 		this.KaartType = Type;
 		this.cost = cost;
 		if(Type == "overwinningskaart"){this.overwinningpunten = waarde;}
-		else {this.waarde = waarde;}
+		else {this.waarde = waarde;};
+		this.info = info;
 		
 	}
-	public Kaart(String naam,String Type, int cost )
+	public Kaart(String naam,String Type, int cost, String info )
 	{
 		this.kaartNaam = naam;
 		this.KaartType = Type;
 		this.cost = cost;
+		this.info = info;
 	}
 
 	

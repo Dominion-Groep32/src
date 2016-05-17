@@ -239,8 +239,8 @@ private int printGeefKeuze() {
 	 return sc.nextInt();
 }
 private void geefInfoOverKaarten(int kaartKeuze, List<Kaart> lijstWaarvanJeKanKopen) {
-	Kaart gekozenKaart = lijstWaarvanJeKanKopen.get(kaartKeuze);
-	System.out.println(gekozenKaart.info());
+	Kaart gekozenKaart = lijstWaarvanJeKanKopen.get(kaartKeuze-1);
+	System.out.println(gekozenKaart.naam()+" : "+gekozenKaart.info());
 	
 	
 	vragenNaarInfoOverKaarten();
