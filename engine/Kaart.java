@@ -10,7 +10,9 @@ public class Kaart {
 	private int waarde;
 	private int overwinningpunten;
 	
-
+	//kleine if zetten in de constructor waardoor hij controleerd op het type en als het type een geldkaart is voegt hij de waarde toe als waarde en als het niet zo is 
+	//voegt hij het toe als overwinningspunten
+	
 	public Kaart(String naam,String Type, int cost ,int waarde,int overwinningpunten )
 	{
 		this.kaartNaam = naam;
@@ -31,19 +33,36 @@ public class Kaart {
 		this.KaartType = Type;
 		this.cost = cost;
 		this.waarde = waarde;
+	}	
+	
+
+	public int krijgAantalOverwinnigsPunten() 
+	{
+		return this.overwinningpunten;	
+	}
+
+	public String naam() {
+		return this.kaartNaam;
+	}
+
+
+	public String kaartType() {
+		return this.KaartType;
+	}
+
+	
+	public int kost() {
+		return this.cost;
+	}
+
+	public int waarde() {
+		return this.waarde;
 	}
 	
-	/*
-	public Kaart(String naam,String Type, int cost ,int waarde,int overwinningpunten, String actie)
-	{
-		this.kaartNaam = naam;
-		this.KaartType = Type;
-		this.cost = cost;
-		this.waarde = waarde;
-		//hieronder staat pseudo 
-		//this.actie = actie();
+	
+	public String info(){
+		return this.info;
 	}
-	*/	
 	
 	/*
 	public Kaart(String kaartnaam)
@@ -251,34 +270,7 @@ public class Kaart {
 		
 	}
 	*/
-
-	public int krijgAantalOverwinnigsPunten() 
-	{
-		return this.overwinningpunten;	
-	}
-
-	public String naam() {
-		return this.kaartNaam;
-	}
-
-
-	public String kaartType() {
-		return this.KaartType;
-	}
-
 	
-	public int kost() {
-		return this.cost;
-	}
-
-	public int waarde() {
-		return this.waarde;
-	}
-	
-	
-	public String info(){
-		return this.info;
-	}
 		
 	}
 
