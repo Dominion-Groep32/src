@@ -8,7 +8,7 @@ import engine.*;
 public class ConsoleSpel {
 	Scanner sc = new Scanner(System.in);
 	GameEngine engine = new GameEngine();
-	private List<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.actiekaartenGenereren(), engine.lijstGeldEnOverwinningskaarten());
+	private List<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.kaartenGenereren(), engine.lijstGeldEnOverwinningskaarten());
 	
 
 	
@@ -179,7 +179,8 @@ public int koopKaart(List<Kaart> lijstWaarvanJeKanKopen,List<Kaart> aflegStapel)
 	
 		int keuze = kaartnummerInvullen("kopen")-1;
 		int gecontroleerdekeuze = controleKeuze(keuze, lijstWaarvanJeKanKopen.size());
-		aflegStapel.add(lijstWaarvanJeKanKopen.get(gecontroleerdekeuze));	
+		aflegStapel.add(lijstWaarvanJeKanKopen.get(gecontroleerdekeuze));
+		engine.verminderStapel(lijstWaarvanJeKanKopen.get(gecontroleerdekeuze).naam());
 		return lijstWaarvanJeKanKopen.get(gecontroleerdekeuze).kost();
 
 	}
