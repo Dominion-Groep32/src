@@ -1,13 +1,18 @@
 package Controllers;
 
 import java.io.IOException;
+
+import javax.management.monitor.GaugeMonitor;
+import javax.print.attribute.standard.RequestingUserName;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.eclipse.swt.internal.ole.win32.VARDESC;
 import org.json.*;
 import engine.*;
+import jdk.nashorn.internal.scripts.JO;
 
 /**
  * Servlet implementation class DominionServlet
@@ -15,26 +20,46 @@ import engine.*;
 public class DominionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private GameEngine engine;
+	private GameEngine engine;			// FIXME: zou via getServletContext().get/setAttribute moeten werken
        
     /**
      * @see HttpServlet#HttpServlet()
      */
     public DominionServlet() {
         super();
+        engine = null;
         // TODO Auto-generated constructor stub
     }
     
-    private void addPlayer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
-    {	
-		String spelerNaam = request.getParameter("spelerNaam");
-		Speler gebruiker = new Speler(spelerNaam);
+    private void spelerToevoegen(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+    	// this is the call that initiates a NEWLY begun game
+    	engine = new GameEngine();
+    	
+    	String spelerNaam = request.getParameter("spelerNaam");
+		Speler speler = new Speler(spelerNaam);
 		
 		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("speler", gebruiker.geefNaam());
+		jsonObj.put("speler", speler.geefNaam());
 		
 		response.getWriter().write(jsonObj.toString());
     }
+    
+    private void kaartenInHand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	
+    	JSONObject jsonObj = new JSONObject();
+    	jsonObj.put("Huidige kaarten in hand", engine.kaartInHand());
+    	
+    	response.getWriter().write(jsonObj.toString());
+	}
+    
+    private void koperKopen(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	JSONObject jsonObj = new JSONObject();
+    	jsonObj.put("Huidige kaarten in hand", engine.kaartInHand());
+    	
+    	response.getWriter().write(jsonObj.toString());
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -44,15 +69,20 @@ public class DominionServlet extends HttpServlet {
 		
 		switch(request.getParameter("operation"))
 		{
-		case "addPlayer":
-			addPlayer(request, response);
+		case "spelerToevoegen":
+			spelerToevoegen(request, response);
 			break;
 			
-		case "ietsanders":
+		case "kaartenInHand":
+			kaartenInHand(request, response);
+			break;
+			
+		case "koperKopen":
+			koperKopen(request, response);
 			break;
 					
 		default:
-			// ErrorMsg(request, response);
+			//ErrorMsg(request, response);
 			break;
 		}	
 	}
