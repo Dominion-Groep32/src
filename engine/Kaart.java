@@ -1,15 +1,16 @@
 package engine;
 
+import console.ConsoleSpel;
 
-public class Kaart {
+public interface Kaart {
+	public String naam();
+	public String kaartType();
+	public String info();
+	public int kost();
+	public int waarde();
 	
-	private String KaartType;
-	private String kaartNaam;	
-	private String info;
-	private int cost;
-	private int waarde;
-	private int overwinningpunten;
 	
+<<<<<<< HEAD
 	//kleine if zetten in de constructor waardoor hij controleerd op het type en als het type een geldkaart is voegt hij de waarde toe als waarde en als het niet zo is 
 	//voegt hij het toe als overwinningspunten
 	
@@ -275,3 +276,14 @@ public class Kaart {
 	}
 
 
+=======
+
+	
+	
+
+	
+
+	
+	
+}
+>>>>>>> aa140b969654acfb48284250e3d4b6bf43e99e4e
