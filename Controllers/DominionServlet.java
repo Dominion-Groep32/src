@@ -16,9 +16,9 @@ import engine.*;
 public class DominionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private GameEngine engine;	// FIXME: zou via getServletContext().get/setAttribute moeten werken
-	private Speler speler;
-       
+	//private GameEngine engine;	// FIXME: zou via getServletContext().get/setAttribute moeten werken
+	//private Speler speler;
+    GameEngine engine = new GameEngine();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -29,9 +29,9 @@ public class DominionServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
   
-    private void spelerToevoegen(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+    public void spelerToevoegen(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
     	// this is the call that initiates a NEWLY begun game
-    	engine = new GameEngine();
+    	//engine = new GameEngine();
     	
     	String spelerNaam = request.getParameter("spelerNaam");
     	String spelerNaam2 = request.getParameter("spelerNaam2");
@@ -47,19 +47,30 @@ public class DominionServlet extends HttpServlet {
     	//jsonObj.put("speler", speler.geefNaam());
     }
 		
-    private void kaartenInHand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void kaartenInHand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	JSONObject jsonObj = new JSONObject();
-    	//jsonObj.put("Huidige kaarten in hand", engine.kaartInHand());
+    	jsonObj.put("Huidige kaarten in hand", engine.geefHuidigeSpeler().kaartenInHand());
     	response.getWriter().write(jsonObj.toString());
+    	
+    	/* OVER DE LIJST LOOPEN
+    	 * 
+    	for (int i = 0; i < engine.geefHuidigeSpeler().kaartenInHand().size(); i++) {
+			System.out.println(engine.geefHuidigeSpeler().kaartenInHand().get(i));
+		}
+		*/
+    	
+    	
 	}
     
-    private void koperKopen(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void koperKopen(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	JSONObject jsonObj = new JSONObject();    	
     	response.getWriter().write(jsonObj.toString());
 	}
     
-    private void huidigeKaarten(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	speler.kaartenInHand();
+    public void huidigeKaarten(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	//speler.kaartenInHand();
+    	
+    	engine.geefHuidigeSpeler().kaartenInHand();
 	}
 
 	/**
