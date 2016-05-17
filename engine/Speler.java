@@ -2,7 +2,7 @@ package engine;
 import java.util.*;
 
 
-//fk
+
 
 
 public class Speler {
@@ -24,6 +24,7 @@ public class Speler {
 		aankoop = 1;
 		actie = 1;
 		geld = 0;
+		//testing
 		
 	}
 	
