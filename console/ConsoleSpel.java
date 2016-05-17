@@ -31,11 +31,10 @@ public class ConsoleSpel {
 		
 		
 		engine.maakSpelersAan(vraagSpelersNamen());
-		
+	
 		while(engine.spelNogNietBeëindigd()){
 			
-			for (int i = 0; i < 2; i++)
-			{
+				engine.spelNogNietBeëindigd();
 				engine.veranderSpeler();
 				Speler huidigeSpeler = engine.geefHuidigeSpeler();
 				System.out.println("");
@@ -53,8 +52,7 @@ public class ConsoleSpel {
 				engine.maakKaartInHandLeeg(huidigeSpeler.kaartenInHand());
 				printFunctie("de beurt van "+engine.geefHuidigeSpeler().geefNaam()+" is beëindigd");
 				System.out.println("");
-				huidigeSpeler.herstelWaarden();
-			}		
+				huidigeSpeler.herstelWaarden();	
 		}
 		
 		
