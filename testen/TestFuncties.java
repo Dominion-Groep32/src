@@ -1,23 +1,23 @@
-	package testen;
+package testen;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
 import org.junit.*;
-import engine.*;
-/*
+
+import engine.ActieKaart;
+import engine.GameEngine;
+import engine.GeldKaart;
+import engine.Kaart;
+import engine.OverwinningKaart;
+import engine.Speler;
+
 public class TestFuncties {
 	GameEngine engine = new GameEngine();
 	Speler speler = new Speler("testspeler");
-	private List<Kaart> eersteTestlijst = speler.trekStapel();
-
-	private List<Kaart> derdeTestLijst = new LinkedList<Kaart>(Arrays.asList(new Kaart("avonturier"),
-			new Kaart("bureaucraat"), new Kaart("kelder"), new Kaart("raadsheer"),new Kaart("heks"),new Kaart("koper"),new Kaart("koper"),
-			new Kaart("koper"),new Kaart("estate"),new Kaart("estate"),new Kaart("estate")));	
-	
-	 * new LinkedList<Kaart>(Arrays.asList(new Kaart("avonturier"),
-			new Kaart("bureaucraat"), new Kaart("kelder"), new Kaart("raadsheer"),new Kaart("heks"),new Kaart("koper"),new Kaart("koper"),
-			new Kaart("koper"),new Kaart("estate"),new Kaart("estate"),new Kaart("estate")));
-	
-	
+	private LinkedList<Kaart> eersteTestlijst = speler.trekStapel();
+	private LinkedList<Kaart> derdeTestLijst = new LinkedList<Kaart>(Arrays.asList(new ActieKaart("avonturier"),
+			new ActieKaart("bureaucraat"), new ActieKaart("kelder"), new ActieKaart("raadsheer"),new ActieKaart("heks"),new GeldKaart("koper"),new GeldKaart("koper"),
+			new GeldKaart("koper"),new OverwinningKaart("estate"),new OverwinningKaart("estate"),new OverwinningKaart("estate")));	
 	
 	@Test
 	public void mainTest(){System.out.println("this works");}
@@ -45,7 +45,7 @@ public class TestFuncties {
 	public void lijstenSamenvoegenShuffle()
 	{
 	
-		List<Kaart> tester = engine.lijstenSamenvoegenShuffle(eersteTestlijst, derdeTestLijst);		
+		LinkedList<Kaart> tester = engine.lijstenSamenvoegenShuffle(eersteTestlijst, derdeTestLijst);		
 		if (tester.size() != 20){System.out.println("Fout in lijsten samenvoegen shuffle");}
 		
 	}
@@ -86,4 +86,4 @@ public class TestFuncties {
 		}	
 	}
 }	
-	 */
+	
