@@ -1,22 +1,13 @@
 package Controllers;
 
 import java.io.IOException;
-
-import javax.management.monitor.GaugeMonitor;
-import javax.print.attribute.standard.RequestingUserName;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-<<<<<<< HEAD
-import org.eclipse.swt.internal.ole.win32.VARDESC;
-import org.json.*;
-=======
 //import org.json.*;
->>>>>>> 1786da204923b079111d893c9b3d61752488cd23
 import engine.*;
-import jdk.nashorn.internal.scripts.JO;
 
 /**
  * Servlet implementation class DominionServlet
@@ -24,11 +15,7 @@ import jdk.nashorn.internal.scripts.JO;
 //public class DominionServlet extends HttpServlet {
 	//private static final long serialVersionUID = 1L;
 	
-<<<<<<< HEAD
-	private GameEngine engine;			// FIXME: zou via getServletContext().get/setAttribute moeten werken
-=======
 	//private GameEngine engine;
->>>>>>> 1786da204923b079111d893c9b3d61752488cd23
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -36,21 +23,8 @@ import jdk.nashorn.internal.scripts.JO;
 	  /*
     public DominionServlet() {
         super();
-        engine = null;
         // TODO Auto-generated constructor stub
     }
-<<<<<<< HEAD
-    
-    private void spelerToevoegen(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-    	// this is the call that initiates a NEWLY begun game
-    	engine = new GameEngine();
-    	
-    	String spelerNaam = request.getParameter("spelerNaam");
-		Speler speler = new Speler(spelerNaam);
-		
-		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("speler", speler.geefNaam());
-=======
   
     private void addPlayer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {	
@@ -59,27 +33,9 @@ import jdk.nashorn.internal.scripts.JO;
 		
 		//JSONObject jsonObj = new JSONObject();
 		jsonObj.put("speler", gebruiker.geefNaam());
->>>>>>> 1786da204923b079111d893c9b3d61752488cd23
 		
 		response.getWriter().write(jsonObj.toString());
     }
-    
-    private void kaartenInHand(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	
-    	
-    	JSONObject jsonObj = new JSONObject();
-    	jsonObj.put("Huidige kaarten in hand", engine.kaartInHand());
-    	
-    	response.getWriter().write(jsonObj.toString());
-	}
-    
-    private void koperKopen(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	
-    	JSONObject jsonObj = new JSONObject();
-    	jsonObj.put("Huidige kaarten in hand", engine.kaartInHand());
-    	
-    	response.getWriter().write(jsonObj.toString());
-	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -90,20 +46,15 @@ import jdk.nashorn.internal.scripts.JO;
 		
 		switch(request.getParameter("operation"))
 		{
-		case "spelerToevoegen":
-			spelerToevoegen(request, response);
+		case "addPlayer":
+			addPlayer(request, response);
 			break;
 			
-		case "kaartenInHand":
-			kaartenInHand(request, response);
-			break;
-			
-		case "koperKopen":
-			koperKopen(request, response);
+		case "ietsanders":
 			break;
 					
 		default:
-			//ErrorMsg(request, response);
+			// ErrorMsg(request, response);
 			break;
 		}	
 	}

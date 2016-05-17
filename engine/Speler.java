@@ -3,22 +3,19 @@ import java.util.*;
 
 
 
+
 public class Speler {
-	// het werkt
 	GameEngine engine = new GameEngine();
-	private LinkedList<Kaart> kaartenInHand = new LinkedList<Kaart>();
-	private LinkedList<Kaart> aflegStapel = new LinkedList<Kaart>();
-	private LinkedList<Kaart> trekStapel = new LinkedList<Kaart>();
-	private LinkedList<Kaart> trashStapel = new LinkedList<Kaart>();
+	private List<Kaart> kaartenInHand = new LinkedList<>();
+	private List<Kaart> aflegStapel = new LinkedList<>();
+	private List<Kaart> trekStapel = new LinkedList<>();
+	private List<Kaart> trashStapel = new LinkedList<>();
 	private String naam;
 	private int aankoop ;
 	private int actie;
 	private int geld;
 
-	
 	public Speler(String naam){
-		//testt
-		//Test
 		this.naam = naam;
 		kaartenInHand = new LinkedList<Kaart>();
 		trekStapel = startKaarten();
@@ -29,20 +26,19 @@ public class Speler {
 		
 	}
 	
-	public LinkedList<Kaart> startKaarten() {
+	public List<Kaart> startKaarten() {
 		for (int i = 0; i < 7; i++) {
-			trekStapel.add(new GeldKaart("koper"));
+			trekStapel.add(new Kaart("koper","GeldKaart",0,1,0));
 			//trekStapel.add(new ActieKaart("raadszaal"));
-			
 		}
 		for (int j = 0; j < 3; j++) {
-			trekStapel.add(new OverwinningKaart("estate"));
+			trekStapel.add(new Kaart("estate","overwinningsKaart",2,0,1));
 		}
 		Collections.shuffle(trekStapel);
 		return trekStapel;
 	}
 	
-	public LinkedList<Kaart> trekKaart(LinkedList<Kaart> lijst, int aantal) {
+	public List<Kaart> trekKaart(List<Kaart> lijst, int aantal) {
 		if (lijst.size() < aantal) {
 			lijst = engine.lijstenSamenvoegenShuffle(trekStapel, aflegStapel);
 		}
@@ -51,7 +47,8 @@ public class Speler {
 			aflegStapel.add(lijst.get(i));
 		}
 		for (int i = 0; i < aantal; i++) {
-			lijst.removeFirst();
+			//lijst.removeFirst();
+			lijst.remove(i);
 		}
 		return kaartenInHand;
 	}
@@ -63,17 +60,17 @@ public class Speler {
 	}
 	
 	
-	public LinkedList<Kaart> trekStapel()
+	public List<Kaart> trekStapel()
 	{
 		return trekStapel;
 	}
 	
-	public LinkedList<Kaart> aflegStapel()
+	public List<Kaart> aflegStapel()
 	{
 		return aflegStapel;
 	}
 	
-	public LinkedList<Kaart> kaartenInHand() 
+	public 	List<Kaart> kaartenInHand() 
 	{
 		return kaartenInHand;
 	}
