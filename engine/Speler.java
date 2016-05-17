@@ -27,8 +27,8 @@ public class Speler {
 	
 	public List<Kaart> startKaarten() {
 		for (int i = 0; i < 7; i++) {
-			trekStapel.add(new Kaart("koper","GeldKaart",0,1,""));
-			//trekStapel.add(new ActieKaart("raadszaal"));
+			//trekStapel.add(new Kaart("koper","GeldKaart",0,1,""));
+			trekStapel.add(new Kaart("goud","GeldKaart",0,9999,""));
 		}
 		for (int j = 0; j < 3; j++) {
 			trekStapel.add(new Kaart("landgoed","overwinningsKaart",2,1,""));
@@ -45,7 +45,7 @@ public class Speler {
 			kaartenInHand.add(lijst.get(i));
 		}
 		for (int i = 0; i < aantal; i++) {
-			lijst.remove(lijst.size());
+			//lijst.remove(lijst.size());
 		}
 		return kaartenInHand;
 	}
