@@ -18,7 +18,7 @@ public class GameEngine {
 	private Speler huidigeSpeler;
 
 	
-	
+	//Test
 	
 	public  void maakSpelersAan(String SpelersNamen[]){
 
