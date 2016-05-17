@@ -51,23 +51,29 @@ public class GameEngine {
 	
 	public boolean spelNogNietBeëindigd(){
 		int Legestapels = 0;
+		int tmp = 0;
+		
 		for (int i = 0; i < Stapels.length; i++) 
 		{
-			if((int) Stapels[i][1] <= 0)
+			int getal = (int)Stapels[i][1];
+			if(getal <= 0)
 			{
-				if (Stapels[i][0].equals("provincie") && Legestapels >=3)
+				String lijstNaam = Stapels[i][0].toString();
+				System.out.println("naam van de lijst"+lijstNaam);
+				if (lijstNaam.equals("provincie") || Legestapels >=3)
 				{
-					return false;
+					tmp = 1;
 				}
 				Legestapels = Legestapels+1;
 			}
-			else {
-				return true;
-			}
+			
 			
 			
 		}
-		return true;
+		if (tmp ==1)
+		{return false;}
+		else{return true;}
+		
 		
 	}
 	
