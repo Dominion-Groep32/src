@@ -12,7 +12,7 @@ public class Speler {
 	private int actie;
 	private int geld;
 
-	//als je nu werkt suckt griet
+
 	public Speler(String naam){
 		this.naam = naam;
 		kaartenInHand = new LinkedList<Kaart>();
@@ -43,10 +43,9 @@ public class Speler {
 		}
 		for (int i = 0; i < aantal; i++) {
 			kaartenInHand.add(lijst.get(i));
+			lijst.remove(lijst.get(i));
 		}
-		for (int i = 0; i < aantal; i++) {
-			lijst.remove(lijst.size());
-		}
+		
 		return kaartenInHand;
 	}
 	
