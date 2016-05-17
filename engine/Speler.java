@@ -43,7 +43,6 @@ public class Speler {
 		}
 		for (int i = 0; i < aantal; i++) {
 			kaartenInHand.add(lijst.get(i));
-			aflegStapel.add(lijst.get(i));
 		}
 		for (int i = 0; i < aantal; i++) {
 			//lijst.remove(i);
