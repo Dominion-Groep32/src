@@ -34,7 +34,7 @@ public class ConsoleSpel {
 	
 		while(engine.spelNogNietBeëindigd()){
 			
-				engine.spelNogNietBeëindigd();
+				
 				engine.veranderSpeler();
 				Speler huidigeSpeler = engine.geefHuidigeSpeler();
 				System.out.println("");
