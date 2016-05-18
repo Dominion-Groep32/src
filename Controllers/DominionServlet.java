@@ -80,7 +80,7 @@ public class DominionServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setHeader("Access-Control-Allow-Origin", "*");
-		
+		//test
 		switch(request.getParameter("operation"))
 		{
 		case "spelerToevoegen":
