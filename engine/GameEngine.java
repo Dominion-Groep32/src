@@ -37,6 +37,7 @@ public class GameEngine {
 
 	}
 	
+
 	public void verminderStapel(String kaartnaam){
 		
 		for (int i = 0; i < Stapels.length; i++) {
@@ -153,7 +154,7 @@ public class GameEngine {
 	public List<Kaart> neemActiekaartenUitHand(List<Kaart> kaartenInHand){
 		List<Kaart> actiekaartenUitHand = new LinkedList<Kaart>();
 		for (int i = 0; i < kaartenInHand.size(); i++) {
-			if (kaartenInHand.get(i).kaartType() == "actieKaart") {
+			if (kaartenInHand.get(i).kaartType() == "actiekaart") {
 				actiekaartenUitHand.add(kaartenInHand.get(i));
 			}
 		}
@@ -177,7 +178,7 @@ public class GameEngine {
 		return this.huidigeSpeler;
 	}
 	
-	public void brengKaartenInHandStapelNaarAflegstapel(List<Kaart> kaartenInHand, List<Kaart> aflegstapel){
+	public void brengKaartenInHandNaarAflegstapel(List<Kaart> kaartenInHand, List<Kaart> aflegstapel){
 		lijstenSamenvoegenZonderShuffle(aflegstapel, kaartenInHand);
 		maakKaartInHandLeeg(huidigeSpeler.kaartenInHand());
 	}
