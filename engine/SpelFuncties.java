@@ -128,7 +128,7 @@ public class SpelFuncties {
 		return kaartenDieTekoopZijn;
 	}
 	
-	public List<Kaart> trekKaart(List<Kaart> lijst, int aantal) {
+	public void trekKaart(List<Kaart> lijst, int aantal) {
 		if (lijst.size() < aantal) {
 			lijst = lijstenSamenvoegenShuffle(huidigeSpeler.trekStapel(), huidigeSpeler.aflegStapel());
 		}
@@ -138,8 +138,6 @@ public class SpelFuncties {
 		for (int i = 0; i < aantal; i++) {
 			lijst.remove(0);
 		}
-		
-		return huidigeSpeler.kaartenInHand();
 	}
 
 
