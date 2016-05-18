@@ -52,6 +52,7 @@ public class GameEngine {
 	public boolean spelNogNietBeëindigd(){
 		int Legestapels = 0;
 		int tmp = 0;
+		// boolean tmp = true;
 		
 		for (int i = 0; i < Stapels.length; i++) 
 		{
@@ -63,6 +64,7 @@ public class GameEngine {
 				if (lijstNaam.equals("provincie") || Legestapels >=3)
 				{
 					tmp = 1;
+					//tmp = false;
 				}
 				Legestapels = Legestapels+1;
 			}
@@ -73,19 +75,20 @@ public class GameEngine {
 		if (tmp ==1)
 		{return false;}
 		else{return true;}
+		// return tmp
 		
 		
 	}
 	
 	
 	public Speler andereSpeler(){
-		Speler tmp;
+		Speler andereSpeler;
 		if (huidigeSpeler == spelersNamen[1])
-		{tmp = spelersNamen[0];}
+		{andereSpeler = spelersNamen[0];}
 		
-		else {tmp = spelersNamen[1];}
+		else {andereSpeler = spelersNamen[1];}
 		
-		return tmp;
+		return andereSpeler;
 	}
 	
 	public List<Kaart> lijstenSamenvoegenShuffle(List<Kaart> primaireLijst, List<Kaart> bijTeVoegenLijst) {
@@ -137,13 +140,13 @@ public class GameEngine {
 
 
 	public List<Kaart> kaartenDieJeKuntKopen(List<Kaart> lijst, int coins) {
-		List<Kaart> tmp = new LinkedList<Kaart>();
+		List<Kaart> lijstMetKaartenDieJeKuntKopen = new LinkedList<Kaart>();
 		for (int i = 0; i < lijst.size(); i++) {
 			if (lijst.get(i).kost() <= coins) {
-				tmp.add(lijst.get(i));
+				lijstMetKaartenDieJeKuntKopen.add(lijst.get(i));
 			}
 		}
-		return tmp;
+		return lijstMetKaartenDieJeKuntKopen;
 	}
 
 		

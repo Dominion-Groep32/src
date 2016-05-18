@@ -95,7 +95,7 @@ public class ConsoleSpel {
 			System.out.println((i + 1) + ": " + lijst.get(i).naam());
 		}
 	}
-	
+	//ER ZIT EEN FOUT IN MORGEN BEKIJKEN GRIET
 	public int geefKeuze(List<Kaart> kaartenInHand) {
 		int getal = 1;
 		boolean tmp = false;
@@ -163,7 +163,7 @@ public class ConsoleSpel {
 		vragenNaarInfoOverKaarten();
 		while(speler.geefAankoop()>0)
 		{
-			int kost = koopKaart(lijstWaarvanJeKanKopen,aflegStapel);
+			int kost = koopKaart(lijstWaarvanJeKanKopen,aflegStapel).kost();
 			speler.verminderGeld(kost);
 			speler.verminderAankoop(1);
 		}
@@ -175,13 +175,13 @@ private int kaartnummerInvullen(String kopenOfWeten) {
 	return sc.nextInt();
 }
 
-public int koopKaart(List<Kaart> lijstWaarvanJeKanKopen,List<Kaart> aflegStapel) {
+public Kaart koopKaart(List<Kaart> lijstWaarvanJeKanKopen,List<Kaart> aflegStapel) {
 	
 		int keuze = kaartnummerInvullen("kopen")-1;
 		int gecontroleerdekeuze = controleKeuze(keuze, lijstWaarvanJeKanKopen.size());
 		aflegStapel.add(lijstWaarvanJeKanKopen.get(gecontroleerdekeuze));
 		engine.verminderStapel(lijstWaarvanJeKanKopen.get(gecontroleerdekeuze).naam());
-		return lijstWaarvanJeKanKopen.get(gecontroleerdekeuze).kost();
+		return lijstWaarvanJeKanKopen.get(gecontroleerdekeuze);
 
 	}
 
@@ -198,7 +198,7 @@ public void huidigeWaarden() {
 	System.out.println("Aankoop: "+ engine.geefHuidigeSpeler().geefAankoop());
 	System.out.println("Actie: " + engine.geefHuidigeSpeler().geefActie());
 }
-
+//MOET IK NOG NAAR KIJKEN!! GRIET
 public void tmpFunctie(){
 	Speler speler = engine.geefHuidigeSpeler();
 	printFunctie("");
