@@ -2,8 +2,6 @@ package engine;
 
 import java.util.*;
 
-import com.sun.prism.shader.Texture_LinearGradient_PAD_AlphaTest_Loader;
-
 
 public class SpelFuncties {
 	
@@ -19,8 +17,7 @@ public class SpelFuncties {
 	private Speler[] spelers;
 
 	private List<Kaart> kaartenDieTekoopZijn = new LinkedList<>();
-	private List<Kaart> testLijst = new LinkedList<>();
-	private Object[][] Stapels = new Object[16][2];
+	private List<Kaart> kaartenVanHetSpel = new LinkedList<>();
 	private List<Stapel> decks = new LinkedList<>();
 	Scanner scanner = new Scanner(System.in);
 	private Speler huidigeSpeler;
@@ -54,12 +51,12 @@ public class SpelFuncties {
 
 	public void verminderStapel(String kaartnaam){
 		
-		for (int i = 0; i < Stapels.length; i++) {
-			String Kaart = (String) Stapels[i][0];
+		for (int i = 0; i < decks.size(); i++) {
+			String Kaart = decks.get(i).geefStapelNaam();
 			if (kaartnaam.equals(Kaart))
 			{
-				int waarde = (int) Stapels[i][1];
-				Stapels[i][1] = (waarde-1);
+				decks.get(i).verminderAantalKaarten();
+				
 			}
 		}
 	}
@@ -68,7 +65,7 @@ public class SpelFuncties {
 		int Legestapels = 0;
 		Boolean tmp = true;
 		
-		for (int i = 0; i < Stapels.length; i++) 
+		for (int i = 0; i < decks.size(); i++) 
 		{
 			if(decks.get(i).geefAatalResterendeKaartenInDeStapel() <= 0)
 			{
@@ -123,9 +120,9 @@ public class SpelFuncties {
 		{
 			kaartenDieTekoopZijn.add(actiekaarten.get(i));
 		}
-		testLijst = lijstenSamenvoegenZonderShuffle(kaartenDieTekoopZijn, geldEnOverwinningskaarten);
-		for (int j = 0; j < testLijst.size(); j++) {
-			decks.add(new Stapel(testLijst.get(j).naam()));
+		kaartenVanHetSpel = lijstenSamenvoegenZonderShuffle(kaartenDieTekoopZijn, geldEnOverwinningskaarten);
+		for (int j = 0; j < kaartenVanHetSpel.size(); j++) {
+			decks.add(new Stapel(kaartenVanHetSpel.get(j).naam()));
 		}
 		
 		return kaartenDieTekoopZijn;
