@@ -63,8 +63,7 @@ public class Kaart {
 	public int waarde() {
 		return this.waarde;
 	}
-	
-	
+		
 	public String info(){
 		return this.info;
 	}
