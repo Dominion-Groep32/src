@@ -81,17 +81,12 @@ public class GameEngine {
 	
 	public Speler andereSpeler(){
 		Speler andereSpeler;
-<<<<<<< HEAD
+
 		if (huidigeSpeler == spelers[1])
 		{andereSpeler = spelers[0];}
 		
 		else {andereSpeler = spelers[1];}
-=======
-		if (huidigeSpeler == spelersNamen[1])
-		{andereSpeler = spelersNamen[0];}
-		
-		else {andereSpeler = spelersNamen[1];}
->>>>>>> 29d5d733b6fc822189949c24c9fcc3f28909e866
+
 		
 		return andereSpeler;
 	}
