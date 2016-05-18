@@ -19,12 +19,9 @@ public class SpelFuncties {
 	private List<Kaart> kaartenDieTekoopZijn = new LinkedList<>();
 	private List<Kaart> testLijst = new LinkedList<>();
 	private Object[][] Stapels = new Object[16][2];
+	private List<Stapel> decks = new LinkedList<>();
 	Scanner scanner = new Scanner(System.in);
 	private Speler huidigeSpeler;
-	
-	
-
-
 	
 	public  void maakSpelersAan(String SpelersNamen[]){
 		 spelers = new Speler[SpelersNamen.length];
@@ -71,10 +68,10 @@ public class SpelFuncties {
 		
 		for (int i = 0; i < Stapels.length; i++) 
 		{
-			if((int)Stapels[i][1] <= 0)
+			if(decks.get(i).geefAatalResterendeKaartenInDeStapel() <= 0)
 			{
 				Legestapels = Legestapels+1;
-				String lijstNaam = Stapels[i][0].toString();
+				String lijstNaam = decks.get(i).geefStapelNaam();
 				
 				if (lijstNaam.equals("provincie") || Legestapels >=3)
 				{
@@ -86,8 +83,8 @@ public class SpelFuncties {
 		
 	}
 	
-	
-	public Speler andereSpeler(){
+	//bij andere spelers zou je met een for moeten werken // nog vragen aan greit 
+	public Speler andereSpelers(){
 		Speler andereSpeler;
 		if (huidigeSpeler == spelers[1])
 		{andereSpeler = spelers[0];}
@@ -126,8 +123,7 @@ public class SpelFuncties {
 		}
 		testLijst = lijstenSamenvoegenZonderShuffle(kaartenDieTekoopZijn, geldEnOverwinningskaarten);
 		for (int j = 0; j < testLijst.size(); j++) {
-			Stapels[j][0] = testLijst.get(j).naam();
-			Stapels[j][1] = 10;
+			decks.add(new Stapel(testLijst.get(j).naam()));
 		}
 		
 		return kaartenDieTekoopZijn;
@@ -348,7 +344,8 @@ public class SpelFuncties {
 	
 	public void heks(){
 		
-		andereSpeler().trekStapel().add(new Kaart("vloek","overwinningskaart",0,-1));}
+		//andereSpeler().trekStapel().add(new Kaart("vloek","overwinningskaart",0,-1));
+		}
 
 
 	
