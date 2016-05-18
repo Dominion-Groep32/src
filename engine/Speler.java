@@ -28,7 +28,11 @@ public class Speler {
 	
 	public List<Kaart> startKaarten() {
 		for (int i = 0; i < 7; i++) {
+<<<<<<< HEAD
 			trekStapel.add(new Kaart("koper","Geldkaart",0,1,""));
+=======
+			trekStapel.add(new Kaart("koper","GeldKaart",0,1,""));
+>>>>>>> 29d5d733b6fc822189949c24c9fcc3f28909e866
 			//trekStapel.add(new Kaart("dorp","actiekaart",3,"+1 kaart / +2 acties"));
 		}
 		for (int j = 0; j < 3; j++) {

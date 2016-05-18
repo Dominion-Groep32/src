@@ -202,7 +202,11 @@ private void vragenNaarInfoOverKaarten(List<Kaart>lijstMetKaarten) {
 	System.out.println("2: Nee");
 	int keuze = printGeefKeuze();
 	int gecontroleerdeKeuze = controleKeuze(keuze, 2);
+<<<<<<< HEAD
 	if (gecontroleerdeKeuze==1 && lijstMetKaarten.size()>1){
+=======
+	if (gecontroleerdeKeuze==1 && lijstMetKaarten.size()>0){
+>>>>>>> 29d5d733b6fc822189949c24c9fcc3f28909e866
 		int kaartKeuze = kaartnummerInvullen("weten");
 		int gecontroleerdeKaartKeuze = controleKeuze(kaartKeuze, lijstMetKaarten.size());
 		geefInfoOverKaarten(gecontroleerdeKaartKeuze,lijstMetKaarten);
