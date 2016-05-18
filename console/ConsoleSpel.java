@@ -8,7 +8,7 @@ import engine.*;
 public class ConsoleSpel {
 	Scanner sc = new Scanner(System.in);
 	GameEngine engine = new GameEngine();
-	private List<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.kaartenGenereren(), engine.lijstGeldEnOverwinningskaarten());
+	private List<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.kaartenInitialiseren(), engine.lijstGeldEnOverwinningskaarten());
 	
 
 	
@@ -51,7 +51,6 @@ public class ConsoleSpel {
 					
 				}
 				engine.brengKaartenInHandStapelNaarAflegstapel(huidigeSpeler.kaartenInHand(), huidigeSpeler.aflegStapel());
-				System.out.println("Lengte aflegstapel:"+huidigeSpeler.aflegStapel().size());
 				printFunctie("de beurt van "+engine.geefHuidigeSpeler().geefNaam()+" is beëindigd");
 				System.out.println("");
 				huidigeSpeler.herstelWaarden();	
@@ -95,12 +94,13 @@ public class ConsoleSpel {
 			System.out.println((i + 1) + ": " + lijst.get(i).naam());
 		}
 	}
+	
 	//ER ZIT EEN FOUT IN MORGEN BEKIJKEN GRIET
 	public int geefKeuze(List<Kaart> kaartenInHand) {
 		int getal = 1;
 		boolean tmp = false;
 		
-		if(engine.neemActiekaartenUitHand(kaartenInHand).size()>0 & engine.geefHuidigeSpeler().geefActie()>0)
+		if(engine.neemActiekaartenUitHand(kaartenInHand).size()>0 && engine.geefHuidigeSpeler().geefActie()>0)
 			{System.err.println("Let op: u kan optie 1 niet meer kiezen als u eerst optie 2 neemt !");
 			System.out.println("1: gebruik actiekaarten");
 			

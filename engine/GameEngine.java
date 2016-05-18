@@ -5,7 +5,7 @@ import java.util.*;
 public class GameEngine {
 	
 	
-	private List<Kaart> geldEnOverwinningskaarten = new LinkedList<>(Arrays.asList(new Kaart("koper","geldKaart",0,1,""),new Kaart("zilver","geldKaart",3,2,""),new Kaart("goud","geldKaart",6,3,""),
+	private List<Kaart> geldEnOverwinningskaarten = new LinkedList<>(Arrays.asList(new Kaart("koper","geldkaart",0,1,""),new Kaart("zilver","geldkaart",3,2,""),new Kaart("goud","geldkaart",6,3,""),
 			new Kaart("landgoed","overwinningskaart",2,1,""),new Kaart("hertogdom","overwinningskaart",5,3,""),new Kaart("provincie","overwinningskaart",8,6,"")));
 	private List<Kaart> actiekaarten = new LinkedList<>(Arrays.asList(new Kaart("avonturier","actiekaart",6,"Draai achtereenvolgens de bovenste kaarten van je trekstapel om totdat je in totaal 2 geldkaarten hebt. Neem ze op handen. Leg de overige omgedraagde kaarten op je alegstapel."),
 			new Kaart("bureaucraat","actiekaart",4,"Leg uit de algemene voorraad een zilverkaart op je trekstapel. Iedere andere speler legt een overwinningskaart uit zijn hand op zijn trekstapel (of laat zien dat hij deze niet heeft)"), new Kaart("kelder","actiekaart",2,"+1 actie / Leg een aantal kaarten naar keuze af. +1 kaart per afgelegde kaart."), new Kaart("raadsheer","actiekaart",3,"+2 munten / Je mag je trekstapel direct op je aflegstapel leggen"),new Kaart("kapel","actiekaart",2,"Vernietig 4 of minder kaarten uit je hand"),new Kaart("raadszaal","actiekaart",5,"+4 kaarten / +1 aanschaf / Iedere andere speler trekt 1 kaart"),new Kaart("feest","actiekaart",4,"Vernietig deze kaart. Pak een kaart met een waarde van 5 munten of minder."),
@@ -18,10 +18,12 @@ public class GameEngine {
 	private Object[][] Stapels = new Object[16][2];
 	Scanner scanner = new Scanner(System.in);
 	private Speler huidigeSpeler;
+	
+
 
 	
 	
-	//TEST
+	
 	public  void maakSpelersAan(String SpelersNamen[]){
 
 		for (int i = 0; i < SpelersNamen.length; i++) {
@@ -51,8 +53,8 @@ public class GameEngine {
 	
 	public boolean spelNogNietBeëindigd(){
 		int Legestapels = 0;
-		int tmp = 0;
-		// boolean tmp = true;
+		Boolean tmp = true;
+		
 		
 		for (int i = 0; i < Stapels.length; i++) 
 		{
@@ -64,19 +66,18 @@ public class GameEngine {
 				
 				if (lijstNaam.equals("provincie") || Legestapels >=3)
 				{
-					tmp = 1;
-					//tmp = false;
-				}
+					tmp = false;
 				
+				}
 			}
-			
-			
-			
 		}
-		if (tmp ==1)
+		if (!tmp)
 		{return false;}
-		else{return true;}
-		// return tmp
+		else {
+			return true;
+		}
+		
+		
 		
 		
 	}
@@ -113,7 +114,7 @@ public class GameEngine {
 
 	}	
 
-	public List<Kaart> kaartenGenereren() {
+	public List<Kaart> kaartenInitialiseren() {
 
 		Collections.shuffle(actiekaarten);
 		for (int i = 0; i < 10; i++) 
@@ -126,9 +127,10 @@ public class GameEngine {
 			Stapels[j][1] = 10;
 		}
 		
-		
 		return kaartenDieTekoopZijn;
 	}
+	
+
 
 	public int geldInHand(List<Kaart> lijst) {
 		int geld = 0;
@@ -154,7 +156,7 @@ public class GameEngine {
 	public List<Kaart> neemActiekaartenUitHand(List<Kaart> kaartenInHand){
 		List<Kaart> actiekaartenUitHand = new LinkedList<Kaart>();
 		for (int i = 0; i < kaartenInHand.size(); i++) {
-			if (kaartenInHand.get(i).kaartType() == "actieKaart") {
+			if (kaartenInHand.get(i).kaartType() == "actiekaart") {
 				actiekaartenUitHand.add(kaartenInHand.get(i));
 			}
 		}
@@ -194,7 +196,7 @@ public class GameEngine {
 			break;
 		case "bureaucraat":
 			
-			//geefHuidigeSpeler().trekStapel().//HIER VOOR ZORGEN DAT ZILVER TOEGEVOEGD WORD
+			geefHuidigeSpeler().trekStapel().add(new Kaart("zilver","geldkaart",3,2,""));
 			//addFirst(new GeldKaart("zilver"));
 			break;
 		case "kelder":
