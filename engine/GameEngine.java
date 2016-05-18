@@ -347,7 +347,7 @@ public class GameEngine {
 	
 	public void heks(){
 		huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 2);
-		andereSpeler().trekStapel().add(new Kaart("vloek","overwinningsKaart",0,-1,""));
+		andereSpeler().trekStapel().add(new Kaart("vloek","overwinningskaart",0,-1,""));
 	}
 
 	public void houthakker(){

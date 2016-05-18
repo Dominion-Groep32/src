@@ -149,9 +149,9 @@ public class ConsoleSpel {
 		}
 	}
 	
-private int kaartnummerInvullen(String kopenOfWeten) {
+private int kaartnummerInvullen(String kopenOfWetenOfSpelen) {
 	printFunctie("");
-	System.out.print("vul het nummer in van de kaart die je wilt "+kopenOfWeten+" : "); 
+	System.out.print("vul het nummer in van de kaart die je wilt "+kopenOfWetenOfSpelen+" : "); 
 	return sc.nextInt();
 }
 
@@ -167,7 +167,7 @@ public Kaart koopKaart(List<Kaart> lijstWaarvanJeKanKopen,List<Kaart> aflegStape
 
 public Kaart kiesActiekaart(List<Kaart> lijstVanActieKaarten) {
 	
-	int keuze = kaartnummerInvullen("kopen")-1;
+	int keuze = kaartnummerInvullen("spelen")-1;
 	int gecontroleerdekeuze = controleKeuze(keuze, lijstVanActieKaarten.size());
 	return lijstVanActieKaarten.get(gecontroleerdekeuze);
 }
@@ -202,7 +202,7 @@ private void vragenNaarInfoOverKaarten(List<Kaart>lijstMetKaarten) {
 	System.out.println("2: Nee");
 	int keuze = printGeefKeuze();
 	int gecontroleerdeKeuze = controleKeuze(keuze, 2);
-	if (gecontroleerdeKeuze==1 && lijstMetKaarten.size()>0){
+	if (gecontroleerdeKeuze==1 && lijstMetKaarten.size()>1){
 		int kaartKeuze = kaartnummerInvullen("weten");
 		int gecontroleerdeKaartKeuze = controleKeuze(kaartKeuze, lijstMetKaarten.size());
 		geefInfoOverKaarten(gecontroleerdeKaartKeuze,lijstMetKaarten);
