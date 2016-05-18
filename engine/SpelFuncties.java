@@ -2,8 +2,6 @@ package engine;
 
 import java.util.*;
 
-import com.sun.prism.shader.Texture_LinearGradient_PAD_AlphaTest_Loader;
-
 
 public class SpelFuncties {
 	
@@ -19,14 +17,10 @@ public class SpelFuncties {
 	private Speler[] spelers;
 
 	private List<Kaart> kaartenDieTekoopZijn = new LinkedList<>();
-	private List<Kaart> testLijst = new LinkedList<>();
-	private Object[][] Stapels = new Object[16][2];
+	private List<Kaart> kaartenVanHetSpel = new LinkedList<>();
+	private List<Stapel> decks = new LinkedList<>();
 	Scanner scanner = new Scanner(System.in);
 	private Speler huidigeSpeler;
-	
-	
-
-
 	
 	public  void maakSpelersAan(String SpelersNamen[]){
 		 spelers = new Speler[SpelersNamen.length];
@@ -57,12 +51,12 @@ public class SpelFuncties {
 
 	public void verminderStapel(String kaartnaam){
 		
-		for (int i = 0; i < Stapels.length; i++) {
-			String Kaart = (String) Stapels[i][0];
+		for (int i = 0; i < decks.size(); i++) {
+			String Kaart = decks.get(i).geefStapelNaam();
 			if (kaartnaam.equals(Kaart))
 			{
-				int waarde = (int) Stapels[i][1];
-				Stapels[i][1] = (waarde-1);
+				decks.get(i).verminderAantalKaarten();
+				
 			}
 		}
 	}
@@ -71,12 +65,12 @@ public class SpelFuncties {
 		int Legestapels = 0;
 		Boolean tmp = true;
 		
-		for (int i = 0; i < Stapels.length; i++) 
+		for (int i = 0; i < decks.size(); i++) 
 		{
-			if((int)Stapels[i][1] <= 0)
+			if(decks.get(i).geefAatalResterendeKaartenInDeStapel() <= 0)
 			{
 				Legestapels = Legestapels+1;
-				String lijstNaam = Stapels[i][0].toString();
+				String lijstNaam = decks.get(i).geefStapelNaam();
 				
 				if (lijstNaam.equals("provincie") || Legestapels >=3)
 				{
@@ -88,8 +82,8 @@ public class SpelFuncties {
 		
 	}
 	
-	
-	public Speler andereSpeler(){
+	//bij andere spelers zou je met een for moeten werken // nog vragen aan greit 
+	public Speler andereSpelers(){
 		Speler andereSpeler;
 		if (huidigeSpeler == spelers[1])
 		{andereSpeler = spelers[0];}
@@ -126,10 +120,9 @@ public class SpelFuncties {
 		{
 			kaartenDieTekoopZijn.add(actiekaarten.get(i));
 		}
-		testLijst = lijstenSamenvoegenZonderShuffle(kaartenDieTekoopZijn, geldEnOverwinningskaarten);
-		for (int j = 0; j < testLijst.size(); j++) {
-			Stapels[j][0] = testLijst.get(j).naam();
-			Stapels[j][1] = 10;
+		kaartenVanHetSpel = lijstenSamenvoegenZonderShuffle(kaartenDieTekoopZijn, geldEnOverwinningskaarten);
+		for (int j = 0; j < kaartenVanHetSpel.size(); j++) {
+			decks.add(new Stapel(kaartenVanHetSpel.get(j).naam()));
 		}
 		
 		return kaartenDieTekoopZijn;
@@ -365,7 +358,8 @@ public class SpelFuncties {
 	
 	public void heks(){
 		
-		andereSpeler().trekStapel().add(new Kaart("vloek","overwinningskaart",0,-1));}
+		//andereSpeler().trekStapel().add(new Kaart("vloek","overwinningskaart",0,-1));
+		}
 
 
 	

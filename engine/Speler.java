@@ -2,11 +2,11 @@ package engine;
 import java.util.*;
 
 public class Speler {
-	
+	GameEngine engine = new GameEngine();
 	private List<Kaart> kaartenInHand = new LinkedList<>();
 	private List<Kaart> aflegStapel = new LinkedList<>();
 	private List<Kaart> trekStapel = new LinkedList<>();
-	private List<Kaart> vuilbakStapel = new LinkedList<>();
+	private List<Kaart> trashStapel = new LinkedList<>();
 	private String naam;
 	private int aankoop ;
 	private int actie;
@@ -18,63 +18,79 @@ public class Speler {
 		kaartenInHand = new LinkedList<Kaart>();
 		trekStapel = startKaarten();
 		aflegStapel = new LinkedList<Kaart>();
-		vuilbakStapel = new LinkedList<>();
 		aankoop = 1;
 		actie = 1;
 		geld = 0;
 	
-		}
+		
+		//test
+	}
 	
 	public List<Kaart> startKaarten() {
 		for (int i = 0; i < 7; i++) {
 
-			trekStapel.add(new Kaart("koper","Geldkaart",0,1));
+			trekStapel.add(new Kaart("koper","Geldkaart",0,1,""));
+
 			//trekStapel.add(new Kaart("dorp","actiekaart",3,"+1 kaart / +2 acties"));
 		}
 		for (int j = 0; j < 3; j++) {
-			trekStapel.add(new Kaart("landgoed","overwinningskaart",2,1));
+			trekStapel.add(new Kaart("landgoed","overwinningskaart",2,1,""));
 		}
 		Collections.shuffle(trekStapel);
 		return trekStapel;
 	}
 	
+	public List<Kaart> trekKaart(List<Kaart> lijst, int aantal) {
+		if (lijst.size() < aantal) {
+			lijst = engine.lijstenSamenvoegenShuffle(trekStapel, aflegStapel);
+		}
+		for (int i = 0; i < aantal; i++) {
+			kaartenInHand.add(lijst.get(i));
+		}
+		for (int i = 0; i < aantal; i++) {
+			lijst.remove(0);
+		}
+		
+		return kaartenInHand;
+	}
 	
-	
-	
+	public void verwijderKaart(Kaart kaart){
+		//NOG TE BEKIJKEN
+		
+		kaartenInHand.remove(kaart);
+		trashStapel.add(kaart);
+	}
 	
 	
 	public List<Kaart> trekStapel()
 	{
-		return this.trekStapel;
+		return trekStapel;
 	}
 	
 	public List<Kaart> aflegStapel()
 	{
-		return this.aflegStapel;
+		return aflegStapel;
 	}
 	
 	public 	List<Kaart> kaartenInHand() 
 	{
-		return this.kaartenInHand;
-	}
-	public List<Kaart> vuilbakStapel() {
-		return this.vuilbakStapel;
+		return kaartenInHand;
 	}
 
 
 	public String geefNaam() {
-		return this.naam;
+		return naam;
 	}
 	public int geefActie() {
-		return this.actie;
+		return actie;
 	}
 	
 	public int geefGeld() {
-		return this.geld;
+		return geld;
 	}
 	
 	public int geefAankoop() {
-		return this.aankoop;
+		return aankoop;
 	}
 	
 	public void vermeerderActie(int actie) {

@@ -7,7 +7,7 @@ import engine.*;
 
 public class ConsoleSpel {
 	Scanner sc = new Scanner(System.in);
-	SpelFuncties engine = new SpelFuncties();
+	GameEngine engine = new GameEngine();
 	private List<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.kaartenInitialiseren(), engine.lijstGeldEnOverwinningskaarten());
 	
 
@@ -29,7 +29,7 @@ public class ConsoleSpel {
 	public void spel(){
 
 
-		engine.maakSpelersAan(vraagSpelersNamen(vraagAantalSpelers()));
+		engine.maakSpelersAan(vraagSpelersNamen());
 	
 		while(engine.spelNogNietBeëindigd()){
 			
@@ -41,34 +41,21 @@ public class ConsoleSpel {
 				printFunctie("de beurt van "+engine.geefHuidigeSpeler().geefNaam()+" is beëindigd");
 				System.out.println("");
 				huidigeSpeler.herstelWaarden();
-				engine.volgendeSpeler();
+				engine.veranderSpeler();
 		}
 		
 		
 	}
-	public int vraagAantalSpelers()
-	{
-		System.out.print("Met hoeveel spelers wilt u spelen? ");
-		int keuze = sc.nextInt();
-		while(keuze <0)
-		{
-			System.out.println("geef een geldige keuze in");
-			keuze = sc.nextInt();
-		}
-		sc.nextLine();
-		System.out.println("");
-		return keuze;
-	}
-	public String[] vraagSpelersNamen(int aantalSpelers){
-		String spelers[] = new String[aantalSpelers];
+	public String[] vraagSpelersNamen(){
 		System.out.println("Geef de spelersnamen in  ");
+		String spelers[] = new String[2];
+		System.out.print("Eerste spelersnaam: ");
+		spelers[0] = sc.nextLine();
+	
+		System.out.print("Tweede spelersnaam: ");
+		spelers[1] = sc.nextLine();
 		
-		for (int i = 0; i < aantalSpelers; i++) {
-			System.out.print(i+" :");
-			spelers[i] = sc.nextLine();
 		
-		}
-
 		return spelers;
 		
 	}
@@ -154,10 +141,12 @@ public class ConsoleSpel {
 		List<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(tafelKaarten, engine.geldInHand(speler.kaartenInHand()));
 		toonLijst(lijstWaarvanJeKanKopen);
 		vragenNaarInfoOverKaarten(lijstWaarvanJeKanKopen);
-		int kost = koopKaart(lijstWaarvanJeKanKopen,aflegStapel).kost();
-		speler.verminderGeld(kost);
-		speler.verminderAankoop(1);
-		
+		while(speler.geefAankoop()>0)
+		{
+			int kost = koopKaart(lijstWaarvanJeKanKopen,aflegStapel).kost();
+			speler.verminderGeld(kost);
+			speler.verminderAankoop(1);
+		}
 	}
 	
 	private int kaartnummerInvullen(String kopenOfWetenOfSpelen) {

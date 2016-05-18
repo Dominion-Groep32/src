@@ -9,34 +9,25 @@ public class Kaart {
 	private int cost;
 	private int waarde;
 	private int overwinningpunten;
-	private int extraAankoop;
-	private int extraActie;
-	private int extraKaart;
-	private int extraMunten;
-	private boolean specialeKaart;
 	
 	
-	public Kaart(String naam, int cost, boolean specialeKaart,int extraAankoop, int extraActie, int extraKaart, int extraMunten,  String info)
+	public Kaart(String naam,String Type, int cost ,int waarde, String info )
 	{
 		this.kaartNaam = naam;
-		this.KaartType = "actiekaarten";
+		this.KaartType = Type;
 		this.cost = cost;
+		if(Type == "overwinningskaart"){this.overwinningpunten = waarde;}
+		else {this.waarde = waarde;};
 		this.info = info;
-		this.extraAankoop = extraAankoop;
-		this.extraActie = extraActie;
-		this.extraKaart = extraKaart;
-		this.extraMunten = extraMunten;
-		this.specialeKaart = specialeKaart;
 		
 	}
 	
-	public Kaart(String naam,String type, int cost, int waarde )
+	public Kaart(String naam,String Type, int cost, String info )
 	{
 		this.kaartNaam = naam;
-		this.KaartType = type;
+		this.KaartType = Type;
 		this.cost = cost;
-		if(type == "overwinningskaart"){this.overwinningpunten = waarde;}
-		else {this.waarde = waarde;};
+		this.info = info;
 	}
 
 	
@@ -67,20 +58,8 @@ public class Kaart {
 	public String info(){
 		return this.info;
 	}
-	public int extraAankoop() {
-		return this.extraAankoop;
+
+		
 	}
-	public int extraActie() {
-		return this.extraActie;
-	}
-	public int extraKaart() {
-		return this.extraKaart;
-	}
-	public int extraMunten() {
-		return this.extraMunten;
-	}
-	public boolean specialeKaart() {
-		return this.specialeKaart;	
-	}}
 
 

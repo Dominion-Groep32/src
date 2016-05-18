@@ -9,9 +9,9 @@ import engine.*;
 
 
 public class EngineTesten {
-	SpelFuncties engine = new SpelFuncties();
+	GameEngine engine = new GameEngine();
 public class TestFuncties {
-	SpelFuncties Engine = new SpelFuncties();
+	GameEngine Engine = new GameEngine();
 
 	Speler speler = new Speler("testspeler");
 	List<Kaart> eersteTestlijst = speler.startKaarten();
