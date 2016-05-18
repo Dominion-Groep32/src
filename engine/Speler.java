@@ -52,7 +52,8 @@ public class Speler {
 	}
 	
 	public void verwijderKaart(Kaart kaart){
-		//nog bekijken
+		//NOG TE BEKIJKEN
+		
 		kaartenInHand.remove(kaart);
 		trashStapel.add(kaart);
 	}
