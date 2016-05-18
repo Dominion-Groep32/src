@@ -56,11 +56,9 @@ public class GameEngine {
 		int Legestapels = 0;
 		Boolean tmp = true;
 		
-		
 		for (int i = 0; i < Stapels.length; i++) 
 		{
-			int getal = (int)Stapels[i][1];
-			if(getal <= 0)
+			if((int)Stapels[i][1] <= 0)
 			{
 				Legestapels = Legestapels+1;
 				String lijstNaam = Stapels[i][0].toString();
@@ -68,18 +66,10 @@ public class GameEngine {
 				if (lijstNaam.equals("provincie") || Legestapels >=3)
 				{
 					tmp = false;
-				
 				}
 			}
 		}
-		if (!tmp)
-		{return false;}
-		else {
-			return true;
-		}
-		
-		
-		
+		return tmp;
 		
 	}
 	
@@ -196,9 +186,7 @@ public class GameEngine {
 			
 			break;
 		case "bureaucraat":
-			
 			geefHuidigeSpeler().trekStapel().add(new Kaart("zilver","geldkaart",3,2,""));
-			//addFirst(new GeldKaart("zilver"));
 			break;
 		case "kelder":
 			//leg een aantal kaarten weg, per elke weggelegde kaart krijg je een bij van je afneemstapel
@@ -213,7 +201,6 @@ public class GameEngine {
 			break;
 		case "raadszaal":
 			raadszaal();
-
 			break;
 		case "feest":
 			feest(kaart);
@@ -284,7 +271,7 @@ public class GameEngine {
 		default:
 			break;
 		}
-		//Test
+		
 		geefHuidigeSpeler().verminderActie(1);
 		
 		
@@ -295,11 +282,12 @@ public class GameEngine {
 		while (getal <=2 ) {
 			
 			Kaart huidigeKaart = geefHuidigeSpeler().trekStapel().get(i);
-			if(huidigeKaart.kaartType() == "GeldKaart"){
+			if(huidigeKaart.kaartType() == "Geldkaart")
+			{
 				geefHuidigeSpeler().kaartenInHand().add(huidigeKaart);
 				geefHuidigeSpeler().trekStapel().remove(huidigeKaart);
 				
-				}
+			}
 			getal ++;
 			i++;
 		}
@@ -315,6 +303,7 @@ public class GameEngine {
 		geefHuidigeSpeler().vermeerderAankoop(1);
 		andereSpeler().trekKaart(geefHuidigeSpeler().trekStapel(), 1);
 		
+		
 	}
 	public void feest(Kaart kaart){
 		geefHuidigeSpeler().verwijderKaart(kaart);
@@ -323,25 +312,20 @@ public class GameEngine {
 	
 	public void festival (){
 		geefHuidigeSpeler().vermeerderActie(2);
-		geefHuidigeSpeler().vermeerderAankoop(1);
-		geefHuidigeSpeler().vermeerderGeld(2);
+		vermeerderAankopEnGeld(1,2);
 	}
 	public void laboratorium (){
-		huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 2);
-		geefHuidigeSpeler().vermeerderActie(1);
+		trekKaartEnVermeerderActies(2, 1);
 	}
 	
 	public void markt(){
-		huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 1);
-		geefHuidigeSpeler().vermeerderActie(1);
-		geefHuidigeSpeler().vermeerderAankoop(1);
-		geefHuidigeSpeler().vermeerderGeld(1);
+		
+		trekKaartEnVermeerderActies(1, 1);
+		vermeerderAankopEnGeld(1,1);
 	}
 	
 	public void militie() {
 		geefHuidigeSpeler().vermeerderGeld(2);
-		
-		
 		//elke ander speler moet hand verminderen tot 3 kaarten
 		
 	}
@@ -352,26 +336,34 @@ public class GameEngine {
 	}
 	
 	public void spion(){
-		huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 1);
-		geefHuidigeSpeler().vermeerderActie(1);
+		trekKaartEnVermeerderActies(1, 1);
 		//elke speler (ook huidigespeler) toont zijn bovenste kaart van zijn aftrekstapel
 		//speler kiest of hij deze teruglegt of naar zijn aflegstapel verplaatst
 	}
 	
 	public void dorp(){
-		geefHuidigeSpeler().vermeerderActie(2);
-		huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 1);
+		trekKaartEnVermeerderActies(1, 2);
 	}
 	
 	public void heks(){
 		huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 2);
-		
 		andereSpeler().trekStapel().add(new Kaart("vloek","overwinningsKaart",0,-1,""));
 	}
 
 	public void houthakker(){
-		geefHuidigeSpeler().vermeerderAankoop(1);
-		geefHuidigeSpeler().vermeerderGeld(2);
+		vermeerderAankopEnGeld(1, 2);
+	}
+	
+	public void vermeerderAankopEnGeld(int aankoop, int geld)
+	{
+		geefHuidigeSpeler().vermeerderAankoop(aankoop);
+		geefHuidigeSpeler().vermeerderGeld(geld);
+	}
+	
+	public void trekKaartEnVermeerderActies(int aantalKaarten, int acties)
+	{
+		huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), aantalKaarten);
+		geefHuidigeSpeler().vermeerderActie(acties);
 	}
 
 
