@@ -6,7 +6,7 @@ public class Speler {
 	private List<Kaart> kaartenInHand = new LinkedList<>();
 	private List<Kaart> aflegStapel = new LinkedList<>();
 	private List<Kaart> trekStapel = new LinkedList<>();
-	private List<Kaart> trashStapel = new LinkedList<>();
+	private List<Kaart> vuilbakStapel = new LinkedList<>();
 	private String naam;
 	private int aankoop ;
 	private int actie;
@@ -18,6 +18,7 @@ public class Speler {
 		kaartenInHand = new LinkedList<Kaart>();
 		trekStapel = startKaarten();
 		aflegStapel = new LinkedList<Kaart>();
+		vuilbakStapel = new LinkedList<>();
 		aankoop = 1;
 		actie = 1;
 		geld = 0;
@@ -39,43 +40,41 @@ public class Speler {
 	
 	
 	
-	public void verwijderKaart(Kaart kaart){
-		//NOG TE BEKIJKEN
-		
-		kaartenInHand.remove(kaart);
-		trashStapel.add(kaart);
-	}
+	
 	
 	
 	public List<Kaart> trekStapel()
 	{
-		return trekStapel;
+		return this.trekStapel;
 	}
 	
 	public List<Kaart> aflegStapel()
 	{
-		return aflegStapel;
+		return this.aflegStapel;
 	}
 	
 	public 	List<Kaart> kaartenInHand() 
 	{
-		return kaartenInHand;
+		return this.kaartenInHand;
+	}
+	public List<Kaart> vuilbakStapel() {
+		return this.vuilbakStapel;
 	}
 
 
 	public String geefNaam() {
-		return naam;
+		return this.naam;
 	}
 	public int geefActie() {
-		return actie;
+		return this.actie;
 	}
 	
 	public int geefGeld() {
-		return geld;
+		return this.geld;
 	}
 	
 	public int geefAankoop() {
-		return aankoop;
+		return this.aankoop;
 	}
 	
 	public void vermeerderActie(int actie) {

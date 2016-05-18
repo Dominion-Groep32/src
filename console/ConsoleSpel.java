@@ -41,7 +41,7 @@ public class ConsoleSpel {
 				printFunctie("de beurt van "+engine.geefHuidigeSpeler().geefNaam()+" is beëindigd");
 				System.out.println("");
 				huidigeSpeler.herstelWaarden();
-				engine.veranderSpeler();
+				engine.volgendeSpeler();
 		}
 		
 		
@@ -154,12 +154,10 @@ public class ConsoleSpel {
 		List<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(tafelKaarten, engine.geldInHand(speler.kaartenInHand()));
 		toonLijst(lijstWaarvanJeKanKopen);
 		vragenNaarInfoOverKaarten(lijstWaarvanJeKanKopen);
-		while(speler.geefAankoop()>0)
-		{
-			int kost = koopKaart(lijstWaarvanJeKanKopen,aflegStapel).kost();
-			speler.verminderGeld(kost);
-			speler.verminderAankoop(1);
-		}
+		int kost = koopKaart(lijstWaarvanJeKanKopen,aflegStapel).kost();
+		speler.verminderGeld(kost);
+		speler.verminderAankoop(1);
+		
 	}
 	
 	private int kaartnummerInvullen(String kopenOfWetenOfSpelen) {
