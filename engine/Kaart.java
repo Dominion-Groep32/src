@@ -9,6 +9,10 @@ public class Kaart {
 	private int cost;
 	private int waarde;
 	private int overwinningpunten;
+	private int extraAankoop;
+	private int extraActie;
+	private int extraKaart;
+	private int extraMunten;
 	
 	
 	public Kaart(String naam,String Type, int cost ,int waarde, String info )

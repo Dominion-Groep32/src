@@ -26,8 +26,7 @@ public class ConsoleSpel {
 			spel();
 		}
 		
-	public void spel(){
-
+	private void spel(){
 
 		engine.maakSpelersAan(vraagSpelersNamen());
 	
@@ -46,7 +45,7 @@ public class ConsoleSpel {
 		
 		
 	}
-	public String[] vraagSpelersNamen(){
+	private String[] vraagSpelersNamen(){
 		System.out.println("Geef de spelersnamen in  ");
 		String spelers[] = new String[2];
 		System.out.print("Eerste spelersnaam: ");
@@ -141,15 +140,12 @@ public class ConsoleSpel {
 		List<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(tafelKaarten, engine.geldInHand(speler.kaartenInHand()));
 		toonLijst(lijstWaarvanJeKanKopen);
 		vragenNaarInfoOverKaarten(lijstWaarvanJeKanKopen);
-		while(speler.geefAankoop()>0)
-		{
-			int kost = koopKaart(lijstWaarvanJeKanKopen,aflegStapel).kost();
-			speler.verminderGeld(kost);
-			speler.verminderAankoop(1);
-		}
+		int kost = koopKaart(lijstWaarvanJeKanKopen,aflegStapel).kost();
+		speler.verminderGeld(kost);
+		speler.verminderAankoop(1);
 	}
 	
-	private int kaartnummerInvullen(String kopenOfWetenOfSpelen) {
+private int kaartnummerInvullen(String kopenOfWetenOfSpelen) {
 	printFunctie("");
 	System.out.print("vul het nummer in van de kaart die je wilt "+kopenOfWetenOfSpelen+" : "); 
 	return sc.nextInt();
@@ -187,10 +183,10 @@ public class ConsoleSpel {
 		toonLijst(kaartenInHand);
 		printFunctie("");
 		int keuze = geefKeuze(huidigeSpeler.kaartenInHand());
-		while(engine.geefHuidigeSpeler().geefActie() >0)
+		while(engine.geefHuidigeSpeler().geefActie()>0 || engine.geefHuidigeSpeler().geefAankoop()>0)
 		{
 		keuzeSpeler(keuze,huidigeSpeler.kaartenInHand(),tafelKaarten,huidigeSpeler.aflegStapel());
-		huidigeSpeler.verminderActie(1);
+		if(engine.geefHuidigeSpeler().geefActie() > 0){huidigeSpeler.verminderActie(1);}
 		}
 }
 
