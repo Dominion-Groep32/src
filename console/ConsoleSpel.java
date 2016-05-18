@@ -29,7 +29,7 @@ public class ConsoleSpel {
 	public void spel(){
 
 
-		engine.maakSpelersAan(vraagSpelersNamen());
+		engine.maakSpelersAan(vraagSpelersNamen(vraagAantalSpelers()));
 	
 		while(engine.spelNogNietBeëindigd()){
 			
@@ -46,16 +46,29 @@ public class ConsoleSpel {
 		
 		
 	}
-	public String[] vraagSpelersNamen(){
+	public int vraagAantalSpelers()
+	{
+		System.out.print("Met hoeveel spelers wilt u spelen? ");
+		int keuze = sc.nextInt();
+		while(keuze <0)
+		{
+			System.out.println("geef een geldige keuze in");
+			keuze = sc.nextInt();
+		}
+		sc.nextLine();
+		System.out.println("");
+		return keuze;
+	}
+	public String[] vraagSpelersNamen(int aantalSpelers){
+		String spelers[] = new String[aantalSpelers];
 		System.out.println("Geef de spelersnamen in  ");
-		String spelers[] = new String[2];
-		System.out.print("Eerste spelersnaam: ");
-		spelers[0] = sc.nextLine();
-	
-		System.out.print("Tweede spelersnaam: ");
-		spelers[1] = sc.nextLine();
 		
+		for (int i = 0; i < aantalSpelers; i++) {
+			System.out.print(i+" :");
+			spelers[i] = sc.nextLine();
 		
+		}
+
 		return spelers;
 		
 	}

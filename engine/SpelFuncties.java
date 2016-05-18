@@ -13,7 +13,7 @@ public class SpelFuncties {
 			new Kaart("festival","actiekaart",5,"+2 acties / +1 aanschaf / +2 munten"),new Kaart("tuinen","actiekaart",4,"Elke 10 kaarten in je stapel zijn aan het einde van  het spel 1 landgoed waard (naar beneden afronden)."),new Kaart("laboratorium","actiekaart",5,"+2 kaarten / +1 actie"),new Kaart("bibliotheek","actiekaart",5,"Vul je hand aan tot 7 kaarten. Getrokken actiekaarten mag je houden of apart bewaren en vervangen door nieuwe kaarten. Als je hand is aangevuld leg je de apart bewaarde actiekaarten af."),new Kaart("markt","actiekaart",5,"+1 kaart/ +1 actie / +1 aanschaf / +1 munt"),new Kaart("militie","actiekaart",4,"+2 munten/ Iedere andere speler legt naar zijn keuze kaarten af totdat hij er 3 op handen heeft."),new Kaart("mijn","actiekaart",5,"Vernietig een geldkaart uit je hand. Neem een geldkaart die ten hoogste drie munten meer wwaard is en neem deze op handen.")
 			,new Kaart("slotgracht","actiekaart",2,"+2 kaarten / Als een andere speler een aanvalskaart speelt, mag je de Slotgracht tonen. In dat geval heeft de aanval op jou geen effect."),new Kaart("geldschieter","actiekaart",4,"Vernietig een koperkaart uit je hand. Als je dat doet, heb je deze beurt met 3 munten."),new Kaart("verbouwing","actieKaart",4,"Vernietig een kaart uit je hand. Pak een kaart die ten hoogste 2 munten meer waard is dan de vernietigde kaart."),new Kaart("smidse","actiekaart",4,"+3 kaarten"),new Kaart("spion","actiekaart",4,"+1 kaart / +1 actie / Alle spelers tonen de bovenste kaart van hun trekstapel. De spion bepaalt of ze blijven liggen of worden afgelegd."),new Kaart("dief","actiekaart",4,"Iedere andere speler toont de bovenste 2 kaarten van zijn trekstapel. Als een speler geldkaarten toont, moet hij er één naar jouw keuze vernietigen. Je mag een of meer van deze vernietigde kaarten pakken en afleggen. De andere spelers leggen andere getoonde kaarten op hun aflegstapel."),new Kaart("troonzaal","actiekaart",4,"Kies een actiekaart uit je hand. Speel deze tweemaal.")
 			,new Kaart("dorp","actiekaart",3,"+1 kaart / +2 acties"),new Kaart("heks","actiekaart",5,"+2 kaarten / Iedere andere speler pakt 1 vloekkaart."),new Kaart("werkplaats","actiekaart",3,"Pak een kaart die maximaal 4 munten kost."),new Kaart("houthakker","actiekaart",3,"+1 aanschaf / +2 munten")));
-	private Speler[] spelers = new Speler[2];
+	private Speler[] spelers;
 	private List<Kaart> kaartenDieTekoopZijn = new LinkedList<>();
 	private List<Kaart> testLijst = new LinkedList<>();
 	private Object[][] Stapels = new Object[16][2];
@@ -25,19 +25,29 @@ public class SpelFuncties {
 
 	
 	public  void maakSpelersAan(String SpelersNamen[]){
-
+		 spelers = new Speler[SpelersNamen.length];
 		for (int i = 0; i < SpelersNamen.length; i++) {
 			spelers[i] = new Speler(SpelersNamen[i]);
 		}
 		huidigeSpeler = spelers[0];
 	}
-	//aanpassen naar volgende speler ipv andere spelers
+	
+	
 	public void veranderSpeler(){
-		if (huidigeSpeler == spelers[0])
-		{huidigeSpeler = spelers[1];}
+		int plaatsInDeArray = 0;
+		for (int i = 0; i < spelers.length; i++) {
+			if (geefHuidigeSpeler().geefNaam().equals(spelers[i].geefNaam()))
+			{
+				plaatsInDeArray = i+1;
+			}
+		}
+		if(plaatsInDeArray == spelers.length)
+		{
+			plaatsInDeArray = 0;
+		}
+		huidigeSpeler = spelers[plaatsInDeArray];
 		
-		else {huidigeSpeler = spelers[0];}
-
+		
 	}
 	
 
