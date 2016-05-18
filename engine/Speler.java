@@ -23,6 +23,7 @@ public class Speler {
 		geld = 0;
 	
 		
+		//test
 	}
 	
 	public List<Kaart> startKaarten() {
