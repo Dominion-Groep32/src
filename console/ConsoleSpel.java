@@ -99,7 +99,6 @@ public class ConsoleSpel {
 	public int geefKeuze(List<Kaart> kaartenInHand) {
 		int getal = 1;
 		boolean tmp = false;
-		//boolean tmp2 = false;
 		
 		if(engine.neemActiekaartenUitHand(kaartenInHand).size()>0 & engine.geefHuidigeSpeler().geefActie()>0)
 			{System.err.println("Let op: u kan optie 1 niet meer kiezen als u eerst optie 2 neemt !");
@@ -108,13 +107,7 @@ public class ConsoleSpel {
 			getal++;
 			tmp = true;
 			}
-		/*
-		if (engine.geefHuidigeSpeler().geefGeld() > 0)
-		{	
-			System.out.println(getal+": gebruik geldkaarten");
-			tmp2 = true;
-		}
-		*/
+		
 		System.out.println(getal+": gebruik geldkaarten");
 		System.out.println((getal+1)+": beëindig je beurt");
 		int keuze = printGeefKeuze();

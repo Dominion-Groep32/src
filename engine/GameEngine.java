@@ -59,14 +59,15 @@ public class GameEngine {
 			int getal = (int)Stapels[i][1];
 			if(getal <= 0)
 			{
+				Legestapels = Legestapels+1;
 				String lijstNaam = Stapels[i][0].toString();
-				System.out.println("naam van de lijst"+lijstNaam);
+				
 				if (lijstNaam.equals("provincie") || Legestapels >=3)
 				{
 					tmp = 1;
 					//tmp = false;
 				}
-				Legestapels = Legestapels+1;
+				
 			}
 			
 			
