@@ -191,6 +191,7 @@ public void huidigeWaarden() {
 	System.out.println("Aankoop: "+ engine.geefHuidigeSpeler().geefAankoop());
 	System.out.println("Actie: " + engine.geefHuidigeSpeler().geefActie());
 }
+
 //MOET IK NOG NAAR KIJKEN!! GR	
 public void tmpFunctie(){
 	Speler speler = engine.geefHuidigeSpeler();
