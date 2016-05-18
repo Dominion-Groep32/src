@@ -18,7 +18,7 @@ public class DominionServlet extends HttpServlet {
 	
 	//private GameEngine engine;	// FIXME: zou via getServletContext().get/setAttribute moeten werken
 	//private Speler speler;
-    GameEngine engine = new GameEngine();
+    SpelFuncties engine = new SpelFuncties();
     /**
      * @see HttpServlet#HttpServlet()
      */

@@ -2,9 +2,8 @@ package engine;
 
 import java.util.*;
 
-import com.sun.jndi.url.iiopname.iiopnameURLContextFactory;
 
-public class GameEngine {
+public class SpelFuncties {
 	
 	
 	private List<Kaart> geldEnOverwinningskaarten = new LinkedList<>(Arrays.asList(new Kaart("koper","geldkaart",0,1,""),new Kaart("zilver","geldkaart",3,2,""),new Kaart("goud","geldkaart",6,3,""),
@@ -190,13 +189,7 @@ public class GameEngine {
 		maakKaartInHandLeeg(huidigeSpeler.kaartenInHand());
 	}
 	
-	/*public actiekaartUitvoeren(Kaart kaart){
-		for (int i = 0; i < actiekaarten.size(); i++) {
-			if(actiekaarten.get(i).naam().equals(kaart.naam())){
-				
-			};
-	}
-	*/
+
 	public void actieUitvoeren(Kaart kaart) {
 		
 		
@@ -333,7 +326,7 @@ public class GameEngine {
 	
 	public void festival (){
 		geefHuidigeSpeler().vermeerderActie(2);
-		vermeerderAankopEnGeld(1,2);
+		vermeerderAankoopEnGeld(1,2);
 	}
 	public void laboratorium (){
 		trekKaartEnVermeerderActies(2, 1);
@@ -342,7 +335,7 @@ public class GameEngine {
 	public void markt(){
 		
 		trekKaartEnVermeerderActies(1, 1);
-		vermeerderAankopEnGeld(1,1);
+		vermeerderAankoopEnGeld(1,1);
 	}
 	
 	public void militie() {
@@ -374,13 +367,12 @@ public class GameEngine {
 	}
 
 	public void houthakker(){
-		vermeerderAankopEnGeld(1, 2);
+		vermeerderAankoopEnGeld(1, 2);
 
 	}
 
 	
-	
-	public void vermeerderAankopEnGeld(int aankoop, int geld)
+	public void vermeerderAankoopEnGeld(int aankoop, int geld)
 	{
 		geefHuidigeSpeler().vermeerderAankoop(aankoop);
 		geefHuidigeSpeler().vermeerderGeld(geld);

@@ -2,7 +2,7 @@ package engine;
 import java.util.*;
 
 public class Speler {
-	GameEngine engine = new GameEngine();
+	
 	private List<Kaart> kaartenInHand = new LinkedList<>();
 	private List<Kaart> aflegStapel = new LinkedList<>();
 	private List<Kaart> trekStapel = new LinkedList<>();
@@ -22,15 +22,12 @@ public class Speler {
 		actie = 1;
 		geld = 0;
 	
-		
-		//test
-	}
+		}
 	
 	public List<Kaart> startKaarten() {
 		for (int i = 0; i < 7; i++) {
 
 			trekStapel.add(new Kaart("koper","Geldkaart",0,1,""));
-
 			//trekStapel.add(new Kaart("dorp","actiekaart",3,"+1 kaart / +2 acties"));
 		}
 		for (int j = 0; j < 3; j++) {
@@ -40,19 +37,7 @@ public class Speler {
 		return trekStapel;
 	}
 	
-	public List<Kaart> trekKaart(List<Kaart> lijst, int aantal) {
-		if (lijst.size() < aantal) {
-			lijst = engine.lijstenSamenvoegenShuffle(trekStapel, aflegStapel);
-		}
-		for (int i = 0; i < aantal; i++) {
-			kaartenInHand.add(lijst.get(i));
-		}
-		for (int i = 0; i < aantal; i++) {
-			lijst.remove(0);
-		}
-		
-		return kaartenInHand;
-	}
+	
 	
 	public void verwijderKaart(Kaart kaart){
 		//NOG TE BEKIJKEN

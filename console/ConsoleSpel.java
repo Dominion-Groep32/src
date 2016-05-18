@@ -7,7 +7,7 @@ import engine.*;
 
 public class ConsoleSpel {
 	Scanner sc = new Scanner(System.in);
-	GameEngine engine = new GameEngine();
+	SpelFuncties engine = new SpelFuncties();
 	private List<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.kaartenInitialiseren(), engine.lijstGeldEnOverwinningskaarten());
 	
 
