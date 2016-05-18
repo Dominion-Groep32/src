@@ -2,6 +2,8 @@ package engine;
 
 import java.util.*;
 
+import com.sun.jndi.url.iiopname.iiopnameURLContextFactory;
+
 public class GameEngine {
 	
 	
@@ -19,6 +21,7 @@ public class GameEngine {
 	Scanner scanner = new Scanner(System.in);
 	private Speler huidigeSpeler;
 	
+	
 
 
 	
@@ -27,9 +30,9 @@ public class GameEngine {
 		for (int i = 0; i < SpelersNamen.length; i++) {
 			spelers[i] = new Speler(SpelersNamen[i]);
 		}
+		huidigeSpeler = spelers[0];
 	}
-	//test test
-	
+	//aanpassen naar volgende speler ipv andere spelers
 	public void veranderSpeler(){
 		if (huidigeSpeler == spelers[0])
 		{huidigeSpeler = spelers[1];}
@@ -75,16 +78,12 @@ public class GameEngine {
 	
 	public Speler andereSpeler(){
 		Speler andereSpeler;
-
 		if (huidigeSpeler == spelers[1])
 		{andereSpeler = spelers[0];}
-		
 		else {andereSpeler = spelers[1];}
-
-		
 		return andereSpeler;
 	}
-	//test
+	
 	
 	public List<Kaart> lijstenSamenvoegenShuffle(List<Kaart> primaireLijst, List<Kaart> bijTeVoegenLijst) {
 
@@ -123,6 +122,19 @@ public class GameEngine {
 		return kaartenDieTekoopZijn;
 	}
 	
+	public List<Kaart> trekKaart(List<Kaart> lijst, int aantal) {
+		if (lijst.size() < aantal) {
+			lijst = lijstenSamenvoegenShuffle(huidigeSpeler.trekStapel(), huidigeSpeler.aflegStapel());
+		}
+		for (int i = 0; i < aantal; i++) {
+			huidigeSpeler.kaartenInHand().add(lijst.get(i));
+		}
+		for (int i = 0; i < aantal; i++) {
+			lijst.remove(0);
+		}
+		
+		return huidigeSpeler.kaartenInHand();
+	}
 
 
 	public int geldInHand(List<Kaart> lijst) {
@@ -178,6 +190,13 @@ public class GameEngine {
 		maakKaartInHandLeeg(huidigeSpeler.kaartenInHand());
 	}
 	
+	/*public actiekaartUitvoeren(Kaart kaart){
+		for (int i = 0; i < actiekaarten.size(); i++) {
+			if(actiekaarten.get(i).naam().equals(kaart.naam())){
+				
+			};
+	}
+	*/
 	public void actieUitvoeren(Kaart kaart) {
 		
 		
@@ -185,14 +204,12 @@ public class GameEngine {
 		switch (kaart.naam()) {
 		case "avonturier":
 			avonturier();
-			
 			break;
 		case "bureaucraat":
 			geefHuidigeSpeler().trekStapel().add(new Kaart("zilver","geldkaart",3,2,""));
 			break;
 		case "kelder":
 			//leg een aantal kaarten weg, per elke weggelegde kaart krijg je een bij van je afneemstapel
-			
 			geefHuidigeSpeler().vermeerderActie(1);
 			break;
 		case "raadsheer":
@@ -245,7 +262,7 @@ public class GameEngine {
 			//kost van deze kaart +2 om andere kaart te kunnen kopen
 			break;
 		case "smidse":
-			huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 3);
+			trekKaart(huidigeSpeler.trekStapel(), 3);
 			break;
 		case "spion":
 			spion();
@@ -300,12 +317,12 @@ public class GameEngine {
 	public void raadsheer(){
 		geefHuidigeSpeler().vermeerderGeld(2);
 		lijstenSamenvoegenShuffle(geefHuidigeSpeler().aflegStapel(), geefHuidigeSpeler().trekStapel());
-		huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 4);
+		trekKaart(huidigeSpeler.trekStapel(), 4);
 	}
 	public void raadszaal (){
-		huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 4);
+		trekKaart(huidigeSpeler.trekStapel(), 4);
 		geefHuidigeSpeler().vermeerderAankoop(1);
-		andereSpeler().trekKaart(geefHuidigeSpeler().trekStapel(), 1);
+		//andereSpeler().trekKaart(geefHuidigeSpeler().trekStapel(), 1);
 		
 		
 	}
@@ -335,7 +352,7 @@ public class GameEngine {
 	}
 
 	public void slotgracht(){
-		huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 2);
+		trekKaart(huidigeSpeler.trekStapel(), 2);
 		// bij gebruik van een aanvalskaart kan deze kaart gebruikt worden om zich te verdedigen.
 	}
 	
@@ -350,7 +367,7 @@ public class GameEngine {
 	}
 	
 	public void heks(){
-		huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 2);
+		trekKaart(huidigeSpeler.trekStapel(), 2);
 
 		andereSpeler().trekStapel().add(new Kaart("vloek","overwinningskaart",0,-1,""));
 
@@ -371,7 +388,7 @@ public class GameEngine {
 	
 	public void trekKaartEnVermeerderActies(int aantalKaarten, int acties)
 	{
-		huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), aantalKaarten);
+		trekKaart(huidigeSpeler.trekStapel(), aantalKaarten);
 		geefHuidigeSpeler().vermeerderActie(acties);
 	}
 //ok

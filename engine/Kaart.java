@@ -20,7 +20,8 @@ public class Kaart {
 		else {this.waarde = waarde;};
 		this.info = info;
 		
-	}//test test
+	}
+	
 	public Kaart(String naam,String Type, int cost, String info )
 	{
 		this.kaartNaam = naam;
