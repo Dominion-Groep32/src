@@ -8,7 +8,7 @@ import engine.*;
 public class ConsoleSpel {
 	Scanner sc = new Scanner(System.in);
 	GameEngine engine = new GameEngine();
-	private List<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.kaartenGenereren(), engine.lijstGeldEnOverwinningskaarten());
+	private List<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.kaartenInitialiseren(), engine.lijstGeldEnOverwinningskaarten());
 	
 
 	
@@ -27,8 +27,15 @@ public class ConsoleSpel {
 		}
 		
 	public void spel(){
+		
+		
+		
+
 		engine.maakSpelersAan(vraagSpelersNamen());
+	
 		while(engine.spelNogNietBeëindigd()){
+			
+				
 				engine.veranderSpeler();
 				Speler huidigeSpeler = engine.geefHuidigeSpeler();
 				System.out.println("");
@@ -41,6 +48,7 @@ public class ConsoleSpel {
 				{
 					keuzeSpeler(keuze,huidigeSpeler.kaartenInHand(),tafelKaarten,huidigeSpeler.aflegStapel());
 					engine.geefHuidigeSpeler().verminderActie(1);
+					
 				}
 				engine.brengKaartenInHandNaarAflegstapel(huidigeSpeler.kaartenInHand(), huidigeSpeler.aflegStapel());
 				printFunctie("de beurt van "+engine.geefHuidigeSpeler().geefNaam()+" is beëindigd");
@@ -63,6 +71,12 @@ public class ConsoleSpel {
 		return spelers;
 		
 	}
+	public void resetWaarden()
+	{
+		engine.geefHuidigeSpeler().vermeerderGeld(0);
+		engine.geefHuidigeSpeler().vermeerderAankoop(1);
+		engine.geefHuidigeSpeler().vermeerderActie(1);
+	}
 	
 	public void printFunctie(String tekst){
 			int lengte = 20 ;
@@ -81,16 +95,19 @@ public class ConsoleSpel {
 		}
 	}
 	
+	//ER ZIT EEN FOUT IN MORGEN BEKIJKEN GRIET
 	public int geefKeuze(List<Kaart> kaartenInHand) {
 		int getal = 1;
 		boolean tmp = false;
-		if(engine.neemActiekaartenUitHand(kaartenInHand).size()>0 & engine.geefHuidigeSpeler().geefActie()>0)
-			{System.out.println("Let op: u kan optie 1 niet meer kiezen als u eerst optie 2 neemt !");
+		
+		if(engine.neemActiekaartenUitHand(kaartenInHand).size()>0 && engine.geefHuidigeSpeler().geefActie()>0)
+			{System.err.println("Let op: u kan optie 1 niet meer kiezen als u eerst optie 2 neemt !");
 			System.out.println("1: gebruik actiekaarten");
+			
 			getal++;
 			tmp = true;
 			}
-
+		
 		System.out.println(getal+": gebruik geldkaarten");
 		System.out.println((getal+1)+": beëindig je beurt");
 		int keuze = printGeefKeuze();
@@ -126,7 +143,7 @@ public class ConsoleSpel {
 		}
 	}
 	
-private void koopActie(List<Kaart> tafelKaarten,List<Kaart> aflegStapel) {
+	private void koopActie(List<Kaart> tafelKaarten,List<Kaart> aflegStapel) {
 		Speler speler = engine.geefHuidigeSpeler();
 	
 		printFunctie("");
@@ -174,7 +191,7 @@ public void huidigeWaarden() {
 	System.out.println("Aankoop: "+ engine.geefHuidigeSpeler().geefAankoop());
 	System.out.println("Actie: " + engine.geefHuidigeSpeler().geefActie());
 }
-//MOET IK NOG NAAR KIJKEN!! GRIET
+//MOET IK NOG NAAR KIJKEN!! GR	
 public void tmpFunctie(){
 	Speler speler = engine.geefHuidigeSpeler();
 	printFunctie("");
