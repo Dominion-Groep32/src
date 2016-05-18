@@ -27,9 +27,7 @@ public class ConsoleSpel {
 		}
 		
 	public void spel(){
-		
-		
-		
+
 
 		engine.maakSpelersAan(vraagSpelersNamen());
 	
@@ -40,16 +38,7 @@ public class ConsoleSpel {
 				Speler huidigeSpeler = engine.geefHuidigeSpeler();
 				System.out.println("");
 				printFunctie("Nu aan de beurt: "+huidigeSpeler.geefNaam());
-				printFunctie("Kaarten in uw hand");
-				toonLijst(engine.geefHuidigeSpeler().trekKaart(huidigeSpeler.trekStapel(), 5));
-				printFunctie("Geef uw keuze");
-				int keuze = geefKeuze(huidigeSpeler.kaartenInHand());
-				while(engine.geefHuidigeSpeler().geefActie() >0)
-				{
-					keuzeSpeler(keuze,huidigeSpeler.kaartenInHand(),tafelKaarten,huidigeSpeler.aflegStapel());
-					engine.geefHuidigeSpeler().verminderActie(1);
-					
-				}
+				toonKaartenInHand(engine.geefHuidigeSpeler().trekKaart(huidigeSpeler.trekStapel(), 5));
 				engine.brengKaartenInHandNaarAflegstapel(huidigeSpeler.kaartenInHand(), huidigeSpeler.aflegStapel());
 				printFunctie("de beurt van "+engine.geefHuidigeSpeler().geefNaam()+" is beëindigd");
 				System.out.println("");
@@ -71,12 +60,6 @@ public class ConsoleSpel {
 		return spelers;
 		
 	}
-	public void resetWaarden()
-	{
-		engine.geefHuidigeSpeler().vermeerderGeld(0);
-		engine.geefHuidigeSpeler().vermeerderAankoop(1);
-		engine.geefHuidigeSpeler().vermeerderActie(1);
-	}
 	
 	public void printFunctie(String tekst){
 			int lengte = 20 ;
@@ -95,13 +78,13 @@ public class ConsoleSpel {
 		}
 	}
 	
-	//ER ZIT EEN FOUT IN MORGEN BEKIJKEN GRIET
+
 	public int geefKeuze(List<Kaart> kaartenInHand) {
 		int getal = 1;
 		boolean tmp = false;
 		
 		if(engine.neemActiekaartenUitHand(kaartenInHand).size()>0 && engine.geefHuidigeSpeler().geefActie()>0)
-			{System.err.println("Let op: u kan optie 1 niet meer kiezen als u eerst optie 2 neemt !");
+			{System.out.println("Let op: u kan optie 1 niet meer kiezen als u eerst optie 2 neemt !");
 			System.out.println("1: gebruik actiekaarten");
 			
 			getal++;
@@ -131,7 +114,8 @@ public class ConsoleSpel {
 			toonLijst(actieKaartenUitDrawHand);
 			Kaart gekozenKaart = kiesActiekaart(actieKaartenUitDrawHand);
 			engine.actieUitvoeren(gekozenKaart);
-			tmpFunctie();
+			//tmpFunctie();
+			toonKaartenInHand(engine.geefHuidigeSpeler().kaartenInHand());
 			break;
 		
 		case 2:
@@ -191,17 +175,22 @@ public void huidigeWaarden() {
 	System.out.println("Aankoop: "+ engine.geefHuidigeSpeler().geefAankoop());
 	System.out.println("Actie: " + engine.geefHuidigeSpeler().geefActie());
 }
-//MOET IK NOG NAAR KIJKEN!! GR	
-public void tmpFunctie(){
-	Speler speler = engine.geefHuidigeSpeler();
-	printFunctie("");
+
+
+private void toonKaartenInHand(List<Kaart> kaartenInHand){
+	Speler huidigeSpeler = engine.geefHuidigeSpeler();
 	huidigeWaarden();
 	printFunctie("Kaarten in uw hand");
-	toonLijst(speler.kaartenInHand());
+	toonLijst(kaartenInHand);
 	printFunctie("");
-	int keuze = geefKeuze(speler.kaartenInHand());
-	keuzeSpeler(keuze, speler.kaartenInHand(),tafelKaarten,speler.aflegStapel());
+	int keuze = geefKeuze(huidigeSpeler.kaartenInHand());
+	while(engine.geefHuidigeSpeler().geefActie() >0)
+	{
+		keuzeSpeler(keuze,huidigeSpeler.kaartenInHand(),tafelKaarten,huidigeSpeler.aflegStapel());
+		huidigeSpeler.verminderActie(1);
+	}
 }
+
 
 private void vragenNaarInfoOverKaarten() {
 	printFunctie("");

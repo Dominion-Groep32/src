@@ -15,5 +15,7 @@ public class ConsoleTesten {
 	public void mainTest(){System.out.println("this works");}
 	
 	//@Test
-	//public 
+	//public void test(){
+	
+	//}
 }
