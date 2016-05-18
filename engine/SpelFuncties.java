@@ -2,6 +2,8 @@ package engine;
 
 import java.util.*;
 
+import com.sun.prism.shader.Texture_LinearGradient_PAD_AlphaTest_Loader;
+
 
 public class SpelFuncties {
 	
@@ -32,7 +34,7 @@ public class SpelFuncties {
 	}
 	
 	
-	public void veranderSpeler(){
+	public void volgendeSpeler(){
 		int plaatsInDeArray = 0;
 		for (int i = 0; i < spelers.length; i++) {
 			if (geefHuidigeSpeler().geefNaam().equals(spelers[i].geefNaam()))
@@ -214,20 +216,19 @@ public class SpelFuncties {
 	public void SpecialeActiesUitvoeren(Kaart kaart) {
 		switch (kaart.naam()) {
 		case "avonturier":
+			//OK
 			avonturier();
 			break;
 		case "bureaucraat":
-			geefHuidigeSpeler().trekStapel().add(new Kaart("zilver","geldkaart",3,2));
 			break;
 		case "kelder":
-			//leg een aantal kaarten weg, per elke weggelegde kaart krijg je een bij van je afneemstapel
-			geefHuidigeSpeler().vermeerderActie(1);
+			kelder();
 			break;
 		case "raadsheer":
 			raadsheer();
 			break;
 		case "kapel":
-			//je kan max 4 kaarten van je hand naar de vuilbak brengen
+			kapel();
 			break;
 		case "raadszaal":
 			raadszaal();
@@ -236,12 +237,10 @@ public class SpelFuncties {
 			feest(kaart);
 			break;
 		case "tuinen":
-			// elke 10 kaarten op het einde van het spel zijn 1 overwinningspunt waard.
+			tuinen();
 			break;
 		case "bibliotheek":
-			// Trek kaarten tot er 7 kaarten in hand zijn
-			
-			//Wanneer er actiekaarten getrokken worden, kan je kiezen of je deze wilt of niet
+			bibliotheek();
 			break;
 		case "militie":
 			militie();
@@ -292,6 +291,7 @@ public class SpelFuncties {
 		
 		
 	}
+	
 	public void avonturier (){
 		int getal = 0 ;
 		int i = 0;
@@ -307,21 +307,38 @@ public class SpelFuncties {
 		}
 		
 	}
-	
+	public void bureaucraat() {
+		geefHuidigeSpeler().trekStapel().add(new Kaart("zilver","geldkaart",3,2));
+		verminderStapel("zilver");
+		//andere speler legt een overwinningskaart uit zijn hand op dzijn trekstapel
+		//while(geefHuidigeSpeler().equals(volgendeSpeler())){}
+	}
+	public void kelder() {
+		//leg een aantal kaarten weg, per elke weggelegde kaart krijg je een bij van je afneemstapel
+	}
 	public void raadsheer(){
 		lijstenSamenvoegenShuffle(geefHuidigeSpeler().aflegStapel(), geefHuidigeSpeler().trekStapel());
 	}
+	public void kapel() {
+		//je kan max 4 kaarten van je hand naar de vuilbak brengen
+	}
 	public void raadszaal (){
 	
-		//andereSpeler().trekKaart(geefHuidigeSpeler().trekStapel(), 1);
-		
-		
+		//volgendeSpeler().trekKaart(geefHuidigeSpeler().trekStapel(), 1);
 	}
 	public void feest(Kaart kaart){
-		geefHuidigeSpeler().verwijderKaart(kaart);
-		
+		verwijderKaart(kaart);
+		//koopActie kunnen uitvoeren
 	}
-	
+	public void tuinen() {
+		// elke 10 kaarten op het einde van het spel zijn 1 overwinningspunt waard.
+		//int meesteOverwinningspunten = 0;
+		//functie alle lijsten aanmaken
+	}
+	public void bibliotheek(){
+		// Trek kaarten tot er 7 kaarten in hand zijn
+		//Wanneer er actiekaarten getrokken worden, kan je kiezen of je deze wilt of niet
+	}
 	
 	public void militie() {
 		
@@ -355,7 +372,11 @@ public class SpelFuncties {
 		geefHuidigeSpeler().vermeerderGeld(geld);
 		geefHuidigeSpeler().vermeerderActie(actie);
 	}
-	
+	public void verwijderKaart(Kaart kaart){
+		
+		geefHuidigeSpeler().kaartenInHand().remove(kaart);
+		geefHuidigeSpeler().vuilbakStapel().add(kaart);
+	}
 
 	
 	
