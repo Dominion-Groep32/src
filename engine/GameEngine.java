@@ -365,8 +365,7 @@ public class GameEngine {
 		huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), aantalKaarten);
 		geefHuidigeSpeler().vermeerderActie(acties);
 	}
-
-
+//ok
 	
 	
 
