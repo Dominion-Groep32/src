@@ -22,12 +22,6 @@ public class GameEngine {
 
 
 	
-<<<<<<< HEAD
-	//
-=======
-	//test
->>>>>>> 29d5d733b6fc822189949c24c9fcc3f28909e866
-	
 	public  void maakSpelersAan(String SpelersNamen[]){
 
 		for (int i = 0; i < SpelersNamen.length; i++) {
@@ -357,31 +351,17 @@ public class GameEngine {
 	
 	public void heks(){
 		huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), 2);
-<<<<<<< HEAD
-		andereSpeler().trekStapel().add(new Kaart("vloek","overwinningsaart",0,-1,""));
-=======
-		andereSpeler().trekStapel().add(new Kaart("vloek","overwinningsKaart",0,-1,""));
->>>>>>> 29d5d733b6fc822189949c24c9fcc3f28909e866
+
+		andereSpeler().trekStapel().add(new Kaart("vloek","overwinningskaart",0,-1,""));
+
 	}
 
 	public void houthakker(){
 		vermeerderAankopEnGeld(1, 2);
-<<<<<<< HEAD
+
 	}
+
 	
-	public void vermeerderAankopEnGeld(int aankoop, int geld)
-	{
-		geefHuidigeSpeler().vermeerderAankoop(aankoop);
-		geefHuidigeSpeler().vermeerderGeld(geld);
-	}
-	
-	public void trekKaartEnVermeerderActies(int aantalKaarten, int acties)
-	{
-		huidigeSpeler.trekKaart(huidigeSpeler.trekStapel(), aantalKaarten);
-		geefHuidigeSpeler().vermeerderActie(acties);
-=======
->>>>>>> 29d5d733b6fc822189949c24c9fcc3f28909e866
-	}
 	
 	public void vermeerderAankopEnGeld(int aankoop, int geld)
 	{
