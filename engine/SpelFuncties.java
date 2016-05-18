@@ -241,43 +241,30 @@ public class SpelFuncties {
 			militie();
 			break;
 		case "mijn":
-			// Geldkaart van je hand naar vuilbak brengen
-			// andere geldkaart kopen die met waarde +3 van weggebrachte kaart
 			break;
 		case "slotgracht":
 			slotgracht();
 			break;
 		case "geldschieter":
-			// Indien je een kooper van je hand naar de vuilbak brengt
-
+			geldschieter();
 			break;
 		case "verbouwing":
-			//test
-			//test
-			//breng een kaart van je hand naar de vuilbank
-			//kost van deze kaart +2 om andere kaart te kunnen kopen
+			verbouwing();
 			break;
-		
 		case "spion":
 			spion();
 			break;
 		case "dief":
-			//elke speler toont zijn twee bovenste kaarten van zijn aftrekstapel
-			// als het een geldkaart is, ... (bekijk dit verder)
 			break;
 		case "troonzaal":
-			// kies actiekaart uit hand
-			// speel twee x actiekaart			
+			troonzaal();			
 			break;
-		
 		case "heks":
 			heks();
 			break;
 		case "werkplaats":
-			//koop een kaart die max 4 kost
+			werkplaats();
 			break;
-		case "gethub":
-			//dskqf
 		default:
 			break;
 		}
@@ -336,29 +323,44 @@ public class SpelFuncties {
 	}
 	
 	public void militie() {
-		
 		//elke ander speler moet hand verminderen tot 3 kaarten
-		
 	}
 
+	public void mijn() {
+		// Geldkaart van je hand naar vuilbak brengen
+		// andere geldkaart kopen die met waarde +3 van weggebrachte kaart
+	}
 	public void slotgracht(){
-	
 		// bij gebruik van een aanvalskaart kan deze kaart gebruikt worden om zich te verdedigen.
 	}
-	
+	public void geldschieter() {
+		// Indien je een kooper van je hand naar de vuilbak brengt
+	}
+	public void verbouwing() {
+		//breng een kaart van je hand naar de vuilbank
+		//kost van deze kaart +2 om andere kaart te kunnen kopen
+	}
 	public void spion(){
 		
 		//elke speler (ook huidigespeler) toont zijn bovenste kaart van zijn aftrekstapel
 		//speler kiest of hij deze teruglegt of naar zijn aflegstapel verplaatst
 	}
-	
-
+	public void dief() {
+		//elke speler toont zijn twee bovenste kaarten van zijn aftrekstapel
+		// als het een geldkaart is, ... (bekijk dit verder)
+	}
+	public void troonzaal() {
+		// kies actiekaart uit hand
+		// speel twee x actiekaart
+	}
 	
 	public void heks(){
-		
-		//andereSpeler().trekStapel().add(new Kaart("vloek","overwinningskaart",0,-1));
-		}
+	//andereSpeler().trekStapel().add(new Kaart("vloek","overwinningskaart",0,-1));
+	}
 
+	public void werkplaats() {
+	//koop een kaart die max 4 kost
+	}
 
 	
 	public void vermeerderAankoopGeldEnActie(int aankoop, int geld, int actie)
