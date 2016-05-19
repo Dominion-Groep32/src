@@ -5,7 +5,6 @@ import java.util.*;
 
 public class SpelFuncties {
 	
-//github
 
 	private List<Kaart> geldEnOverwinningskaarten = new LinkedList<>(Arrays.asList(new Kaart("koper","geldkaart",0,1),new Kaart("zilver","geldkaart",3,2),new Kaart("goud","geldkaart",6,3),
 			new Kaart("landgoed","overwinningskaart",2,1),new Kaart("hertogdom","overwinningskaart",5,3),new Kaart("provincie","overwinningskaart",8,6)));
@@ -121,12 +120,12 @@ public class SpelFuncties {
 		
 	}
 	
-	public void trekKaart(List<Kaart> lijst, int aantal) {
-		if (lijst.size() < aantal) {
-			lijst = lijstenSamenvoegen(huidigeSpeler.geefTrekStapel(), huidigeSpeler.geefAflegStapel(),true);
-		}
-		for (int i = 0; i < aantal; i++) {huidigeSpeler.geefKaartenInHand().add(lijst.get(i));}
-		for (int i = 0; i < aantal; i++) {lijst.remove(0);}
+	public void trekKaart(int aantal) {
+		if (huidigeSpeler.geefTrekStapel().size() < aantal) {
+			lijstenSamenvoegen(huidigeSpeler.geefTrekStapel(), huidigeSpeler.geefAflegStapel(),true);
+		}		
+		for (int i = 0; i < aantal; i++) {huidigeSpeler.geefKaartenInHand().add(huidigeSpeler.geefTrekStapel().get(i));}
+		for (int i = 0; i < aantal; i++) {huidigeSpeler.geefTrekStapel().remove(0);}
 	}
 
 
@@ -181,9 +180,9 @@ public class SpelFuncties {
 		return this.huidigeSpeler;
 	}
 	
-	public void brengKaartenInHandNaarAflegstapel(List<Kaart> kaartenInHand, List<Kaart> aflegstapel){
-		lijstenSamenvoegen(aflegstapel, kaartenInHand,false);
-		maakKaartInHandLeeg(huidigeSpeler.geefKaartenInHand());
+	public void brengAlleKaartenNaarAflegstapel(){
+		lijstenSamenvoegen(huidigeSpeler.geefAflegStapel(), huidigeSpeler.geefSpeelGebied(), false);
+		lijstenSamenvoegen(huidigeSpeler.geefAflegStapel(), huidigeSpeler.geefKaartenInHand(),false);
 	}
 	
 
@@ -194,7 +193,7 @@ public class SpelFuncties {
 			if(actiekaarten.get(i).geefNaam().equals(kaart.geefNaam())){
 				Kaart actiekaart = actiekaarten.get(i);
 				vermeerderAankoopGeldEnActie(actiekaart.geefExtraAankoop(), actiekaart.geefExtraMunten(), actiekaart.geefExtraActie());
-				trekKaart(geefHuidigeSpeler().geefTrekStapel(), actiekaart.geefExtraKaart());
+				trekKaart(actiekaart.geefExtraKaart());
 				if(actiekaarten.get(i).specialeKaart()){
 					SpecialeActiesUitvoeren(actiekaart);
 				}

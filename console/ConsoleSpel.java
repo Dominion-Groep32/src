@@ -4,7 +4,7 @@ import java.util.*;
 import engine.*;
 
 
-
+//test
 public class ConsoleSpel {
 	Scanner sc = new Scanner(System.in);
 	SpelFuncties engine = new SpelFuncties();
@@ -15,10 +15,11 @@ public class ConsoleSpel {
 	public static void main(String[] args) {
 		
 		ConsoleSpel console = new ConsoleSpel();
-		console.run();
+		
 	}
 	
 	public ConsoleSpel(){
+		run();
 	}
 	
 		public void run() {
@@ -36,9 +37,9 @@ public class ConsoleSpel {
 				Speler huidigeSpeler = engine.geefHuidigeSpeler();
 				System.out.println("");
 				printFunctie("Nu aan de beurt: "+huidigeSpeler.geefNaam());
-				engine.trekKaart(huidigeSpeler.geefTrekStapel(), 5);
+				engine.trekKaart(5);
 				toonKaartenInHand(huidigeSpeler.geefKaartenInHand());
-				engine.brengKaartenInHandNaarAflegstapel(huidigeSpeler.geefKaartenInHand(), huidigeSpeler.geefAflegStapel());
+				engine.brengAlleKaartenNaarAflegstapel();
 				printFunctie("de beurt van "+engine.geefHuidigeSpeler().geefNaam()+" is beëindigd");
 				System.out.println("");
 				huidigeSpeler.herstelWaarden();
@@ -118,7 +119,7 @@ public class ConsoleSpel {
 	
 	
 	
-	private void keuzeSpeler(int keuze, List<Kaart> kaartenInHand, List<Kaart> kaartenVanHetSpel, List<Kaart> aflegStapel) {
+	private void keuzeSpeler(int keuze, List<Kaart> kaartenInHand, List<Kaart> kaartenVanHetSpel, List<Kaart> speelGebied) {
 		engine.geefHuidigeSpeler().vermeerderGeld(engine.geldInHand(kaartenInHand));
 		
 		switch (keuze) {
@@ -127,7 +128,7 @@ public class ConsoleSpel {
 			break;
 		
 		case 2:
-			koopActie(kaartenVanHetSpel, aflegStapel);
+			koopActie(kaartenVanHetSpel, speelGebied);
 			break;
 			
 		default:
@@ -145,7 +146,7 @@ public class ConsoleSpel {
 		toonKaartenInHand(engine.geefHuidigeSpeler().geefKaartenInHand());
 	}
 	
-	private void koopActie(List<Kaart> kaartenVanHetSpel,List<Kaart> aflegStapel) {
+	private void koopActie(List<Kaart> kaartenVanHetSpel,List<Kaart> speelGebied) {
 		Speler speler = engine.geefHuidigeSpeler();
 		
 		printFunctie("");
@@ -156,7 +157,7 @@ public class ConsoleSpel {
 		List<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(kaartenVanHetSpel, engine.geldInHand(speler.geefKaartenInHand()));
 		toonLijst(lijstWaarvanJeKanKopen);
 		vragenNaarInfoOverKaarten(lijstWaarvanJeKanKopen);
-		int kost = koopKaart(lijstWaarvanJeKanKopen,aflegStapel).geefKost();
+		int kost = koopKaart(lijstWaarvanJeKanKopen,speelGebied).geefKost();
 		speler.verminderGeld(kost);
 		speler.verminderAankoop(1);
 		

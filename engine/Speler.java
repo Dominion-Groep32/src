@@ -2,7 +2,7 @@ package engine;
 import java.util.*;
 
 public class Speler {
-
+//test
 	private List<Kaart> kaartenInHand = new LinkedList<>();
 	private List<Kaart> aflegStapel = new LinkedList<>();
 	private List<Kaart> trekStapel = new LinkedList<>();

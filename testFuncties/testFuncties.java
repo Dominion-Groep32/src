@@ -141,7 +141,7 @@ public class testFuncties {
 	public void trekKaart(){
 		spelersAanmaken();
 		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 0);
-		engine.trekKaart(eersteTestlijst, 5);
+		engine.trekKaart(5);
 		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 5);
 	}
 	
@@ -162,7 +162,10 @@ public class testFuncties {
 	
 	@Test
 	public void specialeActiesUitvoeren(){
-		
+		spelersAanmaken();
+		engine.geefHuidigeSpeler().geefKaartenInHand().add(new Kaart("avonturier",6,true,0,0,0,0,"Draai achtereenvolgens de bovenste kaarten van je trekstapel om totdat je in totaal 2 geldkaarten hebt. Neem ze op handen. Leg de overige omgedraagde kaarten op je alegstapel."));
+		engine.actieUitvoeren(new Kaart("avonturier",6,true,0,0,0,0,"Draai achtereenvolgens de bovenste kaarten van je trekstapel om totdat je in totaal 2 geldkaarten hebt. Neem ze op handen. Leg de overige omgedraagde kaarten op je alegstapel."));
+		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 2);
 	}
 	
 	@Test
