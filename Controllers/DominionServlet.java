@@ -26,7 +26,7 @@ public class DominionServlet extends HttpServlet {
     	
     	String spelers[] = {spelerNaam, spelerNaam2};
     	engine.maakSpelersAan(spelers);
-    	huidigeSpeler = engine.geefHuidigeSpeler();
+    	this.huidigeSpeler = engine.geefHuidigeSpeler();
 		jsonObj.put("Speler1", spelers[0]);
 		jsonObj.put("Speler2", spelers[1]);
 		response.getWriter().write(jsonObj.toString());
@@ -34,14 +34,23 @@ public class DominionServlet extends HttpServlet {
     }
 	
     private void geefKaartenInHandVanDeHuidigeSpeler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	//huidigeSpeler = engine.geefHuidigeSpeler();
-    	JSONArray arrayObj = new JSONArray();
-
-
-    	engine.trekKaart(huidigeSpeler.trekStapel(), 5);
     	
-		for(int i=0; i<huidigeSpeler.trekStapel().size();i++){
-			arrayObj.put(i, huidigeSpeler.trekStapel().get(i).naam());
+    	JSONArray arrayObj = new JSONArray();
+    	
+    	engine.trekKaart(engine.geefHuidigeSpeler().trekStapel(), 5);
+    	
+		for(int i=0; i<engine.geefHuidigeSpeler().kaartenInHand().size();i++){
+			arrayObj.put(i, engine.geefHuidigeSpeler().kaartenInHand().get(i).naam());
+		}
+		response.getWriter().write(arrayObj.toString());
+    }
+
+    private void genereerActieKaart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	JSONArray arrayObj = new JSONArray();
+    	List<Kaart> actieKaarten = engine.actiekaartenGenereren();
+		for(int i=0; i <10;i++){
+			arrayObj.put(i, actieKaarten.get(i).naam());
 		}
 		response.getWriter().write(arrayObj.toString());
     }
@@ -64,6 +73,10 @@ public class DominionServlet extends HttpServlet {
 		case "huidigeSpeler":
 			geefKaartenInHandVanDeHuidigeSpeler(request, response);
 			break;
+		case "actieKaartenGeneren":
+			genereerActieKaart(request, response);
+			break;
+			
 		
 		default:
 			break;
