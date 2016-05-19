@@ -10,7 +10,7 @@ import engine.Kaart;
 import engine.SpelFuncties;
 import engine.Speler;
 import engine.Stapel;
-
+//github
 public class testFuncties {
 	SpelFuncties engine = new SpelFuncties();
 	Speler speler = new Speler("testspeler");
