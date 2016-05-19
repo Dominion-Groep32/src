@@ -168,10 +168,6 @@ public class SpelFuncties {
 	}
 
 	public void maakKaartInHandLeeg(List<Kaart> lijst) {
-		for (int i = 0; i < lijst.size(); i++) {
-			huidigeSpeler.geefVuilbakStapel().add(lijst.get(i));
-		}
-		
 		lijst.clear();
 		
 	}
