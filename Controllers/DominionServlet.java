@@ -8,9 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.*;
-
-import com.ibm.icu.text.IDNA.Info;
-
 import engine.*;
 
 public class DominionServlet extends HttpServlet {
