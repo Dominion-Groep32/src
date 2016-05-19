@@ -43,6 +43,7 @@ public class ConsoleSpel {
 				printFunctie("de beurt van "+engine.geefHuidigeSpeler().geefNaam()+" is beëindigd");
 				System.out.println("");
 				huidigeSpeler.herstelWaarden();
+				
 				engine.volgendeSpeler();
 		}
 		

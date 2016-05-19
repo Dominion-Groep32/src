@@ -5,7 +5,7 @@ import java.util.*;
 
 public class SpelFuncties {
 	
-	//github
+//github
 
 	private List<Kaart> geldEnOverwinningskaarten = new LinkedList<>(Arrays.asList(new Kaart("koper","geldkaart",0,1),new Kaart("zilver","geldkaart",3,2),new Kaart("goud","geldkaart",6,3),
 			new Kaart("landgoed","overwinningskaart",2,1),new Kaart("hertogdom","overwinningskaart",5,3),new Kaart("provincie","overwinningskaart",8,6)));
@@ -366,17 +366,5 @@ public class SpelFuncties {
 				stapel.add(kaart);
 			}
 		}
-		
 	}
-
-	
-	
-
-
-
-
-
-
-	
-
 }
