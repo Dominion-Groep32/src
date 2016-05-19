@@ -7,6 +7,7 @@ public class Speler {
 	private List<Kaart> aflegStapel = new LinkedList<>();
 	private List<Kaart> trekStapel = new LinkedList<>();
 	private List<Kaart> vuilbakStapel = new LinkedList<>();
+	private List<Kaart> speelGebied = new LinkedList<Kaart>();
 	private String naam;
 	private int aankoop ;
 	private int actie;
@@ -18,7 +19,8 @@ public class Speler {
 		kaartenInHand = new LinkedList<Kaart>();
 		trekStapel = startKaarten();
 		aflegStapel = new LinkedList<Kaart>();
-		vuilbakStapel = new LinkedList<>();
+		vuilbakStapel = new LinkedList<Kaart>();
+		speelGebied = new LinkedList<Kaart>();
 		aankoop = 1;
 		actie = 1;
 		geld = 0;
@@ -38,27 +40,25 @@ public class Speler {
 		return trekStapel;
 	}
 	
-	
-	
-	
-	
-	
-	public List<Kaart> trekStapel()
+	public List<Kaart> geefTrekStapel()
 	{
 		return this.trekStapel;
 	}
 	
-	public List<Kaart> aflegStapel()
+	public List<Kaart> geefAflegStapel()
 	{
 		return this.aflegStapel;
 	}
 	
-	public 	List<Kaart> kaartenInHand() 
+	public 	List<Kaart> geefKaartenInHand() 
 	{
 		return this.kaartenInHand;
 	}
-	public List<Kaart> vuilbakStapel() {
+	public List<Kaart> geefVuilbakStapel() {
 		return this.vuilbakStapel;
+	}
+	public List<Kaart> geefSpeelGebied() {
+		return this.speelGebied;
 	}
 
 

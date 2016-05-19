@@ -38,10 +38,10 @@ public class DominionServlet extends HttpServlet {
     	JSONArray arrayObj = new JSONArray();
 
 
-    	engine.trekKaart(huidigeSpeler.trekStapel(), 5);
+    	engine.trekKaart(huidigeSpeler.geefTrekStapel(), 5);
     	
-		for(int i=0; i<huidigeSpeler.trekStapel().size();i++){
-			arrayObj.put(i, huidigeSpeler.trekStapel().get(i).naam());
+		for(int i=0; i<huidigeSpeler.geefTrekStapel().size();i++){
+			arrayObj.put(i, huidigeSpeler.geefTrekStapel().get(i).naam());
 		}
 		response.getWriter().write(arrayObj.toString());
     }

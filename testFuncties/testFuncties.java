@@ -14,25 +14,9 @@ import engine.Stapel;
 public class testFuncties {
 	SpelFuncties engine = new SpelFuncties();
 	Speler speler = new Speler("testspeler");
-	List<Kaart> eersteTestlijst = speler.trekStapel();
+	List<Kaart> eersteTestlijst = speler.geefTrekStapel();
 	List<Kaart> actiekaarten = engine.geefLijstAlleActiekaarten();
 	
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
 	
 	@Test
 	public void startKaartenTest()
@@ -140,38 +124,39 @@ public class testFuncties {
 	@Test
 	public void trekKaart(){
 		spelersAanmaken();
-		assertEquals(engine.geefHuidigeSpeler().kaartenInHand().size(), 0);
+		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 0);
 		engine.trekKaart(eersteTestlijst, 5);
-		assertEquals(engine.geefHuidigeSpeler().kaartenInHand().size(), 5);
+		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 5);
 	}
 	
 	@Test
-	public void actieUitvoeren(){
+	public void functiesActieUitvoerenENVermeerderAankoopGeldEnActieControleren(){
 		spelersAanmaken();
-		engine.geefHuidigeSpeler().kaartenInHand().add(new Kaart("dorp",3,false,0,2,1,0,"+1 kaart / +2 acties"));
-		engine.geefHuidigeSpeler().kaartenInHand().add(new Kaart("festival",5,false,1,2,0,2,"+2 acties / +1 aanschaf / +2 munten"));
+		engine.geefHuidigeSpeler().geefKaartenInHand().add(new Kaart("dorp",3,false,0,2,1,0,"+1 kaart / +2 acties"));
+		engine.geefHuidigeSpeler().geefKaartenInHand().add(new Kaart("festival",5,false,1,2,0,2,"+2 acties / +1 aanschaf / +2 munten"));
+		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 2);
 		engine.actieUitvoeren(new Kaart("dorp",3,false,0,2,1,0,"+1 kaart / +2 acties"));
 		assertEquals(engine.geefHuidigeSpeler().geefActie(), 3);
-		
+		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 2);
+		engine.geefHuidigeSpeler().herstelWaarden();
 		engine.actieUitvoeren(new Kaart("festival",5,false,1,2,0,2,"+2 acties / +1 aanschaf / +2 munten"));
 		assertEquals(engine.geefHuidigeSpeler().geefAankoop(), 2);
-		assertEquals(engine.geefHuidigeSpeler().geefActie(), 5);
+		assertEquals(engine.geefHuidigeSpeler().geefActie(), 3);
 		assertEquals(engine.geefHuidigeSpeler().geefGeld(), 2);
 	
 	}
 	
 	@Test
-	public void specialeActiesUitvoeren(){
-		
+	public void ControleOpSpecialeActiesUitvoeren(){
+		spelersAanmaken();
+		engine.geefHuidigeSpeler().geefKaartenInHand().add(new Kaart("avonturier",6,true,0,0,0,0,"Draai achtereenvolgens de bovenste kaarten van je trekstapel om totdat je in totaal 2 geldkaarten hebt. Neem ze op handen. Leg de overige omgedraagde kaarten op je alegstapel."));
+		engine.actieUitvoeren(new Kaart("avonturier",6,true,0,0,0,0,"Draai achtereenvolgens de bovenste kaarten van je trekstapel om totdat je in totaal 2 geldkaarten hebt. Neem ze op handen. Leg de overige omgedraagde kaarten op je alegstapel."));
+		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 2);
 	}
 	
-	@Test
-	public void vermeerderAankoopGeldEnActie(){
-		
-	}
 	
 	@Test
-	public void verwijderKaart(){
+	public void kaartVanEneNaarAnderStapel(){
 		
 	}
 
