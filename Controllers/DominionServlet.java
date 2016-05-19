@@ -2,24 +2,16 @@ package Controllers;
 
 import java.io.IOException;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.eclipse.jdt.internal.compiler.apt.util.Util.EncodingError;
 import org.json.*;
-import com.sun.media.jfxmedia.track.Track.Encoding;
 import engine.*;
-
-/**
- * Servlet implementation class DominionServlet
- */
 
 public class DominionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private SpelFuncties engine = new SpelFuncties();	// FIXME: zou via getServletContext().get/setAttribute moeten werken
+	private SpelFuncties engine = new SpelFuncties();
 	private Speler huidigeSpeler;
 	
 	
@@ -29,40 +21,42 @@ public class DominionServlet extends HttpServlet {
   
     private void spelersToevoegen(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
     	JSONObject jsonObj = new JSONObject();
-    	
     	String spelerNaam = request.getParameter("speler1");
     	String spelerNaam2 = request.getParameter("speler2");
+    	
     	String spelers[] = {spelerNaam, spelerNaam2};
     	engine.maakSpelersAan(spelers);
     	huidigeSpeler = engine.geefHuidigeSpeler();
-		jsonObj.put("Speler1", huidigeSpeler.geefNaam());
+		jsonObj.put("Speler1", spelers[0]);
 		jsonObj.put("Speler2", spelers[1]);
 		response.getWriter().write(jsonObj.toString());
 		
     }
 	
-    private void huidigeSpeler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void geefKaartenInHandVanDeHuidigeSpeler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
-    	JSONObject jsonObj = new JSONObject();
-    	String[] spelers = {"jos","silke"};
+    	JSONArray arrayObj = new JSONArray();
+
+    	//huidigeSpeler = engine.geefHuidigeSpeler();
     	
-    	engine.maakSpelersAan(spelers);
-    	//bovenstaande dient ter testen
     	
-    	engine.trekKaart(engine.geefHuidigeSpeler().trekStapel(), 5);
-    	
-    	String kaartenInHand = "";
-    	for (int i = 0; i < engine.geefHuidigeSpeler().kaartenInHand().size(); i++) 
-    	{
-    		kaartenInHand += engine.geefHuidigeSpeler().kaartenInHand().get(i).naam() + ",";
+    	engine.trekKaart(huidigeSpeler.trekStapel(), 5);
+    	List<Kaart> hand = huidigeSpeler.kaartenInHand();
+		for(int i=0; i<huidigeSpeler.trekStapel().size();i++){
+			arrayObj.put(i, hand.get(i).naam());
 		}
-    	jsonObj.put("kaartenInHand", kaartenInHand);
-    	response.getWriter().write(kaartenInHand);
+		response.getWriter().write(arrayObj.toString());
     }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setHeader("Access-Control-Allow-Origin", "*");
+		// FIXME: zou via getServletContext().get/setAttribute moeten werken
+		//get servlet context
 		
+		if(engine == null){
+			engine = new SpelFuncties();
+			 //set servlet context
+		}
 		switch(request.getParameter("operation"))
 		{
 		case "spelerToevoegen":
@@ -70,11 +64,10 @@ public class DominionServlet extends HttpServlet {
 			break;
 			
 		case "huidigeSpeler":
-			huidigeSpeler(request, response);
+			geefKaartenInHandVanDeHuidigeSpeler(request, response);
 			break;
 		
 		default:
-			//ErrorMsg(request, response);
 			break;
 		}	
 	}
