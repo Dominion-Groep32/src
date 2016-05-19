@@ -25,7 +25,7 @@ public class SpelFuncties {
 	public SpelFuncties() {
 
 		actiekaartenGenereren();
-		this.kaartenVanHetSpel = lijstenSamenvoegen(this.lijst10Actiekaarten, geldEnOverwinningskaarten,false);
+		this.kaartenVanHetSpel = lijstenSamenvoegen(geldEnOverwinningskaarten,this.lijst10Actiekaarten, false);
 		stapelsAanmaken(this.kaartenVanHetSpel);
 		
 	}
@@ -100,13 +100,16 @@ public class SpelFuncties {
 	
 	
 	public List<Kaart> lijstenSamenvoegen(List<Kaart> primaireLijst, List<Kaart> bijTeVoegenLijst,boolean shuffle) {
-
-		for (int i = 0; i < bijTeVoegenLijst.size(); i++) {
-			primaireLijst.add(bijTeVoegenLijst.get(i));
+		List<Kaart> samengevoegedeLijst = new LinkedList<Kaart>();
+		for (int i = 0; i < primaireLijst.size(); i++) {
+			samengevoegedeLijst.add(primaireLijst.get(i));
 		}
-		bijTeVoegenLijst.clear();
-		if(shuffle){Collections.shuffle(primaireLijst);}
-		return primaireLijst;
+		for (int i=0; i < bijTeVoegenLijst.size();i++){
+			samengevoegedeLijst.add(bijTeVoegenLijst.get(i));
+		}
+		//bijTeVoegenLijst.clear();
+		if(shuffle){Collections.shuffle(samengevoegedeLijst);}
+		return samengevoegedeLijst;
 
 	}
 
@@ -115,9 +118,9 @@ public class SpelFuncties {
 		Collections.shuffle(actiekaarten);
 		for (int i = 0; i < 10; i++) 
 		{
-			lijst10Actiekaarten.add(actiekaarten.get(i));
+			this.lijst10Actiekaarten.add(actiekaarten.get(i));
 		}
-		return lijst10Actiekaarten;
+		return this.lijst10Actiekaarten;
 	}
 	
 	public void stapelsAanmaken(List<Kaart> kaartenVanHetSpel) {
@@ -209,6 +212,7 @@ public class SpelFuncties {
 				vermeerderAankoopGeldEnActie(actiekaart.extraAankoop(), actiekaart.extraMunten(), actiekaart.extraActie());
 				trekKaart(geefHuidigeSpeler().trekStapel(), actiekaart.extraKaart());
 				if(actiekaarten.get(i).specialeKaart()){
+					SpecialeActiesUitvoeren(actiekaart);
 				}
 			}
 			
