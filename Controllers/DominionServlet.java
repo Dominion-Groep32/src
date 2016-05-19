@@ -11,7 +11,7 @@ import engine.*;
 
 public class DominionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private SpelFuncties engine;
+	private SpelFuncties engine = new SpelFuncties();
 	private Speler huidigeSpeler;
 	
 	
@@ -27,7 +27,6 @@ public class DominionServlet extends HttpServlet {
     	String spelers[] = {spelerNaam, spelerNaam2};
     	engine.maakSpelersAan(spelers);
     	huidigeSpeler = engine.geefHuidigeSpeler();
-    	System.out.println("De naam van de Huidigespeler = "+huidigeSpeler.geefNaam());
 		jsonObj.put("Speler1", spelers[0]);
 		jsonObj.put("Speler2", spelers[1]);
 		response.getWriter().write(jsonObj.toString());
@@ -37,13 +36,12 @@ public class DominionServlet extends HttpServlet {
     private void geefKaartenInHandVanDeHuidigeSpeler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	
     	JSONArray arrayObj = new JSONArray();
-    	System.out.println("test1");
+
+    	//huidigeSpeler = engine.geefHuidigeSpeler();
     	
-    	huidigeSpeler = engine.geefHuidigeSpeler();
-    	System.out.println("test2"+huidigeSpeler.geefNaam());
+    	
     	engine.trekKaart(huidigeSpeler.trekStapel(), 5);
     	List<Kaart> hand = huidigeSpeler.kaartenInHand();
-    	
 		for(int i=0; i<huidigeSpeler.trekStapel().size();i++){
 			arrayObj.put(i, hand.get(i).naam());
 		}
@@ -54,8 +52,9 @@ public class DominionServlet extends HttpServlet {
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		// FIXME: zou via getServletContext().get/setAttribute moeten werken
 		//get servlet context
+		
 		if(engine == null){
-			 engine = new SpelFuncties();
+			engine = new SpelFuncties();
 			 //set servlet context
 		}
 		switch(request.getParameter("operation"))
