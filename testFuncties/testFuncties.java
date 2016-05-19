@@ -88,23 +88,23 @@ public class testFuncties {
 	public void lijstActiekaartenInHand()
 	{
 		lijstenSamenvoegen();
-		assertEquals(engine.neemActiekaartenUitHand(eersteTestlijst).size(), 25);
+		assertEquals(engine.neemActiekaartenUitHand().size(), 25);
 		eersteTestlijst.add(new Kaart("avonturier",6,true,0,0,0,0,"Draai achtereenvolgens de bovenste kaarten van je trekstapel om totdat je in totaal 2 geldkaarten hebt. Neem ze op handen. Leg de overige omgedraagde kaarten op je alegstapel."));
-		assertEquals(engine.neemActiekaartenUitHand(eersteTestlijst).size(), 26);
+		assertEquals(engine.neemActiekaartenUitHand().size(), 26);
 		}	
 	
 	
 	@Test
 	public void geldInHand()
 	{
-		assertEquals(engine.geldInHand(eersteTestlijst), 7);
+		assertEquals(engine.geldInHand(), 7);
 		eersteTestlijst.add(new Kaart("koper","Geldkaart",0,1));
-		assertEquals(engine.geldInHand(eersteTestlijst), 8);
+		assertEquals(engine.geldInHand(), 8);
 	}
 	
 	@Test
 	public void kaartenDieJeKuntKopen(){
-		assertEquals(engine.kaartenDieJeKuntKopen(actiekaarten, 3).size(),7);
+		assertEquals(engine.kaartenDieJeKuntKopen().size(),7);
 		
 	}
 	

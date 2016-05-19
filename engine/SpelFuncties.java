@@ -24,7 +24,7 @@ public class SpelFuncties {
 	public SpelFuncties() {
 
 		actiekaartenGenereren();
-		this.kaartenVanHetSpel = lijstenSamenvoegen(geldEnOverwinningskaarten,this.lijst10Actiekaarten, false);
+		this.kaartenVanHetSpel = lijstenSamenvoegen(lijst10Actiekaarten,geldEnOverwinningskaarten, false);
 		stapelsAanmaken(this.kaartenVanHetSpel);
 		
 	}
@@ -129,27 +129,27 @@ public class SpelFuncties {
 	}
 
 
-	public int geldInHand(List<Kaart> lijst) {
+	public int geldInHand() {
 		int geld = 0;
-		for (int i = 0; i < lijst.size(); i++) {geld += lijst.get(i).geefWaarde();}
+		for (int i = 0; i < geefHuidigeSpeler().geefKaartenInHand().size(); i++) {geld += geefHuidigeSpeler().geefKaartenInHand().get(i).geefWaarde();}
 		return geld;
 	}
 	
 
 
-	public List<Kaart> kaartenDieJeKuntKopen(List<Kaart> lijst, int coins) {
+	public List<Kaart> kaartenDieJeKuntKopen() {
 		List<Kaart> lijstMetKaartenDieJeKuntKopen = new LinkedList<Kaart>();
-		for (int i = 0; i < lijst.size(); i++) {
-			if (lijst.get(i).geefKost() <= coins) {lijstMetKaartenDieJeKuntKopen.add(lijst.get(i));}
+		for (int i = 0; i < geefLijstKaartenVanHetSpel().size(); i++) {
+			if (geefLijstKaartenVanHetSpel().get(i).geefKost() <= geldInHand()) {lijstMetKaartenDieJeKuntKopen.add(geefLijstKaartenVanHetSpel().get(i));}
 		}
 		return lijstMetKaartenDieJeKuntKopen;
 	}
 
 		
-	public List<Kaart> neemActiekaartenUitHand(List<Kaart> kaartenInHand){
+	public List<Kaart> neemActiekaartenUitHand(){
 		List<Kaart> actiekaartenUitHand = new LinkedList<Kaart>();
-		for (int i = 0; i < kaartenInHand.size(); i++) {
-			if (kaartenInHand.get(i).kaartType() == "actiekaart") {actiekaartenUitHand.add(kaartenInHand.get(i));}
+		for (int i = 0; i < geefHuidigeSpeler().geefKaartenInHand().size(); i++) {
+			if (geefHuidigeSpeler().geefKaartenInHand().get(i).kaartType() == "actiekaart") {actiekaartenUitHand.add(geefHuidigeSpeler().geefKaartenInHand().get(i));}
 		}
 		return actiekaartenUitHand;
 	}
