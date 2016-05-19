@@ -34,16 +34,14 @@ public class DominionServlet extends HttpServlet {
     }
 	
     private void geefKaartenInHandVanDeHuidigeSpeler(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	
+    	//huidigeSpeler = engine.geefHuidigeSpeler();
     	JSONArray arrayObj = new JSONArray();
 
-    	//huidigeSpeler = engine.geefHuidigeSpeler();
-    	
-    	
+
     	engine.trekKaart(huidigeSpeler.trekStapel(), 5);
-    	List<Kaart> hand = huidigeSpeler.kaartenInHand();
+    	
 		for(int i=0; i<huidigeSpeler.trekStapel().size();i++){
-			arrayObj.put(i, hand.get(i).naam());
+			arrayObj.put(i, huidigeSpeler.trekStapel().get(i).naam());
 		}
 		response.getWriter().write(arrayObj.toString());
     }
