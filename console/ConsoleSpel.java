@@ -168,11 +168,12 @@ public class ConsoleSpel {
 	return sc.nextInt();
 }
 
-	private Kaart koopKaart(List<Kaart> lijstWaarvanJeKanKopen,List<Kaart> aflegStapel) {
+	private Kaart koopKaart(List<Kaart> lijstWaarvanJeKanKopen,List<Kaart> speelGebied) {
 	
 		int keuze = kaartnummerInvullen("kopen")-1;
 		int gecontroleerdekeuze = controleKeuze(keuze, lijstWaarvanJeKanKopen.size());
-		aflegStapel.add(lijstWaarvanJeKanKopen.get(gecontroleerdekeuze));
+		//engine.brengKaartVanDeEneNaarAndereStapel(speelGebied,lijstWaarvanJeKanKopen.get(gecontroleerdekeuze), );
+		speelGebied.add(lijstWaarvanJeKanKopen.get(gecontroleerdekeuze));
 		engine.verminderStapel(lijstWaarvanJeKanKopen.get(gecontroleerdekeuze).geefNaam());
 		return lijstWaarvanJeKanKopen.get(gecontroleerdekeuze);
 
