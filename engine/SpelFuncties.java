@@ -110,13 +110,14 @@ public class SpelFuncties {
 
 	}
 
-	public void actiekaartenGenereren() {
+	public List<Kaart> actiekaartenGenereren() {
 	
 		Collections.shuffle(actiekaarten);
 		for (int i = 0; i < 10; i++) 
 		{
 			lijst10Actiekaarten.add(actiekaarten.get(i));
 		}
+		return lijst10Actiekaarten;
 	}
 	
 	public void stapelsAanmaken(List<Kaart> kaartenVanHetSpel) {

@@ -20,9 +20,7 @@ public class testFuncties {
 	SpelFuncties engine = new SpelFuncties();
 	Speler speler = new Speler("testspeler");
 	List<Kaart> eersteTestlijst = speler.trekStapel();
-	//tweedelijst is 7 lang
-	List<Kaart> tweedeTestLijst = new LinkedList<>(Arrays.asList(new Kaart("avonturier",6,true,0,0,0,0,"Draai achtereenvolgens de bovenste kaarten van je trekstapel om totdat je in totaal 2 geldkaarten hebt. Neem ze op handen. Leg de overige omgedraagde kaarten op je alegstapel."),
-			new Kaart("bureaucraat",4,true,0,0,0,0,"Leg uit de algemene voorraad een zilverkaart op je trekstapel. Iedere andere speler legt een overwinningskaart uit zijn hand op zijn trekstapel (of laat zien dat hij deze niet heeft)"), new Kaart("kelder",2,true,0,1,0,0,"+1 actie / Leg een aantal kaarten naar keuze af. +1 kaart per afgelegde kaart."), new Kaart("raadsheer",3,true,0,0,0,2,"+2 munten / Je mag je trekstapel direct op je aflegstapel leggen"),new Kaart("kapel",2,true,0,0,0,0,"Vernietig 4 of minder kaarten uit je hand"),new Kaart("raadszaal",5,true,1,0,4,0,"+4 kaarten / +1 aanschaf / Iedere andere speler trekt 1 kaart"),new Kaart("feest",4,true,0,0,0,5,"Vernietig deze kaart. Pak een kaart met een waarde van 5 munten of minder.")));
+	List<Kaart> actiekaarten = engine.geefLijstAlleActiekaarten();
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -50,7 +48,7 @@ public class testFuncties {
 	public void startKaartenTest()
 	{
 		assertEquals(eersteTestlijst.size(), 10);
-		assertEquals(tweedeTestLijst.size(), 7);
+		assertEquals(actiekaarten.size(), 25);
 	}
 	
 	@Test
@@ -84,9 +82,14 @@ public class testFuncties {
 	}
 	
 	@Test
+	public void actiekaartenGenereren(){
+		assertEquals(engine.actiekaartenGenereren().size(), 10);
+		}
+	@Test
 	public void lijstenSamenvoegen()
 	{	
-		assertEquals(engine.lijstenSamenvoegen(eersteTestlijst, tweedeTestLijst,true).size(), 17);
+		actiekaartenGenereren();
+		assertEquals(engine.lijstenSamenvoegen(eersteTestlijst, actiekaarten,true).size(), 17);
 	}
 	
 	
@@ -94,19 +97,12 @@ public class testFuncties {
 	public void ControleerActiekaarten()
 	{
 		lijstenSamenvoegen();
-		assertEquals(engine.neemActiekaartenUitHand(eersteTestlijst).size(), 7);
+		System.out.println(engine.neemActiekaartenUitHand(eersteTestlijst).size());
+		assertEquals(engine.neemActiekaartenUitHand(eersteTestlijst).size(), 10);
 		}
 
-	public void lijstenSamenvoegenZonderSuffle(){
-		
 	
-	}
 	
-	@Test
-	public void actiekaartenGenereren(){
-
-		
-	}
 	
 	@Test
 	public void geldInHand()
