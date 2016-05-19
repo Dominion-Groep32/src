@@ -43,9 +43,7 @@ public class SpelFuncties {
 		{
 			plaatsInDeArray = 0;
 		}
-		huidigeSpeler = spelers[plaatsInDeArray];
-		
-		
+		huidigeSpeler = spelers[plaatsInDeArray];	
 	}
 	
 
@@ -268,10 +266,7 @@ public class SpelFuncties {
 		default:
 			break;
 		}
-		
 		geefHuidigeSpeler().verminderActie(1);
-		
-		
 	}
 	
 	public void avonturier (){
