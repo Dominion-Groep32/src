@@ -117,7 +117,7 @@ public class SpelFuncties {
 	
 	public void stapelsAanmaken(List<Kaart> kaartenVanHetSpel) {
 
-		for (int j = 0; j < kaartenVanHetSpel.size(); j++) {lijstStapel.add(new Stapel(kaartenVanHetSpel.get(j).naam()));}
+		for (int j = 0; j < kaartenVanHetSpel.size(); j++) {lijstStapel.add(new Stapel(kaartenVanHetSpel.get(j).geefNaam()));}
 		
 	}
 	
@@ -132,7 +132,7 @@ public class SpelFuncties {
 
 	public int geldInHand(List<Kaart> lijst) {
 		int geld = 0;
-		for (int i = 0; i < lijst.size(); i++) {geld += lijst.get(i).waarde();}
+		for (int i = 0; i < lijst.size(); i++) {geld += lijst.get(i).geefWaarde();}
 		return geld;
 	}
 	
@@ -141,7 +141,7 @@ public class SpelFuncties {
 	public List<Kaart> kaartenDieJeKuntKopen(List<Kaart> lijst, int coins) {
 		List<Kaart> lijstMetKaartenDieJeKuntKopen = new LinkedList<Kaart>();
 		for (int i = 0; i < lijst.size(); i++) {
-			if (lijst.get(i).kost() <= coins) {lijstMetKaartenDieJeKuntKopen.add(lijst.get(i));}
+			if (lijst.get(i).geefKost() <= coins) {lijstMetKaartenDieJeKuntKopen.add(lijst.get(i));}
 		}
 		return lijstMetKaartenDieJeKuntKopen;
 	}
@@ -187,10 +187,10 @@ public class SpelFuncties {
 		brengKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefKaartenInHand(), kaart, huidigeSpeler.geefAflegStapel());
 	
 		for(int i=0;i<actiekaarten.size();i++){
-			if(actiekaarten.get(i).naam().equals(kaart.naam())){
+			if(actiekaarten.get(i).geefNaam().equals(kaart.geefNaam())){
 				Kaart actiekaart = actiekaarten.get(i);
-				vermeerderAankoopGeldEnActie(actiekaart.extraAankoop(), actiekaart.extraMunten(), actiekaart.extraActie());
-				trekKaart(geefHuidigeSpeler().geefTrekStapel(), actiekaart.extraKaart());
+				vermeerderAankoopGeldEnActie(actiekaart.geefExtraAankoop(), actiekaart.geefExtraMunten(), actiekaart.geefExtraActie());
+				trekKaart(geefHuidigeSpeler().geefTrekStapel(), actiekaart.geefExtraKaart());
 				if(actiekaarten.get(i).specialeKaart()){
 					SpecialeActiesUitvoeren(actiekaart);
 				}
@@ -199,7 +199,7 @@ public class SpelFuncties {
 		}
 	}
 	public void SpecialeActiesUitvoeren(Kaart kaart) {
-		switch (kaart.naam()) {
+		switch (kaart.geefNaam()) {
 		case "avonturier":
 			//OK
 			avonturier();
@@ -360,7 +360,7 @@ public class SpelFuncties {
 	
 	public void brengKaartVanDeEneNaarAndereStapel(List<Kaart> lijst,Kaart kaart,List<Kaart> stapel){
 		for (int i = 0; i < lijst.size(); i++) {
-			if(lijst.get(i).naam() == kaart.naam()){
+			if(lijst.get(i).geefNaam() == kaart.geefNaam()){
 				lijst.remove(i);
 				i--;
 				stapel.add(kaart);

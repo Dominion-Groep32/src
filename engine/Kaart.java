@@ -46,7 +46,7 @@ public class Kaart {
 		return this.overwinningpunten;	
 	}
 
-	public String naam() {
+	public String geefNaam() {
 		return this.kaartNaam;
 	}
 
@@ -56,27 +56,27 @@ public class Kaart {
 	}
 
 	
-	public int kost() {
+	public int geefKost() {
 		return this.cost;
 	}
 
-	public int waarde() {
+	public int geefWaarde() {
 		return this.waarde;
 	}
 		
-	public String info(){
+	public String geefInfo(){
 		return this.info;
 	}
-	public int extraAankoop() {
+	public int geefExtraAankoop() {
 		return this.extraAankoop;
 	}
-	public int extraActie() {
+	public int geefExtraActie() {
 		return this.extraActie;
 	}
-	public int extraKaart() {
+	public int geefExtraKaart() {
 		return this.extraKaart;
 	}
-	public int extraMunten() {
+	public int geefExtraMunten() {
 		return this.extraMunten;
 	}
 	public boolean specialeKaart() {

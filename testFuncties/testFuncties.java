@@ -14,7 +14,7 @@ import engine.Stapel;
 public class testFuncties {
 	SpelFuncties engine = new SpelFuncties();
 	Speler speler = new Speler("testspeler");
-	List<Kaart> eersteTestlijst = speler.trekStapel();
+	List<Kaart> eersteTestlijst = speler.geefTrekStapel();
 	List<Kaart> actiekaarten = engine.geefLijstAlleActiekaarten();
 	
 	@BeforeClass
@@ -140,16 +140,16 @@ public class testFuncties {
 	@Test
 	public void trekKaart(){
 		spelersAanmaken();
-		assertEquals(engine.geefHuidigeSpeler().kaartenInHand().size(), 0);
+		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 0);
 		engine.trekKaart(eersteTestlijst, 5);
-		assertEquals(engine.geefHuidigeSpeler().kaartenInHand().size(), 5);
+		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 5);
 	}
 	
 	@Test
 	public void actieUitvoeren(){
 		spelersAanmaken();
-		engine.geefHuidigeSpeler().kaartenInHand().add(new Kaart("dorp",3,false,0,2,1,0,"+1 kaart / +2 acties"));
-		engine.geefHuidigeSpeler().kaartenInHand().add(new Kaart("festival",5,false,1,2,0,2,"+2 acties / +1 aanschaf / +2 munten"));
+		engine.geefHuidigeSpeler().geefKaartenInHand().add(new Kaart("dorp",3,false,0,2,1,0,"+1 kaart / +2 acties"));
+		engine.geefHuidigeSpeler().geefKaartenInHand().add(new Kaart("festival",5,false,1,2,0,2,"+2 acties / +1 aanschaf / +2 munten"));
 		engine.actieUitvoeren(new Kaart("dorp",3,false,0,2,1,0,"+1 kaart / +2 acties"));
 		assertEquals(engine.geefHuidigeSpeler().geefActie(), 3);
 		

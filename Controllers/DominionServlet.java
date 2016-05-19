@@ -35,10 +35,10 @@ public class DominionServlet extends HttpServlet {
 	
     private void geefKaartenInHandVanDeHuidigeSpeler(HttpServletRequest request, HttpServletResponse response, SpelFuncties engine) throws ServletException, IOException {
     	JSONArray arrayObj = new JSONArray();
-    	engine.trekKaart(engine.geefHuidigeSpeler().trekStapel(), 5);
+    	engine.trekKaart(engine.geefHuidigeSpeler().geefTrekStapel(), 5);
     	
-		for(int i=0; i<engine.geefHuidigeSpeler().kaartenInHand().size();i++){
-			arrayObj.put(i, engine.geefHuidigeSpeler().kaartenInHand().get(i).naam());
+		for(int i=0; i<engine.geefHuidigeSpeler().geefKaartenInHand().size();i++){
+			arrayObj.put(i, engine.geefHuidigeSpeler().geefKaartenInHand().get(i).geefNaam());
 		}
 		
 		response.getWriter().write(arrayObj.toString());
@@ -49,7 +49,7 @@ public class DominionServlet extends HttpServlet {
     	JSONArray arrayObj = new JSONArray();
     	List<Kaart> actieKaarten = engine.actiekaartenGenereren();
 		for(int i=0; i <10;i++){
-			arrayObj.put(i, actieKaarten.get(i).naam());
+			arrayObj.put(i, actieKaarten.get(i).geefNaam());
 		}
 		response.getWriter().write(arrayObj.toString());
     }
@@ -60,7 +60,7 @@ public class DominionServlet extends HttpServlet {
     	String gekozenKaart = request.getParameter("kaart");
     	int index = 0;
     	
-		List<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(engine.geefLijstKaartenVanHetSpel(), engine.geldInHand(engine.geefHuidigeSpeler().kaartenInHand()));
+		List<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(engine.geefLijstKaartenVanHetSpel(), engine.geldInHand(engine.geefHuidigeSpeler().geefKaartenInHand()));
 		engine.verminderStapel(gekozenKaart);
 		
 		for (int i = 0; i < lijstWaarvanJeKanKopen.size(); i++) {
@@ -69,8 +69,8 @@ public class DominionServlet extends HttpServlet {
 			}
 		}
 		
-		engine.verminderStapel(lijstWaarvanJeKanKopen.get(index).naam());
-		int kost = lijstWaarvanJeKanKopen.get(index).kost();
+		engine.verminderStapel(lijstWaarvanJeKanKopen.get(index).geefNaam());
+		int kost = lijstWaarvanJeKanKopen.get(index).geefKost();
 		
 		engine.geefHuidigeSpeler().verminderGeld(kost);
 		engine.geefHuidigeSpeler().verminderAankoop(1);

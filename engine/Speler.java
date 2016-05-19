@@ -43,21 +43,21 @@ public class Speler {
 	
 	
 	
-	public List<Kaart> trekStapel()
+	public List<Kaart> geefTrekStapel()
 	{
 		return this.trekStapel;
 	}
 	
-	public List<Kaart> aflegStapel()
+	public List<Kaart> geefAflegStapel()
 	{
 		return this.aflegStapel;
 	}
 	
-	public 	List<Kaart> kaartenInHand() 
+	public 	List<Kaart> geefKaartenInHand() 
 	{
 		return this.kaartenInHand;
 	}
-	public List<Kaart> vuilbakStapel() {
+	public List<Kaart> geefVuilbakStapel() {
 		return this.vuilbakStapel;
 	}
 
