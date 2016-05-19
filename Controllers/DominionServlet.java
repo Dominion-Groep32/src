@@ -84,7 +84,7 @@ public class DominionServlet extends HttpServlet {
 		case "stopBeurt":
 			
 			gameEngine.volgendeSpeler();
-			genereerActieKaart(request, response, gameEngine);
+		
 			
 			break;
 			
