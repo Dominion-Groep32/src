@@ -144,7 +144,7 @@ public class ConsoleSpel {
 		toonKaartenInHand(engine.geefHuidigeSpeler().kaartenInHand());
 	}
 	
-	private void koopActie(List<Kaart> tafelKaarten,List<Kaart> aflegStapel) {
+	private void koopActie(List<Kaart> kaartenVanHetSpel,List<Kaart> aflegStapel) {
 		Speler speler = engine.geefHuidigeSpeler();
 		
 		printFunctie("");
@@ -152,7 +152,7 @@ public class ConsoleSpel {
 		printFunctie("");
 		System.out.println("je kunt de volgende kaarten kopen");
 		printFunctie("");
-		List<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(tafelKaarten, engine.geldInHand(speler.kaartenInHand()));
+		List<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(kaartenVanHetSpel, engine.geldInHand(speler.kaartenInHand()));
 		toonLijst(lijstWaarvanJeKanKopen);
 		vragenNaarInfoOverKaarten(lijstWaarvanJeKanKopen);
 		int kost = koopKaart(lijstWaarvanJeKanKopen,aflegStapel).kost();

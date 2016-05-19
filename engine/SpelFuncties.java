@@ -25,7 +25,7 @@ public class SpelFuncties {
 	public SpelFuncties() {
 
 		actiekaartenGenereren();
-		this.kaartenVanHetSpel = lijstenSamenvoegen(this.lijst10Actiekaarten, geldEnOverwinningskaarten,false);
+		this.kaartenVanHetSpel = lijstenSamenvoegen(geldEnOverwinningskaarten,this.lijst10Actiekaarten, false);
 		stapelsAanmaken(this.kaartenVanHetSpel);
 		
 	}
@@ -89,18 +89,17 @@ public class SpelFuncties {
 		
 	}
 	
-	//bij andere spelers zou je met een for moeten werken // nog vragen aan greit 
-	public Speler andereSpelers(){
+/*
+	public Speler geefAndereSpelers(){
 		Speler andereSpeler;
 		if (huidigeSpeler == spelers[1])
 		{andereSpeler = spelers[0];}
 		else {andereSpeler = spelers[1];}
 		return andereSpeler;
 	}
-	
+	*/
 	
 	public List<Kaart> lijstenSamenvoegen(List<Kaart> primaireLijst, List<Kaart> bijTeVoegenLijst,boolean shuffle) {
-
 		for (int i = 0; i < bijTeVoegenLijst.size(); i++) {
 			primaireLijst.add(bijTeVoegenLijst.get(i));
 		}
@@ -115,9 +114,9 @@ public class SpelFuncties {
 		Collections.shuffle(actiekaarten);
 		for (int i = 0; i < 10; i++) 
 		{
-			lijst10Actiekaarten.add(actiekaarten.get(i));
+			this.lijst10Actiekaarten.add(actiekaarten.get(i));
 		}
-		return lijst10Actiekaarten;
+		return this.lijst10Actiekaarten;
 	}
 	
 	public void stapelsAanmaken(List<Kaart> kaartenVanHetSpel) {
@@ -203,12 +202,13 @@ public class SpelFuncties {
 
 	public void actieUitvoeren(Kaart kaart) {
 		huidigeSpeler.kaartenInHand().remove(kaart);
-		for(int i=0;actiekaarten.size()<0;i++){
+		for(int i=0;i<actiekaarten.size();i++){
 			if(actiekaarten.get(i).naam().equals(kaart.naam())){
 				Kaart actiekaart = actiekaarten.get(i);
 				vermeerderAankoopGeldEnActie(actiekaart.extraAankoop(), actiekaart.extraMunten(), actiekaart.extraActie());
 				trekKaart(geefHuidigeSpeler().trekStapel(), actiekaart.extraKaart());
 				if(actiekaarten.get(i).specialeKaart()){
+					SpecialeActiesUitvoeren(actiekaart);
 				}
 			}
 			
