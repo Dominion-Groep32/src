@@ -57,14 +57,13 @@ public class SpelFuncties {
 	}
 	
 
-	public void verminderStapel(String kaartnaam){
+	public void verminderTafelstapel(String kaartnaam){
 		
 		for (int i = 0; i < lijstStapel.size(); i++) {
 			String Kaart = lijstStapel.get(i).geefStapelNaam();
 			if (kaartnaam.equals(Kaart))
 			{
-				lijstStapel.get(i).verminderAantalKaarten();
-				
+				lijstStapel.get(i).verminderAantalKaarten();	
 			}
 		}
 	}
@@ -189,7 +188,7 @@ public class SpelFuncties {
 	
 
 	public void actieUitvoeren(Kaart kaart) {
-		brengKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefKaartenInHand(), kaart, huidigeSpeler.geefAflegStapel());
+		brengKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefSpeelGebied(), kaart,huidigeSpeler.geefKaartenInHand());
 	
 		for(int i=0;i<actiekaarten.size();i++){
 			if(actiekaarten.get(i).geefNaam().equals(kaart.geefNaam())){
@@ -283,7 +282,7 @@ public class SpelFuncties {
 	}
 	public void bureaucraat() {
 		geefHuidigeSpeler().geefTrekStapel().add(new Kaart("zilver","geldkaart",3,2));
-		verminderStapel("zilver");
+		verminderTafelstapel("zilver");
 		//andere speler legt een overwinningskaart uit zijn hand op dzijn trekstapel
 		//while(geefHuidigeSpeler().equals(volgendeSpeler())){}
 	}
@@ -363,12 +362,14 @@ public class SpelFuncties {
 	}
 
 	
-	public void brengKaartVanDeEneNaarAndereStapel(List<Kaart> lijst,Kaart kaart,List<Kaart> stapel){
-		for (int i = 0; i < lijst.size(); i++) {
-			if(lijst.get(i).geefNaam() == kaart.geefNaam()){
-				lijst.remove(i);
+
+	
+	public void brengKaartVanDeEneNaarAndereStapel(List<Kaart> toevoegStapel,Kaart kaart,List<Kaart>verwijderStapel){
+		for (int i = 0; i < verwijderStapel.size(); i++) {
+			if(verwijderStapel.get(i).geefNaam() == kaart.geefNaam()){
+				verwijderStapel.remove(kaart);
+				toevoegStapel.add(kaart);
 				i--;
-				stapel.add(kaart);
 			}
 		}
 	}

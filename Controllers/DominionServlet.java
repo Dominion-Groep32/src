@@ -63,7 +63,7 @@ public class DominionServlet extends HttpServlet {
     	int index = 0;
     	
 		List<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(engine.geefLijstKaartenVanHetSpel(), engine.geldInHand(engine.geefHuidigeSpeler().geefKaartenInHand()));
-		engine.verminderStapel(gekozenKaart);
+		engine.verminderTafelstapel(gekozenKaart);
 		
 		for (int i = 0; i < lijstWaarvanJeKanKopen.size(); i++) {
 			if (gekozenKaart.equals(lijstWaarvanJeKanKopen.get(i))) {
@@ -71,7 +71,7 @@ public class DominionServlet extends HttpServlet {
 			}
 		}
 		
-		engine.verminderStapel(lijstWaarvanJeKanKopen.get(index).geefNaam());
+		engine.verminderTafelstapel(lijstWaarvanJeKanKopen.get(index).geefNaam());
 		int kost = lijstWaarvanJeKanKopen.get(index).geefKost();
 		
 		engine.geefHuidigeSpeler().verminderGeld(kost);

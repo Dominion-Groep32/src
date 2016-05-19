@@ -172,9 +172,8 @@ public class ConsoleSpel {
 	
 		int keuze = kaartnummerInvullen("kopen")-1;
 		int gecontroleerdekeuze = controleKeuze(keuze, lijstWaarvanJeKanKopen.size());
-		//engine.brengKaartVanDeEneNaarAndereStapel(speelGebied,lijstWaarvanJeKanKopen.get(gecontroleerdekeuze), );
 		speelGebied.add(lijstWaarvanJeKanKopen.get(gecontroleerdekeuze));
-		engine.verminderStapel(lijstWaarvanJeKanKopen.get(gecontroleerdekeuze).geefNaam());
+		engine.verminderTafelstapel(lijstWaarvanJeKanKopen.get(gecontroleerdekeuze).geefNaam());
 		return lijstWaarvanJeKanKopen.get(gecontroleerdekeuze);
 
 	}
