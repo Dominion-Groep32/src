@@ -2,7 +2,7 @@ package engine;
 
 
 public class Kaart {
-	//github
+	
 	private String KaartType;
 	private String kaartNaam;	
 	private String info;
