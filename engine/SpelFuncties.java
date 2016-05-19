@@ -16,11 +16,20 @@ public class SpelFuncties {
 			,new Kaart("dorp",3,false,0,2,1,0,"+1 kaart / +2 acties"),new Kaart("heks",5,true,0,0,2,0,"+2 kaarten / Iedere andere speler pakt 1 vloekkaart."),new Kaart("werkplaats",3,true,0,0,0,4,"Pak een kaart die maximaal 4 munten kost."),new Kaart("houthakker",3,false,1,0,0,2,"+1 aanschaf / +2 munten")));
 	private Speler[] spelers;
 
-	private List<Kaart> kaartenDieTekoopZijn = new LinkedList<>();
+	private List<Kaart> lijst10Actiekaarten = new LinkedList<>();
 	private List<Kaart> kaartenVanHetSpel = new LinkedList<>();
-	private List<Stapel> decks = new LinkedList<>();
+	private List<Stapel> lijstStapel = new LinkedList<>();
 	Scanner scanner = new Scanner(System.in);
 	private Speler huidigeSpeler;
+	
+	public SpelFuncties() {
+
+		actiekaartenGenereren();
+		this.kaartenVanHetSpel = lijstenSamenvoegen(this.lijst10Actiekaarten, geldEnOverwinningskaarten,false);
+		stapelsAanmaken(this.kaartenVanHetSpel);
+		
+	}
+		
 	
 	public  void maakSpelersAan(String SpelersNamen[]){
 		 spelers = new Speler[SpelersNamen.length];
@@ -49,11 +58,11 @@ public class SpelFuncties {
 
 	public void verminderStapel(String kaartnaam){
 		
-		for (int i = 0; i < decks.size(); i++) {
-			String Kaart = decks.get(i).geefStapelNaam();
+		for (int i = 0; i < lijstStapel.size(); i++) {
+			String Kaart = lijstStapel.get(i).geefStapelNaam();
 			if (kaartnaam.equals(Kaart))
 			{
-				decks.get(i).verminderAantalKaarten();
+				lijstStapel.get(i).verminderAantalKaarten();
 				
 			}
 		}
@@ -63,12 +72,12 @@ public class SpelFuncties {
 		int Legestapels = 0;
 		Boolean tmp = true;
 		
-		for (int i = 0; i < decks.size(); i++) 
+		for (int i = 0; i < lijstStapel.size(); i++) 
 		{
-			if(decks.get(i).geefAatalResterendeKaartenInDeStapel() <= 0)
+			if(lijstStapel.get(i).geefAatalResterendeKaartenInDeStapel() <= 0)
 			{
 				Legestapels = Legestapels+1;
-				String lijstNaam = decks.get(i).geefStapelNaam();
+				String lijstNaam = lijstStapel.get(i).geefStapelNaam();
 				
 				if (lijstNaam.equals("provincie") || Legestapels >=3)
 				{
@@ -90,45 +99,38 @@ public class SpelFuncties {
 	}
 	
 	
-	public List<Kaart> lijstenSamenvoegenShuffle(List<Kaart> primaireLijst, List<Kaart> bijTeVoegenLijst) {
+	public List<Kaart> lijstenSamenvoegen(List<Kaart> primaireLijst, List<Kaart> bijTeVoegenLijst,boolean shuffle) {
 
 		for (int i = 0; i < bijTeVoegenLijst.size(); i++) {
 			primaireLijst.add(bijTeVoegenLijst.get(i));
 		}
 		bijTeVoegenLijst.clear();
-		Collections.shuffle(primaireLijst);
+		if(shuffle){Collections.shuffle(primaireLijst);}
 		return primaireLijst;
 
 	}
 
-	public List<Kaart> lijstenSamenvoegenZonderShuffle(List<Kaart> primaireLijst, List<Kaart> bijTeVoegenLijst) {
-
-		for (int i = 0; i < bijTeVoegenLijst.size(); i++) {
-			primaireLijst.add(bijTeVoegenLijst.get(i));
-		}
-		bijTeVoegenLijst.clear();
-		return primaireLijst;
-
-	}	
-
-	public List<Kaart> kaartenInitialiseren() {
-
+	public void actiekaartenGenereren() {
+	
 		Collections.shuffle(actiekaarten);
 		for (int i = 0; i < 10; i++) 
 		{
-			kaartenDieTekoopZijn.add(actiekaarten.get(i));
+			lijst10Actiekaarten.add(actiekaarten.get(i));
 		}
-		kaartenVanHetSpel = lijstenSamenvoegenZonderShuffle(kaartenDieTekoopZijn, geldEnOverwinningskaarten);
+	}
+	
+	public void stapelsAanmaken(List<Kaart> kaartenVanHetSpel) {
+
+		
 		for (int j = 0; j < kaartenVanHetSpel.size(); j++) {
-			decks.add(new Stapel(kaartenVanHetSpel.get(j).naam()));
+			lijstStapel.add(new Stapel(kaartenVanHetSpel.get(j).naam()));
 		}
 		
-		return kaartenDieTekoopZijn;
 	}
 	
 	public void trekKaart(List<Kaart> lijst, int aantal) {
 		if (lijst.size() < aantal) {
-			lijst = lijstenSamenvoegenShuffle(huidigeSpeler.trekStapel(), huidigeSpeler.aflegStapel());
+			lijst = lijstenSamenvoegen(huidigeSpeler.trekStapel(), huidigeSpeler.aflegStapel(),true);
 		}
 		for (int i = 0; i < aantal; i++) {
 			huidigeSpeler.kaartenInHand().add(lijst.get(i));
@@ -171,10 +173,15 @@ public class SpelFuncties {
 	}
 	
 
-	public List<Kaart> lijstGeldEnOverwinningskaarten() {
+	public List<Kaart> geefLijstGeldEnOverwinningskaarten() {
 		return this.geldEnOverwinningskaarten;
 	}
-
+	public List<Kaart> geefLijstAlleActiekaarten() {
+		return this.actiekaarten;
+	}
+	public List<Kaart> geefLijstKaartenVanHetSpel() {
+		return this.kaartenVanHetSpel;
+	}
 
 	public void maakKaartInHandLeeg(List<Kaart> lijst) {
 		lijst.clear();
@@ -188,7 +195,7 @@ public class SpelFuncties {
 	}
 	
 	public void brengKaartenInHandNaarAflegstapel(List<Kaart> kaartenInHand, List<Kaart> aflegstapel){
-		lijstenSamenvoegenZonderShuffle(aflegstapel, kaartenInHand);
+		lijstenSamenvoegen(aflegstapel, kaartenInHand,false);
 		maakKaartInHandLeeg(huidigeSpeler.kaartenInHand());
 	}
 	
@@ -294,7 +301,7 @@ public class SpelFuncties {
 		//leg een aantal kaarten weg, per elke weggelegde kaart krijg je een bij van je afneemstapel
 	}
 	public void raadsheer(){
-		lijstenSamenvoegenShuffle(geefHuidigeSpeler().aflegStapel(), geefHuidigeSpeler().trekStapel());
+		lijstenSamenvoegen(geefHuidigeSpeler().aflegStapel(), geefHuidigeSpeler().trekStapel(),true);
 	}
 	public void kapel() {
 		//je kan max 4 kaarten van je hand naar de vuilbak brengen
