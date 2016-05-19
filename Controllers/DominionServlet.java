@@ -55,7 +55,31 @@ public class DominionServlet extends HttpServlet {
     }
    
     
-    
+    private void kopen(HttpServletRequest request, HttpServletResponse response,SpelFuncties engine) throws ServletException, IOException {
+    	JSONObject jsonObj = new JSONObject();
+    	String gekozenKaart = request.getParameter("kaart");
+    	int index = 0;
+    	
+		List<Kaart> lijstWaarvanJeKanKopen = engine.kaartenDieJeKuntKopen(engine.geefLijstKaartenVanHetSpel(), engine.geldInHand(engine.geefHuidigeSpeler().kaartenInHand()));
+		engine.verminderStapel(gekozenKaart);
+		
+		for (int i = 0; i < lijstWaarvanJeKanKopen.size(); i++) {
+			if (gekozenKaart.equals(lijstWaarvanJeKanKopen.get(i))) {
+				index = i;
+			}
+		}
+		
+		engine.verminderStapel(lijstWaarvanJeKanKopen.get(index).naam());
+		int kost = lijstWaarvanJeKanKopen.get(index).kost();
+		
+		engine.geefHuidigeSpeler().verminderGeld(kost);
+		engine.geefHuidigeSpeler().verminderAankoop(1);
+		
+		jsonObj.put("naam", gekozenKaart);
+		jsonObj.put("kost", kost);
+		
+		response.getWriter().write(jsonObj.toString());
+    }
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setHeader("Access-Control-Allow-Origin", "*");
@@ -82,12 +106,11 @@ public class DominionServlet extends HttpServlet {
 			genereerActieKaart(request, response, gameEngine);
 			break;
 		case "stopBeurt":
-			
 			gameEngine.volgendeSpeler();
-		
-			
 			break;
-			
+		case "kopen":
+			kopen(request, response, gameEngine);
+			break;
 		
 		default:
 			break;
