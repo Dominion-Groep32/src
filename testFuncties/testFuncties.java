@@ -2,19 +2,14 @@ package testFuncties;
 
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+import org.junit.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 import engine.Kaart;
 import engine.SpelFuncties;
 import engine.Speler;
+import engine.Stapel;
 
 public class testFuncties {
 	SpelFuncties engine = new SpelFuncties();
@@ -38,11 +33,6 @@ public class testFuncties {
 	public void tearDown() throws Exception {
 	}
 
-	
-	
-	
-	@Test
-	public void mainTest(){System.out.println("this works");}
 	
 	@Test
 	public void startKaartenTest()
@@ -79,41 +69,42 @@ public class testFuncties {
 	public void geefHuidigeSpeler(){
 		spelersAanmaken();
 		assertEquals(engine.geefHuidigeSpeler().geefNaam(), "naamEersteSpeler");
+		engine.volgendeSpeler();
+		assertEquals(engine.geefHuidigeSpeler().geefNaam(), "naamTweedeSpeler");
 	}
 	
 	@Test
 	public void actiekaartenGenereren(){
-		assertEquals(engine.actiekaartenGenereren().size(), 10);
+		// gebeurd in SpelFuncties 
 		}
 	@Test
 	public void lijstenSamenvoegen()
 	{	
-		actiekaartenGenereren();
-		assertEquals(engine.lijstenSamenvoegen(eersteTestlijst, actiekaarten,true).size(), 17);
+		assertEquals(engine.lijstenSamenvoegen(eersteTestlijst, actiekaarten,true).size(), 35);
 	}
 	
 	
 	@Test
-	public void ControleerActiekaarten()
+	public void lijstActiekaartenInHand()
 	{
 		lijstenSamenvoegen();
-		System.out.println(engine.neemActiekaartenUitHand(eersteTestlijst).size());
-		assertEquals(engine.neemActiekaartenUitHand(eersteTestlijst).size(), 10);
-		}
-
-	
+		assertEquals(engine.neemActiekaartenUitHand(eersteTestlijst).size(), 25);
+		eersteTestlijst.add(new Kaart("avonturier",6,true,0,0,0,0,"Draai achtereenvolgens de bovenste kaarten van je trekstapel om totdat je in totaal 2 geldkaarten hebt. Neem ze op handen. Leg de overige omgedraagde kaarten op je alegstapel."));
+		assertEquals(engine.neemActiekaartenUitHand(eersteTestlijst).size(), 26);
+		}	
 	
 	
 	@Test
 	public void geldInHand()
 	{
-		int geld = engine.geldInHand(eersteTestlijst);
-		if (geld != 7){System.err.println("Fout aantal geld in hand");}}
-
-	
+		assertEquals(engine.geldInHand(eersteTestlijst), 7);
+		eersteTestlijst.add(new Kaart("koper","Geldkaart",0,1));
+		assertEquals(engine.geldInHand(eersteTestlijst), 8);
+	}
 	
 	@Test
 	public void kaartenDieJeKuntKopen(){
+		assertEquals(engine.kaartenDieJeKuntKopen(actiekaarten, 3).size(),7);
 		
 	}
 	
@@ -121,12 +112,67 @@ public class testFuncties {
 	public void maakLijstLeeg()
 	{
 		eersteTestlijst.clear();
-		if (eersteTestlijst.size() != 0) {
-			System.err.println("fail");
-		}
+		actiekaarten.clear();
+		assertEquals(eersteTestlijst.size(), 0);
+		assertEquals(actiekaarten.size(), 0);
 	}
 
+	@Test
+	public void verminderStapel(){
+		
+	}
 	
+	@Test
+	public void spelNogNietBeëindigd(){
+		
+	}
 
+	@Test
+	public void geefAnderSpelers(){
+		
+	}
+
+	@Test
+	public void stapelsAanmaken(){
+		
+	}
+	
+	@Test
+	public void trekKaart(){
+		spelersAanmaken();
+		assertEquals(engine.geefHuidigeSpeler().kaartenInHand().size(), 0);
+		engine.trekKaart(eersteTestlijst, 5);
+		assertEquals(engine.geefHuidigeSpeler().kaartenInHand().size(), 5);
+	}
+	
+	@Test
+	public void actieUitvoeren(){
+		spelersAanmaken();
+		engine.geefHuidigeSpeler().kaartenInHand().add(new Kaart("dorp",3,false,0,2,1,0,"+1 kaart / +2 acties"));
+		engine.geefHuidigeSpeler().kaartenInHand().add(new Kaart("festival",5,false,1,2,0,2,"+2 acties / +1 aanschaf / +2 munten"));
+		engine.actieUitvoeren(new Kaart("dorp",3,false,0,2,1,0,"+1 kaart / +2 acties"));
+		assertEquals(engine.geefHuidigeSpeler().geefActie(), 3);
+		
+		engine.actieUitvoeren(new Kaart("festival",5,false,1,2,0,2,"+2 acties / +1 aanschaf / +2 munten"));
+		assertEquals(engine.geefHuidigeSpeler().geefAankoop(), 2);
+		assertEquals(engine.geefHuidigeSpeler().geefActie(), 5);
+		assertEquals(engine.geefHuidigeSpeler().geefGeld(), 2);
+	
+	}
+	
+	@Test
+	public void specialeActiesUitvoeren(){
+		
+	}
+	
+	@Test
+	public void vermeerderAankoopGeldEnActie(){
+		
+	}
+	
+	@Test
+	public void verwijderKaart(){
+		
+	}
 
 }

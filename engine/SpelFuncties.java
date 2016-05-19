@@ -89,27 +89,23 @@ public class SpelFuncties {
 		
 	}
 	
-	//bij andere spelers zou je met een for moeten werken // nog vragen aan greit 
-	public Speler andereSpelers(){
+/*
+	public Speler geefAndereSpelers(){
 		Speler andereSpeler;
 		if (huidigeSpeler == spelers[1])
 		{andereSpeler = spelers[0];}
 		else {andereSpeler = spelers[1];}
 		return andereSpeler;
 	}
-	
+	*/
 	
 	public List<Kaart> lijstenSamenvoegen(List<Kaart> primaireLijst, List<Kaart> bijTeVoegenLijst,boolean shuffle) {
-		List<Kaart> samengevoegedeLijst = new LinkedList<Kaart>();
-		for (int i = 0; i < primaireLijst.size(); i++) {
-			samengevoegedeLijst.add(primaireLijst.get(i));
+		for (int i = 0; i < bijTeVoegenLijst.size(); i++) {
+			primaireLijst.add(bijTeVoegenLijst.get(i));
 		}
-		for (int i=0; i < bijTeVoegenLijst.size();i++){
-			samengevoegedeLijst.add(bijTeVoegenLijst.get(i));
-		}
-		//bijTeVoegenLijst.clear();
-		if(shuffle){Collections.shuffle(samengevoegedeLijst);}
-		return samengevoegedeLijst;
+		bijTeVoegenLijst.clear();
+		if(shuffle){Collections.shuffle(primaireLijst);}
+		return primaireLijst;
 
 	}
 
@@ -206,7 +202,7 @@ public class SpelFuncties {
 
 	public void actieUitvoeren(Kaart kaart) {
 		huidigeSpeler.kaartenInHand().remove(kaart);
-		for(int i=0;actiekaarten.size()<0;i++){
+		for(int i=0;i<actiekaarten.size();i++){
 			if(actiekaarten.get(i).naam().equals(kaart.naam())){
 				Kaart actiekaart = actiekaarten.get(i);
 				vermeerderAankoopGeldEnActie(actiekaart.extraAankoop(), actiekaart.extraMunten(), actiekaart.extraActie());
