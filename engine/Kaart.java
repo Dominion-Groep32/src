@@ -19,7 +19,7 @@ public class Kaart {
 	public Kaart(String naam, int cost, boolean specialeKaart,int extraAankoop, int extraActie, int extraKaart, int extraMunten,  String info)
 	{
 		this.kaartNaam = naam;
-		this.KaartType = "actiekaarten";
+		this.KaartType = "actiekaart";
 		this.cost = cost;
 		this.info = info;
 		this.extraAankoop = extraAankoop;

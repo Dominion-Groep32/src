@@ -8,7 +8,7 @@ import engine.*;
 public class ConsoleSpel {
 	Scanner sc = new Scanner(System.in);
 	SpelFuncties engine = new SpelFuncties();
-	private List<Kaart> tafelKaarten = engine.lijstenSamenvoegenZonderShuffle(engine.kaartenInitialiseren(), engine.lijstGeldEnOverwinningskaarten());
+	
 	
 
 	
@@ -117,7 +117,7 @@ public class ConsoleSpel {
 	
 	
 	
-	private void keuzeSpeler(int keuze, List<Kaart> kaartenInHand, List<Kaart> tafelKaarten, List<Kaart> aflegStapel) {
+	private void keuzeSpeler(int keuze, List<Kaart> kaartenInHand, List<Kaart> kaartenVanHetSpel, List<Kaart> aflegStapel) {
 		engine.geefHuidigeSpeler().vermeerderGeld(engine.geldInHand(kaartenInHand));
 		
 		switch (keuze) {
@@ -126,7 +126,7 @@ public class ConsoleSpel {
 			break;
 		
 		case 2:
-			koopActie(tafelKaarten, aflegStapel);
+			koopActie(kaartenVanHetSpel, aflegStapel);
 			break;
 			
 		default:
@@ -201,7 +201,7 @@ public class ConsoleSpel {
 		int keuze = geefKeuze(huidigeSpeler.kaartenInHand());
 		while(engine.geefHuidigeSpeler().geefActie() >0)
 		{
-		keuzeSpeler(keuze,huidigeSpeler.kaartenInHand(),tafelKaarten,huidigeSpeler.aflegStapel());
+		keuzeSpeler(keuze,huidigeSpeler.kaartenInHand(),engine.geefLijstKaartenVanHetSpel(),huidigeSpeler.aflegStapel());
 		huidigeSpeler.verminderActie(1);
 		}
 }

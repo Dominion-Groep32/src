@@ -2,6 +2,8 @@ package testFuncties;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.After;
@@ -18,7 +20,9 @@ public class testFuncties {
 	SpelFuncties engine = new SpelFuncties();
 	Speler speler = new Speler("testspeler");
 	List<Kaart> eersteTestlijst = speler.trekStapel();
-	List<Kaart> tweedeTestLijst = speler.trekStapel();
+	//tweedelijst is 7 lang
+	List<Kaart> tweedeTestLijst = new LinkedList<>(Arrays.asList(new Kaart("avonturier",6,true,0,0,0,0,"Draai achtereenvolgens de bovenste kaarten van je trekstapel om totdat je in totaal 2 geldkaarten hebt. Neem ze op handen. Leg de overige omgedraagde kaarten op je alegstapel."),
+			new Kaart("bureaucraat",4,true,0,0,0,0,"Leg uit de algemene voorraad een zilverkaart op je trekstapel. Iedere andere speler legt een overwinningskaart uit zijn hand op zijn trekstapel (of laat zien dat hij deze niet heeft)"), new Kaart("kelder",2,true,0,1,0,0,"+1 actie / Leg een aantal kaarten naar keuze af. +1 kaart per afgelegde kaart."), new Kaart("raadsheer",3,true,0,0,0,2,"+2 munten / Je mag je trekstapel direct op je aflegstapel leggen"),new Kaart("kapel",2,true,0,0,0,0,"Vernietig 4 of minder kaarten uit je hand"),new Kaart("raadszaal",5,true,1,0,4,0,"+4 kaarten / +1 aanschaf / Iedere andere speler trekt 1 kaart"),new Kaart("feest",4,true,0,0,0,5,"Vernietig deze kaart. Pak een kaart met een waarde van 5 munten of minder.")));
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -46,6 +50,7 @@ public class testFuncties {
 	public void startKaartenTest()
 	{
 		assertEquals(eersteTestlijst.size(), 10);
+		assertEquals(tweedeTestLijst.size(), 7);
 	}
 	
 	@Test
@@ -70,7 +75,6 @@ public class testFuncties {
 		assertEquals(engine.geefHuidigeSpeler().geefNaam(), "naamDerdeSpeler");
 		engine.volgendeSpeler();
 		assertEquals(engine.geefHuidigeSpeler().geefNaam(), "naamEersteSpeler");
-		
 	}
 	
 	@Test
@@ -78,20 +82,19 @@ public class testFuncties {
 		spelersAanmaken();
 		assertEquals(engine.geefHuidigeSpeler().geefNaam(), "naamEersteSpeler");
 	}
-	/*
+	
 	@Test
-	public void lijstenSamenvoegenSuffle()
-	{
-		int lengte = Engine.lijstenSamenvoegenShuffle(eersteTestlijst, tweedeTestLijst).size();
-		if(lengte == 20){System.err.println("Juist");}
-		else{System.out.println("verkeerd");}
+	public void lijstenSamenvoegen()
+	{	
+		assertEquals(engine.lijstenSamenvoegen(eersteTestlijst, tweedeTestLijst,true).size(), 17);
 	}
-	*/
+	
 	
 	@Test
 	public void ControleerActiekaarten()
 	{
-		//if (engine.controleerActieKaarten(derdeTestLijst).size() != 5){System.err.println("Fout in controle actiekaarten");
+		lijstenSamenvoegen();
+		assertEquals(engine.neemActiekaartenUitHand(eersteTestlijst).size(), 7);
 		}
 
 	public void lijstenSamenvoegenZonderSuffle(){
