@@ -53,7 +53,7 @@ public class Kaart {
 	}
 
 
-	public String kaartType() {
+	public String geefKaartType() {
 		return this.KaartType;
 	}
 

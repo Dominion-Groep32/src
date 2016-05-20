@@ -94,7 +94,7 @@ public class Speler {
 	}
 
 	public void vermeerderGeld(int geld) {
-		this.geld =this.geld+ geld;
+		this.geld =this.geld + geld;
 	}
 	public void verminderGeld(int geld) {
 		this.geld =this.geld- geld;
