@@ -27,8 +27,7 @@ public class SpelFuncties {
 	public SpelFuncties() {
 
 		actiekaartenGenereren();
-		List<Kaart> tijdelijkeLijst = actiekaarten;
-		kaartenVanHetSpel = lijstenSamenvoegen(lijst10Actiekaarten,lijstenSamenvoegen(tijdelijkeLijst, overwinningskaarten, false,false), false,true);
+		kaartenVanHetSpel = lijstenSamenvoegenTotNieuweLijst(lijst10Actiekaarten,lijstenSamenvoegenTotNieuweLijst(geldkaarten, overwinningskaarten, false),false);
 		stapelsAanmaken(kaartenVanHetSpel);
 		
 	}
@@ -108,6 +107,18 @@ public class SpelFuncties {
 		if(verwijderBijTeVoegenLijst){bijTeVoegenLijst.clear();}
 		if(shuffle){Collections.shuffle(primaireLijst);}
 		return primaireLijst;
+
+	}
+	public List<Kaart> lijstenSamenvoegenTotNieuweLijst(List<Kaart> primaireLijst, List<Kaart> bijTeVoegenLijst,boolean shuffle){
+		List<Kaart> nieuweLijst = new LinkedList<Kaart>();
+		for (int i = 0; i < primaireLijst.size(); i++) {
+			nieuweLijst.add(primaireLijst.get(i));
+		}
+		for (int i = 0; i < bijTeVoegenLijst.size(); i++) {
+			nieuweLijst.add(bijTeVoegenLijst.get(i));
+		}
+		if(shuffle){Collections.shuffle(nieuweLijst);}
+		return nieuweLijst;
 
 	}
 
