@@ -366,7 +366,8 @@ public class SpelFuncties {
 		huidigeSpeler.vermeerderGeld(geld);
 		huidigeSpeler.vermeerderActie(actie);
 	}
-
+//test
+	
 	
 
 	public void brengAlleGeldkaartenUitHandNaarSpeelGebied(){
