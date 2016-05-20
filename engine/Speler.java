@@ -2,11 +2,16 @@ package engine;
 import java.util.*;
 
 public class Speler {
-
+	
+	//test
+		
+		
+		
 	private List<Kaart> kaartenInHand = new LinkedList<>();
 	private List<Kaart> aflegStapel = new LinkedList<>();
 	private List<Kaart> trekStapel = new LinkedList<>();
 	private List<Kaart> vuilbakStapel = new LinkedList<>();
+	private List<Kaart> speelGebied = new LinkedList<>();
 	private String naam;
 	private int aankoop ;
 	private int actie;
@@ -18,7 +23,8 @@ public class Speler {
 		kaartenInHand = new LinkedList<Kaart>();
 		trekStapel = startKaarten();
 		aflegStapel = new LinkedList<Kaart>();
-		vuilbakStapel = new LinkedList<>();
+		vuilbakStapel = new LinkedList<Kaart>();
+		speelGebied = new LinkedList<Kaart>();
 		aankoop = 1;
 		actie = 1;
 		geld = 0;
@@ -60,7 +66,10 @@ public class Speler {
 	public List<Kaart> geefVuilbakStapel() {
 		return this.vuilbakStapel;
 	}
-
+	
+	public List<Kaart> geefSpeelGebied() {
+		return this.speelGebied;
+	}
 
 	public String geefNaam() {
 		return this.naam;
@@ -102,21 +111,5 @@ public class Speler {
 		this.aankoop = 1;
 		this.actie = 1;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
 	
 }
