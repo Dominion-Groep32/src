@@ -4,9 +4,7 @@ import java.util.*;
 public class Speler {
 	
 	//test
-		
-		
-		
+
 	private List<Kaart> kaartenInHand = new LinkedList<>();
 	private List<Kaart> aflegStapel = new LinkedList<>();
 	private List<Kaart> trekStapel = new LinkedList<>();
@@ -16,6 +14,7 @@ public class Speler {
 	private int aankoop ;
 	private int actie;
 	private int geld;
+	
 
 
 	public Speler(String naam){
@@ -34,11 +33,12 @@ public class Speler {
 	public List<Kaart> startKaarten() {
 		for (int i = 0; i < 7; i++) {
 
-			trekStapel.add(new Kaart("koper","Geldkaart",0,1));
+			trekStapel.add(new Kaart("koper","geldkaart",0,1,"Deze kaart is 1 munt waard"));
+			
 			//trekStapel.add(new Kaart("dorp","actiekaart",3,"+1 kaart / +2 acties"));
 		}
 		for (int j = 0; j < 3; j++) {
-			trekStapel.add(new Kaart("landgoed","overwinningskaart",2,1));
+			trekStapel.add(new Kaart("landgoed","overwinningskaart",2,1,"Is op het einde van het spel 1 punt waard"));
 		}
 		Collections.shuffle(trekStapel);
 		return trekStapel;

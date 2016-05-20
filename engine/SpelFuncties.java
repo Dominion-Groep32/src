@@ -9,8 +9,8 @@ public class SpelFuncties {
 	
 	
 	
-	private List<Kaart> geldkaarten = new LinkedList<>(Arrays.asList(new Kaart("koper","geldkaart",0,1),new Kaart("zilver","geldkaart",3,2),new Kaart("goud","geldkaart",6,3)));
-	private List<Kaart> overwinningskaarten = new LinkedList<>(Arrays.asList(new Kaart("landgoed","overwinningskaart",2,1),new Kaart("hertogdom","overwinningskaart",5,3),new Kaart("provincie","overwinningskaart",8,6)));
+	private List<Kaart> geldkaarten = new LinkedList<>(Arrays.asList(new Kaart("koper","geldkaart",0,1,"Deze kaart is 1 munt waard"),new Kaart("zilver","geldkaart",3,2,"Deze kaart is 2 munten waard"),new Kaart("goud","geldkaart",6,3,"Deze kaart is 3 munten waard")));
+	private List<Kaart> overwinningskaarten = new LinkedList<>(Arrays.asList(new Kaart("landgoed","overwinningskaart",2,1,"Is op het einde van het spel 1 punt waard"),new Kaart("hertogdom","overwinningskaart",5,3,"Is op het einde van het spel 5 punten waard"),new Kaart("provincie","overwinningskaart",8,6,"Is op het einde van het spel 8 punten waard")));
 	private List<Kaart> actiekaarten = new LinkedList<>(Arrays.asList(new Kaart("avonturier",6,true,0,0,0,0,"Draai achtereenvolgens de bovenste kaarten van je trekstapel om totdat je in totaal 2 geldkaarten hebt. Neem ze op handen. Leg de overige omgedraagde kaarten op je alegstapel."),
 			new Kaart("bureaucraat",4,true,0,0,0,0,"Leg uit de algemene voorraad een zilverkaart op je trekstapel. Iedere andere speler legt een overwinningskaart uit zijn hand op zijn trekstapel (of laat zien dat hij deze niet heeft)"), new Kaart("kelder",2,true,0,1,0,0,"+1 actie / Leg een aantal kaarten naar keuze af. +1 kaart per afgelegde kaart."), new Kaart("raadsheer",3,true,0,0,0,2,"+2 munten / Je mag je trekstapel direct op je aflegstapel leggen"),new Kaart("kapel",2,true,0,0,0,0,"Vernietig 4 of minder kaarten uit je hand"),new Kaart("raadszaal",5,true,1,0,4,0,"+4 kaarten / +1 aanschaf / Iedere andere speler trekt 1 kaart"),new Kaart("feest",4,true,0,0,0,5,"Vernietig deze kaart. Pak een kaart met een waarde van 5 munten of minder."),
 			new Kaart("festival",5,false,1,2,0,2,"+2 acties / +1 aanschaf / +2 munten"),new Kaart("tuinen",4,true,0,0,0,0,"Elke 10 kaarten in je stapel zijn aan het einde van  het spel 1 landgoed waard (naar beneden afronden)."),new Kaart("laboratorium",5,false,0,1,2,0,"+2 kaarten / +1 actie"),new Kaart("bibliotheek",5,true,0,0,0,0,"Vul je hand aan tot 7 kaarten. Getrokken actiekaarten mag je houden of apart bewaren en vervangen door nieuwe kaarten. Als je hand is aangevuld leg je de apart bewaarde actiekaarten af."),new Kaart("markt",5,false,1,1,1,1,"+1 kaart/ +1 actie / +1 aanschaf / +1 munt"),new Kaart("militie",4,true,0,0,0,2,"+2 munten/ Iedere andere speler legt naar zijn keuze kaarten af totdat hij er 3 op handen heeft."),new Kaart("mijn",5,true,0,0,0,3,"Vernietig een geldkaart uit je hand. Neem een geldkaart die ten hoogste drie munten meer wwaard is en neem deze op handen.")
@@ -27,7 +27,8 @@ public class SpelFuncties {
 	public SpelFuncties() {
 
 		actiekaartenGenereren();
-		kaartenVanHetSpel = lijstenSamenvoegen(lijst10Actiekaarten,lijstenSamenvoegen(geldkaarten, overwinningskaarten, false), false);
+		List<Kaart> tijdelijkeLijst = actiekaarten;
+		kaartenVanHetSpel = lijstenSamenvoegen(lijst10Actiekaarten,lijstenSamenvoegen(tijdelijkeLijst, overwinningskaarten, false,false), false,true);
 		stapelsAanmaken(kaartenVanHetSpel);
 		
 	}
@@ -100,11 +101,11 @@ public class SpelFuncties {
 	}
 	*/
 	
-	public List<Kaart> lijstenSamenvoegen(List<Kaart> primaireLijst, List<Kaart> bijTeVoegenLijst,boolean shuffle) {
+	public List<Kaart> lijstenSamenvoegen(List<Kaart> primaireLijst, List<Kaart> bijTeVoegenLijst,boolean shuffle,boolean verwijderBijTeVoegenLijst) {
 		for (int i = 0; i < bijTeVoegenLijst.size(); i++) {
 			primaireLijst.add(bijTeVoegenLijst.get(i));
 		}
-		bijTeVoegenLijst.clear();
+		if(verwijderBijTeVoegenLijst){bijTeVoegenLijst.clear();}
 		if(shuffle){Collections.shuffle(primaireLijst);}
 		return primaireLijst;
 
@@ -125,7 +126,7 @@ public class SpelFuncties {
 	
 	public void trekKaartVanTrekStapel(int aantal) {
 		if (huidigeSpeler.geefTrekStapel().size() < aantal) {
-			lijstenSamenvoegen(huidigeSpeler.geefTrekStapel(), huidigeSpeler.geefAflegStapel(),true);
+			lijstenSamenvoegen(huidigeSpeler.geefTrekStapel(), huidigeSpeler.geefAflegStapel(),true,true);
 		}		
 		for (int i = 0; i < aantal; i++) {huidigeSpeler.geefKaartenInHand().add(huidigeSpeler.geefTrekStapel().get(i));}
 		for (int i = 0; i < aantal; i++) {huidigeSpeler.geefTrekStapel().remove(0);}
@@ -187,8 +188,8 @@ public class SpelFuncties {
 	}
 	
 	public void brengAlleKaartenNaarAflegstapel(){
-		lijstenSamenvoegen(huidigeSpeler.geefAflegStapel(), huidigeSpeler.geefSpeelGebied(), false);
-		lijstenSamenvoegen(huidigeSpeler.geefAflegStapel(), huidigeSpeler.geefKaartenInHand(),false);
+		lijstenSamenvoegen(huidigeSpeler.geefAflegStapel(), huidigeSpeler.geefSpeelGebied(), false,true);
+		lijstenSamenvoegen(huidigeSpeler.geefAflegStapel(), huidigeSpeler.geefKaartenInHand(),false,true);
 	}
 	
 
@@ -286,8 +287,9 @@ public class SpelFuncties {
 		
 	}
 	public void bureaucraat() {
-		huidigeSpeler.geefTrekStapel().add(new Kaart("zilver","geldkaart",3,2));
-		verminderTafelstapel("zilver");
+		huidigeSpeler.geefTrekStapel().add(geldkaarten.get(1));
+		System.out.println(geldkaarten.get(1));
+		verminderTafelstapel(geldkaarten.get(1).geefNaam());
 		//andere speler legt een overwinningskaart uit zijn hand op dzijn trekstapel
 		//while(huidigeSpeler.equals(volgendeSpeler())){}
 	}
@@ -295,7 +297,7 @@ public class SpelFuncties {
 		//leg een aantal kaarten weg, per elke weggelegde kaart krijg je een bij van je afneemstapel
 	}
 	public void raadsheer(){
-		lijstenSamenvoegen(huidigeSpeler.geefAflegStapel(), huidigeSpeler.geefTrekStapel(),true);
+		lijstenSamenvoegen(huidigeSpeler.geefAflegStapel(), huidigeSpeler.geefTrekStapel(),true,true);
 	}
 	public void kapel() {
 		//je kan max 4 kaarten van je hand naar de vuilbak brengen
@@ -371,13 +373,12 @@ public class SpelFuncties {
 		
 		for (int i = 0; i < huidigeSpeler.geefKaartenInHand().size(); i++ ) {
 			String kaartNaam = huidigeSpeler.geefKaartenInHand().get(i).geefNaam();
-			for(int j = 0; j<geldkaarten.size() ;i++){
+			for(int j = 0; j<geldkaarten.size() ;j++){
 				if(kaartNaam == geldkaarten.get(j).geefNaam()){
-				huidigeSpeler.geefKaartenInHand().remove(geldkaarten.get(j));
+				huidigeSpeler.geefKaartenInHand().remove(i);
 				huidigeSpeler.geefSpeelGebied().add(geldkaarten.get(j));
-				
-			}i--;
-			}}}
+				i--;
+				}}}}
 		
 	public void brengEenKaartVanDeEneNaarAndereStapel(List<Kaart>verwijderStapel,Kaart kaart,List<Kaart> toevoegStapel){
 		boolean tmp = false;

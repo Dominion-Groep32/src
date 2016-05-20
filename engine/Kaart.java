@@ -31,13 +31,14 @@ public class Kaart {
 		
 	}
 	
-	public Kaart(String naam,String type, int cost, int waarde )
+	public Kaart(String naam,String type, int cost, int waarde, String info )
 	{
 		this.kaartNaam = naam;
 		this.KaartType = type;
 		this.cost = cost;
 		if(type == "overwinningskaart"){this.overwinningpunten = waarde;}
 		else {this.waarde = waarde;};
+		this.info = info;
 	}
 
 	

@@ -37,7 +37,6 @@ public class ConsoleSpel {
 				toonKaartenInHand();
 				engine.brengAlleKaartenNaarAflegstapel();
 				printFunctie("de beurt van "+engine.geefHuidigeSpeler().geefNaam()+" is beëindigd");
-				System.out.println("");
 				huidigeSpeler.herstelWaarden();
 				engine.volgendeSpeler();
 		}
