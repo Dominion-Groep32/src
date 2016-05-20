@@ -11,6 +11,10 @@ import engine.SpelFuncties;
 import engine.Speler;
 import engine.Stapel;
 
+//test
+	
+	
+	
 public class testFuncties {
 	SpelFuncties engine = new SpelFuncties();
 	Speler speler = new Speler("testspeler");

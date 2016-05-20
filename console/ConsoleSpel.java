@@ -5,8 +5,9 @@ import engine.*;
 
 
 //test
-//test
-
+	
+	
+	
 public class ConsoleSpel {
 	Scanner sc = new Scanner(System.in);
 	SpelFuncties engine = new SpelFuncties();

@@ -6,6 +6,9 @@ import java.util.*;
 public class SpelFuncties {
 	
 //test
+	
+	
+	
 	private List<Kaart> geldEnOverwinningskaarten = new LinkedList<>(Arrays.asList(new Kaart("koper","geldkaart",0,1),new Kaart("zilver","geldkaart",3,2),new Kaart("goud","geldkaart",6,3),
 			new Kaart("landgoed","overwinningskaart",2,1),new Kaart("hertogdom","overwinningskaart",5,3),new Kaart("provincie","overwinningskaart",8,6)));
 	private List<Kaart> actiekaarten = new LinkedList<>(Arrays.asList(new Kaart("avonturier",6,true,0,0,0,0,"Draai achtereenvolgens de bovenste kaarten van je trekstapel om totdat je in totaal 2 geldkaarten hebt. Neem ze op handen. Leg de overige omgedraagde kaarten op je alegstapel."),
