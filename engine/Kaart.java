@@ -1,6 +1,6 @@
 package engine;
 
-
+//test
 public class Kaart {
 	
 	private String KaartType;

@@ -5,6 +5,8 @@ import engine.*;
 
 
 //test
+//test
+
 public class ConsoleSpel {
 	Scanner sc = new Scanner(System.in);
 	SpelFuncties engine = new SpelFuncties();
@@ -243,6 +245,7 @@ public class ConsoleSpel {
 		System.out.println(gekozenKaart.geefNaam()+" : "+gekozenKaart.geefInfo());
 		vragenNaarInfoOverKaarten(lijstMetKaarten);
 }
-}
+	}
+
 
 
