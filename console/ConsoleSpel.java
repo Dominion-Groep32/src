@@ -19,17 +19,14 @@ public class ConsoleSpel {
 	}
 	
 	public ConsoleSpel(){
-		run();
+		System.out.println("----------------------------------WELKOM BIJ DOMINION------------------------------------");
+		spel();
 	}
 	
-		public void run() {
-			System.out.println("----------------------------------WELKOM BIJ DOMINION------------------------------------");
-			spel();
-		}
 		
 	public void spel(){
 
-
+		
 		engine.maakSpelersAan(vraagSpelersNamen(vraagAantalSpelers()));
 	
 		while(engine.spelNogNietBeëindigd()){
