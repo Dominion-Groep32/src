@@ -143,8 +143,7 @@ public class ConsoleSpel {
 	private void koopActie() {
 		Speler speler = engine.geefHuidigeSpeler();
 		engine.brengAlleGeldkaartenUitHandNaarSpeelGebied();
-		printFunctie("");
-		huidigeWaarden();
+		printhuidigeWaarden();
 		printFunctie("");
 		System.out.println("je kunt de volgende kaarten kopen");
 		printFunctie("");
@@ -181,16 +180,21 @@ public class ConsoleSpel {
 }
 
 
-	private void huidigeWaarden() {
+	private void printhuidigeWaarden() {
+		printFunctie("huidige waarden");
 		System.out.println("Geld:  " + engine.geefHuidigeSpeler().geefGeld());
 		System.out.println("Aankoop: "+ engine.geefHuidigeSpeler().geefAankoop());
 		System.out.println("Actie: " + engine.geefHuidigeSpeler().geefActie());
+		if(engine.geefHuidigeSpeler().geefSpeelGebied().size()>0){
+		printFunctie("Kaarten in Speelveld");
+		toonLijst(engine.geefHuidigeSpeler().geefSpeelGebied());}
+		
 }
 
 
 	private void toonKaartenInHand(){
 		Speler huidigeSpeler = engine.geefHuidigeSpeler();
-		huidigeWaarden();
+		printhuidigeWaarden();
 		printFunctie("Kaarten in uw hand");
 		toonLijst(huidigeSpeler.geefKaartenInHand());
 		printFunctie("");
