@@ -180,8 +180,12 @@ public class testFuncties {
 	}
 	
 	@Test
-	public void verwijderKaart(){
-		
+	public void raadszaal(){
+		spelersAanmaken();
+		engine.raadszaal();
+		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 0);
+		engine.volgendeSpeler();
+		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 1);
 	}
 
 }

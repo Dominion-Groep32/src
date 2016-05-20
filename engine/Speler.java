@@ -35,10 +35,11 @@ public class Speler {
 
 			trekStapel.add(new Kaart("koper","geldkaart",0,1,"Deze kaart is 1 munt waard"));
 			
-			//trekStapel.add(new Kaart("dorp","actiekaart",3,"+1 kaart / +2 acties"));
+			
 		}
 		for (int j = 0; j < 3; j++) {
 			trekStapel.add(new Kaart("landgoed","overwinningskaart",2,1,"Is op het einde van het spel 1 punt waard"));
+			
 		}
 		Collections.shuffle(trekStapel);
 		return trekStapel;
