@@ -45,7 +45,7 @@ public class SpelFuncties {
 	public void volgendeSpeler(){
 		int plaatsInDeArray = 0;
 		for (int i = 0; i < spelers.length; i++) {
-			if (geefHuidigeSpeler().geefNaam().equals(spelers[i].geefNaam()))
+			if (huidigeSpeler.geefNaam().equals(spelers[i].geefNaam()))
 			{
 				plaatsInDeArray = i+1;
 				break;
@@ -134,7 +134,7 @@ public class SpelFuncties {
 
 	public int geldInHand() {
 		int geld = 0;
-		for (int i = 0; i < geefHuidigeSpeler().geefKaartenInHand().size(); i++) {geld += geefHuidigeSpeler().geefKaartenInHand().get(i).geefWaarde();}
+		for (int i = 0; i < huidigeSpeler.geefKaartenInHand().size(); i++) {geld += huidigeSpeler.geefKaartenInHand().get(i).geefWaarde();}
 		return geld;
 	}
 	
@@ -151,8 +151,8 @@ public class SpelFuncties {
 		
 	public List<Kaart> neemActiekaartenUitHand(){
 		List<Kaart> actiekaartenUitHand = new LinkedList<Kaart>();
-		for (int i = 0; i < geefHuidigeSpeler().geefKaartenInHand().size(); i++) {
-			if (geefHuidigeSpeler().geefKaartenInHand().get(i).kaartType() == "actiekaart") {actiekaartenUitHand.add(geefHuidigeSpeler().geefKaartenInHand().get(i));}
+		for (int i = 0; i < huidigeSpeler.geefKaartenInHand().size(); i++) {
+			if (huidigeSpeler.geefKaartenInHand().get(i).kaartType() == "actiekaart") {actiekaartenUitHand.add(huidigeSpeler.geefKaartenInHand().get(i));}
 		}
 		return actiekaartenUitHand;
 	}
@@ -190,7 +190,7 @@ public class SpelFuncties {
 	
 
 	public void actieUitvoeren(Kaart kaart) {
-		brengKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefSpeelGebied(), kaart,huidigeSpeler.geefKaartenInHand());
+		brengEenKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefKaartenInHand(), kaart,huidigeSpeler.geefSpeelGebied());
 	
 		for(int i=0;i<actiekaarten.size();i++){
 			if(actiekaarten.get(i).geefNaam().equals(kaart.geefNaam())){
@@ -264,18 +264,18 @@ public class SpelFuncties {
 		default:
 			break;
 		}
-		geefHuidigeSpeler().verminderActie(1);
+		huidigeSpeler.verminderActie(1);
 	}
 	
 	public void avonturier (){
 		int getal = 0 ;
 		int i = 0;
 		while (getal < 2 ) {
-			Kaart huidigeKaart = geefHuidigeSpeler().geefTrekStapel().get(i);
+			Kaart huidigeKaart = huidigeSpeler.geefTrekStapel().get(i);
 			if(huidigeKaart.kaartType() == "Geldkaart")
 			{
-				geefHuidigeSpeler().geefKaartenInHand().add(huidigeKaart);
-				geefHuidigeSpeler().geefTrekStapel().remove(huidigeKaart);
+				huidigeSpeler.geefKaartenInHand().add(huidigeKaart);
+				huidigeSpeler.geefTrekStapel().remove(huidigeKaart);
 				getal ++;
 			}
 			i++;
@@ -283,16 +283,16 @@ public class SpelFuncties {
 		
 	}
 	public void bureaucraat() {
-		geefHuidigeSpeler().geefTrekStapel().add(new Kaart("zilver","geldkaart",3,2));
+		huidigeSpeler.geefTrekStapel().add(new Kaart("zilver","geldkaart",3,2));
 		verminderTafelstapel("zilver");
 		//andere speler legt een overwinningskaart uit zijn hand op dzijn trekstapel
-		//while(geefHuidigeSpeler().equals(volgendeSpeler())){}
+		//while(huidigeSpeler.equals(volgendeSpeler())){}
 	}
 	public void kelder() {
 		//leg een aantal kaarten weg, per elke weggelegde kaart krijg je een bij van je afneemstapel
 	}
 	public void raadsheer(){
-		lijstenSamenvoegen(geefHuidigeSpeler().geefAflegStapel(), geefHuidigeSpeler().geefTrekStapel(),true);
+		lijstenSamenvoegen(huidigeSpeler.geefAflegStapel(), huidigeSpeler.geefTrekStapel(),true);
 	}
 	public void kapel() {
 		//je kan max 4 kaarten van je hand naar de vuilbak brengen
@@ -302,7 +302,7 @@ public class SpelFuncties {
 		//volgendeSpeler().trekKaart(geefHuidigeSpeler().trekStapel(), 1);
 	}
 	public void feest(Kaart kaart){
-		brengKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefKaartenInHand(), kaart,geefHuidigeSpeler().geefVuilbakStapel());
+		brengEenKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefVuilbakStapel(), kaart,huidigeSpeler.geefKaartenInHand());
 		//koopActie kunnen uitvoeren
 	}
 	public void tuinen() {
@@ -358,19 +358,21 @@ public class SpelFuncties {
 	
 	public void vermeerderAankoopGeldEnActie(int aankoop, int geld, int actie)
 	{
-		geefHuidigeSpeler().vermeerderAankoop(aankoop);
-		geefHuidigeSpeler().vermeerderGeld(geld);
-		geefHuidigeSpeler().vermeerderActie(actie);
+		huidigeSpeler.vermeerderAankoop(aankoop);
+		huidigeSpeler.vermeerderGeld(geld);
+		huidigeSpeler.vermeerderActie(actie);
 	}
 
 	
 
 	
-	public void brengKaartVanDeEneNaarAndereStapel(List<Kaart> toevoegStapel,Kaart kaart,List<Kaart>verwijderStapel){
-		for (int i = 0; i < verwijderStapel.size(); i++) {
+	public void brengEenKaartVanDeEneNaarAndereStapel(List<Kaart>verwijderStapel,Kaart kaart,List<Kaart> toevoegStapel){
+		boolean tmp = false;
+		for (int i = 0; i < verwijderStapel.size()&& tmp == false; i++ ) {
 			if(verwijderStapel.get(i).geefNaam() == kaart.geefNaam()){
 				verwijderStapel.remove(kaart);
 				toevoegStapel.add(kaart);
+				tmp = true;
 				i--;
 			}
 		}

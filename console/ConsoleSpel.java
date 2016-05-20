@@ -13,7 +13,6 @@ public class ConsoleSpel {
 
 	
 	public static void main(String[] args) {
-		
 		ConsoleSpel console = new ConsoleSpel();
 		
 	}
@@ -66,9 +65,7 @@ public class ConsoleSpel {
 		for (int i = 0; i < aantalSpelers; i++) {
 			System.out.print(i+" :");
 			spelers[i] = sc.nextLine();
-		
 		}
-
 		return spelers;
 		
 	}
@@ -179,7 +176,7 @@ public class ConsoleSpel {
 	
 		int keuze = kaartnummerInvullen("spelen")-1;
 		int gecontroleerdekeuze = controleKeuze(keuze, lijstVanActieKaarten.size());
-		engine.brengKaartVanDeEneNaarAndereStapel(engine.geefHuidigeSpeler().geefSpeelGebied(), lijstVanActieKaarten.get(gecontroleerdekeuze), engine.geefHuidigeSpeler().geefKaartenInHand());
+		engine.brengEenKaartVanDeEneNaarAndereStapel(engine.geefHuidigeSpeler().geefKaartenInHand(), lijstVanActieKaarten.get(gecontroleerdekeuze),engine.geefHuidigeSpeler().geefSpeelGebied() );
 		return lijstVanActieKaarten.get(gecontroleerdekeuze);
 }
 
