@@ -2,7 +2,15 @@ package engine;
 import java.util.*;
 
 public class Speler {
+<<<<<<< HEAD
 
+=======
+	
+	//test
+		
+		
+		
+>>>>>>> 3467fd0090525f528fa2690eb1a9dd07e005f604
 	private List<Kaart> kaartenInHand = new LinkedList<>();
 	private List<Kaart> aflegStapel = new LinkedList<>();
 	private List<Kaart> trekStapel = new LinkedList<>();
