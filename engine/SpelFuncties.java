@@ -27,9 +27,8 @@ public class SpelFuncties {
 	public SpelFuncties() {
 
 		actiekaartenGenereren();
-		
 		kaartenVanHetSpel = lijstenSamenvoegen(lijst10Actiekaarten,lijstenSamenvoegen(geldkaarten, overwinningskaarten, false), false);
-		stapelsAanmaken(this.kaartenVanHetSpel);
+		stapelsAanmaken(kaartenVanHetSpel);
 		
 	}
 		
@@ -124,7 +123,7 @@ public class SpelFuncties {
 		
 	}
 	
-	public void trekKaart(int aantal) {
+	public void trekKaartVanTrekStapel(int aantal) {
 		if (huidigeSpeler.geefTrekStapel().size() < aantal) {
 			lijstenSamenvoegen(huidigeSpeler.geefTrekStapel(), huidigeSpeler.geefAflegStapel(),true);
 		}		
@@ -171,7 +170,7 @@ public class SpelFuncties {
 	public List<Kaart> geefLijstKaartenVanHetSpel() {
 		return this.kaartenVanHetSpel;
 	}
-
+	
 	public void maakKaartInHandLeeg(List<Kaart> lijst) {
 		for (int i = 0; i < lijst.size(); i++) {
 			huidigeSpeler.geefVuilbakStapel().add(lijst.get(i));
@@ -200,7 +199,7 @@ public class SpelFuncties {
 			if(actiekaarten.get(i).geefNaam().equals(kaart.geefNaam())){
 				Kaart actiekaart = actiekaarten.get(i);
 				vermeerderAankoopGeldEnActie(actiekaart.geefExtraAankoop(), actiekaart.geefExtraMunten(), actiekaart.geefExtraActie());
-				trekKaart(actiekaart.geefExtraKaart());
+				trekKaartVanTrekStapel(actiekaart.geefExtraKaart());
 				if(actiekaarten.get(i).specialeKaart()){
 					SpecialeActiesUitvoeren(actiekaart);
 				}

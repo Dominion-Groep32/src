@@ -19,7 +19,7 @@ public class Stapel {
 	}
 	public void verminderAantalKaarten()
 	{
-		this.aantalKaartenInDeStapel = -1;
+		this.aantalKaartenInDeStapel = this.aantalKaartenInDeStapel -1;
 	}
 	
 

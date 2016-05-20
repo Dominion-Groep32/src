@@ -141,7 +141,7 @@ public class testFuncties {
 	public void trekKaart(){
 		spelersAanmaken();
 		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 0);
-		engine.trekKaart(5);
+		engine.trekKaartVanTrekStapel(5);
 		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 5);
 	}
 	
