@@ -144,20 +144,18 @@ public class SpelFuncties {
 	}
 
 
+	public List<Kaart> kaartenDieJeKuntKopen() {
+		List<Kaart> lijstMetKaartenDieJeKuntKopen = new LinkedList<Kaart>();
+		for (int i = 0; i < geefLijstKaartenVanHetSpel().size(); i++) {
+			if (geefLijstKaartenVanHetSpel().get(i).geefKost() <= huidigeSpeler.geefGeld()) {lijstMetKaartenDieJeKuntKopen.add(geefLijstKaartenVanHetSpel().get(i));}
+		}
+		return lijstMetKaartenDieJeKuntKopen;
+	}
+	
 	public int geldInHand() {
 		int geld = 0;
 		for (int i = 0; i < huidigeSpeler.geefKaartenInHand().size(); i++) {geld += huidigeSpeler.geefKaartenInHand().get(i).geefWaarde();}
 		return geld;
-	}
-	
-
-
-	public List<Kaart> kaartenDieJeKuntKopen() {
-		List<Kaart> lijstMetKaartenDieJeKuntKopen = new LinkedList<Kaart>();
-		for (int i = 0; i < geefLijstKaartenVanHetSpel().size(); i++) {
-			if (geefLijstKaartenVanHetSpel().get(i).geefKost() <= geldInHand()) {lijstMetKaartenDieJeKuntKopen.add(geefLijstKaartenVanHetSpel().get(i));}
-		}
-		return lijstMetKaartenDieJeKuntKopen;
 	}
 
 		
