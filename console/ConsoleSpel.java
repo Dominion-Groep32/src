@@ -48,7 +48,7 @@ public class ConsoleSpel {
 	{
 		System.out.print("Met hoeveel spelers wilt u spelen? ");
 		int keuze = sc.nextInt();
-		while(keuze <0)
+		while(keuze <0 || 4>keuze)
 		{
 			System.out.println("geef een geldige keuze in");
 			keuze = sc.nextInt();
@@ -135,13 +135,13 @@ public class ConsoleSpel {
 		toonLijst(actieKaartenUitDrawHand);
 		vragenNaarInfoOverKaarten(actieKaartenUitDrawHand);
 		Kaart gekozenKaart = kiesActiekaart(actieKaartenUitDrawHand);
-		engine.actieUitvoeren(gekozenKaart);
+		if(engine.actieUitvoeren(gekozenKaart)){extraInputActiekaarten(gekozenKaart);};
 		toonKaartenInHand();
 	}
 	
 	private void koopActie() {
 		Speler speler = engine.geefHuidigeSpeler();
-		engine.brengAlleGeldkaartenUitHandNaarSpeelGebied();
+		engine.brengAlleGeldkaartenUitHandNaarStapel(speler.geefSpeelGebied());
 		printhuidigeWaarden();
 		printFunctie("");
 		System.out.println("je kunt de volgende kaarten kopen");
@@ -164,8 +164,8 @@ public class ConsoleSpel {
 	
 		int keuze = kaartnummerInvullen("kopen")-1;
 		int gecontroleerdekeuze = controleKeuze(keuze, engine.kaartenDieJeKuntKopen().size());
-		engine.geefHuidigeSpeler().geefSpeelGebied().add(engine.kaartenDieJeKuntKopen().get(gecontroleerdekeuze));
-		engine.verminderTafelstapel(engine.kaartenDieJeKuntKopen().get(gecontroleerdekeuze).geefNaam());
+		engine.brengGekochteKaartNaarAflegstapel(engine.kaartenDieJeKuntKopen().get(gecontroleerdekeuze));
+		
 		return engine.kaartenDieJeKuntKopen().get(gecontroleerdekeuze);
 
 	}
@@ -243,6 +243,10 @@ public class ConsoleSpel {
 		System.out.println(gekozenKaart.geefNaam()+" : "+gekozenKaart.geefInfo());
 		vragenNaarInfoOverKaarten(lijstMetKaarten);
 }
+	private void extraInputActiekaarten(Kaart actiekaart) {
+		
+		engine.actieFase2Uitvoeren(actiekaart);
+	}
 }
 
 

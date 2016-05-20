@@ -206,7 +206,7 @@ public class SpelFuncties {
 	}
 	
 
-	public void actieUitvoeren(Kaart kaart) {
+	public boolean actieUitvoeren(Kaart kaart) {
 		brengEenKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefKaartenInHand(), kaart,huidigeSpeler.geefSpeelGebied());
 	
 		for(int i=0;i<lijst10Actiekaarten.size();i++){
@@ -215,13 +215,10 @@ public class SpelFuncties {
 				vermeerderAankoopGeldEnActie(actiekaart.geefExtraAankoop(), actiekaart.geefExtraMunten(), actiekaart.geefExtraActie());
 				trekKaartVanTrekStapel(actiekaart.geefExtraKaart());
 				if(actiekaart.specialeKaart()){
-					SpecialeActiesUitvoeren(actiekaart);
-				}
-			}
-			
-		}
+					return true;
+				}}}return false;
 	}
-	public void SpecialeActiesUitvoeren(Kaart kaart) {
+	public void actieFase2Uitvoeren(Kaart kaart) {
 		switch (kaart.geefNaam()) {
 		case "avonturier":
 			//OK
@@ -314,6 +311,7 @@ public class SpelFuncties {
 	}
 	public void kelder() {
 		//leg een aantal kaarten weg, per elke weggelegde kaart krijg je een bij van je afneemstapel
+		
 	}
 	public void raadsheer(){
 		lijstenSamenvoegenBijBestaandeLijst(huidigeSpeler.geefAflegStapel(), huidigeSpeler.geefTrekStapel(),true,true);
@@ -340,8 +338,9 @@ public class SpelFuncties {
 	}
 	public void bibliotheek(){
 		// Trek kaarten tot er 7 kaarten in hand zijn
-		trekKaartVanTrekStapel(7);
+		if(huidigeSpeler.geefKaartenInHand().size()<7){	trekKaartVanTrekStapel(1);}
 		//Wanneer er actiekaarten getrokken worden, kan je kiezen of je deze wilt of niet
+		
 	}
 	
 	public void militie() {
@@ -350,6 +349,7 @@ public class SpelFuncties {
 
 	public void mijn() {
 		// Geldkaart van je hand naar vuilbak brengen
+			brengAlleGeldkaartenUitHandNaarStapel(huidigeSpeler.geefVuilbakStapel());
 		// andere geldkaart kopen die met waarde +3 van weggebrachte kaart
 	}
 	public void slotgracht(){
@@ -377,7 +377,12 @@ public class SpelFuncties {
 	}
 	
 	public void heks(){
-	//andereSpeler().trekStapel().add(new Kaart("vloek","overwinningskaart",0,-1));
+		Speler huidigeSpeler = this.huidigeSpeler;
+		for (int i = 0; i < spelers.length; i++){
+			if(spelers[i].geefNaam() != huidigeSpeler.geefNaam()){
+				AndereSpelers(i);
+				huidigeSpeler.geefAflegStapel().add(new Kaart("vloek","overwinningskaart",0,-1,"Vermindert de waarde op het einde van het spel met 1 punt "));}}
+		this.huidigeSpeler = huidigeSpeler;
 	}
 
 	public void werkplaats() {
@@ -393,10 +398,10 @@ public class SpelFuncties {
 	}
 	
 
-	public void brengAlleGeldkaartenUitHandNaarSpeelGebied(){
+	public void brengAlleGeldkaartenUitHandNaarStapel(List<Kaart> lijst){
 		for (int i = 0; i < huidigeSpeler.geefKaartenInHand().size(); i++) {
 			if(huidigeSpeler.geefKaartenInHand().get(i).geefKaartType() == "geldkaart"){
-				huidigeSpeler.geefSpeelGebied().add(huidigeSpeler.geefKaartenInHand().get(i));
+				lijst.add(huidigeSpeler.geefKaartenInHand().get(i));
 				huidigeSpeler.geefKaartenInHand().remove(i);
 				i--;
 			}}
