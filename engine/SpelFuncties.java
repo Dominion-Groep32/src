@@ -395,7 +395,7 @@ public class SpelFuncties {
 		boolean tmp = false;
 		for (int i = 0; i < verwijderStapel.size()&& tmp == false; i++ ) {
 			if(verwijderStapel.get(i).geefNaam() == kaart.geefNaam()){
-				verwijderStapel.remove(kaart);
+				verwijderStapel.remove(i);
 				toevoegStapel.add(kaart);
 				tmp = true;
 				i--;
