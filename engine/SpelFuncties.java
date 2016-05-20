@@ -382,14 +382,14 @@ public class SpelFuncties {
 
 	public void brengAlleGeldkaartenUitHandNaarSpeelGebied(){
 		
-		for (int i = 0; i < huidigeSpeler.geefKaartenInHand().size(); i++ ) {
-			String kaartNaam = huidigeSpeler.geefKaartenInHand().get(i).geefNaam();
-			for(int j = 0; j<geldkaarten.size() ;j++){
-				if(kaartNaam == geldkaarten.get(j).geefNaam()){
+		for (int i = 0; i < huidigeSpeler.geefKaartenInHand().size(); i++) {
+			if(huidigeSpeler.geefKaartenInHand().get(i).kaartType() == "geldkaart"){
+				huidigeSpeler.geefSpeelGebied().add(huidigeSpeler.geefKaartenInHand().get(i));
 				huidigeSpeler.geefKaartenInHand().remove(i);
-				huidigeSpeler.geefSpeelGebied().add(geldkaarten.get(j));
 				i--;
-				}}}}
+			}}
+		}
+			
 		
 	public void brengEenKaartVanDeEneNaarAndereStapel(List<Kaart>verwijderStapel,Kaart kaart,List<Kaart> toevoegStapel){
 		boolean tmp = false;

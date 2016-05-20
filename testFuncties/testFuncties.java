@@ -98,7 +98,7 @@ public class testFuncties {
 	public void geldInHand()
 	{
 		assertEquals(engine.geldInHand(), 7);
-		eersteTestlijst.add(new Kaart("koper","Geldkaart",0,1));
+		eersteTestlijst.add(new Kaart("koper","geldkaart",0,1));
 		assertEquals(engine.geldInHand(), 8);
 	}
 	
