@@ -142,7 +142,7 @@ public class ConsoleSpel {
 	
 	private void koopActie() {
 		Speler speler = engine.geefHuidigeSpeler();
-		
+		engine.brengAlleGeldkaartenUitHandNaarSpeelGebied();
 		printFunctie("");
 		huidigeWaarden();
 		printFunctie("");
