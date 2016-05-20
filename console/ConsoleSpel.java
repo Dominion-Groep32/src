@@ -4,14 +4,7 @@ import java.util.*;
 import engine.*;
 
 
-<<<<<<< HEAD
 
-=======
-//test
-	
-	
-	
->>>>>>> 3467fd0090525f528fa2690eb1a9dd07e005f604
 public class ConsoleSpel {
 	Scanner sc = new Scanner(System.in);
 	SpelFuncties engine = new SpelFuncties();
