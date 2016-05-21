@@ -278,7 +278,7 @@ private void extraInputActiekaarten(Kaart actiekaart) {
 				engine.geefHuidigeSpeler().geefKaartenInHand().remove(keuze);
 			}
 			engine.trekKaartVanTrekStapel(aantal);
-		case "
+		case "":
 		default:
 			break;
 		}
