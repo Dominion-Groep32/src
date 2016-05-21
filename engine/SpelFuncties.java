@@ -245,12 +245,10 @@ public void zetHuidigeSpeler(Speler speler) {
 			//andere spelers leggen een overwinningskaart uit zijn hand op zijn trekstapel
 			//VervolgInfo("");
 			tmp = true;
-			
 			break;
 		case "kelder":
 			//leg een aantal kaarten weg, per elke weggelegde kaart krijg je een bij van je afneemstapel
 			tmp = true;
-			
 			break;
 		case "raadsheer":
 			raadsheer();
@@ -497,7 +495,7 @@ public void zetHuidigeSpeler(Speler speler) {
 				verwijderStapel.remove(i);
 				toevoegStapel.add(kaart);
 				tmp = true;
-				i--;
+				
 			}
 		}
 	}
