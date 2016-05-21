@@ -2,11 +2,6 @@ package engine;
 
 import java.util.*;
 
-import org.omg.CORBA.PRIVATE_MEMBER;
-
-import com.sun.org.apache.xpath.internal.functions.FuncFloor;
-
-
 public class SpelFuncties {
 	
 //test
@@ -21,12 +16,15 @@ public class SpelFuncties {
 			,new Kaart("slotgracht",false,2,true,0,0,2,0,"+2 kaarten / Als een andere speler een aanvalskaart speelt, mag je de Slotgracht tonen. In dat geval heeft de aanval op jou geen effect."),new Kaart("geldschieter",false,4,true,0,0,0,0,"Vernietig een koperkaart uit je hand. Als je dat doet, heb je deze beurt met 3 munten."),new Kaart("verbouwing",false,4,true,0,0,0,2,"Vernietig een kaart uit je hand. Pak een kaart die ten hoogste 2 munten meer waard is dan de vernietigde kaart."),new Kaart("smidse",false,4,false,0,0,3,0,"+3 kaarten"),new Kaart("spion",true,4,true,0,1,1,0,"+1 kaart / +1 actie / Alle spelers tonen de bovenste kaart van hun trekstapel. De spion bepaalt of ze blijven liggen of worden afgelegd."),new Kaart("dief",true,4,true,0,0,0,0,"Iedere andere speler toont de bovenste 2 kaarten van zijn trekstapel. Als een speler geldkaarten toont, moet hij er één naar jouw keuze vernietigen. Je mag een of meer van deze vernietigde kaarten pakken en afleggen. De andere spelers leggen andere getoonde kaarten op hun aflegstapel."),new Kaart("troonzaal",false,4,true,0,0,0,0,"Kies een actiekaart uit je hand. Speel deze tweemaal.")
 			,new Kaart("dorp",false,3,false,0,2,1,0,"+1 kaart / +2 acties"),new Kaart("heks",true,5,true,0,0,2,0,"+2 kaarten / Iedere andere speler pakt 1 vloekkaart."),new Kaart("werkplaats",false,3,true,0,0,0,4,"Pak een kaart die maximaal 4 munten kost."),new Kaart("houthakker",false,3,false,1,0,0,2,"+1 aanschaf / +2 munten")));
 	private Speler[] spelers;
-
+	ExtraInfo extraInfoGeven = null;
 	private List<Kaart> lijst10Actiekaarten = new LinkedList<>();
 	private List<Kaart> kaartenVanHetSpel = new LinkedList<>();
 	private List<Stapel> lijstStapel = new LinkedList<>();
 	Scanner scanner = new Scanner(System.in);
 	private Speler huidigeSpeler;
+	private ExtraInfo extraInfoHalen;
+	
+	
 	
 	public SpelFuncties() {
 
@@ -219,12 +217,12 @@ public void zetHuidigeSpeler(Speler speler) {
 	}
 	
 
-	public boolean actieUitvoeren(Kaart kaart) {
+	public ExtraInfo actieUitvoeren(Kaart kaart) {
 		brengEenKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefKaartenInHand(), kaart,huidigeSpeler.geefSpeelGebied());
-		boolean tmp = false;
+		
 		gewoneActiekaartenUitvoeren(kaart);
-		if(kaart.specialeKaart()){tmp =actieFase1Uitvoeren(kaart);}	
-		return tmp;
+		if(kaart.specialeKaart()){actieFase1Uitvoeren(kaart);}	
+		return extraInfoGeven;
 	}
 	
 	public void gewoneActiekaartenUitvoeren(Kaart kaart){
@@ -235,33 +233,28 @@ public void zetHuidigeSpeler(Speler speler) {
 				trekKaartVanTrekStapel(actiekaart.geefExtraKaart());
 	}}}
 	
-	public boolean actieFase1Uitvoeren(Kaart kaart) {
-		boolean tmp = false;
+	public ExtraInfo actieFase1Uitvoeren(Kaart kaart) {
+		
 		switch (kaart.geefNaam()) {
 		case "avonturier":
 			//OK
 			avonturier();
 			break;
 		case "bureaucraat":
-			//OK hardcoded
-			huidigeSpeler.geefTrekStapel().add(geldkaarten.get(1));
-			System.out.println(geldkaarten.get(1).geefNaam());
-			verminderTafelstapel(geldkaarten.get(1).geefNaam());
-			//andere spelers leggen een overwinningskaart uit zijn hand op zijn trekstapel
-			//VervolgInfo("");
-			tmp = true;
+			brengGekochteKaartNaarAflegstapel(geldkaarten.get(1));
 			break;
 		case "kelder":
-			//OK hardcoded
+			extraInfoGeven = new ExtraInfo(kaart,4);
 			//leg een aantal kaarten weg, per elke weggelegde kaart krijg je een bij van je afneemstapel
-			tmp = true;
+			
 			break;
 		case "raadsheer":
 			//OK
 			raadsheer();
 			break;
 		case "kapel":
-			tmp = true;
+			
+			
 			break;
 		case "raadszaal":
 			//OK
@@ -269,26 +262,26 @@ public void zetHuidigeSpeler(Speler speler) {
 			break;
 		case "feest":
 			brengEenKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefVuilbakStapel(), kaart,huidigeSpeler.geefKaartenInHand());
-			tmp = true;
+		
 			break;
 		case "bibliotheek":
 			bibliotheek();
 			break;
 		case "militie":
-			tmp = true;
+			
 			break;
 		case "mijn":
 			brengAlleGeldkaartenUitHandNaarStapel(huidigeSpeler.geefVuilbakStapel());
-			tmp = true;
+			
 			break;
 		case "slotgracht":
 			slotgracht();
 			break;
 		case "geldschieter":
-			tmp = true;
+			
 			break;
 		case "verbouwing":
-			verbouwing();
+			
 			break;
 		case "spion":
 			spion();
@@ -296,7 +289,7 @@ public void zetHuidigeSpeler(Speler speler) {
 		case "dief":
 			break;
 		case "troonzaal":
-			troonzaal();			
+				
 			break;
 		case "heks":
 			heks();
@@ -305,23 +298,24 @@ public void zetHuidigeSpeler(Speler speler) {
 			break;
 		}
 		
-		return tmp;
+		return extraInfoGeven;
 		
 	}
 	
-	public void actieFase2Uitvoeren(Kaart kaart) {
-		switch (kaart.geefNaam()) {
+	public void actieFase2Uitvoeren(List<ExtraInfo> kaartMetExtraInfo) {
+		switch (kaartMetExtraInfo.get(0).geefActiekaart().geefNaam()) {
 		
 		case "bureaucraat":
+			bureaucraat(kaartMetExtraInfo);
 			break;
 		case "kelder":
-			kelder();
+			kelder(kaartMetExtraInfo);
 			break;
 		case "kapel":
 			kapel();
 			break;
 		case "feest":
-			feest(kaart);
+			feest();
 			break;
 		case "bibliotheek":
 			bibliotheek();
@@ -346,7 +340,7 @@ public void zetHuidigeSpeler(Speler speler) {
 		case "dief":
 			break;
 		case "troonzaal":
-			troonzaal();			
+			actieUitvoeren(kaartMetExtraInfo.get(0).geefGekozenKaart());		
 			break;
 		case "heks":
 			heks();
@@ -372,14 +366,26 @@ public void zetHuidigeSpeler(Speler speler) {
 		}
 		
 	}
-	public void bureaucraat() {
+	public void bureaucraat(List<ExtraInfo> kaartMetExtraInfo) {
 		
 		//andere spelers leggen een overwinningskaart uit zijn hand op zijn trekstapel
-	
+		Speler huidigeSpeler = this.huidigeSpeler;
+		for (int i = 0; i < kaartMetExtraInfo.size(); i++) {
+			AndereSpelers(kaartMetExtraInfo.get(i).geefPlaatsSpeler());
+			brengEenKaartVanDeEneNaarAndereStapel(geefHuidigeSpeler().geefKaartenInHand(), geefHuidigeSpeler().geefKaartenInHand().get(kaartMetExtraInfo.get(i).geefKaartKeuze()), geefHuidigeSpeler().geefAflegStapel());
+		}
+		this.huidigeSpeler = huidigeSpeler;
 
 	}
-	public void kelder() {
+	public void kelder(List<ExtraInfo> kaart) {
 		//leg een aantal kaarten weg, per elke weggelegde kaart krijg je een bij van je afneemstapel
+		int aantal = 0;
+		for (int i = 0; i < kaart.size(); i++) {
+			huidigeSpeler.geefAflegStapel().add(huidigeSpeler.geefKaartenInHand().get(kaart.get(i).geefKaartKeuze()));
+			huidigeSpeler.geefKaartenInHand().remove(kaart.get(0).geefKaartKeuze());
+			aantal ++;
+		}
+		trekKaartVanTrekStapel(aantal);
 		
 	}
 	public void raadsheer(){
@@ -397,9 +403,12 @@ public void zetHuidigeSpeler(Speler speler) {
 				trekKaartVanTrekStapel(1);}}
 		this.huidigeSpeler = huidigeSpeler;
 	}
-	public void feest(Kaart kaart){
-		
-		//koopActie kunnen uitvoeren
+	public void feest(){
+		Kaart gekochteKaart =kaartenDieJeKuntKopen().get(extraInfoHalen.geefKaartKeuze());
+		brengGekochteKaartNaarAflegstapel(gekochteKaart);
+		int kost = gekochteKaart.geefKost();
+		geefHuidigeSpeler().verminderGeld(kost);
+		geefHuidigeSpeler().verminderAankoop(1);
 	}
 	
 	public void bibliotheek(){
@@ -447,7 +456,7 @@ public void zetHuidigeSpeler(Speler speler) {
 		for (int i = 0; i < spelers.length; i++){
 			if(spelers[i].geefNaam() != huidigeSpeler.geefNaam()){
 				AndereSpelers(i);
-				huidigeSpeler.geefAflegStapel().add(new Kaart("vloek","overwinningskaart",0,-1,"Vermindert de waarde op het einde van het spel met 1 punt "));}}
+				geefHuidigeSpeler().geefAflegStapel().add(new Kaart("vloek","overwinningskaart",0,-1,"Vermindert de waarde op het einde van het spel met 1 punt "));}}
 				
 		this.huidigeSpeler = huidigeSpeler;
 	}
