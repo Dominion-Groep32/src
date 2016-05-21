@@ -1,7 +1,11 @@
 package console;
 
 import java.util.*;
+
+
+
 import engine.*;
+
 
 
 //test
@@ -33,7 +37,7 @@ public class ConsoleSpel {
 				Speler huidigeSpeler = engine.geefHuidigeSpeler();
 				System.out.println("");
 				printFunctie("Nu aan de beurt: "+huidigeSpeler.geefNaam());
-				toonKaartenInHand();
+				kiezen();
 				engine.brengAlleKaartenNaarAflegstapel();
 				printFunctie("de beurt van "+engine.geefHuidigeSpeler().geefNaam()+" is beëindigd");
 				engine.trekKaartVanTrekStapel(5);
@@ -41,7 +45,8 @@ public class ConsoleSpel {
 				engine.volgendeSpeler();
 		}
 		printFunctie("GAME OVER");
-		//TO DO: scores geven
+		engine.berekenScoreSpelers();
+		printUitslag();
 		
 	}
 	public int vraagAantalSpelers()
@@ -87,7 +92,7 @@ public class ConsoleSpel {
 	}
 	
 
-	private int geefKeuze() {
+	private int keuzeMenu() {
 		int getal = 1;
 		boolean tmp = false;
 		
@@ -129,14 +134,15 @@ public class ConsoleSpel {
 		}
 	}
 	
-	private void speelActie() {
+	private Kaart speelActie() {
 		List<Kaart> actieKaartenUitDrawHand = engine.neemActiekaartenUitHand();
 		printFunctie("Actiekaarten");
 		toonLijst(actieKaartenUitDrawHand);
 		vragenNaarInfoOverKaarten(actieKaartenUitDrawHand);
 		Kaart gekozenKaart = kiesActiekaart(actieKaartenUitDrawHand);
 		if(engine.actieUitvoeren(gekozenKaart)){extraInputActiekaarten(gekozenKaart);};
-		toonKaartenInHand();
+		kiezen();
+		return gekozenKaart;
 	}
 	
 	private void koopActie() {
@@ -192,19 +198,23 @@ public class ConsoleSpel {
 
 
 	private void toonKaartenInHand(){
-		Speler huidigeSpeler = engine.geefHuidigeSpeler();
+		
 		printhuidigeWaarden();
 		printFunctie("Kaarten in uw hand");
-		toonLijst(huidigeSpeler.geefKaartenInHand());
+		toonLijst(engine.geefHuidigeSpeler().geefKaartenInHand());
 		printFunctie("");
-		int keuze = geefKeuze();
-		while(engine.geefHuidigeSpeler().geefActie() >0&&engine.geefHuidigeSpeler().geefAankoop()>0)
-		{
-		keuzeSpeler(keuze);
-		huidigeSpeler.verminderActie(1);
-		}
+		
+		
 }
-
+	private void kiezen(){
+	
+	while(engine.geefHuidigeSpeler().geefActie() >0 || engine.geefHuidigeSpeler().geefAankoop()>0)
+	{
+	toonKaartenInHand();
+	int keuze = keuzeMenu();	
+	keuzeSpeler(keuze);
+	engine.geefHuidigeSpeler().verminderActie(1);
+	}}
 
 	private void vragenNaarInfoOverKaarten(List<Kaart>lijstMetKaarten) {
 		printFunctie("");
@@ -243,6 +253,24 @@ public class ConsoleSpel {
 		System.out.println(gekozenKaart.geefNaam()+" : "+gekozenKaart.geefInfo());
 		vragenNaarInfoOverKaarten(lijstMetKaarten);
 }
+	
+private int vragenNaarKaartenUitHand(int maxAantal,String tekst, List<Kaart> verplaatsStapel){
+	printFunctie("Kaarten in uw hand");
+	toonLijst(engine.geefHuidigeSpeler().geefKaartenInHand());
+	printFunctie("");
+	System.out.print(tekst);
+	int aantal = sc.nextInt();
+	controleKeuze(aantal, maxAantal);
+	for (int i = 1; i < aantal; i++) {
+		printFunctie("Kaarten in uw hand");
+		toonLijst(engine.geefHuidigeSpeler().geefKaartenInHand());
+		System.out.print("Geef het kaartnummer:");
+		int keuze = (sc.nextInt()-1);
+		verplaatsStapel.add(engine.geefHuidigeSpeler().geefKaartenInHand().get(keuze));
+		engine.geefHuidigeSpeler().geefKaartenInHand().remove(keuze);
+	}
+	return aantal;
+}
 private void extraInputActiekaarten(Kaart actiekaart) {
 		switch (actiekaart.geefNaam()) {
 		case "bureaucraat":
@@ -256,7 +284,7 @@ private void extraInputActiekaarten(Kaart actiekaart) {
 					printFunctie("Nu aan de beurt: "+engine.geefHuidigeSpeler().geefNaam());
 					printFunctie("Kaarten in uw hand");
 					toonLijst(engine.geefHuidigeSpeler().geefKaartenInHand());
-					System.out.println("trek een overwinningskaart uit uw hand en leg deze op de aftrekstapel.");
+					System.out.println("Trek een overwinningskaart uit uw hand.");
 					
 					int keuze = printGeefKeuze();
 					engine.brengEenKaartVanDeEneNaarAndereStapel(engine.geefHuidigeSpeler().geefKaartenInHand(), engine.geefHuidigeSpeler().geefKaartenInHand().get(keuze), engine.geefHuidigeSpeler().geefAflegStapel());};}
@@ -264,26 +292,84 @@ private void extraInputActiekaarten(Kaart actiekaart) {
 			printFunctie("Nu aan de beurt: "+engine.geefHuidigeSpeler().geefNaam());
 			break;
 		case "kelder":
+			int aantal = vragenNaarKaartenUitHand(engine.geefHuidigeSpeler().geefKaartenInHand().size(),"Hoeveel kaarten wenst u af te leggen?:",engine.geefHuidigeSpeler().geefAflegStapel());
+			engine.trekKaartVanTrekStapel(aantal);
+			break;
+		case "kapel":
+			vragenNaarKaartenUitHand(4,"Hoeveel kaarten wenst u te vernietigen?:", engine.geefHuidigeSpeler().geefVuilbakStapel());
+			break;
+		case "feest":
+			//kan properder door koopActie maar moet nog aangepast worden mss door gebruik van boolean
+			//deze functie neemt namelijk ook alle geldkaarten uit gaan naar speelveld wat hier niet mag
+			printhuidigeWaarden();
+			printFunctie("");
+			System.out.println("je kunt de volgende kaarten kopen");
+			printFunctie("");
+			toonLijst(engine.kaartenDieJeKuntKopen());
+			vragenNaarInfoOverKaarten(engine.kaartenDieJeKuntKopen());
+			int kost = koopKaart().geefKost();
+			engine.geefHuidigeSpeler().verminderGeld(kost);
+			engine.geefHuidigeSpeler().verminderAankoop(1);
+			break;
+		case "militie":
 			printFunctie("Kaarten in uw hand");
 			toonLijst(engine.geefHuidigeSpeler().geefKaartenInHand());
 			printFunctie("");
-			System.out.println("Hoeveel kaarten wenst u af te leggen?:");
-			int aantal = sc.nextInt();
-			for (int i = 0; i < aantal; i++) {
+			System.out.print("Verminder uw kaarten in hand tot 3 kaarten!");
+			while(engine.geefHuidigeSpeler().geefKaartenInHand().size()>3) {
 				printFunctie("Kaarten in uw hand");
 				toonLijst(engine.geefHuidigeSpeler().geefKaartenInHand());
-				System.out.println("Geef de kaartnummer:");
-				int keuze = sc.nextInt();
+				System.out.print("Geef het kaartnummer:");
+				int keuze = (sc.nextInt()-1);
 				engine.geefHuidigeSpeler().geefAflegStapel().add(engine.geefHuidigeSpeler().geefKaartenInHand().get(keuze));
 				engine.geefHuidigeSpeler().geefKaartenInHand().remove(keuze);
 			}
-			engine.trekKaartVanTrekStapel(aantal);
-		case "
-		default:
 			break;
-		}
+		case "geldschieter":
+			//als er geldkaarten in hand zijn
+			int aantalVernietigdeKaarten = vragenNaarKaartenUitHand(1,"Hoeveel koperkaarten wenst u te vernietigen?(max 1):", engine.geefHuidigeSpeler().geefVuilbakStapel());
+			if( aantalVernietigdeKaarten ==1){engine.geefHuidigeSpeler().vermeerderGeld(3);}
+			break;
+		
+		case "verbouwing":
+			//int aantalVernietigdeKaarten = vragenNaarKaartenUitHand(1, "Hoeveel kaarten wenst u te vernietigen?: (max 1)", engine.geefHuidigeSpeler().geefVuilbakStapel());
+			//mss met een obj werken die in bovenstaande functie aantal + kaart weergeeft
+			//if(aantalVernietigdeKaarten == 1){engine.geefHuidigeSpeler().vermeerderGeld(kaart);
+			printFunctie("Kaarten in uw hand");
+			toonLijst(engine.geefHuidigeSpeler().geefKaartenInHand());
+			printFunctie("");
+			System.out.print("Hoeveel kaarten wenst u te vernietigen?: (max 1)");
+			int keuze = sc.nextInt();
+			controleKeuze(keuze, 1);
+			if(keuze==1){			
+				printFunctie("Kaarten in uw hand");
+				toonLijst(engine.geefHuidigeSpeler().geefKaartenInHand());
+				System.out.print("Geef het kaartnummer:");
+				int keuzeKaart = (sc.nextInt()-1);
+				Kaart kaart = engine.geefHuidigeSpeler().geefKaartenInHand().get(keuzeKaart);
+				engine.geefHuidigeSpeler().geefVuilbakStapel().add(kaart);
+				engine.geefHuidigeSpeler().geefKaartenInHand().remove(keuze);
+				engine.geefHuidigeSpeler().vermeerderGeld(kaart.geefKost());
+			}			
+			break;
+		case "troonzaal":
+			Kaart gekozenkaart = speelActie();
+			engine.actieUitvoeren(gekozenkaart);
+			break;
+				
+		default:
+			break;}
+		
 		engine.actieFase2Uitvoeren(actiekaart);
 	}
+private void printUitslag() {
+	printFunctie("Uitlag");
+	Speler[] spelers = engine.geefLijstSpelers();
+	for (int i = 0; i < spelers.length; i++) {
+		
+		System.out.println(i+":"+spelers[i].geefNaam()+" -- score: "+spelers[i].geefScore());
+	}
+}
 }
 
 

@@ -14,6 +14,7 @@ public class Speler {
 	private int aankoop ;
 	private int actie;
 	private int geld;
+	private int score;
 	
 
 
@@ -27,6 +28,7 @@ public class Speler {
 		aankoop = 1;
 		actie = 1;
 		geld = 0;
+		score = 0;
 	
 		}
 	
@@ -90,6 +92,9 @@ public class Speler {
 	public int geefAankoop() {
 		return this.aankoop;
 	}
+	public int geefScore() {
+		return this.score;
+	}
 	
 	public void vermeerderActie(int actie) {
 		this.actie = this.actie +actie;
@@ -116,5 +121,9 @@ public class Speler {
 		this.aankoop = 1;
 		this.actie = 1;
 	}
+	public void vermeerderScore(int score) {
+		this.score = this.score + score;
+	}
+	
 	
 }
