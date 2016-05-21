@@ -33,10 +33,10 @@ public class ConsoleSpel {
 				Speler huidigeSpeler = engine.geefHuidigeSpeler();
 				System.out.println("");
 				printFunctie("Nu aan de beurt: "+huidigeSpeler.geefNaam());
-				engine.trekKaartVanTrekStapel(5);
 				toonKaartenInHand();
 				engine.brengAlleKaartenNaarAflegstapel();
 				printFunctie("de beurt van "+engine.geefHuidigeSpeler().geefNaam()+" is beëindigd");
+				engine.trekKaartVanTrekStapel(5);
 				huidigeSpeler.herstelWaarden();
 				engine.volgendeSpeler();
 		}
@@ -48,7 +48,7 @@ public class ConsoleSpel {
 	{
 		System.out.print("Met hoeveel spelers wilt u spelen? ");
 		int keuze = sc.nextInt();
-		while(keuze <0)
+		while(keuze <0 || keuze>4)
 		{
 			System.out.println("geef een geldige keuze in");
 			keuze = sc.nextInt();
@@ -135,13 +135,13 @@ public class ConsoleSpel {
 		toonLijst(actieKaartenUitDrawHand);
 		vragenNaarInfoOverKaarten(actieKaartenUitDrawHand);
 		Kaart gekozenKaart = kiesActiekaart(actieKaartenUitDrawHand);
-		engine.actieUitvoeren(gekozenKaart);
+		if(engine.actieUitvoeren(gekozenKaart)){extraInputActiekaarten(gekozenKaart);};
 		toonKaartenInHand();
 	}
 	
 	private void koopActie() {
 		Speler speler = engine.geefHuidigeSpeler();
-		engine.brengAlleGeldkaartenUitHandNaarSpeelGebied();
+		engine.brengAlleGeldkaartenUitHandNaarStapel(speler.geefSpeelGebied());
 		printhuidigeWaarden();
 		printFunctie("");
 		System.out.println("je kunt de volgende kaarten kopen");
@@ -164,8 +164,8 @@ public class ConsoleSpel {
 	
 		int keuze = kaartnummerInvullen("kopen")-1;
 		int gecontroleerdekeuze = controleKeuze(keuze, engine.kaartenDieJeKuntKopen().size());
-		engine.geefHuidigeSpeler().geefSpeelGebied().add(engine.kaartenDieJeKuntKopen().get(gecontroleerdekeuze));
-		engine.verminderTafelstapel(engine.kaartenDieJeKuntKopen().get(gecontroleerdekeuze).geefNaam());
+		engine.brengGekochteKaartNaarAflegstapel(engine.kaartenDieJeKuntKopen().get(gecontroleerdekeuze));
+		
 		return engine.kaartenDieJeKuntKopen().get(gecontroleerdekeuze);
 
 	}
@@ -243,6 +243,47 @@ public class ConsoleSpel {
 		System.out.println(gekozenKaart.geefNaam()+" : "+gekozenKaart.geefInfo());
 		vragenNaarInfoOverKaarten(lijstMetKaarten);
 }
+private void extraInputActiekaarten(Kaart actiekaart) {
+		switch (actiekaart.geefNaam()) {
+		case "bureaucraat":
+			//nog controleren op overwinningskaarten in hand zo niet stap overslaan
+			// zo ja, als er een keuze gemaakt wordt, kijken of dit het type overwinningskaart heeft
+			Speler huidigeSpeler = engine.geefHuidigeSpeler();
+			Speler[] spelers = engine.geefLijstSpelers();
+			for (int i = 0; i < engine.geefLijstSpelers().length; i++){
+				if(spelers[i].geefNaam() != huidigeSpeler.geefNaam()){
+					engine.AndereSpelers(i);
+					printFunctie("Nu aan de beurt: "+engine.geefHuidigeSpeler().geefNaam());
+					printFunctie("Kaarten in uw hand");
+					toonLijst(engine.geefHuidigeSpeler().geefKaartenInHand());
+					System.out.println("trek een overwinningskaart uit uw hand en leg deze op de aftrekstapel.");
+					
+					int keuze = printGeefKeuze();
+					engine.brengEenKaartVanDeEneNaarAndereStapel(engine.geefHuidigeSpeler().geefKaartenInHand(), engine.geefHuidigeSpeler().geefKaartenInHand().get(keuze), engine.geefHuidigeSpeler().geefAflegStapel());};}
+			engine.zetHuidigeSpeler(huidigeSpeler);
+			printFunctie("Nu aan de beurt: "+engine.geefHuidigeSpeler().geefNaam());
+			break;
+		case "kelder":
+			printFunctie("Kaarten in uw hand");
+			toonLijst(engine.geefHuidigeSpeler().geefKaartenInHand());
+			printFunctie("");
+			System.out.println("Hoeveel kaarten wenst u af te leggen?:");
+			int aantal = sc.nextInt();
+			for (int i = 0; i < aantal; i++) {
+				printFunctie("Kaarten in uw hand");
+				toonLijst(engine.geefHuidigeSpeler().geefKaartenInHand());
+				System.out.println("Geef de kaartnummer:");
+				int keuze = sc.nextInt();
+				engine.geefHuidigeSpeler().geefAflegStapel().add(engine.geefHuidigeSpeler().geefKaartenInHand().get(keuze));
+				engine.geefHuidigeSpeler().geefKaartenInHand().remove(keuze);
+			}
+			engine.trekKaartVanTrekStapel(aantal);
+		case "
+		default:
+			break;
+		}
+		engine.actieFase2Uitvoeren(actiekaart);
+	}
 }
 
 

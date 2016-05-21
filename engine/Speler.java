@@ -19,8 +19,8 @@ public class Speler {
 
 	public Speler(String naam){
 		this.naam = naam;
-		kaartenInHand = new LinkedList<Kaart>();
 		trekStapel = startKaarten();
+		kaartenInHand = startKaartenInHand();
 		aflegStapel = new LinkedList<Kaart>();
 		vuilbakStapel = new LinkedList<Kaart>();
 		speelGebied = new LinkedList<Kaart>();
@@ -46,7 +46,11 @@ public class Speler {
 		return trekStapel;
 	}
 	
-	
+	public List<Kaart> startKaartenInHand() {
+		for (int i = 0; i < 5; i++) {kaartenInHand.add(trekStapel.get(i));}
+		for (int i = 0; i < 5; i++) {trekStapel.remove(0);}
+		return kaartenInHand;
+	}
 	
 	
 	
