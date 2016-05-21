@@ -34,6 +34,7 @@ public class Speler {
 		for (int i = 0; i < 7; i++) {
 
 			trekStapel.add(new Kaart("koper","geldkaart",0,1,"Deze kaart is 1 munt waard"));
+			//trekStapel.add(new Kaart("feest",4,true,0,0,0,5,"Vernietig deze kaart. Pak een kaart met een waarde van 5 munten of minder."));
 			
 			
 		}
