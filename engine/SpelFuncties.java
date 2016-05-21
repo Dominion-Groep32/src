@@ -496,7 +496,7 @@ public void zetHuidigeSpeler(Speler speler) {
 		
 	public void brengEenKaartVanDeEneNaarAndereStapel(List<Kaart>verwijderStapel,Kaart kaart,List<Kaart> toevoegStapel){
 		boolean tmp = false;
-		for (int i = 0; i < 1&& tmp == false; i++ ) {
+		for (int i = 0; i < verwijderStapel.size()&& tmp == false; i++ ) {
 			if(verwijderStapel.get(i).geefNaam() == kaart.geefNaam()){
 				verwijderStapel.remove(i);
 				toevoegStapel.add(kaart);

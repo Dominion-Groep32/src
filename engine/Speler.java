@@ -20,7 +20,7 @@ public class Speler {
 	public Speler(String naam){
 		this.naam = naam;
 		trekStapel = startKaarten();
-		//kaartenInHand = startKaartenInHand(); // anders werkt ajax niet meer 
+		kaartenInHand = startKaartenInHand(); // anders werkt ajax niet meer 
 		aflegStapel = new LinkedList<Kaart>();
 		vuilbakStapel = new LinkedList<Kaart>();
 		speelGebied = new LinkedList<Kaart>();
