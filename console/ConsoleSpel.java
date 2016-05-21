@@ -33,10 +33,10 @@ public class ConsoleSpel {
 				Speler huidigeSpeler = engine.geefHuidigeSpeler();
 				System.out.println("");
 				printFunctie("Nu aan de beurt: "+huidigeSpeler.geefNaam());
-				engine.trekKaartVanTrekStapel(5);
 				toonKaartenInHand();
 				engine.brengAlleKaartenNaarAflegstapel();
 				printFunctie("de beurt van "+engine.geefHuidigeSpeler().geefNaam()+" is beëindigd");
+				engine.trekKaartVanTrekStapel(5);
 				huidigeSpeler.herstelWaarden();
 				engine.volgendeSpeler();
 		}
@@ -48,7 +48,7 @@ public class ConsoleSpel {
 	{
 		System.out.print("Met hoeveel spelers wilt u spelen? ");
 		int keuze = sc.nextInt();
-		while(keuze <0 || 4>keuze)
+		while(keuze <0 || keuze>4)
 		{
 			System.out.println("geef een geldige keuze in");
 			keuze = sc.nextInt();
@@ -243,8 +243,24 @@ public class ConsoleSpel {
 		System.out.println(gekozenKaart.geefNaam()+" : "+gekozenKaart.geefInfo());
 		vragenNaarInfoOverKaarten(lijstMetKaarten);
 }
-	private void extraInputActiekaarten(Kaart actiekaart) {
-		
+private void extraInputActiekaarten(Kaart actiekaart) {
+		switch (actiekaart.geefNaam()) {
+		case "bureaucraat":
+			Speler huidigeSpeler = engine.geefHuidigeSpeler();
+			Speler[] spelers = engine.geefLijstSpelers();
+			for (int i = 0; i < engine.geefLijstSpelers().length; i++){
+				if(spelers[i].geefNaam() != huidigeSpeler.geefNaam()){
+					engine.AndereSpelers(i);
+					System.out.println("trek een overwinningskaart uit uw hand en leg deze op de aftrekstapel.");
+					toonLijst(huidigeSpeler.geefKaartenInHand());
+					int keuze = printGeefKeuze();
+					engine.brengEenKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefKaartenInHand(), huidigeSpeler.geefKaartenInHand().get(keuze), huidigeSpeler.geefAflegStapel());};}
+			engine.zetHuidigeSpeler(huidigeSpeler);
+			break;
+
+		default:
+			break;
+		}
 		engine.actieFase2Uitvoeren(actiekaart);
 	}
 }
