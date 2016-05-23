@@ -85,6 +85,7 @@ public class ConsoleSpel {
 		System.out.println();
 		}
 	
+	
 	private void toonLijst(List<Kaart> lijst,boolean metInfo) {
 		for (int i = 0; i < lijst.size(); i++) {
 			if(metInfo){
