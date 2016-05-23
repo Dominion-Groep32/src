@@ -1,9 +1,5 @@
 package engine;
 
-//test
-//test
-//test
-
 public class Kaart {
 	
 	private String KaartType;
@@ -18,9 +14,10 @@ public class Kaart {
 	private int extraMunten;
 	private boolean specialeKaart;
 	private boolean aanval;
+	private boolean infoMeegeven;
 	
 	
-	public Kaart(String naam, boolean aanval, int cost, boolean specialeKaart,int extraAankoop, int extraActie, int extraKaart, int extraMunten,  String info)
+	public Kaart(String naam, boolean aanval, int cost, boolean specialeKaart,int extraAankoop, int extraActie, int extraKaart, int extraMunten,  String info, boolean infoMeegeven)
 	{
 		this.kaartNaam = naam;
 		this.KaartType = "actiekaart";
@@ -32,6 +29,8 @@ public class Kaart {
 		this.extraKaart = extraKaart;
 		this.extraMunten = extraMunten;
 		this.specialeKaart = specialeKaart;
+		this.infoMeegeven = infoMeegeven;
+		
 		
 	}
 	
@@ -60,7 +59,9 @@ public class Kaart {
 		return this.KaartType;
 	}
 
-	
+	public boolean geefAanval(){
+		return this.aanval;
+	}
 	public int geefKost() {
 		return this.cost;
 	}
@@ -86,6 +87,11 @@ public class Kaart {
 	}
 	public boolean specialeKaart() {
 		return this.specialeKaart;	
-	}}
+	}
+	public boolean geefInfoMeegeven(){
+		return this.infoMeegeven;
+	}
+	
+}
 
 

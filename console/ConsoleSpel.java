@@ -281,12 +281,14 @@ private Kaart vragenNaarEenUitHand(Speler speler) {
 private void extraInputActiekaarten(ExtraInfo actiekaart) {
 		List<Speler> AndereSpelers = engine.geefLijstAndereSpelers();
 		List<Kaart> gekozenKaarten = new LinkedList<Kaart>();
-	
+		
 		switch (actiekaart.geefSoortActie()) {
+	
 		case "actieEnkeleSpeler":
 			gekozenKaarten = vragenNaarKaartenUitHand(actiekaart.geefAantalKaartenUitHandNemen(),actiekaart.geefBericht(),true,engine.geefHuidigeSpeler());
-			extraInfoGeven = new ExtraInfo(actiekaart.geefActiekaart(),gekozenKaarten);
+			extraInfoGeven = new ExtraInfo(actiekaart.kaartNaam(),gekozenKaarten);
 			break;
+		
 		case "actieMeerdereSpelers":
 			
 			break;
@@ -295,28 +297,30 @@ private void extraInputActiekaarten(ExtraInfo actiekaart) {
 				printFunctie("Nu aan de beurt: "+AndereSpelers.get(i).geefNaam());
 				if(engine.controleerOpTypeKaartenInHand(AndereSpelers.get(i),"overwinningskaart")){
 					gekozenKaarten = vragenNaarKaartenUitHand(actiekaart.geefAantalKaartenUitHandNemen(),actiekaart.geefBericht(),false,AndereSpelers.get(i));
-					extraInfoGeven = new ExtraInfo(actiekaart.geefActiekaart(),i,gekozenKaarten);
+					extraInfoGeven = new ExtraInfo(actiekaart.kaartNaam(),i,gekozenKaarten);
 				}else {
 					System.out.println("Geen overwinningskaart in hand!");
-				}}
+				}
+				printFunctie("Nu terug de beurt aan: "+engine.geefHuidigeSpeler().geefNaam());}
 			break;
 		case "feest":
 			//nog vragen of ze effectief een kaart willen kopen
 			gekozenKaarten.add(keuzeKoopKaarten(true));
-			extraInfoGeven =new ExtraInfo(actiekaart.geefActiekaart(),gekozenKaarten);
+			extraInfoGeven =new ExtraInfo(actiekaart.kaartNaam(),gekozenKaarten);
 			break;
 		case "militie":
 			for (int i = 0; i < AndereSpelers.size(); i++){
 				printFunctie("Nu aan de beurt: "+engine.geefHuidigeSpeler().geefNaam());
 				while(AndereSpelers.get(i).geefKaartenInHand().size()>3) {
 				gekozenKaarten= vragenNaarKaartenUitHand(actiekaart.geefAantalKaartenUitHandNemen(),actiekaart.geefBericht(),false,AndereSpelers.get(i));
-				extraInfoGeven= new ExtraInfo(actiekaart.geefActiekaart(), i,gekozenKaarten);
-			}}
+				extraInfoGeven= new ExtraInfo(actiekaart.kaartNaam(), i,gekozenKaarten);
+			}
+				printFunctie("Nu terug de beurt aan: "+engine.geefHuidigeSpeler().geefNaam());}
 			break;
 		case "geldschieter":
 			if(engine.controleerOpTypeKaartenInHand(engine.geefHuidigeSpeler(), "geldkaart")){
 				gekozenKaarten = vragenNaarKaartenUitHand(actiekaart.geefAantalKaartenUitHandNemen(),actiekaart.geefBericht(),true,engine.geefHuidigeSpeler());
-				extraInfoGeven = new ExtraInfo(actiekaart.geefActiekaart(),gekozenKaarten);
+				extraInfoGeven = new ExtraInfo(actiekaart.kaartNaam(),gekozenKaarten);
 			}else {
 				System.out.println("Geen geldkaarten in hand!");
 			}
@@ -324,7 +328,7 @@ private void extraInputActiekaarten(ExtraInfo actiekaart) {
 		case "troonzaal":
 			if(engine.controleerOpTypeKaartenInHand(engine.geefHuidigeSpeler(), "actiekaart")){
 				gekozenKaarten.add(speelActie());
-				extraInfoGeven = new ExtraInfo(actiekaart.geefActiekaart(),gekozenKaarten);}
+				extraInfoGeven = new ExtraInfo(actiekaart.kaartNaam(),gekozenKaarten);}
 			else {
 				System.out.println("Geen actiekaarten in hand!");
 		}
