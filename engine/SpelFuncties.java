@@ -1,9 +1,7 @@
 package engine;
 
 import java.util.*;
-//test
-//test
-//test
+
 
 public class SpelFuncties {
 	
