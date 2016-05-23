@@ -11,7 +11,7 @@ public class ExtraInfo {
 	private List<Kaart> gekozenKaart;
 	private String soortActie;
 	private List<Integer> keuzeSpeler;
-	private Boolean gebruikSlotgracht;
+	private List<Boolean> gebruikSlotgracht;
 	
 
 public ExtraInfo(String kaartNaam,int aantalKaarten, String bericht, String soortActie ){
@@ -22,23 +22,15 @@ public ExtraInfo(String kaartNaam,int aantalKaarten, String bericht, String soor
 }
 
 
-public ExtraInfo (String kaartNaam, List<Integer> spelersIndex,  List<Kaart> gekozenKaarten) {
+public ExtraInfo (String kaartNaam, List<Integer> spelersIndex,  List<Kaart> gekozenKaarten,List<Integer>keuzeSpeler,List<Boolean> gebruikSlotgracht) {
 	this.actiekaartNaam = kaartNaam;
 	this.spelersIndex = spelersIndex;
 	this.gekozenKaart = gekozenKaarten;
-}
-
-public ExtraInfo (String kaartNaam, List<Integer> spelersIndex,  List<Kaart> gekozenKaarten, List<Integer>keuzeSpeler) {
-	this.actiekaartNaam = kaartNaam;
-	this.spelersIndex = spelersIndex;
-	this.gekozenKaart = gekozenKaarten;
+	this.gebruikSlotgracht = gebruikSlotgracht;
 	this.keuzeSpeler = keuzeSpeler;
 }
-public ExtraInfo (String kaartNaam, List<Integer> spelersIndex, boolean gebruikSlotgracht){
-	this.actiekaartNaam = kaartNaam;
-	this.spelersIndex = spelersIndex;
-	this.gebruikSlotgracht = gebruikSlotgracht;
-}
+
+
 public ExtraInfo (String kaartNaam,  List<Kaart> gekozenKaarten) {
 	this.actiekaartNaam = kaartNaam;
 	this.gekozenKaart = gekozenKaarten;
@@ -75,7 +67,7 @@ public String geefSoortActie() {
 public List<Integer> geefKeuzeSpeler() {
 	return this.keuzeSpeler;
 }
-public boolean geefGebruikSlotgracht() {
+public List<Boolean> geefGebruikSlotgracht() {
 	return this.gebruikSlotgracht;
 }
 }

@@ -14,7 +14,7 @@ public class ConsoleSpel {
 	private List<Kaart> gekozenKaarten = new LinkedList<Kaart>();
 	private List<Integer> keuzesSpeler = new LinkedList<Integer>();
 	private List<Integer> spelersIndex = new LinkedList<Integer>();
-	private Boolean gebruikSlotgracht =null;
+	private List<Boolean> gebruikSlotgracht = new LinkedList<Boolean>();
 	
 
 	
@@ -254,7 +254,7 @@ private Kaart vragenNaarEenUitHand(Speler speler) {
 
 private boolean ControleOpSlotgracht(Speler speler){
 	boolean gebruikVanSlotgracht = false;
-	if(!engine.isKaartInHand(speler, "slotgracht")){
+	if(engine.isKaartInHand(speler, "slotgracht")){
 		toonKaartenInHand(speler);
 		System.out.print("Wenst u uw Slotgracht te gebruiken? (0: Nee / 1: Ja)");
 		int keuze = sc.nextInt();
@@ -277,12 +277,13 @@ private void extraInputActiekaarten(ExtraInfo actiekaart) {
 		case "bureaucraat":			
 			for (int i = 0; i < andereSpelers.size(); i++){
 				printFunctie("Nu aan de beurt: "+andereSpelers.get(i).geefNaam());
-				if(engine.isTypeKaartInLijst(andereSpelers.get(i).geefKaartenInHand(),"overwinningskaart").size()<0){
+				gebruikSlotgracht.add(ControleOpSlotgracht(andereSpelers.get(i)));
+				if(!engine.isTypeKaartInLijst(andereSpelers.get(i).geefKaartenInHand(),"overwinningskaart").isEmpty()&&gebruikSlotgracht.get(i)==false){
 					gekozenKaarten = vragenNaarKaartenUitHand(actiekaart.geefMaxAantalKaarten(),actiekaart.geefBericht(),false,andereSpelers.get(i));
 					spelersIndex.add(i);}
 				else 
 				{System.out.println("Geen overwinningskaart in hand!");}}
-				extraInfoGeven = new ExtraInfo(actiekaart.kaartNaam(),spelersIndex,gekozenKaarten);
+				extraInfoGeven = new ExtraInfo(actiekaart.kaartNaam(),spelersIndex,gekozenKaarten,keuzesSpeler,gebruikSlotgracht);
 				printFunctie("Nu terug de beurt aan: "+engine.geefHuidigeSpeler().geefNaam());
 			break;
 		case "feest":
@@ -292,13 +293,17 @@ private void extraInputActiekaarten(ExtraInfo actiekaart) {
 			break;
 		case "militie":
 			for (int i = 0; i < andereSpelers.size(); i++){
-				printFunctie("Nu aan de beurt: "+engine.geefHuidigeSpeler().geefNaam());
+				printFunctie("Nu aan de beurt: "+andereSpelers.get(i).geefNaam());
+				spelersIndex.add(i);
+				gebruikSlotgracht.add(ControleOpSlotgracht(andereSpelers.get(i)));
+				if(gebruikSlotgracht.get(i)){
 				while(andereSpelers.get(i).geefKaartenInHand().size()>3) {
 				gekozenKaarten= vragenNaarKaartenUitHand(actiekaart.geefMaxAantalKaarten(),actiekaart.geefBericht(),false,andereSpelers.get(i));
-				spelersIndex.add(i);
-			}
-			extraInfoGeven= new ExtraInfo(actiekaart.kaartNaam(), spelersIndex,gekozenKaarten);	
-			printFunctie("Nu terug de beurt aan: "+engine.geefHuidigeSpeler().geefNaam());}
+				}}
+				else {System.out.println("Gebruik van Slotgracht!");
+				}}
+			extraInfoGeven= new ExtraInfo(actiekaart.kaartNaam(), spelersIndex,gekozenKaarten,keuzesSpeler,gebruikSlotgracht);	
+			printFunctie("Nu terug de beurt aan: "+engine.geefHuidigeSpeler().geefNaam());
 			break;
 		case "geldschieter":
 			if(engine.isKaartInHand(engine.geefHuidigeSpeler(), "koper")){
@@ -308,11 +313,12 @@ private void extraInputActiekaarten(ExtraInfo actiekaart) {
 			extraInfoGeven = new ExtraInfo(actiekaart.kaartNaam(),gekozenKaarten);
 			break;
 		case "mijn":
-			if(engine.isTypeKaartInLijst(engine.geefHuidigeSpeler().geefKaartenInHand(), "geldkaart").size()<0){
+			if(!engine.isTypeKaartInLijst(engine.geefHuidigeSpeler().geefKaartenInHand(), "geldkaart").isEmpty()){
 				gekozenKaarten = vragenNaarKaartenUitHand(actiekaart.geefMaxAantalKaarten(),actiekaart.geefBericht(),true,engine.geefHuidigeSpeler());
 				if(gekozenKaarten.size()==1){
 					engine.geefHuidigeSpeler().vermeerderGeld(3);
 					Kaart gekozenKaart = keuzeKoopKaarten(true, engine.isTypeKaartInLijst(engine.geefLijstKaartenDieJeKuntKopen(),"geldkaart") );
+					engine.geefHuidigeSpeler().verminderGeld(3);
 					gekozenKaarten.add(gekozenKaart);
 				}}
 			else {	System.out.println("Geen geldkaarten in hand!");}
@@ -328,28 +334,28 @@ private void extraInputActiekaarten(ExtraInfo actiekaart) {
 			for (int i = 0; i < andereSpelers.size(); i++){
 				spelersIndex.add(i);
 				printFunctie("Nu aan de beurt: "+andereSpelers.get(i).geefNaam());
-				gebruikSlotgracht = ControleOpSlotgracht(andereSpelers.get(i));
+				gebruikSlotgracht.add(ControleOpSlotgracht(andereSpelers.get(i)));
 			}
-			extraInfoGeven = new ExtraInfo(actiekaart.kaartNaam(),spelersIndex, gebruikSlotgracht);
+			extraInfoGeven = new ExtraInfo(actiekaart.kaartNaam(),spelersIndex, gekozenKaarten, keuzesSpeler, gebruikSlotgracht);
 			printFunctie("Nu terug de beurt aan: "+engine.geefHuidigeSpeler().geefNaam());
 			break;
 		case "spion":
 			for (int i = 0; i < alleSpelers.length; i++){
 				spelersIndex.add(i);
 				printFunctie("Nu aan de beurt: "+alleSpelers[i].geefNaam());
-				gebruikSlotgracht = ControleOpSlotgracht(alleSpelers[i]);
+				gebruikSlotgracht.add(ControleOpSlotgracht(alleSpelers[i]));
 				if(!engine.isKaartInHand(alleSpelers[i], "slotgracht")){
-				printFunctie("Kaarten van: "+alleSpelers[i].geefNaam());
-				Kaart kaart = alleSpelers[i].geefTrekStapel().get(0);
-				gekozenKaarten.add(kaart);
-				toonLijst(gekozenKaarten, false);
-				System.out.println(actiekaart.geefBericht());
-				int kaartKeuze = sc.nextInt();
-				int gecontroleerdeKeuze =controleKeuze(kaartKeuze, actiekaart.geefMaxAantalKaarten());
-				keuzesSpeler.add(gecontroleerdeKeuze);
-				gekozenKaarten.clear();
+					printFunctie("Kaarten van: "+alleSpelers[i].geefNaam());
+					Kaart kaart = alleSpelers[i].geefTrekStapel().get(0);
+					gekozenKaarten.add(kaart);
+					toonLijst(gekozenKaarten, false);
+					System.out.println(actiekaart.geefBericht());
+					int kaartKeuze = sc.nextInt();
+					int gecontroleerdeKeuze =controleKeuze(kaartKeuze, actiekaart.geefMaxAantalKaarten());
+					keuzesSpeler.add(gecontroleerdeKeuze);
+					gekozenKaarten.clear();
 			}}
-			extraInfoGeven = new ExtraInfo(actiekaart.kaartNaam(),spelersIndex,gekozenKaarten,keuzesSpeler);
+			extraInfoGeven = new ExtraInfo(actiekaart.kaartNaam(),spelersIndex,gekozenKaarten,keuzesSpeler,gebruikSlotgracht);
 			break;
 		case "dief":
 			for (int i = 0; i < alleSpelers.length; i++){
@@ -363,7 +369,7 @@ private void extraInputActiekaarten(ExtraInfo actiekaart) {
 				gekozenKaarten.add(kaart);
 				keuzesSpeler.add(gecontroleerdeKeuze);
 			}
-			extraInfoGeven = new ExtraInfo(actiekaart.kaartNaam(),spelersIndex,gekozenKaarten,keuzesSpeler);
+			extraInfoGeven = new ExtraInfo(actiekaart.kaartNaam(),spelersIndex,gekozenKaarten,keuzesSpeler,gebruikSlotgracht);
 			
 			break;
 		default:
