@@ -8,7 +8,6 @@ import engine.*;
 public class ConsoleSpel {
 	private Scanner sc = new Scanner(System.in);
 	private SpelFuncties engine = new SpelFuncties();
-	//private ExtraInfo extraInfoHalen;
 	private ExtraInfo extraInfoGeven = null;
 	private List<Speler> andereSpelers = engine.geefLijstAndereSpelers();
 	private Speler[] alleSpelers = engine.geefLijstSpelers();
@@ -111,8 +110,9 @@ public class ConsoleSpel {
 			getal++;
 			tmp = true;
 			}
-		
-		System.out.println(getal+": gebruik geldkaarten");
+		if(engine.isTypeKaartInLijst(engine.geefHuidigeSpeler().geefKaartenInHand(), "geldkaart").size()>0){
+		System.out.println(getal+": gebruik geldkaarten");}
+		else{System.out.println(getal+": Koop koperkaart");}
 		System.out.println((getal+1)+": beëindig je beurt");
 		int keuze = printGeefKeuze();
 		
@@ -145,7 +145,6 @@ public class ConsoleSpel {
 		List<Kaart> actieKaartenUitDrawHand = engine.isTypeKaartInLijst(engine.geefHuidigeSpeler().geefKaartenInHand(),"actiekaart");
 		printFunctie("Actiekaarten");
 		toonLijst(actieKaartenUitDrawHand,true);
-		//vragenNaarInfoOverKaarten(actieKaartenUitDrawHand);
 		Kaart gekozenKaart = kiesActiekaart(actieKaartenUitDrawHand);
 		ExtraInfo kaartMetExtraInfo = engine.actieUitvoeren(gekozenKaart);
 		if(kaartMetExtraInfo!= null){extraInputActiekaarten(kaartMetExtraInfo);};
@@ -215,28 +214,6 @@ public class ConsoleSpel {
 	engine.geefHuidigeSpeler().verminderActie(1);
 	}}
 
-	/*
-	private void vragenNaarInfoOverKaarten(List<Kaart>lijstMetKaarten) {
-		printFunctie("");
-		System.out.println("Wenst u informatie over bepaalde actiekaarten?");
-		System.out.println("1: Ja");
-		System.out.println("2: Nee");
-		int keuze = printGeefKeuze();
-		int gecontroleerdeKeuze = controleKeuze(keuze, 2);
-
-		if (gecontroleerdeKeuze==1 && lijstMetKaarten.size()>1){
-
-			int kaartKeuze = kaartnummerInvullen("weten");
-			int gecontroleerdeKaartKeuze = controleKeuze(kaartKeuze, lijstMetKaarten.size());
-			geefInfoOverKaarten(gecontroleerdeKaartKeuze,lijstMetKaarten);
-	}
-		if(gecontroleerdeKeuze == 1 && lijstMetKaarten.size()==1){
-			geefInfoOverKaarten(1, lijstMetKaarten);
-	}
-	
-}
-*/
-
 	private int controleKeuze(int keuze, int max) {
 		while (keuze < 0 || keuze > max) {
 			System.out.println("geef een waarde in tussen 1 en " + max +" :");
@@ -249,14 +226,7 @@ public class ConsoleSpel {
 		System.out.print("geef een keuze in : ");
 		return sc.nextInt();
 }
-	/*
-	private void geefInfoOverKaarten(int kaartKeuze, List<Kaart> lijstMetKaarten) {
-		Kaart gekozenKaart = lijstMetKaarten.get(kaartKeuze-1);
-		System.out.println(gekozenKaart.geefNaam()+" : "+gekozenKaart.geefInfo());
-		vragenNaarInfoOverKaarten(lijstMetKaarten);
-		
-}
-	*/
+
 private List<Kaart> vragenNaarKaartenUitHand(int maxAantal,String tekst,boolean verschillendeKaarten,Speler speler){
 	List<Kaart> lijstGekozenKaarten = new LinkedList<Kaart>();
 	toonKaartenInHand(speler);
@@ -311,9 +281,9 @@ private void extraInputActiekaarten(ExtraInfo actiekaart) {
 					gekozenKaarten = vragenNaarKaartenUitHand(actiekaart.geefMaxAantalKaarten(),actiekaart.geefBericht(),false,andereSpelers.get(i));
 					spelersIndex.add(i);}
 				else 
-				{System.out.println("Geen overwinningskaart in hand!");}
+				{System.out.println("Geen overwinningskaart in hand!");}}
 				extraInfoGeven = new ExtraInfo(actiekaart.kaartNaam(),spelersIndex,gekozenKaarten);
-				printFunctie("Nu terug de beurt aan: "+engine.geefHuidigeSpeler().geefNaam());}
+				printFunctie("Nu terug de beurt aan: "+engine.geefHuidigeSpeler().geefNaam());
 			break;
 		case "feest":
 			//nog vragen of ze effectief een kaart willen kopen
@@ -331,7 +301,7 @@ private void extraInputActiekaarten(ExtraInfo actiekaart) {
 			printFunctie("Nu terug de beurt aan: "+engine.geefHuidigeSpeler().geefNaam());}
 			break;
 		case "geldschieter":
-			if(engine.isTypeKaartInLijst(engine.geefHuidigeSpeler().geefKaartenInHand(), "geldkaart").size()<0){
+			if(engine.isKaartInHand(engine.geefHuidigeSpeler(), "koper")){
 				gekozenKaarten = vragenNaarKaartenUitHand(actiekaart.geefMaxAantalKaarten(),actiekaart.geefBericht(),true,engine.geefHuidigeSpeler());
 			}
 			else {System.out.println("Geen geldkaarten in hand!");}
