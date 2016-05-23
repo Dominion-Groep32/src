@@ -278,7 +278,7 @@ public class SpelFuncties {
 		case "dief":
 			break;
 		case "heks":
-			extraInfoMeegeven = new ExtraInfo("heks",1,"Wenst u uw Slotgracht te gebruiken? (0: Nee / 1: Ja)","heks");			
+			extraInfoMeegeven = new ExtraInfo("heks",0,"","heks");			
 			break;
 		default:
 			break;
@@ -354,8 +354,9 @@ public class SpelFuncties {
 	}
 	private void bureaucraat(ExtraInfo kaartMetExtraInfo) {
 		//andere spelers leggen een overwinningskaart uit zijn hand op zijn trekstapel
-		for (int i = 0; i < kaartMetExtraInfo.geefGekozenKaart().size(); i++) {
-			brengEenKaartVanDeEneNaarAndereStapel(geefLijstAndereSpelers().get(kaartMetExtraInfo.geefSpelersIndex()).geefKaartenInHand(), kaartMetExtraInfo.geefGekozenKaart().get(i), geefHuidigeSpeler().geefAflegStapel());
+		for (int i = 0; i < kaartMetExtraInfo.geefSpelersIndex().size(); i++) {
+			int spelersIndex = kaartMetExtraInfo.geefSpelersIndex().get(i);
+			brengEenKaartVanDeEneNaarAndereStapel(geefLijstAndereSpelers().get(spelersIndex).geefKaartenInHand(), kaartMetExtraInfo.geefGekozenKaart().get(i), geefHuidigeSpeler().geefAflegStapel());
 		}
 
 	}
@@ -397,23 +398,23 @@ public class SpelFuncties {
 	
 	private void militie(ExtraInfo kaartMetExtraInfo) {
 		//elke ander speler moet hand verminderen tot 3 kaarten
-		for (int i = 0; i < kaartMetExtraInfo.geefGekozenKaart().size(); i++) {
-			brengEenKaartVanDeEneNaarAndereStapel(geefLijstAndereSpelers().get(kaartMetExtraInfo.geefSpelersIndex()).geefKaartenInHand(), kaartMetExtraInfo.geefGekozenKaart().get(i), geefHuidigeSpeler().geefAflegStapel());
+		for (int i = 0; i < kaartMetExtraInfo.geefSpelersIndex().size(); i++) {
+			int spelersIndex = kaartMetExtraInfo.geefSpelersIndex().get(i);
+			brengEenKaartVanDeEneNaarAndereStapel(geefLijstAndereSpelers().get(spelersIndex).geefKaartenInHand(), kaartMetExtraInfo.geefGekozenKaart().get(i),geefLijstAndereSpelers().get(spelersIndex).geefAflegStapel());
 		}		
 	}
 
 	private void mijn(ExtraInfo kaartMetExtraInfo) {
 		if(!kaartMetExtraInfo.geefGekozenKaart().isEmpty()){
 			brengGekochteKaartNaarAflegstapel(kaartMetExtraInfo.geefGekozenKaart().get(1));
-		}
-	}
+		}}
 	
 	private void geldschieter(ExtraInfo kaartMetExtraInfo) {
 		// Indien je een kooper van je hand naar de vuilbak brengt
 		if(!kaartMetExtraInfo.geefGekozenKaart().isEmpty()){
 			huidigeSpeler.vermeerderGeld(3);
-		}
-	}
+		}}
+	
 	private void verbouwing(ExtraInfo kaartMetExtraInfo) {
 		//breng een kaart van je hand naar de vuilbank
 		if(kaartMetExtraInfo.geefGekozenKaart().size()>0){
@@ -427,19 +428,18 @@ public class SpelFuncties {
 		for (int i = 0; i < spelers.length; i++) {
 			if(kaartMetExtraInfo.geefKeuzeSpeler().get(i) == 0){
 				brengEenKaartVanDeEneNaarAndereStapel(spelers[i].geefAflegStapel(), kaartMetExtraInfo.geefGekozenKaart().get(i), spelers[i].geefAflegStapel());
-				
-			}
-		}
-	}
+			}}}
+	
 	private void dief(ExtraInfo kaartMetExtraInfo) {
 		//elke speler toont zijn twee bovenste kaarten van zijn aftrekstapel
 		// als het een geldkaart is, ... (bekijk dit verder)
 	}
 		
 	private void heks(ExtraInfo kaartMetExtraInfo){
-		for (int i = 0; i < geefLijstAndereSpelers().size(); i++) {
-			if(kaartMetExtraInfo.geefSpelersIndex() == i){
-				geefLijstAndereSpelers().get(i).geefAflegStapel().add(overwinningskaarten.get(3));
+		for (int i = 0; i < kaartMetExtraInfo.geefSpelersIndex().size(); i++) {
+			int spelersIndex = kaartMetExtraInfo.geefSpelersIndex().get(i);
+			if(kaartMetExtraInfo.geefGebruikSlotgracht()){
+				geefLijstAndereSpelers().get(spelersIndex).geefAflegStapel().add(overwinningskaarten.get(3));
 			}}}
 	
 	//EINDE
