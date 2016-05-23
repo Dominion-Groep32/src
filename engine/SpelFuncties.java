@@ -126,7 +126,13 @@ public class SpelFuncties {
 		return nieuweLijst;
 
 	}
-
+	
+	public void geldOpSpeelVeld() {
+		geefHuidigeSpeler().verminderGeld(geefHuidigeSpeler().geefGeld());
+		for (int i = 0; i < huidigeSpeler.geefSpeelGebied().size(); i++) {
+			huidigeSpeler.vermeerderGeld(huidigeSpeler.geefSpeelGebied().get(i).geefWaarde());}
+			
+	}
 	public List<Kaart> actiekaartenGenereren() {
 	
 		Collections.shuffle(actiekaarten);
