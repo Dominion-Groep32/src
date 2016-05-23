@@ -152,7 +152,7 @@ public class SpelFuncties {
 	
 	public boolean isKaartInHand(Speler speler, String kaart){
 		boolean tmp = false;
-		for (int i = 0; i < speler.geefKaartenInHand().size(); i++) {
+		for (int i = 0; i < speler.geefKaartenInHand().size() && tmp == false; i++) {
 			if (speler.geefKaartenInHand().get(i).geefNaam() == kaart){
 				tmp = true;}}
 		return tmp;
@@ -409,7 +409,7 @@ public class SpelFuncties {
 		}}
 	
 	private void verbouwing(ExtraInfo kaartMetExtraInfo) {
-		if(kaartMetExtraInfo.geefGekozenKaart().size()>0){
+		if(!kaartMetExtraInfo.geefGekozenKaart().isEmpty()){
 		brengEenKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefKaartenInHand(), kaartMetExtraInfo.geefGekozenKaart().get(0), huidigeSpeler.geefVuilbakStapel());
 		huidigeSpeler.vermeerderGeld(kaartMetExtraInfo.geefGekozenKaart().get(0).geefKost());}
 	}

@@ -238,7 +238,7 @@ private List<Kaart> vragenNaarKaartenUitHand(int maxAantal,String tekst,boolean 
 	controleKeuze(aantal, maxAantal);
 	}
 		
-	for (int i = 1; i <= aantal; i++) {
+	for (int i = 0; i < aantal; i++) {
 		Kaart gekozenKaart = vragenNaarEenUitHand(speler);
 		lijstGekozenKaarten.add(gekozenKaart);
 	}
