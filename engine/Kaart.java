@@ -43,7 +43,6 @@ public class Kaart {
 		this.info = info;
 	}
 
-	
 
 	public int krijgAantalOverwinnigsPunten() 
 	{

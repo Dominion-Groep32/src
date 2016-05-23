@@ -3,10 +3,8 @@ package console;
 import java.util.*;
 
 import engine.*;
-
-
-
 //test
+
 public class ConsoleSpel {
 	Scanner sc = new Scanner(System.in);
 	SpelFuncties engine = new SpelFuncties();
