@@ -6,19 +6,18 @@ import java.util.List;
 public class ExtraInfo {
 	private String actiekaartNaam;
 	private String bericht;
-	private int maxAantalKaartenUitHand;
+	private int maxAantalKaarten;
 	private int spelersIndex;
 	private List<Kaart> gekozenKaart;
 	private String soortActie;
+	private List<Integer> keuzeSpeler;
 	
-public ExtraInfo () {
-	
-};
+public ExtraInfo() {};
 	
 
 public ExtraInfo(String kaartNaam,int aantalKaarten, String bericht, String soortActie ){
 	this.actiekaartNaam = kaartNaam;
-	this.maxAantalKaartenUitHand = aantalKaarten;
+	this.maxAantalKaarten = aantalKaarten;
 	this.bericht = bericht;
 	this.soortActie = soortActie;
 }
@@ -28,6 +27,13 @@ public ExtraInfo (String kaartNaam, int spelersIndex,  List<Kaart> gekozenKaarte
 	this.actiekaartNaam = kaartNaam;
 	this.spelersIndex = spelersIndex;
 	this.gekozenKaart = gekozenKaarten;
+}
+
+public ExtraInfo (String kaartNaam, int spelersIndex,  List<Kaart> gekozenKaarten, List<Integer>keuzeSpeler) {
+	this.actiekaartNaam = kaartNaam;
+	this.spelersIndex = spelersIndex;
+	this.gekozenKaart = gekozenKaarten;
+	this.keuzeSpeler = keuzeSpeler;
 }
 
 public ExtraInfo (String kaartNaam,  List<Kaart> gekozenKaarten) {
@@ -48,8 +54,8 @@ public String geefBericht(){
 }
 
 
-public int geefAantalKaartenUitHandNemen() {
-	return this.maxAantalKaartenUitHand;
+public int geefMaxAantalKaarten() {
+	return this.maxAantalKaarten;
 }
 
 
@@ -62,5 +68,9 @@ public int geefSpelersIndex() {
 
 public String geefSoortActie() {
 	return this.soortActie;
+}
+public List<Integer> geefKeuzeSpeler() {
+	return this.keuzeSpeler;
+	
 }
 }
