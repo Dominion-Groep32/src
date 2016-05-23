@@ -2,41 +2,52 @@ package engine;
 
 import java.util.List;
 
-import sun.nio.cs.ext.TIS_620;
+
 
 
 
 public class ExtraInfo {
 	private Kaart actiekaart;
 	private String bericht;
-	private int aantalKaartenUitHandNemen;
-	private int kaartKeuze;
-	private int plaatsSpeler;
-	private Kaart gekozenKaart;
+	private int maxAantalKaartenUitHand;
+	private int spelersIndex;
+	private List<Kaart> gekozenKaart;
+	private String soortActie;
+	
+	
 
 
 
-public ExtraInfo(Kaart actiekaart,int kaartKeuze, int aantalKaarten){
+public ExtraInfo () {
+	
+};
+	
+
+public ExtraInfo(Kaart actiekaart,int aantalKaarten, String bericht, String soortActie ){
 	this.actiekaart = actiekaart;
-	//this.bericht = bericht;
-	this.kaartKeuze = kaartKeuze;
-	this.aantalKaartenUitHandNemen = aantalKaarten;
+	this.maxAantalKaartenUitHand = aantalKaarten;
+	this.bericht = bericht;
+	this.soortActie = soortActie;
 
 	
 }
-public ExtraInfo (Kaart actiekaart, int kaartKeuze) {
+
+
+public ExtraInfo (Kaart actiekaart , int spelersIndex,  List<Kaart> gekozenKaarten) {
 	this.actiekaart = actiekaart;
-	this.kaartKeuze = kaartKeuze;
-}
-public ExtraInfo (Kaart actiekaart,int plaatsSpeler, int kaartKeuze) {
-	this.plaatsSpeler = plaatsSpeler;
-	this.kaartKeuze = kaartKeuze;
+	this.spelersIndex = spelersIndex;
+	this.gekozenKaart = gekozenKaarten;
 }
 
-public ExtraInfo( Kaart actiekaart,Kaart gekozenKaart){
+public ExtraInfo (Kaart actiekaart,  List<Kaart> gekozenKaarten) {
+	this.actiekaart = actiekaart;
+	this.gekozenKaart = gekozenKaarten;
+}
+
+/*public ExtraInfo( Kaart actiekaart,Kaart gekozenKaart){
 	this.actiekaart = actiekaart;
 	this.gekozenKaart = gekozenKaart;}
-
+*/
 public Kaart geefActiekaart() {
 	return this.actiekaart;
 }
@@ -46,20 +57,18 @@ public String geefBericht(){
 }
 
 public int geefAantalKaartenUitHandNemen() {
-	return this.aantalKaartenUitHandNemen;
+	return this.maxAantalKaartenUitHand;
 }
 
-public int geefKaartKeuze() {
-	return this.kaartKeuze;
-}
-public String geefactieKaartNaam() {
-	return this.actiekaart.geefNaam();
-}
-public int geefPlaatsSpeler(){
-	return this.plaatsSpeler;
-}
 
-public Kaart geefGekozenKaart() {
+public List<Kaart> geefGekozenKaart() {
 	return this.gekozenKaart;
+}
+public int geefSpelersIndex() {
+	return this.spelersIndex;
+}
+
+public String geefSoortActie() {
+	return this.soortActie;
 }
 }
