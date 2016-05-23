@@ -283,8 +283,7 @@ private void extraInputActiekaarten(ExtraInfo actiekaart) {
 		List<Kaart> gekozenKaarten = new LinkedList<Kaart>();
 		
 		switch (actiekaart.geefSoortActie()) {
-		case "geenExtraInput":
-			
+	
 		case "actieEnkeleSpeler":
 			gekozenKaarten = vragenNaarKaartenUitHand(actiekaart.geefAantalKaartenUitHandNemen(),actiekaart.geefBericht(),true,engine.geefHuidigeSpeler());
 			extraInfoGeven = new ExtraInfo(actiekaart.kaartNaam(),gekozenKaarten);
@@ -301,7 +300,8 @@ private void extraInputActiekaarten(ExtraInfo actiekaart) {
 					extraInfoGeven = new ExtraInfo(actiekaart.kaartNaam(),i,gekozenKaarten);
 				}else {
 					System.out.println("Geen overwinningskaart in hand!");
-				}}
+				}
+				printFunctie("Nu terug de beurt aan: "+engine.geefHuidigeSpeler().geefNaam());}
 			break;
 		case "feest":
 			//nog vragen of ze effectief een kaart willen kopen
@@ -314,7 +314,8 @@ private void extraInputActiekaarten(ExtraInfo actiekaart) {
 				while(AndereSpelers.get(i).geefKaartenInHand().size()>3) {
 				gekozenKaarten= vragenNaarKaartenUitHand(actiekaart.geefAantalKaartenUitHandNemen(),actiekaart.geefBericht(),false,AndereSpelers.get(i));
 				extraInfoGeven= new ExtraInfo(actiekaart.kaartNaam(), i,gekozenKaarten);
-			}}
+			}
+				printFunctie("Nu terug de beurt aan: "+engine.geefHuidigeSpeler().geefNaam());}
 			break;
 		case "geldschieter":
 			if(engine.controleerOpTypeKaartenInHand(engine.geefHuidigeSpeler(), "geldkaart")){
