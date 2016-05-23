@@ -15,12 +15,14 @@ public class Kaart {
 	private int extraKaart;
 	private int extraMunten;
 	private boolean specialeKaart;
+	private boolean aanval;
 	
 	
-	public Kaart(String naam, int cost, boolean specialeKaart,int extraAankoop, int extraActie, int extraKaart, int extraMunten,  String info)
+	public Kaart(String naam, boolean aanval, int cost, boolean specialeKaart,int extraAankoop, int extraActie, int extraKaart, int extraMunten,  String info)
 	{
 		this.kaartNaam = naam;
 		this.KaartType = "actiekaart";
+		this.aanval = aanval;
 		this.cost = cost;
 		this.info = info;
 		this.extraAankoop = extraAankoop;

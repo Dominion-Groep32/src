@@ -14,19 +14,21 @@ public class Speler {
 	private int aankoop ;
 	private int actie;
 	private int geld;
+	private int score;
 	
 
 
 	public Speler(String naam){
 		this.naam = naam;
 		trekStapel = startKaarten();
-		kaartenInHand = startKaartenInHand(); // anders werkt ajax niet meer 
+		kaartenInHand = startKaartenInHand();
 		aflegStapel = new LinkedList<Kaart>();
 		vuilbakStapel = new LinkedList<Kaart>();
 		speelGebied = new LinkedList<Kaart>();
 		aankoop = 1;
 		actie = 1;
 		geld = 0;
+		score = 0;
 	
 		}
 	
@@ -34,7 +36,6 @@ public class Speler {
 		for (int i = 0; i < 7; i++) {
 
 			trekStapel.add(new Kaart("koper","geldkaart",0,1,"Deze kaart is 1 munt waard"));
-			//trekStapel.add(new Kaart("feest",4,true,0,0,0,5,"Vernietig deze kaart. Pak een kaart met een waarde van 5 munten of minder."));
 			
 			
 		}
@@ -91,6 +92,9 @@ public class Speler {
 	public int geefAankoop() {
 		return this.aankoop;
 	}
+	public int geefScore() {
+		return this.score;
+	}
 	
 	public void vermeerderActie(int actie) {
 		this.actie = this.actie +actie;
@@ -117,5 +121,9 @@ public class Speler {
 		this.aankoop = 1;
 		this.actie = 1;
 	}
+	public void vermeerderScore(int score) {
+		this.score = this.score + score;
+	}
+	
 	
 }
