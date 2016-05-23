@@ -2,15 +2,7 @@ package engine;
 
 import java.util.*;
 
-import org.junit.validator.PublicClassValidator;
-
-//test
-//test
-//test
 public class SpelFuncties {
-	
-
-	
 	private List<Kaart> geldkaarten = new LinkedList<>(Arrays.asList(new Kaart("koper","geldkaart",0,1,"Deze kaart is 1 munt waard"),new Kaart("zilver","geldkaart",3,2,"Deze kaart is 2 munten waard"),new Kaart("goud","geldkaart",6,3,"Deze kaart is 3 munten waard")));
 	private List<Kaart> overwinningskaarten = new LinkedList<>(Arrays.asList(new Kaart("landgoed","overwinningskaart",2,1,"Is op het einde van het spel 1 punt waard"),new Kaart("hertogdom","overwinningskaart",5,3,"Is op het einde van het spel 5 punten waard"),new Kaart("provincie","overwinningskaart",8,6,"Is op het einde van het spel 8 punten waard"),new Kaart("vloek","overwinningskaart",0,-1,"Vermindert de waarde op het einde van het spel met 1 punt ")));
 	private List<Kaart> actiekaarten = new LinkedList<>(Arrays.asList(new Kaart("avonturier",false,6,true,0,0,0,0,"Draai achtereenvolgens de bovenste kaarten van je trekstapel om totdat je in totaal 2 geldkaarten hebt. Neem ze op handen. Leg de overige omgedraagde kaarten op je alegstapel.",false),
@@ -29,17 +21,13 @@ public class SpelFuncties {
 	private Speler huidigeSpeler;
 
 	
-	
-	
 	public SpelFuncties() {
-
 		actiekaartenGenereren();
 		kaartenVanHetSpel = lijstenSamenvoegenTotNieuweLijst(lijst10Actiekaarten,lijstenSamenvoegenTotNieuweLijst(geldkaarten, overwinningskaarten, false),false);
 		stapelsAanmaken(kaartenVanHetSpel);
-		
 	}
 		
-	
+	//SPELERS
 	public  void maakSpelersAan(String SpelersNamen[]){
 		 spelers = new Speler[SpelersNamen.length];
 		for (int i = 0; i < SpelersNamen.length; i++) {
@@ -71,11 +59,13 @@ public class SpelFuncties {
 		for (int i = 0; i < spelers.length; i++){
 			if(spelers[i].geefNaam() != huidigeSpeler.geefNaam()){
 				LijstAndereSpelers.add(spelers[i]);}}
-		
 	}
 	
+	//STAPELS
+	private void stapelsAanmaken(List<Kaart> kaartenVanHetSpel) {
+		for (int j = 0; j < kaartenVanHetSpel.size(); j++) {lijstStapel.add(new Stapel(kaartenVanHetSpel.get(j).geefNaam()));}
+	}
 	
-
 	private void verminderTafelstapel(String kaartnaam){
 		
 		for (int i = 0; i < lijstStapel.size(); i++) {
@@ -83,40 +73,22 @@ public class SpelFuncties {
 			if (kaartnaam.equals(Kaart))
 			{
 				lijstStapel.get(i).verminderAantalKaarten();	
-			}
-		}
-	}
-	
-	public boolean spelNogNietBeëindigd(){
-		int Legestapels = 0;
-		Boolean tmp = true;
-		
-		for (int i = 0; i < lijstStapel.size(); i++) 
-		{
-			if(lijstStapel.get(i).geefAatalResterendeKaartenInDeStapel() <= 0)
-			{
-				Legestapels = Legestapels+1;
-				String lijstNaam = lijstStapel.get(i).geefStapelNaam();
-				if (lijstNaam.equals("provincie") || Legestapels >=3)
-				{
-					tmp = false;
-				}
-			}
-		}
-		return tmp;
-		
+			}}
 	}
 	
 	
+	//LIJSTEN OF STAPELS AANPASSEN
 	
+	//kan korter!! mss samenvoegen met onderstaande functie
 	private List<Kaart> lijstenSamenvoegenBijBestaandeLijst(List<Kaart> primaireLijst, List<Kaart> bijTeVoegenLijst,boolean shuffle,boolean verwijderBijTeVoegenLijst) {
 		for (int i = 0; i < bijTeVoegenLijst.size(); i++) {
 			primaireLijst.add(bijTeVoegenLijst.get(i));		}
 		if(verwijderBijTeVoegenLijst){bijTeVoegenLijst.clear();}
 		if(shuffle){Collections.shuffle(primaireLijst);}
 		return primaireLijst;
-
 	}
+	
+	//ZIE BOVENSTAANDE COMMENT
 	private List<Kaart> lijstenSamenvoegenTotNieuweLijst(List<Kaart> primaireLijst, List<Kaart> bijTeVoegenLijst,boolean shuffle){
 		List<Kaart> nieuweLijst = new LinkedList<Kaart>();
 		for (int i = 0; i < primaireLijst.size(); i++) {
@@ -127,27 +99,6 @@ public class SpelFuncties {
 		}
 		if(shuffle){Collections.shuffle(nieuweLijst);}
 		return nieuweLijst;
-
-	}
-	//vragenAanJens!!!
-	/*
-	private void geldOpSpeelVeld(){
-		geefHuidigeSpeler().verminderGeld(geefHuidigeSpeler().geefGeld());
-		for (int i = 0; i < huidigeSpeler.geefSpeelGebied().size(); i++) {
-			huidigeSpeler.vermeerderGeld(huidigeSpeler.geefSpeelGebied().get(i).geefWaarde());}
-			
-	}*/
-	public List<Kaart> actiekaartenGenereren() {
-	
-		Collections.shuffle(actiekaarten);
-		for (int i = 0; i < 10; i++) {this.lijst10Actiekaarten.add(actiekaarten.get(i));}
-		return this.lijst10Actiekaarten;
-	}
-	
-	public void stapelsAanmaken(List<Kaart> kaartenVanHetSpel) {
-
-		for (int j = 0; j < kaartenVanHetSpel.size(); j++) {lijstStapel.add(new Stapel(kaartenVanHetSpel.get(j).geefNaam()));}
-		
 	}
 	
 	public void trekKaartVanTrekStapel(Speler speler,int aantal) {
@@ -158,55 +109,62 @@ public class SpelFuncties {
 		for (int i = 0; i < aantal; i++) {speler.geefTrekStapel().remove(0);}
 	}
 
-
-	public List<Kaart> kaartenDieJeKuntKopen() {
-		List<Kaart> lijstMetKaartenDieJeKuntKopen = new LinkedList<Kaart>();
-		for (int i = 0; i < geefLijstKaartenVanHetSpel().size(); i++) {
-			if (geefLijstKaartenVanHetSpel().get(i).geefKost() <= huidigeSpeler.geefGeld()) {lijstMetKaartenDieJeKuntKopen.add(geefLijstKaartenVanHetSpel().get(i));}
-		}
-		return lijstMetKaartenDieJeKuntKopen;
+	public void brengAlleKaartenNaarAflegstapel(){
+		lijstenSamenvoegenBijBestaandeLijst(huidigeSpeler.geefAflegStapel(), huidigeSpeler.geefSpeelGebied(), false,true);
+		lijstenSamenvoegenBijBestaandeLijst(huidigeSpeler.geefAflegStapel(), huidigeSpeler.geefKaartenInHand(),false,true);
+		geefLijstAndereSpelers().clear();
 	}
-	
-	public int geldInHand() {
-		int geld = 0;
-		for (int i = 0; i < huidigeSpeler.geefKaartenInHand().size(); i++) {geld += huidigeSpeler.geefKaartenInHand().get(i).geefWaarde();}
-		return geld;
-	}
-
-		
-	public List<Kaart> neemActiekaartenUitHand(){
-		List<Kaart> actiekaartenUitHand = new LinkedList<Kaart>();
+	public void brengAlleGeldkaartenUitHandNaarStapel(List<Kaart> lijst){
 		for (int i = 0; i < huidigeSpeler.geefKaartenInHand().size(); i++) {
-			if (huidigeSpeler.geefKaartenInHand().get(i).geefKaartType() == "actiekaart") {actiekaartenUitHand.add(huidigeSpeler.geefKaartenInHand().get(i));}
-		}
-		return actiekaartenUitHand;
+			if(huidigeSpeler.geefKaartenInHand().get(i).geefKaartType() == "geldkaart"){
+				lijst.add(huidigeSpeler.geefKaartenInHand().get(i));
+				huidigeSpeler.geefKaartenInHand().remove(i);
+				i--;
+	}}}
+	private void vermeerderAankoopGeldEnActie(int aankoop, int geld, int actie)
+	{
+		huidigeSpeler.vermeerderAankoop(aankoop);
+		huidigeSpeler.vermeerderGeld(geld);
+		huidigeSpeler.vermeerderActie(actie);
 	}
 	
-	public boolean controleerOpTypeKaartenInHand(Speler speler, String type){
+	public void brengEenKaartVanDeEneNaarAndereStapel(List<Kaart>verwijderStapel,Kaart kaart,List<Kaart> toevoegStapel){
+		boolean tmp = false;
+		for (int i = 0; i < verwijderStapel.size()&& tmp == false; i++ ) {
+			if(verwijderStapel.get(i).geefNaam() == kaart.geefNaam()){
+				verwijderStapel.remove(i);
+				toevoegStapel.add(kaart);
+				tmp = true;
+				}}}
+	
+	private void brengGekochteKaartNaarAflegstapel(Kaart kaart) {
+		geefHuidigeSpeler().geefAflegStapel().add(kaart);
+		verminderTafelstapel(kaart.geefNaam());
+	}
+	
+	public List<Kaart> isTypeKaartInHand(Speler speler, String type){
+		List<Kaart> lijstBepaaldeTypeKaarten = new LinkedList<Kaart>();
+		for (int i = 0; i < speler.geefKaartenInHand().size(); i++) {
+			if (speler.geefKaartenInHand().get(i).geefKaartType() == type){
+				lijstBepaaldeTypeKaarten.add(huidigeSpeler.geefKaartenInHand().get(i));}}
+		return lijstBepaaldeTypeKaarten;
+	}
+	
+	public boolean isKaartInHand(Speler speler, String kaart){
 		boolean tmp = false;
 		for (int i = 0; i < speler.geefKaartenInHand().size(); i++) {
-			if(speler.geefKaartenInHand().get(i).geefKaartType() == type){
-				tmp = true;
-			}
-		}
+			if (speler.geefKaartenInHand().get(i).geefNaam() == kaart){
+				tmp = true;}}
 		return tmp;
 	}
-
-	public void koopKaart(Kaart gekozenKaart) {
-		int kost = gekozenKaart.geefKost();			
-		huidigeSpeler.verminderGeld(kost);
-		huidigeSpeler.verminderAankoop(1);
-		brengGekochteKaartNaarAflegstapel(gekozenKaart);
-	}
 	
-	public List<Kaart> geefLijstGeldkaarten() {
-		return this.geldkaarten;
-	}
-	public List<Kaart> geefLijstOverwinningskaarten() {
-		return this.overwinningskaarten;	
-	}
-	public List<Kaart> geefLijstAlleActiekaarten() {
-		return this.actiekaarten;
+	//LIJSTEN GEVEN
+	public List<Kaart> geefLijstKaartenDieJeKuntKopen() {
+		List<Kaart> lijstMetKaartenDieJeKuntKopen = new LinkedList<Kaart>();
+		for (int i = 0; i < kaartenVanHetSpel.size(); i++) {
+			if (kaartenVanHetSpel.get(i).geefKost() <= huidigeSpeler.geefGeld()) {lijstMetKaartenDieJeKuntKopen.add(geefLijstKaartenVanHetSpel().get(i));}
+		}
+		return lijstMetKaartenDieJeKuntKopen;
 	}
 	public List<Kaart> geefLijstKaartenVanHetSpel() {
 		return this.kaartenVanHetSpel;
@@ -230,29 +188,34 @@ public class SpelFuncties {
 		return this.extraInfoMeegeven;
 	}
 	
-public void zetHuidigeSpeler(Speler speler) {
-	for (int i = 0; i < spelers.length; i++) {
-		if (speler.geefNaam().equals(spelers[i].geefNaam())){
-			huidigeSpeler = spelers[i];}
+	//GELDKAARTEN
+	public void geldOpSpeelVeld(){
+		geefHuidigeSpeler().verminderGeld(geefHuidigeSpeler().geefGeld());
+		for (int i = 0; i < huidigeSpeler.geefSpeelGebied().size(); i++) {
+			huidigeSpeler.vermeerderGeld(huidigeSpeler.geefSpeelGebied().get(i).geefWaarde());}
+			
+	}	
+	
+	public int geldInHand() {
+		int geld = 0;
+		for (int i = 0; i < huidigeSpeler.geefKaartenInHand().size(); i++) {geld += huidigeSpeler.geefKaartenInHand().get(i).geefWaarde();}
+		return geld;
 	}
-}
-
-	public void maakKaartInHandLeeg(List<Kaart> lijst) {
-		for (int i = 0; i < lijst.size(); i++) {
-			huidigeSpeler.geefVuilbakStapel().add(lijst.get(i));
-		}
-		
-		lijst.clear();
-		
-	}
-		
-	public void brengAlleKaartenNaarAflegstapel(){
-		lijstenSamenvoegenBijBestaandeLijst(huidigeSpeler.geefAflegStapel(), huidigeSpeler.geefSpeelGebied(), false,true);
-		lijstenSamenvoegenBijBestaandeLijst(huidigeSpeler.geefAflegStapel(), huidigeSpeler.geefKaartenInHand(),false,true);
-		geefLijstAndereSpelers().clear();
+	//ACTIEKAARTEN
+	private List<Kaart> actiekaartenGenereren() {
+	
+		Collections.shuffle(actiekaarten);
+		for (int i = 0; i < 10; i++) {this.lijst10Actiekaarten.add(actiekaarten.get(i));}
+		return this.lijst10Actiekaarten;
 	}
 	
-
+	public void koopKaart(Kaart gekozenKaart) {
+		int kost = gekozenKaart.geefKost();			
+		huidigeSpeler.verminderGeld(kost);
+		huidigeSpeler.verminderAankoop(1);
+		brengGekochteKaartNaarAflegstapel(gekozenKaart);
+	}
+	
 	public ExtraInfo actieUitvoeren(Kaart kaart) {
 		brengEenKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefKaartenInHand(), kaart,huidigeSpeler.geefSpeelGebied());
 		
@@ -261,7 +224,7 @@ public void zetHuidigeSpeler(Speler speler) {
 		return extraInfoMeegeven;
 	}
 	
-	public void gewoneActiekaartenUitvoeren(Kaart kaart){
+	private void gewoneActiekaartenUitvoeren(Kaart kaart){
 		for(int i=0;i<lijst10Actiekaarten.size();i++){
 			Kaart actiekaart = lijst10Actiekaarten.get(i);
 			if(actiekaart.geefNaam().equals(kaart.geefNaam())){
@@ -276,7 +239,7 @@ public void zetHuidigeSpeler(Speler speler) {
 				}}
 	}
 	
-	public ExtraInfo actieFase1Uitvoeren(Kaart kaart) {
+	private ExtraInfo actieFase1Uitvoeren(Kaart kaart) {
 		LijstAndereSpelers(huidigeSpeler);
 		if(kaart.geefInfoMeegeven()){infoMeegeven(kaart);}
 		else{			
@@ -314,8 +277,7 @@ public void zetHuidigeSpeler(Speler speler) {
 		case "dief":
 			break;
 		case "heks":
-			//nog bekijken! controle op moat
-			heks();
+			extraInfoMeegeven = new ExtraInfo("heks",1,"Wenst u uw Slotgracht te gebruiken? (0: Nee / 1: Ja)","heks");			
 			break;
 		default:
 			break;
@@ -366,8 +328,7 @@ public void zetHuidigeSpeler(Speler speler) {
 			actieUitvoeren(kaartMetExtraInfo.geefGekozenKaart().get(0));		
 			break;
 		case "heks":
-			//nog bekijken! controle op moat
-			heks();
+			heks(kaartMetExtraInfo);
 			break;
 		default:
 			break;
@@ -375,7 +336,8 @@ public void zetHuidigeSpeler(Speler speler) {
 		huidigeSpeler.verminderActie(1);
 	}
 	
-	public void avonturier (){
+	// ALLE APARTE ACTIEKAARTEN
+	private void avonturier (){
 		// nog eens bekijken! nog niet inorde!!
 		int getal = 0 ;
 		int i = 0;
@@ -392,14 +354,14 @@ public void zetHuidigeSpeler(Speler speler) {
 		}
 		
 	}
-	public void bureaucraat(ExtraInfo kaartMetExtraInfo) {
+	private void bureaucraat(ExtraInfo kaartMetExtraInfo) {
 		//andere spelers leggen een overwinningskaart uit zijn hand op zijn trekstapel
 		for (int i = 0; i < kaartMetExtraInfo.geefGekozenKaart().size(); i++) {
 			brengEenKaartVanDeEneNaarAndereStapel(geefLijstAndereSpelers().get(kaartMetExtraInfo.geefSpelersIndex()).geefKaartenInHand(), kaartMetExtraInfo.geefGekozenKaart().get(i), geefHuidigeSpeler().geefAflegStapel());
 		}
 
 	}
-	public void kelder(ExtraInfo kaartMetExtraInfo) {
+	private void kelder(ExtraInfo kaartMetExtraInfo) {
 		//leg een aantal kaarten weg, per elke weggelegde kaart krijg je een bij van je afneemstapel
 		int aantal = 0;
 		for (int i = 0; i < kaartMetExtraInfo.geefGekozenKaart().size(); i++) {
@@ -408,129 +370,110 @@ public void zetHuidigeSpeler(Speler speler) {
 		}
 		trekKaartVanTrekStapel(huidigeSpeler,aantal);
 	}
-	public void raadsheer(){
+	private void raadsheer(){
 		lijstenSamenvoegenBijBestaandeLijst(huidigeSpeler.geefAflegStapel(), huidigeSpeler.geefTrekStapel(),true,true);
 	}
 	
-	public void kapel(ExtraInfo kaartMetExtraInfo) {
+	private void kapel(ExtraInfo kaartMetExtraInfo) {
 		for (int i = 0; i < kaartMetExtraInfo.geefGekozenKaart().size(); i++) {
 			brengEenKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefKaartenInHand(), kaartMetExtraInfo.geefGekozenKaart().get(i), huidigeSpeler.geefVuilbakStapel());
 		}
 	}
-	public void raadszaal (){
+	private void raadszaal (){
 		for (int i = 0; i < geefLijstAndereSpelers().size(); i++){
 			trekKaartVanTrekStapel(geefLijstAndereSpelers().get(i),1);}
 		}
 	
-	public void feest(ExtraInfo kaartMetExtraInfo){
+	private void feest(ExtraInfo kaartMetExtraInfo){
 		brengGekochteKaartNaarAflegstapel(kaartMetExtraInfo.geefGekozenKaart().get(0));
 		int kost = kaartMetExtraInfo.geefGekozenKaart().get(0).geefKost();
 		huidigeSpeler.verminderGeld(kost);
 		huidigeSpeler.verminderAankoop(1);
 	}
 	
-	public void bibliotheek(ExtraInfo kaartMetExtraInfo){
+	private void bibliotheek(ExtraInfo kaartMetExtraInfo){
 		// Trek kaarten tot er 7 kaarten in hand zijn
 		if(huidigeSpeler.geefKaartenInHand().size()<7){	trekKaartVanTrekStapel(huidigeSpeler,1);}
 		//Wanneer er actiekaarten getrokken worden, kan je kiezen of je deze wilt of niet
 			}
 	
-	public void militie(ExtraInfo kaartMetExtraInfo) {
+	private void militie(ExtraInfo kaartMetExtraInfo) {
 		//elke ander speler moet hand verminderen tot 3 kaarten
 		for (int i = 0; i < kaartMetExtraInfo.geefGekozenKaart().size(); i++) {
 			brengEenKaartVanDeEneNaarAndereStapel(geefLijstAndereSpelers().get(kaartMetExtraInfo.geefSpelersIndex()).geefKaartenInHand(), kaartMetExtraInfo.geefGekozenKaart().get(i), geefHuidigeSpeler().geefAflegStapel());
 		}		
 	}
 
-	public void mijn(ExtraInfo kaartMetExtraInfo) {
+	private void mijn(ExtraInfo kaartMetExtraInfo) {
 		// andere geldkaart kopen die met waarde +3 van weggebrachte kaart
 	}
-	public void slotgracht(ExtraInfo kaartMetExtraInfo){
+	private void slotgracht(ExtraInfo kaartMetExtraInfo){
 		// bij gebruik van een aanvalskaart kan deze kaart gebruikt worden om zich te verdedigen.
 	}
-	public void geldschieter(ExtraInfo kaartMetExtraInfo) {
+	private void geldschieter(ExtraInfo kaartMetExtraInfo) {
 		// Indien je een kooper van je hand naar de vuilbak brengt
 		if(!kaartMetExtraInfo.geefGekozenKaart().isEmpty()){
 			huidigeSpeler.vermeerderGeld(3);
 		}
 	}
-	public void verbouwing(ExtraInfo kaartMetExtraInfo) {
+	private void verbouwing(ExtraInfo kaartMetExtraInfo) {
 		//breng een kaart van je hand naar de vuilbank
 		if(kaartMetExtraInfo.geefGekozenKaart().size()>0){
 		brengEenKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefKaartenInHand(), kaartMetExtraInfo.geefGekozenKaart().get(0), huidigeSpeler.geefVuilbakStapel());
 		//kost van deze kaart +2 om andere kaart te kunnen kopen
 		huidigeSpeler.vermeerderGeld(kaartMetExtraInfo.geefGekozenKaart().get(0).geefKost());}
 	}
-	public void spion(ExtraInfo kaartMetExtraInfo){
+	private void spion(ExtraInfo kaartMetExtraInfo){
 		
 		//elke speler (ook huidigespeler) toont zijn bovenste kaart van zijn aftrekstapel
 		//speler kiest of hij deze teruglegt of naar zijn aflegstapel verplaatst
 	}
-	public void dief(ExtraInfo kaartMetExtraInfo) {
+	private void dief(ExtraInfo kaartMetExtraInfo) {
 		//elke speler toont zijn twee bovenste kaarten van zijn aftrekstapel
 		// als het een geldkaart is, ... (bekijk dit verder)
 	}
 		
-	public void heks(){
+	private void heks(ExtraInfo kaartMetExtraInfo){
+		for (int i = 0; i < geefLijstAndereSpelers().size(); i++) {
+			if(kaartMetExtraInfo.geefSpelersIndex() == i){
+				geefLijstAndereSpelers().get(i).geefAflegStapel().add(overwinningskaarten.get(3));
+			}}}
+	
+	//EINDE
+	public boolean spelNogNietBeëindigd(){
+		int Legestapels = 0;
+		Boolean tmp = true;
 		
-		for (int i = 0; i < geefLijstAndereSpelers().size(); i++){
-			geefLijstAndereSpelers().get(i).geefAflegStapel().add(overwinningskaarten.get(3));
-		}
-	}
-	public void vermeerderAankoopGeldEnActie(int aankoop, int geld, int actie)
-	{
-		huidigeSpeler.vermeerderAankoop(aankoop);
-		huidigeSpeler.vermeerderGeld(geld);
-		huidigeSpeler.vermeerderActie(actie);
+		for (int i = 0; i < lijstStapel.size(); i++) 
+		{
+			if(lijstStapel.get(i).geefAatalResterendeKaartenInDeStapel() <= 0)
+			{
+				Legestapels = Legestapels+1;
+				String lijstNaam = lijstStapel.get(i).geefStapelNaam();
+				if (lijstNaam.equals("provincie") || Legestapels >=3)
+				{
+					tmp = false;
+				}}}
+		return tmp;
 	}
 	
-
-	public void brengAlleGeldkaartenUitHandNaarStapel(List<Kaart> lijst){
-		for (int i = 0; i < huidigeSpeler.geefKaartenInHand().size(); i++) {
-			if(huidigeSpeler.geefKaartenInHand().get(i).geefKaartType() == "geldkaart"){
-				lijst.add(huidigeSpeler.geefKaartenInHand().get(i));
-				huidigeSpeler.geefKaartenInHand().remove(i);
-				i--;
-			}}
-		}
-			
-		
-	public void brengEenKaartVanDeEneNaarAndereStapel(List<Kaart>verwijderStapel,Kaart kaart,List<Kaart> toevoegStapel){
-		boolean tmp = false;
-		for (int i = 0; i < verwijderStapel.size()&& tmp == false; i++ ) {
-			if(verwijderStapel.get(i).geefNaam() == kaart.geefNaam()){
-				verwijderStapel.remove(i);
-				toevoegStapel.add(kaart);
-				tmp = true;
-				
-			}
-		}
-	}
-	public void brengGekochteKaartNaarAflegstapel(Kaart kaart) {
-		geefHuidigeSpeler().geefAflegStapel().add(kaart);
-		verminderTafelstapel(kaart.geefNaam());
-		
-	}
-
-	public void berekenScoreSpelers() {
-		int aantal = 0;
+	public void berekenScoreAlleSpelers() {
 		for (int i = 0; i < spelers.length; i++) {
 			Speler speler = spelers[i];
 			brengAlleKaartenNaarAflegstapel();
-			for (int j = 0; j < speler.geefAflegStapel().size(); j++) {
-				Kaart kaart = speler.geefAflegStapel().get(j);
-				if(kaart.geefKaartType() == "overwinningskaart"){
-					speler.vermeerderScore(kaart.geefWaarde());
-				}
-				if(kaart.geefNaam()=="tuinen"){
-					aantal ++;
-				}
-			}
-			//NOG BEKIJKEN!!! mss met een functie!
-			int extraPunten = ((speler.geefScore()-(speler.geefScore()%10))/10)*aantal;
-			speler.vermeerderScore(extraPunten);
-		
-		}
-		
+			scorePerSpeler(speler);
+			}}
+	
+	private void scorePerSpeler(Speler speler){
+		int aantal = 0;
+		for (int j = 0; j < speler.geefAflegStapel().size(); j++) {
+		Kaart kaart = speler.geefAflegStapel().get(j);
+			if(kaart.geefKaartType() == "overwinningskaart"){
+				speler.vermeerderScore(kaart.geefWaarde());}
+			if(kaart.geefNaam()=="tuinen"){aantal ++;}
+		//NOG BEKIJKEN!!! mss met een functie!
+		int extraPunten = ((speler.geefScore()-(speler.geefScore()%10))/10)*aantal;
+		speler.vermeerderScore(extraPunten);	
+	}
 	}
 }
