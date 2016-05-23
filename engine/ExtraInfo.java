@@ -3,9 +3,6 @@ package engine;
 import java.util.List;
 
 
-
-
-
 public class ExtraInfo {
 	private Kaart actiekaart;
 	private String bericht;
@@ -15,7 +12,7 @@ public class ExtraInfo {
 	private String soortActie;
 	
 	
-
+	//test
 
 
 public ExtraInfo () {
