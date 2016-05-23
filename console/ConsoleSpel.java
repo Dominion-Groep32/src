@@ -29,7 +29,7 @@ public class ConsoleSpel {
 		engine.maakSpelersAan(vraagSpelersNamen(vraagAantalSpelers()));
 	
 		while(engine.spelNogNietBeëindigd()){
-			
+				//toonLijst(engine.geefLijstKaartenVanHetSpel()); test voor jens 
 				Speler huidigeSpeler = engine.geefHuidigeSpeler();
 				System.out.println("");
 				printFunctie("Nu aan de beurt: "+huidigeSpeler.geefNaam());
