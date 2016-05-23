@@ -1,10 +1,10 @@
 package engine;
 
 import java.util.*;
-//test
-//test
-//test
 
+//test
+//test
+//test
 public class SpelFuncties {
 	
 	private List<Kaart> geldkaarten = new LinkedList<>(Arrays.asList(new Kaart("koper","geldkaart",0,1,"Deze kaart is 1 munt waard"),new Kaart("zilver","geldkaart",3,2,"Deze kaart is 2 munten waard"),new Kaart("goud","geldkaart",6,3,"Deze kaart is 3 munten waard")));
