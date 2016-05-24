@@ -9,6 +9,14 @@ public class Stapel {
 		this.aantalKaartenInDeStapel = 10;
 	}
 	
+	public Stapel (String stapelNaam, int aantalKaartenInDeStapel){
+		this.stapelNaam = stapelNaam;
+		this.aantalKaartenInDeStapel = aantalKaartenInDeStapel;
+		
+		
+	}
+	
+	
 	public String geefStapelNaam()
 	{
 		return this.stapelNaam;
