@@ -11,6 +11,7 @@ public class Speler {
 	private List<Kaart> vuilbakStapel = new LinkedList<>();
 	private List<Kaart> speelGebied = new LinkedList<>();
 	private List<Kaart> gekozenKaarten = new LinkedList<>();
+	private List<Kaart> teStelenKaarten = new LinkedList<>();
 	private Boolean gebruikSlotgracht = false;
 	private Boolean keuzeSpeler = false;
 	private String naam;
@@ -83,6 +84,9 @@ public class Speler {
 	}
 	public List<Kaart> geefLijstGekozenKaarten() {
 		return this.gekozenKaarten;
+	}
+	public List<Kaart> geefLijstTeStelenKaarten(){
+		return this.teStelenKaarten;
 	}
 	public Boolean geefGebruikSlotgracht(){
 		return this.gebruikSlotgracht;
