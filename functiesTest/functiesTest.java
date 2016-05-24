@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 import java.util.*;
 import org.junit.*;
 
+import com.sun.media.jfxmedia.track.Track.Encoding;
+
 import engine.Kaart;
 import engine.SpelFuncties;
 import engine.Speler;
@@ -13,7 +15,6 @@ public class functiesTest {
 	SpelFuncties engine = new SpelFuncties();
 	Speler speler = new Speler("testspeler");
 	List<Kaart> eersteTestlijst = speler.geefTrekStapel();
-	//List<Kaart> actiekaarten = engine.geefLijstKaartenVanHetSpel();
 	List<Kaart> actiekaarten = engine.geefLijst10GekozenActiekaarten();
 	
 	@Test
@@ -58,15 +59,21 @@ public class functiesTest {
 	public void actiekaartenGenereren(){
 		//gebeurd al eens bij opstart van engine
 		//engine.actiekaartenGenereren();
-		//assertEquals(engine.geefLijst10GekozenActiekaarten().size(), 10);
 		spelersAanmaken();
 		assertEquals(actiekaarten.size(), 10);
 	}
 	
 	@Test
-	public void lijstenSamenvoegen() {	
-		assertEquals(engine.lijstenSamenvoegenBijBestaandeLijst(eersteTestlijst, actiekaarten,true,false).size(), 35);
+	public void handkaartenControleren() {
+		spelersAanmaken();
+		assertEquals(eersteTestlijst.size(), 5);
 	}
+	
+	@Test
+	public void lijstenSamenvoegen() {	
+		assertEquals(engine.lijstenSamenvoegenBijBestaandeLijst(eersteTestlijst, actiekaarten,true,false).size(), 15);
+	}
+	
 	/*
 	@Test
 	public void lijstActiekaartenInHand() {
@@ -124,8 +131,9 @@ public class functiesTest {
 	@Test
 	public void geefAnderSpelers(){
 		spelersAanmaken();
-		//engine.geefLijstAndereSpelers();
-		assertEquals(engine.geefLijstAndereSpelers().get(0), engine.geefHuidigeSpeler());
+		engine.LijstAndereSpelers(engine.geefHuidigeSpeler());
+		engine.volgendeSpeler();
+		assertEquals(engine.geefLijstAndereSpelers().get(0).geefNaam(), engine.geefHuidigeSpeler().geefNaam());
 	}
 
 	@Test
@@ -157,6 +165,22 @@ public class functiesTest {
 		assertEquals(engine.geefHuidigeSpeler().geefGeld(), 2);
 	}*/
 	
+	
+	@Test
+	public void actieUitvoeren() {
+		spelersAanmaken();
+		Kaart dorp = new Kaart("dorp", "actie", 3, 0, "+1 kaart / +2 acties");
+		
+		engine.geefHuidigeSpeler().geefKaartenInHand().clear();
+		engine.geefHuidigeSpeler().geefKaartenInHand().add(dorp);
+		engine.actieUitvoeren(dorp);
+		engine.raadszaal();
+		System.out.println(engine.geefHuidigeSpeler().geefActie());
+		
+		assertEquals(engine.geefHuidigeSpeler().geefActie(), 2);
+	}
+	
+	
 	public void controleOfKaartAlInLijstZit(List<Kaart>lijst, Kaart kaart) {
 		boolean tmp = false;
 		for (int i = 0; i < lijst.size(); i++) {
@@ -165,31 +189,28 @@ public class functiesTest {
 		if(!tmp){lijst.add(kaart);}
 	}
 	
-	/*
 	@Test
 	public void specialeActiesUitvoeren(){
 		spelersAanmaken();
-		//Kaart kaart = new Kaart("avonturier",6,true,0,0,0,0,"Draai achtereenvolgens de bovenste kaarten van je trekstapel om totdat je in totaal 2 geldkaarten hebt. Neem ze op handen. Leg de overige omgedraagde kaarten op je alegstapel.");
-		Kaart kaart = new Kaart("avonturier", true, 6, false, 0, 0, 0, 0, "Draai achtereenvolgens de bovenste kaarten van je trekstapel om totdat je in totaal 2 geldkaarten hebt. Neem ze op handen. Leg de overige omgedraagde kaarten op je alegstapel.", true);
+		Kaart kaart = new Kaart("avonturier", "actie", 6, 0, "Draai achtereenvolgens de bovenste kaarten van je trekstapel om totdat je in totaal 2 geldkaarten hebt. Neem ze op handen. Leg de overige omgedraagde kaarten op je alegstapel.");
 		engine.geefHuidigeSpeler().geefKaartenInHand().add(kaart);
 		controleOfKaartAlInLijstZit(engine.geefLijst10GekozenActiekaarten(), kaart);
 		engine.actieUitvoeren(kaart);
-		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 2);
-	}
-	*/
-	
-	@Test
-	public void vermeerderAankoopGeldEnActie(){
+		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 5);
 	}
 	
+	/*
 	@Test
 	public void raadszaal(){
 		spelersAanmaken();
 		engine.raadszaal();
+		System.out.println(engine.geefHuidigeSpeler().geefKaartenInHand().size());
 		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 5);
+		System.out.println(engine.geefHuidigeSpeler().geefKaartenInHand().size());
 		engine.volgendeSpeler();
 		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 6);
 	}
+	*/
 	
 	@Test
 	public void herstelWaarden() {
@@ -251,5 +272,40 @@ public class functiesTest {
 		engine.raadszaal();
 		//verder aanvullen
 	}
-
+	
+	@Test
+	public void kaartVanTrekstapelTrekken() {
+		spelersAanmaken();
+		engine.trekKaartVanTrekStapel(engine.geefHuidigeSpeler(), 1);
+		assertEquals(engine.geefHuidigeSpeler().geefTrekStapel().size(), 4);
+	}
+	
+	@Test
+	public void brengAlleKaartenNaarAflegstapel() {
+		spelersAanmaken();
+		engine.brengAlleKaartenNaarAflegstapel();
+		
+		assertEquals(engine.geefHuidigeSpeler().geefSpeelGebied().size(), 0);
+		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 0);
+		assertEquals(engine.geefLijstAndereSpelers().size(), 0);
+	}
+	
+	@Test
+	public void geldInHand() {
+		spelersAanmaken();
+		int geld = 0;
+		for (int i = 0; i < engine.geefHuidigeSpeler().geefKaartenInHand().size(); i++) {
+			geld += engine.geefHuidigeSpeler().geefKaartenInHand().get(i).geefWaarde();
+		}
+		assertEquals(engine.geldInHand(), geld);
+	}
+	
+	/*
+		public int geldInHand() {
+		int geld = 0;
+		for (int i = 0; i < huidigeSpeler.geefKaartenInHand().size(); i++) {geld += huidigeSpeler.geefKaartenInHand().get(i).geefWaarde();}
+		return geld;
+	}
+	 */
+	
 }
