@@ -1,6 +1,7 @@
 package engine;
 import java.util.*;
 
+
 public class Speler {
 	//test
 	
@@ -9,6 +10,9 @@ public class Speler {
 	private List<Kaart> trekStapel = new LinkedList<>();
 	private List<Kaart> vuilbakStapel = new LinkedList<>();
 	private List<Kaart> speelGebied = new LinkedList<>();
+	private List<Kaart> gekozenKaarten = new LinkedList<>();
+	private Boolean gebruikSlotgracht = false;
+	private Boolean keuzeSpeler = false;
 	private String naam;
 	private int aankoop ;
 	private int actie;
@@ -35,6 +39,7 @@ public class Speler {
 		for (int i = 0; i < 7; i++) {
 
 			trekStapel.add(new Kaart("koper","geldkaart",0,1,"Deze kaart is 1 munt waard"));
+			//trekStapel.add(new Kaart("heks",5,true,0,0,2,0,"+2 kaarten / Iedere andere speler pakt 1 vloekkaart.",true));
 			
 			
 		}
@@ -76,7 +81,21 @@ public class Speler {
 	public List<Kaart> geefSpeelGebied() {
 		return this.speelGebied;
 	}
-
+	public List<Kaart> geefLijstGekozenKaarten() {
+		return this.gekozenKaarten;
+	}
+	public Boolean geefGebruikSlotgracht(){
+		return this.gebruikSlotgracht;
+	}
+	public Boolean geefKeuzeSpeler(){
+		return this.keuzeSpeler;
+	}
+	public void zetGebruikSlotgrachtopTrue() {
+		this.gebruikSlotgracht = true;
+	}
+	public void zetKeuzeSpelerOpTrue(){
+		this.keuzeSpeler = true;
+	}
 	public String geefNaam() {
 		return this.naam;
 	}
@@ -94,6 +113,7 @@ public class Speler {
 	public int geefScore() {
 		return this.score;
 	}
+	
 	
 	public void vermeerderActie(int actie) {
 		this.actie = this.actie +actie;
