@@ -7,7 +7,7 @@ public class ExtraInfo {
 	private String actiekaartNaam;
 	private String bericht;
 	private int maxAantalKaarten;
-	private List<Integer> spelersIndex;
+	private List<Speler> spelers;
 	private List<Kaart> gekozenKaart;
 	private String soortActie;
 	private List<Integer> keuzeSpeler;
@@ -22,9 +22,9 @@ public ExtraInfo(String kaartNaam,int aantalKaarten, String bericht, String soor
 }
 
 
-public ExtraInfo (String kaartNaam, List<Integer> spelersIndex,  List<Kaart> gekozenKaarten,List<Integer>keuzeSpeler,List<Boolean> gebruikSlotgracht) {
+public ExtraInfo (String kaartNaam, List<Speler> spelers,  List<Kaart> gekozenKaarten,List<Integer>keuzeSpeler,List<Boolean> gebruikSlotgracht) {
 	this.actiekaartNaam = kaartNaam;
-	this.spelersIndex = spelersIndex;
+	this.spelers = spelers;
 	this.gekozenKaart = gekozenKaarten;
 	this.gebruikSlotgracht = gebruikSlotgracht;
 	this.keuzeSpeler = keuzeSpeler;
@@ -57,8 +57,8 @@ public int geefMaxAantalKaarten() {
 public List<Kaart> geefGekozenKaart() {
 	return this.gekozenKaart;
 }
-public List<Integer> geefSpelersIndex() {
-	return this.spelersIndex;
+public List<Speler> geefSpelers() {
+	return this.spelers;
 }
 
 public String geefSoortActie() {
