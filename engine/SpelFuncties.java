@@ -68,7 +68,7 @@ public class SpelFuncties {
 		
 	}
 	
-	private void LijstAndereSpelersMaken(Speler huidigeSpeler){
+	public void LijstAndereSpelersMaken(Speler huidigeSpeler){
 		
 		for (int i = 0; i < lijstAlleSpelers.size(); i++){
 			if(lijstAlleSpelers.get(i).geefNaam() != huidigeSpeler.geefNaam()){
@@ -80,7 +80,7 @@ public class SpelFuncties {
 		for (int j = 0; j < kaartenVanHetSpel.size(); j++) {lijstStapel.add(new Stapel(kaartenVanHetSpel.get(j).geefNaam()));}
 	}
 	
-	private void verminderTafelstapel(String kaartnaam){
+	public void verminderTafelstapel(String kaartnaam){
 		
 		for (int i = 0; i < lijstStapel.size(); i++) {
 			String Kaart = lijstStapel.get(i).geefStapelNaam();
@@ -94,7 +94,7 @@ public class SpelFuncties {
 	//LIJSTEN OF STAPELS AANPASSEN
 	
 	//kan korter!! mss samenvoegen met onderstaande functie
-	private List<Kaart> lijstenSamenvoegenBijBestaandeLijst(List<Kaart> primaireLijst, List<Kaart> bijTeVoegenLijst,boolean shuffle,boolean verwijderBijTeVoegenLijst) {
+	public List<Kaart> lijstenSamenvoegenBijBestaandeLijst(List<Kaart> primaireLijst, List<Kaart> bijTeVoegenLijst,boolean shuffle,boolean verwijderBijTeVoegenLijst) {
 		for (int i = 0; i < bijTeVoegenLijst.size(); i++) {
 			primaireLijst.add(bijTeVoegenLijst.get(i));		}
 		if(verwijderBijTeVoegenLijst){bijTeVoegenLijst.clear();}

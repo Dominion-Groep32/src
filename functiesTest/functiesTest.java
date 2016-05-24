@@ -9,7 +9,6 @@ import com.sun.media.jfxmedia.track.Track.Encoding;
 import engine.Kaart;
 import engine.SpelFuncties;
 import engine.Speler;
-import engine.Stapel;
 
 public class functiesTest {
 	SpelFuncties engine = new SpelFuncties();
@@ -21,7 +20,6 @@ public class functiesTest {
 	public void startKaartenTest() {
 		spelersAanmaken();
 		assertEquals(engine.geefHuidigeSpeler().geefTrekStapel().size(), 5);
-		//assertEquals(actiekaarten.size(), 25);
 		assertEquals(actiekaarten.size(), 10);
 	}
 	
@@ -131,7 +129,7 @@ public class functiesTest {
 	@Test
 	public void geefAnderSpelers(){
 		spelersAanmaken();
-		engine.LijstAndereSpelers(engine.geefHuidigeSpeler());
+		engine.LijstAndereSpelersMaken(engine.geefHuidigeSpeler());
 		engine.volgendeSpeler();
 		assertEquals(engine.geefLijstAndereSpelers().get(0).geefNaam(), engine.geefHuidigeSpeler().geefNaam());
 	}
@@ -174,10 +172,9 @@ public class functiesTest {
 		engine.geefHuidigeSpeler().geefKaartenInHand().clear();
 		engine.geefHuidigeSpeler().geefKaartenInHand().add(dorp);
 		engine.actieUitvoeren(dorp);
-		engine.raadszaal();
 		System.out.println(engine.geefHuidigeSpeler().geefActie());
 		
-		assertEquals(engine.geefHuidigeSpeler().geefActie(), 2);
+		assertEquals(engine.geefHuidigeSpeler().geefActie(), 3);
 	}
 	
 	
@@ -261,9 +258,9 @@ public class functiesTest {
 	@Test
 	public void hoeveelheidSpelers() {
 		spelersAanmaken();
-		engine.geefLijstSpelers();
+		engine.geefLijstAlleSpelers();
 		
-		assertEquals(engine.geefLijstSpelers().length, 3);
+		assertEquals(engine.geefLijstAlleSpelers().size(), 3);
 	}
 	
 	@Test
