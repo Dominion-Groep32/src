@@ -23,9 +23,10 @@ public ExtraInfo(String kaartNaam,int aantalKaarten, String bericht, String kaar
 	this.specialeUitwerking = specialeUitwerking;
 }
 
-public ExtraInfo(String kaartNaam, List<Speler> spelers, Boolean aanval){
+public ExtraInfo(String kaartNaam, List<Speler> spelers, String kaartSpecificaties, Boolean aanval){
 	this.actiekaartNaam = kaartNaam;
 	this.spelers = spelers;
+	this.kaartSpecificaties = kaartSpecificaties;
 	this.aanval = aanval;
 	this.specialeUitwerking = true;
 }
