@@ -9,6 +9,7 @@ import com.sun.media.jfxmedia.track.Track.Encoding;
 import engine.Kaart;
 import engine.SpelFuncties;
 import engine.Speler;
+import engine.Stapel;
 
 public class functiesTest {
 	SpelFuncties engine = new SpelFuncties();
@@ -81,7 +82,6 @@ public class functiesTest {
 		assertEquals(engine.neemActiekaartenUitHand().size(), 1);
 	}
 	
-	
 	@Test
 	public void geldInHand() {
 		spelersAanmaken();
@@ -136,6 +136,11 @@ public class functiesTest {
 
 	@Test
 	public void stapelsAanmaken(){
+		spelersAanmaken();
+		engine.stapelsAanmaken(engine.geefLijstKaartenVanHetSpel());
+		
+		System.out.println(engine.geefLijstKaartenVanHetSpel().size());
+		System.out.println(engine.geefLijstStapels().size());
 	}
 	
 	@Test
@@ -163,7 +168,6 @@ public class functiesTest {
 		assertEquals(engine.geefHuidigeSpeler().geefGeld(), 2);
 	}*/
 	
-	
 	@Test
 	public void actieUitvoeren() {
 		spelersAanmaken();
@@ -172,11 +176,9 @@ public class functiesTest {
 		engine.geefHuidigeSpeler().geefKaartenInHand().clear();
 		engine.geefHuidigeSpeler().geefKaartenInHand().add(dorp);
 		engine.actieUitvoeren(dorp);
-		System.out.println(engine.geefHuidigeSpeler().geefActie());
 		
 		assertEquals(engine.geefHuidigeSpeler().geefActie(), 3);
 	}
-	
 	
 	public void controleOfKaartAlInLijstZit(List<Kaart>lijst, Kaart kaart) {
 		boolean tmp = false;
