@@ -6,29 +6,30 @@ import java.util.List;
 public class ExtraInfo {
 	private String actiekaartNaam;
 	private String bericht;
-	private int maxAantalKaartenUitHand;
-	private int spelersIndex;
+	private int maxAantalKaarten;
+	private List<Speler> spelers;
 	private List<Kaart> gekozenKaart;
 	private String soortActie;
-	
-public ExtraInfo () {
-	
-};
+	private List<Integer> keuzeSpeler;
+	private List<Boolean> gebruikSlotgracht;
 	
 
 public ExtraInfo(String kaartNaam,int aantalKaarten, String bericht, String soortActie ){
 	this.actiekaartNaam = kaartNaam;
-	this.maxAantalKaartenUitHand = aantalKaarten;
+	this.maxAantalKaarten = aantalKaarten;
 	this.bericht = bericht;
 	this.soortActie = soortActie;
 }
 
 
-public ExtraInfo (String kaartNaam, int spelersIndex,  List<Kaart> gekozenKaarten) {
+public ExtraInfo (String kaartNaam, List<Speler> spelers,  List<Kaart> gekozenKaarten,List<Integer>keuzeSpeler,List<Boolean> gebruikSlotgracht) {
 	this.actiekaartNaam = kaartNaam;
-	this.spelersIndex = spelersIndex;
+	this.spelers = spelers;
 	this.gekozenKaart = gekozenKaarten;
+	this.gebruikSlotgracht = gebruikSlotgracht;
+	this.keuzeSpeler = keuzeSpeler;
 }
+
 
 public ExtraInfo (String kaartNaam,  List<Kaart> gekozenKaarten) {
 	this.actiekaartNaam = kaartNaam;
@@ -48,19 +49,25 @@ public String geefBericht(){
 }
 
 
-public int geefAantalKaartenUitHandNemen() {
-	return this.maxAantalKaartenUitHand;
+public int geefMaxAantalKaarten() {
+	return this.maxAantalKaarten;
 }
 
 
 public List<Kaart> geefGekozenKaart() {
 	return this.gekozenKaart;
 }
-public int geefSpelersIndex() {
-	return this.spelersIndex;
+public List<Speler> geefSpelers() {
+	return this.spelers;
 }
 
 public String geefSoortActie() {
 	return this.soortActie;
+}
+public List<Integer> geefKeuzeSpeler() {
+	return this.keuzeSpeler;
+}
+public List<Boolean> geefGebruikSlotgracht() {
+	return this.gebruikSlotgracht;
 }
 }
