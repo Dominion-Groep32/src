@@ -76,7 +76,7 @@ public class SpelFuncties {
 	}
 	
 	//STAPELS
-	private void stapelsAanmaken(List<Kaart> kaartenVanHetSpel) {
+	public void stapelsAanmaken(List<Kaart> kaartenVanHetSpel) {
 		for (int j = 0; j < kaartenVanHetSpel.size(); j++) {lijstStapel.add(new Stapel(kaartenVanHetSpel.get(j).geefNaam()));}
 	}
 	
