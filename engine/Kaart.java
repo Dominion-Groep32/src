@@ -14,6 +14,7 @@ public class Kaart {
 	private int extraMunten;
 	private boolean specialeKaart;
 	private boolean infoMeegeven;
+
 	
 	
 	public Kaart(String naam, int cost, boolean specialeKaart,int extraAankoop, int extraActie, int extraKaart, int extraMunten,  String info, boolean infoMeegeven)
@@ -84,6 +85,7 @@ public class Kaart {
 	public boolean geefInfoMeegeven(){
 		return this.infoMeegeven;
 	}
+
 	
 }
 

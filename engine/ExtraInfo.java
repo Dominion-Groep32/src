@@ -6,40 +6,37 @@ import java.util.List;
 public class ExtraInfo {
 	private String actiekaartNaam;
 	private String bericht;
+	private String kaartSpecificaties;
 	private int maxAantalKaarten;
+	private Boolean aanval;
+	private Boolean specialeUitwerking;
 	private List<Speler> spelers;
-	private List<Kaart> gekozenKaart;
-	private String soortActie;
-	private List<Integer> keuzeSpeler;
-	private List<Boolean> gebruikSlotgracht;
 	
 
-public ExtraInfo(String kaartNaam,int aantalKaarten, String bericht, String soortActie ){
+public ExtraInfo(String kaartNaam,int aantalKaarten, String bericht, String kaartSpecificaties,Boolean aanval,List<Speler> spelersMeegeven,boolean specialeUitwerking){
 	this.actiekaartNaam = kaartNaam;
 	this.maxAantalKaarten = aantalKaarten;
 	this.bericht = bericht;
-	this.soortActie = soortActie;
+	this.kaartSpecificaties = kaartSpecificaties;
+	this.aanval = aanval;
+	this.spelers = spelersMeegeven;
+	this.specialeUitwerking = specialeUitwerking;
 }
 
-
-public ExtraInfo (String kaartNaam, List<Speler> spelers,  List<Kaart> gekozenKaarten,List<Integer>keuzeSpeler,List<Boolean> gebruikSlotgracht) {
+public ExtraInfo(String kaartNaam, List<Speler> spelers, Boolean aanval){
 	this.actiekaartNaam = kaartNaam;
 	this.spelers = spelers;
-	this.gekozenKaart = gekozenKaarten;
-	this.gebruikSlotgracht = gebruikSlotgracht;
-	this.keuzeSpeler = keuzeSpeler;
+	this.aanval = aanval;
+	this.specialeUitwerking = true;
 }
 
 
-public ExtraInfo (String kaartNaam,  List<Kaart> gekozenKaarten) {
+
+public ExtraInfo (String kaartNaam, List<Speler> spelers) {
 	this.actiekaartNaam = kaartNaam;
-	this.gekozenKaart = gekozenKaarten;
+	this.spelers = spelers;
 }
 
-/*public ExtraInfo( Kaart actiekaart,Kaart gekozenKaart){
-	this.actiekaart = actiekaart;
-	this.gekozenKaart = gekozenKaart;}
-*/
 public String kaartNaam() {
 	return this.actiekaartNaam;
 }
@@ -48,26 +45,21 @@ public String geefBericht(){
 	return this.bericht;
 }
 
-
 public int geefMaxAantalKaarten() {
 	return this.maxAantalKaarten;
 }
 
-
-public List<Kaart> geefGekozenKaart() {
-	return this.gekozenKaart;
-}
 public List<Speler> geefSpelers() {
 	return this.spelers;
 }
 
-public String geefSoortActie() {
-	return this.soortActie;
+public String geefKaartSpecificaties() {
+	return this.kaartSpecificaties;
 }
-public List<Integer> geefKeuzeSpeler() {
-	return this.keuzeSpeler;
+public boolean geefAanval() {
+	return this.aanval;
 }
-public List<Boolean> geefGebruikSlotgracht() {
-	return this.gebruikSlotgracht;
+public Boolean geefSpecialeUitwerking() {
+	return this.specialeUitwerking;
 }
 }
