@@ -13,15 +13,14 @@ public class Kaart {
 	private int extraKaart;
 	private int extraMunten;
 	private boolean specialeKaart;
-	private boolean aanval;
 	private boolean infoMeegeven;
+
 	
 	
-	public Kaart(String naam, boolean aanval, int cost, boolean specialeKaart,int extraAankoop, int extraActie, int extraKaart, int extraMunten,  String info, boolean infoMeegeven)
+	public Kaart(String naam, int cost, boolean specialeKaart,int extraAankoop, int extraActie, int extraKaart, int extraMunten,  String info, boolean infoMeegeven)
 	{
 		this.kaartNaam = naam;
 		this.KaartType = "actiekaart";
-		this.aanval = aanval;
 		this.cost = cost;
 		this.info = info;
 		this.extraAankoop = extraAankoop;
@@ -54,13 +53,8 @@ public class Kaart {
 		return this.kaartNaam;
 	}
 
-
 	public String geefKaartType() {
 		return this.KaartType;
-	}
-
-	public boolean geefAanval(){
-		return this.aanval;
 	}
 	public int geefKost() {
 		return this.cost;
@@ -91,6 +85,7 @@ public class Kaart {
 	public boolean geefInfoMeegeven(){
 		return this.infoMeegeven;
 	}
+
 	
 }
 

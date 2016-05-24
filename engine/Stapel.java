@@ -29,9 +29,4 @@ public class Stapel {
 	{
 		this.aantalKaartenInDeStapel = this.aantalKaartenInDeStapel -1;
 	}
-	
-
-	
-	
-	
 }
