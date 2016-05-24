@@ -58,8 +58,8 @@ public class SpelFuncties {
 			{
 				plaatsInDeArray = i+1;
 				break;
-			}
-		}
+			}}
+		
 		if(plaatsInDeArray == lijstAlleSpelers.size())
 		{
 			plaatsInDeArray = 0;
@@ -151,7 +151,7 @@ public class SpelFuncties {
 				tmp = true;
 				}}}
 	
-	private void brengGekochteKaartNaarAflegstapel(Kaart kaart) {
+	public void brengGekochteKaartNaarAflegstapel(Kaart kaart) {
 		geefHuidigeSpeler().geefAflegStapel().add(kaart);
 		verminderTafelstapel(kaart.geefNaam());
 	}
@@ -351,7 +351,7 @@ public class SpelFuncties {
 	public void kaartenWegLeggen(ExtraInfo kaartMetExtraInfo){
 		for (int i = 0; i < kaartMetExtraInfo.geefSpelers().size(); i++) {
 			Speler speler = kaartMetExtraInfo.geefSpelers().get(i);
-			brengEenKaartVanDeEneNaarAndereStapel(speler.geefKaartenInHand(), huidigeSpeler.geefLijstGekozenKaarten().get(i), speler.geefAflegStapel());
+			brengEenKaartVanDeEneNaarAndereStapel(speler.geefKaartenInHand(), speler.geefLijstGekozenKaarten().get(i), speler.geefAflegStapel());
 		}}
 	/*
 	public void bureaucraat(ExtraInfo kaartMetExtraInfo) {
@@ -361,12 +361,11 @@ public class SpelFuncties {
 		}}
 	*/
 	public void kelder(ExtraInfo kaartMetExtraInfo) {
-		int aantal = 0;
+		
 		for (int i = 0; i < huidigeSpeler.geefLijstGekozenKaarten().size(); i++) {
 			brengEenKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefKaartenInHand(), huidigeSpeler.geefLijstGekozenKaarten().get(i), huidigeSpeler.geefAflegStapel());
-			aantal++;
 		}
-		trekKaartVanTrekStapel(huidigeSpeler,aantal);
+		trekKaartVanTrekStapel(huidigeSpeler,huidigeSpeler.geefLijstGekozenKaarten().size());
 	}
 	
 	public void raadsheer(){
