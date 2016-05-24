@@ -261,8 +261,9 @@ private void ControleOpSlotgracht(Speler speler){
 
 }
 
-private void jaNeeKeuzeMaken(Speler speler,ExtraInfo actiekaart) {
-	System.out.print(actiekaart.geefBericht());
+private void jaNeeKeuzeMaken(Speler speler,ExtraInfo actiekaart,String tekst) {
+	
+	System.out.print(tekst);
 	int keuze = (sc.nextInt());
 	int gecontroleerdeKeuze =controleKeuze(keuze, actiekaart.geefMaxAantalKaarten());
 	if(gecontroleerdeKeuze==1){ speler.zetKeuzeSpelerOpTrue();}
@@ -278,9 +279,7 @@ private void extraInputActiekaarten(ExtraInfo actiekaart) {
 	else{
 		for (int i = 0; i < actiekaart.geefSpelers().size(); i++){
 			Speler speler = actiekaart.geefSpelers().get(i);
-			
 			if(actiekaart.geefAanval()){ControleOpSlotgracht(speler);}
-		
 			aparteSwitchMeerderSpelers(actiekaart,speler,i);}
 			printFunctie("Nu terug de beurt aan: "+engine.geefHuidigeSpeler().geefNaam());		
 	}
@@ -291,7 +290,7 @@ private void extraInputActiekaarten(ExtraInfo actiekaart) {
 private void aparteSwitchEnkeleSpeler (ExtraInfo actiekaart) {
 switch (actiekaart.kaartNaam()) {
 	case "raadsheer":
-		jaNeeKeuzeMaken(engine.geefHuidigeSpeler(),actiekaart);
+		jaNeeKeuzeMaken(engine.geefHuidigeSpeler(),actiekaart,actiekaart.geefBericht());
 	case "mijn":
 		//kan properder
 		if(!engine.isTypeKaartInLijst(engine.geefHuidigeSpeler().geefKaartenInHand(), actiekaart.geefKaartSpecificaties()).isEmpty()){
@@ -322,12 +321,39 @@ switch (actiekaart.kaartNaam()) {
 		while(engine.geefHuidigeSpeler().geefKaartenInHand().size()<actiekaart.geefMaxAantalKaarten()){
 			Kaart kaart = engine.geefHuidigeSpeler().geefTrekStapel().get(0);
 			if(kaart.geefKaartType() == actiekaart.geefKaartSpecificaties()){
-				jaNeeKeuzeMaken(engine.geefHuidigeSpeler(), actiekaart);
+				jaNeeKeuzeMaken(engine.geefHuidigeSpeler(), actiekaart,actiekaart.geefBericht());
 			}
-			else {
-				engine.trekKaartVanTrekStapel(engine.geefHuidigeSpeler(), 1);
-			}
+			else {engine.trekKaartVanTrekStapel(engine.geefHuidigeSpeler(), 1);}
 		}
+	case "dief":
+		String[] berichten = actiekaart.geefBericht().split(",");
+		for (int i = 0; i < actiekaart.geefSpelers().size(); i++){
+			Speler speler = actiekaart.geefSpelers().get(i);
+			
+			ControleOpSlotgracht(speler);
+			if(!speler.geefGebruikSlotgracht()){
+				printFunctie("Kaarten van: "+speler.geefNaam());
+				List<Kaart> lijstKaarten = new LinkedList<>();
+				lijstKaarten.add(speler.geefTrekStapel().get(0));
+				lijstKaarten.add(speler.geefTrekStapel().get(1));
+				toonLijst(lijstKaarten, false);
+				for (int j = 0; j < lijstKaarten.size(); j++) {
+					if(lijstKaarten.get(i).geefKaartType()==actiekaart.geefKaartSpecificaties()){
+						
+						jaNeeKeuzeMaken(speler, actiekaart,berichten[0]);
+						if(speler.geefKeuzeSpeler()){speler.geefLijstTeStelenKaarten().add(lijstKaarten.get(i));}
+						else {engine.brengEenKaartVanDeEneNaarAndereStapel(speler.geefVuilbakStapel(), lijstKaarten.get(i), speler.geefAflegStapel());
+						}}}
+				}
+			}
+		for (int i = 0; i < actiekaart.geefSpelers().size(); i++){
+			Speler speler = actiekaart.geefSpelers().get(i);
+			for (int j = 0; j < speler.geefLijstTeStelenKaarten().size(); j++) {
+					jaNeeKeuzeMaken(speler, actiekaart,berichten[1]);
+					if(speler.geefKeuzeSpeler()){
+						engine.geefHuidigeSpeler().geefLijstTeStelenKaarten().add(speler.geefLijstTeStelenKaarten().get(i));
+						speler.geefLijstGekozenKaarten().remove(i);
+					}}}		
 		break;
 	default:
 		break;
@@ -350,26 +376,9 @@ private void aparteSwitchMeerderSpelers (ExtraInfo actiekaart,Speler speler,int 
 		case "spion":
 			printFunctie("Kaarten van: "+speler.geefNaam());
 			System.out.println(speler.geefTrekStapel().get(0));
-			System.out.println(actiekaart.geefBericht());
-			int keuze = sc.nextInt();
-			int gecontroleerdeKeuze =controleKeuze(keuze, actiekaart.geefMaxAantalKaarten());
-			if(gecontroleerdeKeuze == 1){
-				speler.zetKeuzeSpelerOpTrue();
-			}
+			jaNeeKeuzeMaken(speler, actiekaart,actiekaart.geefBericht());
+			
 			break;
-		/*	
-		case "dief":
-			printFunctie("Kaarten van: "+speler.geefNaam());
-			Kaart kaart = speler.geefTrekStapel().get(0);
-			System.out.println(kaart.geefNaam());
-			System.out.println(actiekaart.geefBericht());
-			int kaartKeuze = sc.nextInt();
-			int gecontroleerdeKeuze =controleKeuze(kaartKeuze, actiekaart.geefMaxAantalKaarten());
-			gekozenKaarten.add(kaart);
-			spelers.add(andereSpelers.get(i));
-			keuzesSpeler.add(gecontroleerdeKeuze);
-			break;
-			*/
 		default:
 			break;}
 		
