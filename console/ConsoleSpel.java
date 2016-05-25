@@ -119,24 +119,25 @@ public class ConsoleSpel {
 	
 	
 	private void kiezen(){
-	while(engine.geefHuidigeSpeler().geefActie() >0 || engine.geefHuidigeSpeler().geefAankoop()>0){
-		toonKaartenInHand(engine.geefHuidigeSpeler());
-		int keuze = keuzeMenu();
-		keuzeSpeler(keuze);
+		while(engine.geefHuidigeSpeler().geefActie()>0 && engine.geefHuidigeSpeler().geefAankoop()>0  || engine.geefHuidigeSpeler().geefAankoop()>0 && engine.isTypeKaartInLijst(engine.geefHuidigeSpeler().geefKaartenInHand(), "actiekaart").size() != 0){
+			System.out.println("lijstActieKaarten"+engine.isTypeKaartInLijst(engine.geefHuidigeSpeler().geefKaartenInHand(), "actiekaart").size());
+			toonKaartenInHand(engine.geefHuidigeSpeler());
+			int keuze = keuzeMenu();
+			keuzeSpeler(keuze);
 	}}
 	
 	private int keuzeMenu() {
 		int getal = 1;
 		boolean tmp = false;
 		
-		if(engine.isTypeKaartInLijst(engine.geefHuidigeSpeler().geefKaartenInHand(),"actiekaart").size()>0 && engine.geefHuidigeSpeler().geefActie()>0)
+		if(!engine.isTypeKaartInLijst(engine.geefHuidigeSpeler().geefKaartenInHand(),"actiekaart").isEmpty() && engine.geefHuidigeSpeler().geefActie()>0){
+			tmp = true;
 			{System.out.println("Let op: u kan optie 1 niet meer kiezen als u eerst optie 2 neemt !");
 			System.out.println("1: gebruik actiekaarten");
 			getal++;
-			tmp = true;
-			}
+			}}
 		
-		if(engine.isTypeKaartInLijst(engine.geefHuidigeSpeler().geefKaartenInHand(), "geldkaart").size()>0&& engine.geefHuidigeSpeler().geefAankoop()>0){
+		if(!engine.isTypeKaartInLijst(engine.geefHuidigeSpeler().geefKaartenInHand(), "geldkaart").isEmpty()&& engine.geefHuidigeSpeler().geefAankoop()>0){
 			System.out.println(getal+": gebruik geldkaarten");}
 		else{System.out.println(getal+": Koop koperkaart");}
 			System.out.println((getal+1)+": beëindig je beurt");
