@@ -2,13 +2,7 @@ package functiesTest;
 
 import static org.junit.Assert.*;
 import java.util.*;
-
-import org.eclipse.jdt.internal.compiler.apt.util.Util.EncodingError;
 import org.junit.*;
-
-import com.sun.media.jfxmedia.track.Track.Encoding;
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
-
 import engine.ExtraInfo;
 import engine.Kaart;
 import engine.SpelFuncties;
@@ -285,8 +279,9 @@ public class functiesTest {
 	@Test
 	public void brengAlleKaartenNaarAflegstapel() {
 		spelersAanmaken();
+		engine.LijstAndereSpelersMaken(engine.geefHuidigeSpeler());
 		engine.brengAlleKaartenNaarAflegstapel();
-		
+
 		assertEquals(engine.geefHuidigeSpeler().geefSpeelGebied().size(), 0);
 		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 0);
 		assertEquals(engine.geefLijstAndereSpelers().size(), 0);
@@ -355,7 +350,7 @@ public class functiesTest {
 	@Test
 	public void dief() {
 		spelersAanmaken();
-		ExtraInfo dief = new ExtraInfo("dief", 2, "Wat kiest u?: 0: breng de twee kaarten naar de vuilbak /1: Kies een geldgeld, Hoeveel kaarten wenst u te stelen?", "geldkaart", true, engine.geefLijstAndereSpelers(), false);
+		ExtraInfo dief = new ExtraInfo("dief", 2,"Breng kaarten naar de vuilbak of leg ze weg, Steel kaarten ", "Wat kiest u?: 0: Breng kaarten naar de vuilbak /1: Kies een geldgeld, Hoeveel kaarten wenst u te stelen?", "geldkaart", true, engine.geefLijstAndereSpelers(), false);
 		Kaart koper = new Kaart("koper","geldkaart",0,1,"Deze kaart is 1 munt waard");
 		Kaart gekozenKaart = koper;
 		for (int i = 0; i < 2; i++) {
@@ -375,26 +370,29 @@ public class functiesTest {
 	@Test
 	public void heks() {
 		spelersAanmaken();
-		ExtraInfo heks = new ExtraInfo("heks",engine.geefLijstAndereSpelers(),true);
+		engine.LijstAndereSpelersMaken(engine.geefHuidigeSpeler());
+		ExtraInfo heks = new ExtraInfo("heks",engine.geefLijstAndereSpelers(),null,true);
 		Kaart koper = new Kaart("koper","geldkaart",0,1,"Deze kaart is 1 munt waard");
 		Kaart gekozenKaart = koper;
 		for (int i = 0; i < 2; i++) {
 			engine.geefHuidigeSpeler().geefLijstGekozenKaarten().add(gekozenKaart);
 		}
 		
-		engine.LijstAndereSpelersMaken(engine.geefHuidigeSpeler());
+		System.out.println("heks, aantal spelers waar het van toepassing op is: " + heks.geefSpelers().size());
 		
 		for (int i = 0; i < heks.geefSpelers().size(); i++) {
 			Speler speler = heks.geefSpelers().get(i);
+			System.out.println("heks: ik ben hier in de for loop gekomen");
 			//System.out.println(heks.geefSpelers().get(i).geefNaam());
 			if(speler.geefGebruikSlotgracht()){
 				speler.geefAflegStapel().add(engine.geefLijstOverwinningskaarten().get(3));
+				System.out.println("heks: ik ben in de if statement gekomen");
 			}
 			//System.out.println(engine.geefHuidigeSpeler().geefAflegStapel().get(i));
-			System.out.println(heks.geefSpelers().get(1).geefKaartenInHand().get(1));
+			System.out.println("heks, einde van de for loop: " + heks.geefSpelers().get(i).geefKaartenInHand().get(i).geefNaam());
 		}
-		
-		assertEquals(engine.geefHuidigeSpeler().geefAflegStapel().get(1).geefNaam(), "heks");
+		System.out.println("heks, aflegstap: " + speler.geefAflegStapel().get(0));
+		assertEquals(engine.geefHuidigeSpeler().geefAflegStapel().get(0).geefNaam(), "heks");
 	}
 
 	@Test
@@ -416,7 +414,8 @@ public class functiesTest {
 	@Test
 	public void militie() {
 		spelersAanmaken();
-		ExtraInfo militie = new ExtraInfo("militie",3,"Verminder uw kaarten in hand tot 3 kaarten!","",true,engine.geefLijstAndereSpelers(),false);
+		engine.LijstAndereSpelersMaken(engine.geefHuidigeSpeler());
+		ExtraInfo militie = new ExtraInfo("militie",3,"Verminder uw kaarten in hand tot 3 kaarten",null,null,true,engine.geefLijstAndereSpelers(),false);
 		
 		for (int i = 0; i < militie.geefSpelers().size(); i++) {
 			Speler speler = militie.geefSpelers().get(i);
@@ -472,15 +471,26 @@ public class functiesTest {
 		System.out.println(engine.geefHuidigeSpeler().geefGeld());
 	}
 	
-}
-	
-	/*
-	private void verbouwing(ExtraInfo kaartMetExtraInfo) {
-		if(!huidigeSpeler.geefLijstGekozenKaarten().isEmpty()){
-		brengEenKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefKaartenInHand(), huidigeSpeler.geefLijstGekozenKaarten().get(0), huidigeSpeler.geefVuilbakStapel());
-		huidigeSpeler.vermeerderGeld(huidigeSpeler.geefLijstGekozenKaarten().get(0).geefKost());}
+	@Test
+	public void spion() {
+		spelersAanmaken();
+		ExtraInfo spion = new ExtraInfo("spion",1,"Kaart mag blijven liggen of leg de kaart af","Wat kiest u? 0: Kaart mag blijven liggen/ 1: Kaart afleggen","",true,engine.geefLijstAlleSpelers(),false);
+		
+		Kaart koper = new Kaart("koper","geldkaart",0,1,"Deze kaart is 1 munt waard");
+		Kaart gekozenKaart = koper;
+		for (int i = 0; i < 2; i++) {
+			engine.geefHuidigeSpeler().geefLijstGekozenKaarten().add(gekozenKaart);
+		}
+		
+		for (int i = 0; i < spion.geefSpelers().size(); i++) {
+			Speler speler = spion.geefSpelers().get(i);
+			if(speler.geefKeuzeSpeler()){
+				engine.brengEenKaartVanDeEneNaarAndereStapel(speler.geefAflegStapel(), speler.geefLijstGekozenKaarten().get(i), speler.geefAflegStapel());
+			}
+		}
+		
+		System.out.println("spion actie: " + engine.geefHuidigeSpeler().geefActie());
+		System.out.println("spion kaart: " + engine.geefHuidigeSpeler().geefKaartenInHand().size());
 	}
-	 */
 	
-	
-	
+}
