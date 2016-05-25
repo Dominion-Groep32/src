@@ -19,19 +19,19 @@ public class SpelFuncties {
 			,new Kaart("slotgracht",2,true,0,0,2,0,"+2 kaarten / Als een andere speler een aanvalskaart speelt, mag je de Slotgracht tonen. In dat geval heeft de aanval op jou geen effect.",false),new Kaart("geldschieter",4,true,0,0,0,0,"Vernietig een koperkaart uit je hand. Als je dat doet, heb je deze beurt met 3 munten.",true),new Kaart("verbouwing",4,true,0,0,0,2,"Vernietig een kaart uit je hand. Pak een kaart die ten hoogste 2 munten meer waard is dan de vernietigde kaart.",true),new Kaart("smidse",4,false,0,0,3,0,"+3 kaarten",false),new Kaart("spion",4,true,0,1,1,0,"+1 kaart / +1 actie / Alle spelers tonen de bovenste kaart van hun trekstapel. De spion bepaalt of ze blijven liggen of worden afgelegd.",false),new Kaart("dief",4,true,0,0,0,0,"Iedere andere speler toont de bovenste 2 kaarten van zijn trekstapel. Als een speler geldkaarten toont, moet hij er een naar jouw keuze vernietigen. Je mag een of meer van deze vernietigde kaarten pakken en afleggen. De andere spelers leggen andere getoonde kaarten op hun aflegstapel.",true),new Kaart("troonzaal",4,true,0,0,0,0,"Kies een actiekaart uit je hand. Speel deze tweemaal.",true)
 			,new Kaart("dorp",3,false,0,2,1,0,"+1 kaart / +2 acties",false),new Kaart("heks",5,true,0,0,2,0,"+2 kaarten / Iedere andere speler pakt 1 vloekkaart.",true),new Kaart("werkplaats",3,true,0,0,0,4,"Pak een kaart die maximaal 4 munten kost.",true),new Kaart("houthakker",3,false,1,0,0,2,"+1 aanschaf / +2 munten",false)));
 	private List <ExtraInfo> lijstExtraInfoSpecialeKaarten = new LinkedList<>(Arrays.asList(
-			new ExtraInfo("bureaucraat",1,"Trek een overwinningskaart uit uw hand.","ovewinningskaart",false,LijstAndereSpelers,true),
-			new ExtraInfo("kapel",4,"Hoeveel kaarten wenst u te vernietigen?:","",false,null,false),
-			new ExtraInfo("militie",3,"Verminder uw kaarten in hand tot 3 kaarten!","",true,LijstAndereSpelers,false),
-			new ExtraInfo("heks",LijstAndereSpelers,"",true),
-			new ExtraInfo("raadsheer", 1,"Wenst u uw trekstapel naar uw aflegstapel te leggen? 0: Nee / 1: Ja ","",false,null,true),
-			new ExtraInfo("feest",null,"",false),
-			new ExtraInfo("mijn", 1,"Wenst u een geldkaart te vernietigen? 0: Nee / 1:Ja :","geldkaart",false,null,true),
-			new ExtraInfo("geldschieter",1,"Wenst u een koperkaart te vernietigen? 0: Nee / 1:Ja : ","koper",false,null,true),
-			new ExtraInfo("verbouwing",1,"Wenst u een kaart te vernietigen? 0: Nee / 1: Ja: ","",false,null,false),
-			new ExtraInfo("dief", 2, "Wat kiest u?: 0: breng de twee kaarten naar de vuilbak /1: Kies een geldgeld, Hoeveel kaarten wenst u te stelen?", "geldkaart", true, LijstAndereSpelers, false),
+			new ExtraInfo("bureaucraat",1,"Trek een overwinningskaart uit uw hand.",null,"ovewinningskaart",false,LijstAndereSpelers,true),
+			new ExtraInfo("kapel",4,"Vernietig hoogstens 4 kaarten","Hoeveel kaarten wenst u te vernietigen?:",null,false,null,false),
+			new ExtraInfo("militie",3,"Verminder uw kaarten in hand tot 3 kaarten",null,null,true,LijstAndereSpelers,false),
+			new ExtraInfo("heks",LijstAndereSpelers,null,true),
+			new ExtraInfo("raadsheer", 1,"Wenst u uw trekstapel naar uw aflegstapel te leggen?"," 0: Nee / 1: Ja ",null,false,null,true),
+			new ExtraInfo("feest",null,null,false),
+			new ExtraInfo("mijn", 1,"Vernietig een geldkaart","Wenst u een geldkaart te vernietigen? 0: Nee / 1:Ja :","geldkaart",false,null,true),
+			new ExtraInfo("geldschieter",1,"Vernietig een koperkaart","Wenst u een koperkaart te vernietigen? 0: Nee / 1:Ja : ","koper",false,null,true),
+			new ExtraInfo("verbouwing",1,"Vernietig een kaart","Wenst u een kaart te vernietigen? 0: Nee / 1: Ja: ","",false,null,false),
+			new ExtraInfo("dief", 2,"Breng kaarten naar de vuilbak of leg ze weg, Steel kaarten ", "Wat kiest u?: 0: Breng kaarten naar de vuilbak /1: Kies een geldgeld, Hoeveel kaarten wenst u te stelen?", "geldkaart", true, LijstAndereSpelers, false),
 			new ExtraInfo("troonzaal",null,"actiekaart",false),
-			new ExtraInfo("spion",1,"Wat kiest u? 0: Kaart mag blijven liggen/ 1: Kaart afleggen","",true,lijstAlleSpelers,false),
-			new ExtraInfo("bibliotheek",7,"Wat kiest u? 0: Kaart afleggen / 1: Kaart naar hand brengen","actiekaart",false,null,true)));
+			new ExtraInfo("spion",1,"Kaart mag blijven liggen of leg de kaart af","Wat kiest u? 0: Kaart mag blijven liggen/ 1: Kaart afleggen","",true,lijstAlleSpelers,false),
+			new ExtraInfo("bibliotheek",7,"kaarten afleggen of naar hand brengen","Wat kiest u? 0: Kaart afleggen / 1: Kaart naar hand brengen","actiekaart",false,null,true)));
 	
 	
 
@@ -186,7 +186,9 @@ public class SpelFuncties {
 	public List<Stapel> geefLijstStapels() {
 		return this.lijstStapel;
 	}
-
+	public List<ExtraInfo> geefLijstExtraInfoSpecialeKaarten(){
+		return this.lijstExtraInfoSpecialeKaarten;
+	}
 	public List<Kaart> geefLijst10GekozenActiekaarten() {
 		return this.lijst10Actiekaarten;
 	}
@@ -273,7 +275,7 @@ public class SpelFuncties {
 			infoMeegeven(kaart);
 			break;
 		case "kelder":
-			extraInfoMeegeven = new ExtraInfo("kelder",huidigeSpeler.geefKaartenInHand().size(),"Hoeveel kaarten wenst u af te leggen?:","",false,null,false);
+			extraInfoMeegeven = new ExtraInfo("kelder",huidigeSpeler.geefKaartenInHand().size(),"Leg kaarten af naar keuze","Hoeveel kaarten wenst u af te leggen?:","",false,null,false);
 			break;
 		case "feest":
 			brengEenKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefSpeelGebied(),kaart,huidigeSpeler.geefVuilbakStapel());
