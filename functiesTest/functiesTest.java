@@ -128,7 +128,7 @@ public class functiesTest {
 		spelersAanmaken();
 		engine.LijstAndereSpelersMaken(engine.geefHuidigeSpeler());
 		engine.volgendeSpeler();
-		assertEquals(engine.geefLijstAndereSpelers().get(0).geefNaam(), engine.geefHuidigeSpeler().geefNaam());
+		assertEquals(engine.geefLijstAndereSpelers().get(0).geefNaam(), engine.geefHuidigeSpeler().geefNaam());		
 	}
 
 	@Test
@@ -391,8 +391,8 @@ public class functiesTest {
 			//System.out.println(engine.geefHuidigeSpeler().geefAflegStapel().get(i));
 			System.out.println("heks, einde van de for loop: " + heks.geefSpelers().get(i).geefKaartenInHand().get(i).geefNaam());
 		}
-		System.out.println("heks, aflegstap: " + speler.geefAflegStapel().get(0));
-		assertEquals(engine.geefHuidigeSpeler().geefAflegStapel().get(0).geefNaam(), "heks");
+		//System.out.println("heks, aflegstap: " + speler.geefAflegStapel().get(0));
+		assertEquals(heks.geefSpelers().get(0).geefKaartenInHand().size(), "6");
 	}
 
 	@Test
@@ -412,21 +412,30 @@ public class functiesTest {
 	}
 	
 	@Test
-	public void militie() {
+	public void militieEnBureaucraat() {
 		spelersAanmaken();
 		engine.LijstAndereSpelersMaken(engine.geefHuidigeSpeler());
+		
+		Kaart koper = new Kaart("koper","geldkaart",0,1,"Deze kaart is 1 munt waard");
+		Kaart gekozenKaart = koper;
+		for (int i = 0; i < 2; i++) {
+			engine.geefHuidigeSpeler().geefLijstGekozenKaarten().add(gekozenKaart);
+		}
+		
 		ExtraInfo militie = new ExtraInfo("militie",3,"Verminder uw kaarten in hand tot 3 kaarten",null,null,true,engine.geefLijstAndereSpelers(),false);
 		
 		for (int i = 0; i < militie.geefSpelers().size(); i++) {
 			Speler speler = militie.geefSpelers().get(i);
-			
-			//System.out.println(militie.geefSpelers().get(i).geefNaam());
-			//System.out.println(speler.geefNaam());
-			//System.out.println(engine.geefHuidigeSpeler().geefNaam());
-			
-			engine.brengEenKaartVanDeEneNaarAndereStapel(speler.geefKaartenInHand(), speler.geefLijstGekozenKaarten().get(i), speler.geefAflegStapel());
+			for (int j = 0; j < speler.geefLijstGekozenKaarten().size(); j++) {
+				engine.brengEenKaartVanDeEneNaarAndereStapel(speler.geefKaartenInHand(), speler.geefLijstGekozenKaarten().get(i), speler.geefAflegStapel());
+			}
 		}
-		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 3);
+
+		System.out.println("militie speler 1: " + militie.geefSpelers().get(0).geefNaam());
+		System.out.println("militie speler 2: " + militie.geefSpelers().get(1).geefNaam());
+		System.out.println("militie hand size speler 1: " + militie.geefSpelers().get(0).geefKaartenInHand().size());
+		
+		assertEquals(militie.geefSpelers().get(0).geefKaartenInHand().size(), 3);
 	}
 
 	@Test
