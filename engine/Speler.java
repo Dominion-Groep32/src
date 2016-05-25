@@ -1,6 +1,8 @@
 package engine;
 import java.util.*;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 
 public class Speler {
 	//test
@@ -92,11 +94,11 @@ public class Speler {
 	public Boolean geefKeuzeSpeler(){
 		return this.keuzeSpeler;
 	}
-	public void zetGebruikSlotgrachtopTrue() {
-		this.gebruikSlotgracht = true;
+	public void zetGebruikSlotgracht(Boolean gebruikSlotgracht) {
+		this.gebruikSlotgracht = gebruikSlotgracht;
 	}
-	public void zetKeuzeSpelerOpTrue(){
-		this.keuzeSpeler = true;
+	public void zetKeuzeSpeler(Boolean keuzeSpeler){
+		this.keuzeSpeler = keuzeSpeler;
 	}
 	public String geefNaam() {
 		return this.naam;
@@ -146,5 +148,11 @@ public class Speler {
 		this.score = this.score + score;
 	}
 	
+	public void maakAlleSpecialeLijstenLeeg() {
+	zetGebruikSlotgracht(false);
+	zetKeuzeSpeler(false);
+	geefLijstGekozenKaarten().clear();
+	geefLijstTeStelenKaarten().clear();
 	
+	}
 }

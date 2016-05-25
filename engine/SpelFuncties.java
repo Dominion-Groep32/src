@@ -2,6 +2,7 @@ package engine;
 
 import java.util.*;
 
+
 public class SpelFuncties {
 	ExtraInfo extraInfoMeegeven = null;
 	private List<Kaart> lijst10Actiekaarten = new LinkedList<>();
@@ -15,7 +16,7 @@ public class SpelFuncties {
 	private List<Kaart> overwinningskaarten = new LinkedList<>(Arrays.asList(new Kaart("landgoed","overwinningskaart",2,1,"Is op het einde van het spel 1 punt waard"),new Kaart("hertogdom","overwinningskaart",5,3,"Is op het einde van het spel 5 punten waard"),new Kaart("provincie","overwinningskaart",8,6,"Is op het einde van het spel 8 punten waard"),new Kaart("vloek","overwinningskaart",0,-1,"Vermindert de waarde op het einde van het spel met 1 punt ")));
 	private List<Kaart> actiekaarten = new LinkedList<>(Arrays.asList(new Kaart("avonturier",6,true,0,0,0,0,"Draai achtereenvolgens de bovenste kaarten van je trekstapel om totdat je in totaal 2 geldkaarten hebt. Neem ze op handen. Leg de overige omgedraagde kaarten op je alegstapel.",false),
 			new Kaart("bureaucraat",4,true,0,0,0,0,"Leg uit de algemene voorraad een zilverkaart op je trekstapel. Iedere andere speler legt een overwinningskaart uit zijn hand op zijn trekstapel (of laat zien dat hij deze niet heeft)",false), new Kaart("kelder",2,true,0,1,0,0,"+1 actie / Leg een aantal kaarten naar keuze af. +1 kaart per afgelegde kaart.",false), new Kaart("raadsheer",3,true,0,0,0,2,"+2 munten / Je mag je trekstapel direct op je aflegstapel leggen",true),new Kaart("kapel",2,true,0,0,0,0,"Vernietig 4 of minder kaarten uit je hand",true),new Kaart("raadszaal",5,true,1,0,4,0,"+4 kaarten / +1 aanschaf / Iedere andere speler trekt 1 kaart",false),new Kaart("feest",4,true,0,0,0,5,"Vernietig deze kaart. Pak een kaart met een waarde van 5 munten of minder.",false),
-			new Kaart("festival",5,false,1,2,0,2,"+2 acties / +1 aanschaf / +2 munten",false),new Kaart("tuinen",4,true,0,0,0,0,"Elke 10 kaarten in je stapel zijn aan het einde van  het spel 1 landgoed waard (naar beneden afronden).",true),new Kaart("laboratorium",5,false,0,1,2,0,"+2 kaarten / +1 actie",false),new Kaart("bibliotheek",5,true,0,0,0,0,"Vul je hand aan tot 7 kaarten. Getrokken actiekaarten mag je houden of apart bewaren en vervangen door nieuwe kaarten. Als je hand is aangevuld leg je de apart bewaarde actiekaarten af.",true),new Kaart("markt",5,false,1,1,1,1,"+1 kaart/ +1 actie / +1 aanschaf / +1 munt",false),new Kaart("militie",4,true,0,0,0,2,"+2 munten/ Iedere andere speler legt naar zijn keuze kaarten af totdat hij er 3 op handen heeft.",true),new Kaart("mijn",5,true,0,0,0,3,"Vernietig een geldkaart uit je hand. Neem een geldkaart die ten hoogste drie munten meer waard is en neem deze op handen.",true)
+			new Kaart("festival",5,false,1,2,0,2,"+2 acties / +1 aanschaf / +2 munten",false),new Kaart("tuinen",4,true,0,0,0,0,"Elke 10 kaarten in je stapel zijn aan het einde van  het spel 1 landgoed waard (naar beneden afronden).",true),new Kaart("laboratorium",5,false,0,1,2,0,"+2 kaarten / +1 actie",false),new Kaart("bibliotheek",5,true,0,0,0,0,"Vul je hand aan tot 7 kaarten. Getrokken actiekaarten mag je houden of apart bewaren en vervangen door nieuwe kaarten. Als je hand is aangevuld leg je de apart bewaarde actiekaarten af.",true),new Kaart("markt",5,false,1,1,1,1,"+1 kaart/ +1 actie / +1 aanschaf / +1 munt",false),new Kaart("militie",4,true,0,0,0,2,"+2 munten/ Iedere andere speler legt naar zijn keuze kaarten af totdat hij er 3 op handen heeft.",true),new Kaart("mijn",5,true,0,0,0,0,"Vernietig een geldkaart uit je hand. Neem een geldkaart die ten hoogste drie munten meer waard is en neem deze op handen.",true)
 			,new Kaart("slotgracht",2,true,0,0,2,0,"+2 kaarten / Als een andere speler een aanvalskaart speelt, mag je de Slotgracht tonen. In dat geval heeft de aanval op jou geen effect.",false),new Kaart("geldschieter",4,true,0,0,0,0,"Vernietig een koperkaart uit je hand. Als je dat doet, heb je deze beurt met 3 munten.",true),new Kaart("verbouwing",4,true,0,0,0,2,"Vernietig een kaart uit je hand. Pak een kaart die ten hoogste 2 munten meer waard is dan de vernietigde kaart.",true),new Kaart("smidse",4,false,0,0,3,0,"+3 kaarten",false),new Kaart("spion",4,true,0,1,1,0,"+1 kaart / +1 actie / Alle spelers tonen de bovenste kaart van hun trekstapel. De spion bepaalt of ze blijven liggen of worden afgelegd.",false),new Kaart("dief",4,true,0,0,0,0,"Iedere andere speler toont de bovenste 2 kaarten van zijn trekstapel. Als een speler geldkaarten toont, moet hij er een naar jouw keuze vernietigen. Je mag een of meer van deze vernietigde kaarten pakken en afleggen. De andere spelers leggen andere getoonde kaarten op hun aflegstapel.",true),new Kaart("troonzaal",4,true,0,0,0,0,"Kies een actiekaart uit je hand. Speel deze tweemaal.",true)
 			,new Kaart("dorp",3,false,0,2,1,0,"+1 kaart / +2 acties",false),new Kaart("heks",5,true,0,0,2,0,"+2 kaarten / Iedere andere speler pakt 1 vloekkaart.",true),new Kaart("werkplaats",3,true,0,0,0,4,"Pak een kaart die maximaal 4 munten kost.",true),new Kaart("houthakker",3,false,1,0,0,2,"+1 aanschaf / +2 munten",false)));
 	private List <ExtraInfo> lijstExtraInfoSpecialeKaarten = new LinkedList<>(Arrays.asList(
@@ -25,9 +26,9 @@ public class SpelFuncties {
 			new ExtraInfo("heks",LijstAndereSpelers,null,true),
 			new ExtraInfo("raadsheer", 1,"Wenst u uw trekstapel naar uw aflegstapel te leggen?"," 0: Nee / 1: Ja ",null,false,null,true),
 			new ExtraInfo("feest",null,null,false),
-			new ExtraInfo("mijn", 1,"Vernietig een geldkaart","Wenst u een geldkaart te vernietigen? 0: Nee / 1:Ja :","geldkaart",false,null,true),
-			new ExtraInfo("geldschieter",1,"Vernietig een koperkaart","Wenst u een koperkaart te vernietigen? 0: Nee / 1:Ja : ","koper",false,null,true),
-			new ExtraInfo("verbouwing",1,"Vernietig een kaart","Wenst u een kaart te vernietigen? 0: Nee / 1: Ja: ","",false,null,false),
+			new ExtraInfo("mijn", 1,"Vernietig een geldkaart","0: Nee / 1:Ja :","geldkaart",false,null,true),
+			new ExtraInfo("geldschieter",1,"Vernietig een koperkaart","0: Nee / 1:Ja : ","koper",false,null,true),
+			new ExtraInfo("verbouwing",1,"Vernietig een kaart"," 0: Nee / 1: Ja: ","",false,null,false),
 			new ExtraInfo("dief", 2,"Breng kaarten naar de vuilbak of leg ze weg, Steel kaarten ", "Wat kiest u?: 0: Breng kaarten naar de vuilbak /1: Kies een geldgeld, Hoeveel kaarten wenst u te stelen?", "geldkaart", true, LijstAndereSpelers, false),
 			new ExtraInfo("troonzaal",null,"actiekaart",false),
 			new ExtraInfo("spion",1,"Kaart mag blijven liggen of leg de kaart af","Wat kiest u? 0: Kaart mag blijven liggen/ 1: Kaart afleggen","",true,lijstAlleSpelers,false),
@@ -127,6 +128,10 @@ public class SpelFuncties {
 		lijstenSamenvoegenBijBestaandeLijst(huidigeSpeler.geefAflegStapel(), huidigeSpeler.geefSpeelGebied(), false,true);
 		lijstenSamenvoegenBijBestaandeLijst(huidigeSpeler.geefAflegStapel(), huidigeSpeler.geefKaartenInHand(),false,true);
 		geefLijstAndereSpelers().clear();
+		for (int i = 0; i < lijstAlleSpelers.size(); i++) {
+			Speler speler = lijstAlleSpelers.get(i);
+			speler.maakAlleSpecialeLijstenLeeg();
+		}
 	}
 	public void brengAlleGeldkaartenUitHandNaarStapel(List<Kaart> lijst){
 		for (int i = 0; i < huidigeSpeler.geefKaartenInHand().size(); i++) {
@@ -332,7 +337,6 @@ public class SpelFuncties {
 		default:
 			break;
 		}
-		huidigeSpeler.verminderActie(1);
 	}
 	
 	// ALLE APARTE ACTIEKAARTEN
@@ -353,15 +357,10 @@ public class SpelFuncties {
 	public void kaartenWegLeggen(ExtraInfo kaartMetExtraInfo){
 		for (int i = 0; i < kaartMetExtraInfo.geefSpelers().size(); i++) {
 			Speler speler = kaartMetExtraInfo.geefSpelers().get(i);
-			brengEenKaartVanDeEneNaarAndereStapel(speler.geefKaartenInHand(), speler.geefLijstGekozenKaarten().get(i), speler.geefAflegStapel());
-		}}
-	/*
-	public void bureaucraat(ExtraInfo kaartMetExtraInfo) {
-		for (int i = 0; i < kaartMetExtraInfo.geefSpelers().size(); i++) {
-			Speler speler = kaartMetExtraInfo.geefSpelers().get(i);
-			brengEenKaartVanDeEneNaarAndereStapel(speler.geefKaartenInHand(), huidigeSpeler.geefLijstGekozenKaarten().get(i), speler.geefAflegStapel());
-		}}
-	*/
+			for (int j = 0; j < speler.geefLijstGekozenKaarten().size(); j++) {
+				brengEenKaartVanDeEneNaarAndereStapel(speler.geefKaartenInHand(), speler.geefLijstGekozenKaarten().get(i), speler.geefAflegStapel());
+			}}}
+	
 	public void kelder(ExtraInfo kaartMetExtraInfo) {
 		
 		for (int i = 0; i < huidigeSpeler.geefLijstGekozenKaarten().size(); i++) {
@@ -393,18 +392,9 @@ public class SpelFuncties {
 			}
 	}
 	public void bibliotheek(ExtraInfo kaartMetExtraInfo){
-		// Trek kaarten tot er 7 kaarten in hand zijn
-		
-		//Wanneer er actiekaarten getrokken worden, kan je kiezen of je deze wilt of niet
+		else {engine.trekKaartVanTrekStapel(engine.geefHuidigeSpeler(), 1);}}
 			}
-	/*
-	public void militie(ExtraInfo kaartMetExtraInfo) {
-		for (int i = 0; i < kaartMetExtraInfo.geefSpelers().size(); i++) {
-			Speler speler = kaartMetExtraInfo.geefSpelers().get(i);
-			brengEenKaartVanDeEneNaarAndereStapel(speler.geefKaartenInHand(), huidigeSpeler.geefLijstGekozenKaarten().get(i),speler.geefAflegStapel());
-		}}
 	
-	*/
 	public void mijn(ExtraInfo kaartMetExtraInfo) {
 		if(huidigeSpeler.geefLijstGekozenKaarten().size()>1){
 			verminderTafelstapel(huidigeSpeler.geefLijstGekozenKaarten().get(1).geefNaam());
@@ -413,7 +403,7 @@ public class SpelFuncties {
 	
 	
 	public void geldschieter(ExtraInfo kaartMetExtraInfo) {
-		if(huidigeSpeler.geefLijstGekozenKaarten().isEmpty()){
+		if(!huidigeSpeler.geefLijstGekozenKaarten().isEmpty()){
 			huidigeSpeler.vermeerderGeld(3);
 		}}
 	
