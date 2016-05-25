@@ -279,7 +279,6 @@ switch (actiekaart.kaartNaam()) {
 			
 		break;
 	case "mijn":
-		//kan properder
 		List<Kaart> tijdelijkeLijst = new LinkedList<>();
 		tijdelijkeLijst = engine.isTypeKaartInLijst(engine.geefHuidigeSpeler().geefKaartenInHand(), actiekaart.geefKaartSpecificaties());
 		if(!tijdelijkeLijst.isEmpty()){
@@ -297,7 +296,6 @@ switch (actiekaart.kaartNaam()) {
 		String[] berichten = actiekaart.geefExtraVraag().split(",");
 		for (int i = 0; i < actiekaart.geefSpelers().size(); i++){
 			Speler speler = actiekaart.geefSpelers().get(i);
-			
 			ControleOpSlotgracht(speler);
 			if(!speler.geefGebruikSlotgracht()){
 				printFunctie("Kaarten van: "+speler.geefNaam());
@@ -311,8 +309,7 @@ switch (actiekaart.kaartNaam()) {
 						jaNeeKeuzeMaken(speler, actiekaart.geefMaxAantalKaarten(),berichten[0]);
 						if(speler.geefKeuzeSpeler()){speler.geefLijstTeStelenKaarten().add(lijstKaarten.get(i));}
 						else {engine.brengEenKaartVanDeEneNaarAndereStapel(speler.geefVuilbakStapel(), lijstKaarten.get(i), speler.geefAflegStapel());
-						}}}}
-			}
+						}}}}}
 		for (int i = 0; i < actiekaart.geefSpelers().size(); i++){
 			Speler speler = actiekaart.geefSpelers().get(i);
 			for (int j = 0; j < speler.geefLijstTeStelenKaarten().size(); j++) {

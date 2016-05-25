@@ -29,7 +29,7 @@ public class SpelFuncties {
 			new ExtraInfo("mijn", 1,"Vernietig een geldkaart"," 0 = Nee / 1 = Ja :","geldkaart",false,null,true),
 			new ExtraInfo("geldschieter",1,"Vernietig een koperkaart"," 0 = Nee / 1 = Ja : ","koper",false,null,true),
 			new ExtraInfo("verbouwing",1,"Vernietig een kaart"," 0 = Nee / 1 = Ja : ","",false,null,false),
-			new ExtraInfo("dief", 2,"Breng kaarten naar de vuilbak of leg ze weg, Steel kaarten ", "Wat kiest u? 0 =  Breng kaarten naar de vuilbak /1 = Kies een geldgeld, Hoeveel kaarten wenst u te stelen? : ", "geldkaart", true, LijstAndereSpelers, false),
+			new ExtraInfo("dief", 2,"Breng kaarten naar de vuilbak of leg ze weg, Steel kaarten ", "Wat kiest u? 0 =  Breng kaarten naar de vuilbak /1 = Kies een geldgeld, Hoeveel kaarten wenst u te stelen? : ", "geldkaart", true, null, true),
 			new ExtraInfo("troonzaal",null,"actiekaart",false),
 			new ExtraInfo("spion",1,"Kaart mag blijven liggen of leg de kaart af","Wat kiest u? 0 = Kaart mag blijven liggen/ 1 = Kaart afleggen : ","",true,lijstAlleSpelers,false),
 			new ExtraInfo("bibliotheek",7,"kaarten afleggen of naar hand brengen","Wat kiest u? 0 = Kaart afleggen / 1 = Kaart naar hand brengen : ","actiekaart",false,null,true)));
@@ -416,9 +416,8 @@ public class SpelFuncties {
 		
 	private void heks(ExtraInfo kaartMetExtraInfo){
 		for (int i = 0; i < kaartMetExtraInfo.geefSpelers().size(); i++) {
-			System.out.println("kom ik hier eigenlijk ooit wel in ??????");
 			Speler speler = kaartMetExtraInfo.geefSpelers().get(i);
-			if(speler.geefGebruikSlotgracht()){
+			if(!speler.geefGebruikSlotgracht()){
 				System.out.println("deze kaart komt er bij "+overwinningskaarten.get(3));
 				speler.geefAflegStapel().add(overwinningskaarten.get(3));
 			}}}
