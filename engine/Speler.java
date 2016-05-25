@@ -16,7 +16,7 @@ public class Speler {
 	private List<Kaart> teStelenKaarten = new LinkedList<>();
 	private Boolean gebruikSlotgracht = false;
 	private Boolean keuzeSpeler = false;
-	private String naam;
+	private String spelersNaam;
 	private int aankoop ;
 	private int actie;
 	private int geld;
@@ -25,7 +25,7 @@ public class Speler {
 
 
 	public Speler(String naam){
-		this.naam = naam;
+		this.spelersNaam = naam;
 		trekStapel = startKaarten();
 		kaartenInHand = startKaartenInHand();
 		aflegStapel = new LinkedList<Kaart>();
@@ -101,7 +101,7 @@ public class Speler {
 		this.keuzeSpeler = keuzeSpeler;
 	}
 	public String geefNaam() {
-		return this.naam;
+		return this.spelersNaam;
 	}
 	public int geefActie() {
 		return this.actie;

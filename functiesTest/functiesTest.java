@@ -5,11 +5,11 @@ import java.util.*;
 import org.junit.*;
 import engine.ExtraInfo;
 import engine.Kaart;
-import engine.SpelFuncties;
+import engine.SpelEngine;
 import engine.Speler;
 
 public class functiesTest {
-	SpelFuncties engine = new SpelFuncties();
+	SpelEngine engine = new SpelEngine();
 	Speler speler = new Speler("testspeler");
 	List<Kaart> eersteTestlijst = speler.geefTrekStapel();
 	List<Kaart> actiekaarten = engine.geefLijst10GekozenActiekaarten();

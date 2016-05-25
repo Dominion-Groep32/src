@@ -10,7 +10,7 @@ import engine.*;
 
 public class ConsoleSpel {
 	private Scanner sc = new Scanner(System.in);
-	private SpelFuncties engine = new SpelFuncties();
+	private SpelEngine engine = new SpelEngine();
 	private ExtraInfo extraInfoGeven = null;
 	private List<Speler> spelers = new LinkedList<Speler>();
 	
@@ -282,7 +282,7 @@ switch (actiekaart.kaartNaam()) {
 		List<Kaart> tijdelijkeLijst = new LinkedList<>();
 		tijdelijkeLijst = engine.isTypeKaartInLijst(engine.geefHuidigeSpeler().geefKaartenInHand(), actiekaart.geefKaartSpecificaties());
 		if(!tijdelijkeLijst.isEmpty()){
-			jaNeeKeuzeMaken(engine.geefHuidigeSpeler(), actiekaart.geefMaxAantalKaarten(),actiekaart.geefExtraVraag());
+			jaNeeKeuzeMaken(engine.geefHuidigeSpeler(), actiekaart.geefMaxAantalKaarten(),actiekaart.geefBericht()+actiekaart.geefExtraVraag());
 			if(engine.geefHuidigeSpeler().geefKeuzeSpeler()){
 				vragenNaarKaartenUitHand(actiekaart, actiekaart.geefMaxAantalKaarten(), engine.geefHuidigeSpeler());				
 				engine.geefHuidigeSpeler().vermeerderGeld(3+engine.geefHuidigeSpeler().geefLijstGekozenKaarten().get(0).geefKost());

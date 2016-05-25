@@ -3,7 +3,7 @@ package engine;
 import java.util.*;
 
 
-public class SpelFuncties {
+public class SpelEngine {
 	ExtraInfo extraInfoMeegeven = null;
 	private List<Kaart> lijst10Actiekaarten = new LinkedList<>();
 	private List<Kaart> kaartenVanHetSpel = new LinkedList<>();
@@ -37,7 +37,7 @@ public class SpelFuncties {
 	
 
 	
-	public SpelFuncties() {
+	public SpelEngine() {
 		actiekaartenGenereren();
 		kaartenVanHetSpel = lijstenSamenvoegenTotNieuweLijst(lijst10Actiekaarten,lijstenSamenvoegenTotNieuweLijst(geldkaarten, overwinningskaarten, false),false);
 		stapelsAanmaken(kaartenVanHetSpel);
