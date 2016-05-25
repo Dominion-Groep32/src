@@ -1,7 +1,7 @@
 package engine;
  
 import java.util.*;
- //Test//test
+ //Test//test 
  
 public class SpelEngine {
     ExtraInfo extraInfoMeegeven = null;
@@ -80,7 +80,13 @@ public class SpelEngine {
    
     //STAPELS
     public void stapelsAanmaken(List<Kaart> kaartenVanHetSpel) {
-        for (int j = 0; j < kaartenVanHetSpel.size(); j++) {lijstStapel.add(new Stapel(kaartenVanHetSpel.get(j).geefNaam()));}
+        for (int j = 0; j < geefLijst10GekozenActiekaarten().size(); j++) {lijstStapel.add(new Stapel(geefLijst10GekozenActiekaarten().get(j).geefNaam()));}
+        for (int k = 0; k < geldkaarten.size();k++) {lijstStapel.add(new Stapel(geldkaarten.get(k).geefNaam(),40));}
+        for (int i = 0; i < 3;i++) {lijstStapel.add(new Stapel(overwinningskaarten.get(i).geefNaam(),12));}
+        
+        lijstStapel.add(new Stapel(overwinningskaarten.get(3).geefNaam(),30));
+			
+		
     }
    
     public void verminderTafelstapel(String kaartnaam){
