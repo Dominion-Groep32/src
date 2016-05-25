@@ -233,9 +233,9 @@ public class SpelFuncties {
 	
 	public ExtraInfo actieUitvoeren(Kaart kaart) {
 		brengEenKaartVanDeEneNaarAndereStapel(huidigeSpeler.geefKaartenInHand(), kaart,huidigeSpeler.geefSpeelGebied());
-		
 		gewoneActiekaartenUitvoeren(kaart);
-		if(kaart.specialeKaart()){actieFase1Uitvoeren(kaart);}	
+		if(kaart.specialeKaart()){actieFase1Uitvoeren(kaart);}
+		geefHuidigeSpeler().verminderActie(1);
 		return extraInfoMeegeven;
 	}
 	
