@@ -392,8 +392,8 @@ public class SpelFuncties {
 			}
 	}
 	public void bibliotheek(ExtraInfo kaartMetExtraInfo){
-		else {engine.trekKaartVanTrekStapel(engine.geefHuidigeSpeler(), 1);}}
-			}
+		trekKaartVanTrekStapel(geefHuidigeSpeler(), 1);}
+			
 	
 	public void mijn(ExtraInfo kaartMetExtraInfo) {
 		if(huidigeSpeler.geefLijstGekozenKaarten().size()>1){
