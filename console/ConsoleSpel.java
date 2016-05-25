@@ -294,8 +294,8 @@ switch (actiekaart.kaartNaam()) {
 		break;
 	case "dief":
 		String[] berichten = actiekaart.geefExtraVraag().split(",");
-		for (int i = 0; i < actiekaart.geefSpelers().size(); i++){
-			Speler speler = actiekaart.geefSpelers().get(i);
+		for (int i = 0; i < engine.geefLijstAndereSpelers().size(); i++){
+			Speler speler = engine.geefLijstAlleSpelers().get(i);
 			ControleOpSlotgracht(speler);
 			if(!speler.geefGebruikSlotgracht()){
 				printFunctie("Kaarten van: "+speler.geefNaam());
