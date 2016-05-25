@@ -58,9 +58,7 @@ public class Speler {
 		return kaartenInHand;
 	}
 	
-	
-	
-	
+
 	public List<Kaart> geefTrekStapel()
 	{
 		return this.trekStapel;

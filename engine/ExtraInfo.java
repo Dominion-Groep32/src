@@ -6,6 +6,7 @@ import java.util.List;
 public class ExtraInfo {
 	private String actiekaartNaam;
 	private String bericht;
+	private String extraVraag;
 	private String kaartSpecificaties;
 	private int maxAantalKaarten;
 	private Boolean aanval;
@@ -13,19 +14,21 @@ public class ExtraInfo {
 	private List<Speler> spelers;
 	
 
-public ExtraInfo(String kaartNaam,int aantalKaarten, String bericht, String kaartSpecificaties,Boolean aanval,List<Speler> spelersMeegeven,boolean specialeUitwerking){
+public ExtraInfo(String kaartNaam,int aantalKaarten, String bericht, String extraVraag, String kaartSpecificaties,Boolean aanval,List<Speler> spelersMeegeven,boolean specialeUitwerking){
 	this.actiekaartNaam = kaartNaam;
 	this.maxAantalKaarten = aantalKaarten;
 	this.bericht = bericht;
+	this.extraVraag = extraVraag;
 	this.kaartSpecificaties = kaartSpecificaties;
 	this.aanval = aanval;
 	this.spelers = spelersMeegeven;
 	this.specialeUitwerking = specialeUitwerking;
 }
 
-public ExtraInfo(String kaartNaam, List<Speler> spelers, Boolean aanval){
+public ExtraInfo(String kaartNaam, List<Speler> spelers, String kaartSpecificaties, Boolean aanval){
 	this.actiekaartNaam = kaartNaam;
 	this.spelers = spelers;
+	this.kaartSpecificaties = kaartSpecificaties;
 	this.aanval = aanval;
 	this.specialeUitwerking = true;
 }
@@ -61,5 +64,8 @@ public boolean geefAanval() {
 }
 public Boolean geefSpecialeUitwerking() {
 	return this.specialeUitwerking;
+}
+public String geefExtraVraag() {
+	return this.extraVraag;
 }
 }
