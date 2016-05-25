@@ -34,7 +34,6 @@ public class SpelFuncties {
             new ExtraInfo("bibliotheek",7,"kaarten afleggen of naar hand brengen","Wat kiest u? 0: Kaart afleggen / 1: Kaart naar hand brengen","actiekaart",false,null,true)));
    private Kaart huidigeKaart;
    private int aantalGekozenKaarten;
-   private int geldSpeelveld;
    
  
    
@@ -79,9 +78,15 @@ public class SpelFuncties {
    
     //STAPELS
     public void stapelsAanmaken(List<Kaart> kaartenVanHetSpel) {
-        for (int j = 0; j < kaartenVanHetSpel.size(); j++) {lijstStapel.add(new Stapel(kaartenVanHetSpel.get(j).geefNaam()));}
+        for (int j = 0; j < geefLijst10GekozenActiekaarten().size(); j++) {lijstStapel.add(new Stapel(geefLijst10GekozenActiekaarten().get(j).geefNaam()));}
+        for (int k = 0; k < geldkaarten.size();k++) {lijstStapel.add(new Stapel(geldkaarten.get(k).geefNaam(),40));}
+        for (int i = 0; i < 3;i++) {lijstStapel.add(new Stapel(overwinningskaarten.get(i).geefNaam(),12));}
+        
+        lijstStapel.add(new Stapel(overwinningskaarten.get(3).geefNaam(),30));
+			
+		
     }
-   
+    
     public void verminderTafelstapel(String kaartnaam){
        
         for (int i = 0; i < lijstStapel.size(); i++) {
@@ -456,8 +461,7 @@ public class SpelFuncties {
             {
                 Legestapels = Legestapels+1;
                 String lijstNaam = lijstStapel.get(i).geefStapelNaam();
-                if (lijstNaam.equals("provincie") || Legestapels >=3)
-                {
+                if (lijstNaam.equals("provincie") || Legestapels >=3){
                     tmp = false;
                 }}}
         return tmp;
