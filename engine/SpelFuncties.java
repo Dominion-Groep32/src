@@ -482,6 +482,10 @@ public class SpelFuncties {
 		//NOG BEKIJKEN!!! mss met een functie!
 		int extraPunten = ((speler.geefScore()-(speler.geefScore()%10))/10)*aantal;
 		speler.vermeerderScore(extraPunten);	
+		}
 	}
+	
+	public List<Kaart> geefLijstOverwinningskaarten() {
+		return this.overwinningskaarten;
 	}
 }
