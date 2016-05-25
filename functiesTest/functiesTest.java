@@ -1,5 +1,5 @@
 package functiesTest;
-
+/*
 import static org.junit.Assert.*;
 import java.util.*;
 import org.junit.*;
@@ -90,7 +90,7 @@ public class functiesTest {
 		engine.geefHuidigeSpeler().geefKaartenInHand().add(new Kaart("goud","geldkaart",6,3,"Deze kaart is 3 munten waard"));
 		assertEquals(engine.geldInHand(), 3);
 	}
-	*/
+	
 	
 	@Test
 	public void kaartenDieJeKuntKopen(){
@@ -166,7 +166,7 @@ public class functiesTest {
 		assertEquals(engine.geefHuidigeSpeler().geefAankoop(), 2);
 		assertEquals(engine.geefHuidigeSpeler().geefActie(), 3);
 		assertEquals(engine.geefHuidigeSpeler().geefGeld(), 2);
-	}*/
+	}
 	
 	@Test
 	public void actieUitvoeren() {
@@ -209,7 +209,7 @@ public class functiesTest {
 		engine.volgendeSpeler();
 		assertEquals(engine.geefHuidigeSpeler().geefKaartenInHand().size(), 6);
 	}
-	*/
+	
 	
 	@Test
 	public void herstelWaarden() {
@@ -299,12 +299,11 @@ public class functiesTest {
 		assertEquals(engine.geldInHand(), geld);
 	}
 	
-	/*
 		public int geldInHand() {
 		int geld = 0;
 		for (int i = 0; i < huidigeSpeler.geefKaartenInHand().size(); i++) {geld += huidigeSpeler.geefKaartenInHand().get(i).geefWaarde();}
 		return geld;
 	}
-	 */
 	
-}
+	
+} */
