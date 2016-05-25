@@ -5,7 +5,7 @@ import engine.*;
 
 public class ConsoleSpel {
 	private Scanner sc = new Scanner(System.in);
-	private SpelFuncties engine = new SpelFuncties();
+	private SpelEngine engine = new SpelEngine();
 	private ExtraInfo extraInfoGeven = null;
 	
 	public static void main(String[] args) {
@@ -271,11 +271,10 @@ switch (actiekaart.kaartNaam()) {
 			
 		break;
 	case "mijn":
-		//kan properder
 		List<Kaart> tijdelijkeLijst = new LinkedList<>();
 		tijdelijkeLijst = engine.isTypeKaartInLijst(engine.geefHuidigeSpeler().geefKaartenInHand(), actiekaart.geefKaartSpecificaties());
 		if(!tijdelijkeLijst.isEmpty()){
-			jaNeeKeuzeMaken(engine.geefHuidigeSpeler(), actiekaart.geefMaxAantalKaarten(),actiekaart.geefExtraVraag());
+			jaNeeKeuzeMaken(engine.geefHuidigeSpeler(), actiekaart.geefMaxAantalKaarten(),actiekaart.geefBericht()+actiekaart.geefExtraVraag());
 			if(engine.geefHuidigeSpeler().geefKeuzeSpeler()){
 				vragenNaarKaartenUitHand(actiekaart, actiekaart.geefMaxAantalKaarten(), engine.geefHuidigeSpeler());				
 				engine.geefHuidigeSpeler().vermeerderGeld(3+engine.geefHuidigeSpeler().geefLijstGekozenKaarten().get(0).geefKost());
@@ -287,9 +286,8 @@ switch (actiekaart.kaartNaam()) {
 		break;
 	case "dief":
 		String[] berichten = actiekaart.geefExtraVraag().split(",");
-		for (int i = 0; i < actiekaart.geefSpelers().size(); i++){
-			Speler speler = actiekaart.geefSpelers().get(i);
-			
+		for (int i = 0; i < engine.geefLijstAndereSpelers().size(); i++){
+			Speler speler = engine.geefLijstAlleSpelers().get(i);
 			ControleOpSlotgracht(speler);
 			if(!speler.geefGebruikSlotgracht()){
 				printFunctie("Kaarten van: "+speler.geefNaam());
@@ -303,8 +301,7 @@ switch (actiekaart.kaartNaam()) {
 						jaNeeKeuzeMaken(speler, actiekaart.geefMaxAantalKaarten(),berichten[0]);
 						if(speler.geefKeuzeSpeler()){speler.geefLijstTeStelenKaarten().add(lijstKaarten.get(i));}
 						else {engine.brengEenKaartVanDeEneNaarAndereStapel(speler.geefVuilbakStapel(), lijstKaarten.get(i), speler.geefAflegStapel());
-						}}}}
-			}
+						}}}}}
 		for (int i = 0; i < actiekaart.geefSpelers().size(); i++){
 			Speler speler = actiekaart.geefSpelers().get(i);
 			for (int j = 0; j < speler.geefLijstTeStelenKaarten().size(); j++) {

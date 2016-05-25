@@ -29,8 +29,6 @@ public class Kaart {
 		this.extraMunten = extraMunten;
 		this.specialeKaart = specialeKaart;
 		this.infoMeegeven = infoMeegeven;
-		
-		
 	}
 	
 	public Kaart(String naam,String type, int kost, int waarde, String info )
